@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<transfers xmlns="spryker:transfer-01"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xsd">
+
+    <transfer name="ArvatoRssRiskCheckRequest">
+        <property name="clientTransactionID" type="int" />
+        <property name="clientCustomerID" type="int" />
+        <property name="debitorNumber" type="string"  />
+        <property name="lastName" type="string" />
+        <property name="firstName" type="string" />
+        <property name="birthDay" type="string" />
+        <property name="email" type="string" />
+        <!--cutomer address-->
+        <property name="careOf" type="string" />
+        <property name="street" type="string" />
+        <property name="streetNumber" type="string" />
+        <property name="streetNumberAdditional" type="string" />
+        <property name="zipCode" type="string" />
+        <property name="city" type="string" />
+        <property name="country" type="string" />
+        <!--order details-->
+        <property name="currency" type="string" />
+        <property name="orderChannel" type="string" />
+        <property name="deliveryType" type="string" />
+        <property name="registeredOrder" type="bool" />
+        <!--shopping cart details-->
+        <property name="grossTotalBill" type="float" />
+        <property name="totalOrderValue" type="float" />
+        <property name="pos" type="int" />
+        <property name="productNumber" type="int" />
+        <property name="productGroupId" type="int" />
+        <property name="unitPrice" type="float" />
+        <property name="unitCount" type="int" />
+        <property name="remarks" type="string" />
+        <!--profile tracking-->
+        <property name="sessionIDAddegree" type="string" />
+        <property name="IPAddress" type="string" />
+        <property name="requestTimestamp" type="string" />
+    </transfer>
+
+    <transfer name="ArvatoRssRiskCheckResponse">
+        <property name="result" type="string" />
+        <property name="actionCode" type="string" />
+        <property name="resultCode" type="string" />
+        <property name="resultDescription" type="string" />
+        <property name="scoreValue" type="string" />
+        <property name="scoreFeatureName" type="string" />
+        <property name="scoreFeatureValue" type="string" />
+        <!--duplicate ID-->
+        <property name="RMFCustomerId" type="string" />
+        <property name="isNewCustomer" type="bool" />
+        <property name="communicationToken" type="string" />
+        <!-- Address Correction-->
+        <property name="returnCode" type="int" />
+        <property name="street" type="string" />
+        <property name="streetNumber" type="string" />
+        <property name="streetNumberAdditional" type="string" />
+        <property name="zipCode" type="string" />
+        <property name="city" type="string" />
+    </transfer>
+
+    <transfer name="Quote">
+        <property name="arvatoRssRiskCheckResponse" type="ArvatoRssRiskCheckResponse" />
+    </transfer>
+
+</transfers>
