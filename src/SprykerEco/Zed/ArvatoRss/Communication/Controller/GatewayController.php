@@ -17,13 +17,13 @@ class GatewayController extends AbstractGatewayController
 {
 
     /**
-     * @param Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return QuoteTransfer
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function performRiskCheckAction(QuoteTransfer $quoteTransfer)
     {
-        return $this->getFacade();
+        return $this->getFacade()->performRiskCheck($quoteTransfer);
     }
 
 }
