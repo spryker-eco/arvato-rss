@@ -8,9 +8,12 @@
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Converter;
 
 //TODO: implement interface
-class ResponseToRiskCheckResponseTransferConverter
+class ArvatoRssResponseConverter implements ArvatoRssResponseConverterInterface
 {
 
+    /**
+     * @param array $response
+     */
     public function convert(array $response)
     {
         // TODO: implement once it is possible to request arvato(credentials are provided)

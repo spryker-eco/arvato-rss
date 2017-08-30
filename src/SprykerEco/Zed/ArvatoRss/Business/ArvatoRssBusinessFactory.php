@@ -10,9 +10,9 @@ namespace SprykerEco\Zed\ArvatoRss\Business;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerEco\Zed\ArvatoRss\ArvatoRssDependencyProvider;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\SoapApiAdapter;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\ResponseToRiskCheckResponseTransferConverter;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestToArrayConverter;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestToHeaderConverter;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\ArvatoRssResponseConverter;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverter;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestHeaderConverter;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapper;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckResponseMapper;
 use SprykerEco\Zed\ArvatoRss\Business\Handler\RiskCheckHandler;
@@ -59,34 +59,34 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     protected function createSoapApiAdapter()
     {
         return new SoapApiAdapter(
-            $this->createRiskCheckToArrayConverter(),
-            $this->createRiskCheckToHeaderConverter(),
+            $this->createRiskCheckRequestConverter(),
+            $this->createRiskCheckHeaderConverter(),
             $this->createResponseToRiskCheckResponseTransferConverter()
         );
     }
 
     /**
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestToArrayConverter
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverter
      */
-    protected function createRiskCheckToArrayConverter()
+    protected function createRiskCheckRequestConverter()
     {
-        return new RiskCheckRequestToArrayConverter();
+        return new RiskCheckRequestConverter();
     }
 
     /**
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestToHeaderConverter
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestHeaderConverter
      */
-    protected function createRiskCheckToHeaderConverter()
+    protected function createRiskCheckHeaderConverter()
     {
-        return new RiskCheckRequestToHeaderConverter();
+        return new RiskCheckRequestHeaderConverter();
     }
 
     /**
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\ResponseToRiskCheckResponseTransferConverter
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\ArvatoRssResponseConverter
      */
     protected function createResponseToRiskCheckResponseTransferConverter()
     {
-        return new ResponseToRiskCheckResponseTransferConverter();
+        return new ArvatoRssResponseConverter();
     }
 
     protected function getMoney()

@@ -9,7 +9,7 @@ namespace SprykerEco\Zed\ArvatoRss\Business\Api\Converter;
 
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
 
-interface RiskCheckRequestToHeaderConverterInterface
+interface RiskCheckRequestHeaderConverterInterface
 {
 
     /**

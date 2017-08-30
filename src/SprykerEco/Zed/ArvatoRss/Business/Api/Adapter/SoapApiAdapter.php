@@ -10,9 +10,9 @@ namespace SprykerEco\Zed\ArvatoRss\Business\Api\Adapter;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\ResponseToRiskCheckResponseTransferConverter;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestToArrayConverter;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestToHeaderConverter;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\ArvatoRssResponseConverter;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverter;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestHeaderConverter;
 
 class SoapApiAdapter implements ApiAdapterInterface
 {
@@ -23,40 +23,43 @@ class SoapApiAdapter implements ApiAdapterInterface
     const WSDL_PATH = __DIR__."/../Etc/risk-solution-services.v2.1.wsdl";
 
     /**
-     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestToArrayConverter
+     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverter
      */
-    protected $riskCheckRequestToArrayConverter;
-
-    protected $riskCheckRequestToHeaderConverter;
+    protected $riskCheckRequestConverter;
 
     /**
-     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\ResponseToRiskCheckResponseTransferConverter
+     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestHeaderConverter
+     */
+    protected $riskCheckRequestHeaderConverter;
+
+    /**
+     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\ArvatoRssResponseConverter
      */
     protected $responseToRiskCheckResponseTransferConverter;
 
     /**
-     * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestToArrayConverter $riskCheckRequestToArrayConverter
+     * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverter $riskCheckRequestConverter
      */
     public function __construct(
-        RiskCheckRequestToArrayConverter $riskCheckRequestToArrayConverter,
-        RiskCheckRequestToHeaderConverter $riskCheckRequestToHeaderConverter,
-        ResponseToRiskCheckResponseTransferConverter $responseToRiskCheckResponseTransferConverter
+        RiskCheckRequestConverter $riskCheckRequestConverter,
+        RiskCheckRequestHeaderConverter $riskCheckRequestHeaderConverter,
+        ArvatoRssResponseConverter $responseToRiskCheckResponseTransferConverter
     )
     {
-        $this->riskCheckRequestToArrayConverter = $riskCheckRequestToArrayConverter;
-        $this->riskCheckRequestToHeaderConverter  =$riskCheckRequestToHeaderConverter;
+        $this->riskCheckRequestConverter = $riskCheckRequestConverter;
+        $this->riskCheckRequestHeaderConverter = $riskCheckRequestHeaderConverter;
         $this->responseToRiskCheckResponseTransferConverter = $responseToRiskCheckResponseTransferConverter;
     }
 
     /**
-     * @param Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $quoteTransfer
      *
-     * @return Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer
+     * @return \Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer
      */
     public function performRiskCheck(ArvatoRssRiskCheckRequestTransfer $requestTransfer)
     {
-        $params = $this->riskCheckRequestToArrayConverter->convert($requestTransfer);
-        $header = $this->riskCheckRequestToHeaderConverter->convert($requestTransfer);
+        $params = $this->riskCheckRequestConverter->convert($requestTransfer);
+        $header = $this->riskCheckRequestHeaderConverter->convert($requestTransfer);
         $options = array(
         ) ;
         $soapClient = new \SoapClient(static::WSDL_PATH, $options);
