@@ -59,15 +59,26 @@ class SoapApiAdapter implements ApiAdapterInterface
     public function performRiskCheck(ArvatoRssRiskCheckRequestTransfer $requestTransfer)
     {
         $params = $this->riskCheckRequestConverter->convert($requestTransfer);
-        $header = $this->riskCheckRequestHeaderConverter->convert($requestTransfer);
-        $options = array(
-        ) ;
-        $soapClient = new \SoapClient(static::WSDL_PATH, $options);
-        $soapClient->__setSoapHeaders($header);
-        $soapClient->__setLocation(Config::get(ArvatoRssConstants::ARVATORSS)[ArvatoRssConstants::ARVATORSS_URL]);
+        $soapClient = $this->createSoapClient($requestTransfer);
         //TODO: catch exceptions.
         $result = $soapClient->RiskCheck($params);
         //TODO: process the response and convert it to the response transfer.
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $requestTransfer
+     *
+     * @return \SoapClient
+     */
+    protected function createSoapClient(ArvatoRssRiskCheckRequestTransfer $requestTransfer)
+    {
+        $header = $this->riskCheckRequestHeaderConverter->convert($requestTransfer);
+        $options = [];
+        $soapClient = new \SoapClient(static::WSDL_PATH, $options);
+        $soapClient->__setSoapHeaders($header);
+        $soapClient->__setLocation(Config::get(ArvatoRssConstants::ARVATORSS)[ArvatoRssConstants::ARVATORSS_URL]);
+
+        return $soapClient;
     }
 
 }
