@@ -1,6 +1,6 @@
 <?php
 
-namespace SprykerEco\Zed\ArvatoRss;
+namespace SprykerEco\Shared\ArvatoRss;
 
 interface ArvatoRssConstants
 {
