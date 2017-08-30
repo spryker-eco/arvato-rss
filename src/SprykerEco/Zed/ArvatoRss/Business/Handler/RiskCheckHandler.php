@@ -22,7 +22,7 @@ class RiskCheckHandler implements RiskCheckHandlerInterface
 
 
     /**
-     * @var \SprykerEco\Zed\ArvatoRss\Business\Mapper\RiskCheckResponseMapperInterface $riskCheckResponseMapper
+     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckResponseMapperInterface $riskCheckResponseMapper
      */
     protected $riskCheckResponseMapper;
 
@@ -32,7 +32,7 @@ class RiskCheckHandler implements RiskCheckHandlerInterface
     protected $apiAdapter;
 
     /**
-     * @param \SprykerEco\Zed\ArvatoRss\Business\Mapper\RiskCheckRequestMapperInterface $riskCheckRequestMapper
+     * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapperInterface $riskCheckRequestMapper
      */
     public function __construct(
         RiskCheckRequestMapperInterface $riskCheckRequestMapper,
@@ -46,13 +46,13 @@ class RiskCheckHandler implements RiskCheckHandlerInterface
     }
 
     /**
-     * @param Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return QuoteTransfer
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function performRiskCheck(QuoteTransfer $quoteTransfer)
     {
-        $requestTransfer = $this->riskCheckRequestMapper->mapQuoteToRequest($quoteTransfer);
+        $requestTransfer = $this->riskCheckRequestMapper->mapQuoteToRequestTranfer($quoteTransfer);
         $responseTransfer = $this->apiAdapter->performRiskCheck($requestTransfer);
         $quoteTransfer = $this->riskCheckResponseMapper->mapResponseToQuote($responseTransfer);
 

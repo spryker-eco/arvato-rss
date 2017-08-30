@@ -8,21 +8,26 @@
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Adapter;
 
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
+use Spryker\Shared\Config\Config;
+use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\ResponseToRiskCheckResponseTransferConverter;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestToArrayConverter;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestToHeaderConverter;
 
 class SoapApiAdapter implements ApiAdapterInterface
 {
 
     /**
-     * @const WSDL_PATH
+     * @const string WSDL_PATH
      */
-    const WSDL_PATH = __DIR__."/../../../../../assets/risk-solution-services.v2.1.wsdl";
+    const WSDL_PATH = __DIR__."/../Etc/risk-solution-services.v2.1.wsdl";
 
     /**
      * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestToArrayConverter
      */
     protected $riskCheckRequestToArrayConverter;
+
+    protected $riskCheckRequestToHeaderConverter;
 
     /**
      * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\ResponseToRiskCheckResponseTransferConverter
@@ -34,10 +39,12 @@ class SoapApiAdapter implements ApiAdapterInterface
      */
     public function __construct(
         RiskCheckRequestToArrayConverter $riskCheckRequestToArrayConverter,
+        RiskCheckRequestToHeaderConverter $riskCheckRequestToHeaderConverter,
         ResponseToRiskCheckResponseTransferConverter $responseToRiskCheckResponseTransferConverter
     )
     {
         $this->riskCheckRequestToArrayConverter = $riskCheckRequestToArrayConverter;
+        $this->riskCheckRequestToHeaderConverter  =$riskCheckRequestToHeaderConverter;
         $this->responseToRiskCheckResponseTransferConverter = $responseToRiskCheckResponseTransferConverter;
     }
 
@@ -49,9 +56,13 @@ class SoapApiAdapter implements ApiAdapterInterface
     public function performRiskCheck(ArvatoRssRiskCheckRequestTransfer $requestTransfer)
     {
         $params = $this->riskCheckRequestToArrayConverter->convert($requestTransfer);
-        $options = [];
-        //TODO: get client id and password for request from configuration.
+        $header = $this->riskCheckRequestToHeaderConverter->convert($requestTransfer);
+        $options = array(
+        ) ;
         $soapClient = new \SoapClient(static::WSDL_PATH, $options);
+        $soapClient->__setSoapHeaders($header);
+        $soapClient->__setLocation(Config::get(ArvatoRssConstants::ARVATORSS)[ArvatoRssConstants::ARVATORSS_URL]);
+        //TODO: catch exceptions.
         $result = $soapClient->RiskCheck($params);
         //TODO: process the response and convert it to the response transfer.
     }

@@ -8,9 +8,11 @@
 namespace SprykerEco\Zed\ArvatoRss\Business;
 
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
+use SprykerEco\Zed\ArvatoRss\ArvatoRssDependencyProvider;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\SoapApiAdapter;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\ResponseToRiskCheckResponseTransferConverter;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestToArrayConverter;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestToHeaderConverter;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapper;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckResponseMapper;
 use SprykerEco\Zed\ArvatoRss\Business\Handler\RiskCheckHandler;
@@ -38,7 +40,9 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
      */
     protected function createRiskCheckRequestMapper()
     {
-        return new RiskCheckRequestMapper();
+        return new RiskCheckRequestMapper(
+            $this->getMoney()
+        );
     }
 
     /**
@@ -56,6 +60,7 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     {
         return new SoapApiAdapter(
             $this->createRiskCheckToArrayConverter(),
+            $this->createRiskCheckToHeaderConverter(),
             $this->createResponseToRiskCheckResponseTransferConverter()
         );
     }
@@ -69,11 +74,24 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestToHeaderConverter
+     */
+    protected function createRiskCheckToHeaderConverter()
+    {
+        return new RiskCheckRequestToHeaderConverter();
+    }
+
+    /**
      * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\ResponseToRiskCheckResponseTransferConverter
      */
     protected function createResponseToRiskCheckResponseTransferConverter()
     {
         return new ResponseToRiskCheckResponseTransferConverter();
+    }
+
+    protected function getMoney()
+    {
+        return $this->getProvidedDependency(ArvatoRssDependencyProvider::FACADE_MONEY);
     }
 
 }
