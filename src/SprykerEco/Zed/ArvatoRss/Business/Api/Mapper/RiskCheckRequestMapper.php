@@ -55,7 +55,7 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
      * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $arvatoRssRiskCheckRequestTransfer
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer
+     * @return void
      */
     protected function hydrateRequestWithIdentificationData($requestTransfer, $quoteTransfer)
     {
@@ -69,14 +69,13 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
         );
         $requestTransfer->setIdentification($identification);
 
-        return $requestTransfer;
     }
 
     /**
      * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $arvatoRssRiskCheckRequestTransfer
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer
+     * @return void
      */
     protected function hydrateRequestWithCustomerData($requestTransfer, $quoteTransfer)
     {
@@ -99,14 +98,13 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
         $billingCustomer->setBirthDay($customer->getDateOfBirth());
         $requestTransfer->setBillingCustomer($billingCustomer);
 
-        return $requestTransfer;
     }
 
     /**
      * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $arvatoRssRiskCheckRequestTransfer
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer
+     * @return void
      */
     protected function hydrateRequestWithOrderData($requestTransfer, $quoteTransfer)
     {
@@ -134,7 +132,6 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
         }
         $requestTransfer->setOrder($order);
 
-        return $requestTransfer;
     }
 
 }
