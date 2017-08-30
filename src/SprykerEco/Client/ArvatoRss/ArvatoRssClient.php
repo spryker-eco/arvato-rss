@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Client\ArvatoRss;
 
+use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Client\Kernel\AbstractClient;
 
 /**
@@ -16,11 +17,13 @@ class ArvatoRssClient extends AbstractClient implements ArvatoRssClientInterface
 {
 
     /**
-     * @return \SprykerEco\Client\ArvatoRss\Zed\ArvatoRssStubInterface
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    protected function getZedStub()
+    public function performRiskCheck(QuoteTransfer $quoteTransfer)
     {
-        return $this->getFactory()->createZedStub();
+        return $this->getFactory()->createZedStub()->performRiskCheck($quoteTransfer);
     }
 
 }
