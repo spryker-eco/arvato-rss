@@ -9,21 +9,12 @@ namespace SprykerEco\Zed\ArvatoRss;
 
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
+use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyBridge;
 
 class ArvatoRssDependencyProvider extends AbstractBundleDependencyProvider
 {
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
-    public function provideCommunicationLayerDependencies(Container $container)
-    {
-        //TODO Provide dependencies
-
-        return $container;
-    }
+    const FACADE_MONEY = 'FACADE_MONEY';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
@@ -32,19 +23,9 @@ class ArvatoRssDependencyProvider extends AbstractBundleDependencyProvider
      */
     public function provideBusinessLayerDependencies(Container $container)
     {
-        //TODO Provide dependencies
-
-        return $container;
-    }
-
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
-    public function providePersistenceLayerDependencies(Container $container)
-    {
-        //TODO Provide dependencies
+        $container[static::FACADE_MONEY] = function (Container $container) {
+            return new ArvatoRssToMoneyBridge($container->getLocator()->money()->facade());
+        };
 
         return $container;
     }
