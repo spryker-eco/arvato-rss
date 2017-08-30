@@ -3,15 +3,35 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xsd">
 
-    <transfer name="ArvatoRssRiskCheckRequest">
-        <property name="clientTransactionID" type="int" />
-        <property name="clientCustomerID" type="int" />
+    <transfer name="ArvatoRssIdentificationRequestTransfer">
+        <property name="clientId" type="string" />
+        <property name="subClientId" type="string" />
+        <!--Password-->
+        <property name="authorisation" type="string" />
+        <property name="clientTransactionId" type="string" />
+        <property name="processControl" type="string" />
+        <property name="communicationToken" type="sting" />
+    </transfer>
+
+    <transfer name="ArvatoRssBillingCustomer">
+        <property name="clientCustomerId" type="string" />
         <property name="debitorNumber" type="string"  />
-        <property name="lastName" type="string" />
         <property name="firstName" type="string" />
+        <property name="lastName" type="string" />
+        <property name="salutation" type="string" />
+        <property name="title" type="string" />
         <property name="birthDay" type="string" />
         <property name="email" type="string" />
-        <!--cutomer address-->
+        <property name="telephoneNumber" type="string" />
+        <property name="mobileNumber" type="string" />
+        <property name="facsimileNumber" type="string" />
+        <!--TODO: use cutomer address transfer if so exists-->
+        <property name="address" type="ArvatoRssCustomerAddress" />
+        <property name="extendedCustomerData" type="ArvatoRssExtendedCustomerData" />
+
+    </transfer>
+
+    <transfer name="ArvatoRssCustomerAddress">
         <property name="careOf" type="string" />
         <property name="street" type="string" />
         <property name="streetNumber" type="string" />
@@ -19,23 +39,64 @@
         <property name="zipCode" type="string" />
         <property name="city" type="string" />
         <property name="country" type="string" />
-        <!--order details-->
-        <property name="currency" type="string" />
+    </transfer>
+
+    <transfer name="ArvatoRssExtendedCustomerData">
+        <property name="existingCustomer" type="bool" />
+        <property name="verifiedCustomerIdentification" type="bool" />
+        <!--Example: 2008-12-31-->
+        <property name="customerSince" type="date" />
+        <!--In range 1-5 -->
+        <property name="customerClassification" type="int" />
+        <property name="hasCustomerCard" type="bool" />
+        <!--Example: 2008-12-31-->
+        <property name="customerCardSince" type="date" />
+        <!--In range 1-5 -->
+        <property name="customerCardClassification" type="int" />
+        <property name="customerAcquisitionChannel" type="string" />
+        <property name="hasMarketingOptIn" type="bool" />
+        <property name="currentOutstandingSaldo" type="string" />
+        <property name="maxOutstandingSaldo" type="string" />
+        <property name="maxBalanceChange" type="string" />
+        <property name="currentDunningLevel" type="string" />
+        <property name="currentDunningLevel" type="string" />
+        <property name="maxDunningLevelEver" type="string" />
+        <property name="currentPaymentSaldo" type="string" />
+        <property name="currentReshipmentSaldo" type="string" />
+        <property name="lastPaymentReceiptDate" type="string" />
+        <property name="returnDebitNoteCount" type="string" />
+        <property name="lastReturnDebitDate" type="string" />
+        <property name="decisionProcessData" type="ArvatoRssDecisionProcessData" />
+    </transfer>
+
+    <transfer name="ArvatoRssDecisionProcessData">
+        <property name="name" type="string" />
+    </transfer>
+
+    <transfer name="ArvatoRssOrder">
         <property name="orderChannel" type="string" />
         <property name="deliveryType" type="string" />
         <property name="registeredOrder" type="bool" />
-        <!--shopping cart details-->
-        <property name="grossTotalBill" type="float" />
-        <property name="totalOrderValue" type="float" />
-        <property name="pos" type="int" />
-        <property name="productNumber" type="int" />
+        <property name="paymentType" type="string" />
+        <property name="currency" type="string" />
+        <property name="grossTotalBill" type="string" />
+        <property name="totalOrderValue" type="string" />
+        <property name="item" type="ArvatoRssOrderItem[]" />
+    </transfer>
+
+    <transfer name="ArvatoRssOrderItem">
+        <property name="position" type="int" />
+        <property name="productNumber" type="string" />
         <property name="productGroupId" type="int" />
         <property name="unitPrice" type="float" />
         <property name="unitCount" type="int" />
         <property name="remarks" type="string" />
-        <!--profile tracking-->
-        <property name="sessionIDAddegree" type="string" />
-        <property name="IPAddress" type="string" />
+    </transfer>
+
+    <transfer name="ArvatoRssRiskCheckRequest">
+        <property name="identification" type="ArvatoRssIdentificationRequest" />
+        <property name="billingCustomer" type="ArvatoRssBillingCustomer" />
+        <property name="order" type="ArvatoRssOrder" />
         <property name="requestTimestamp" type="string" />
     </transfer>
 
@@ -48,7 +109,7 @@
         <property name="scoreFeatureName" type="string" />
         <property name="scoreFeatureValue" type="string" />
         <!--duplicate ID-->
-        <property name="RMFCustomerId" type="string" />
+        <property name="RmfCustomerId" type="string" />
         <property name="isNewCustomer" type="bool" />
         <property name="communicationToken" type="string" />
         <!-- Address Correction-->
