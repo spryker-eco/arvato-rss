@@ -35,7 +35,7 @@ class SoapApiAdapter implements ApiAdapterInterface
     /**
      * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\ArvatoRssResponseConverter
      */
-    protected $responseToRiskCheckResponseTransferConverter;
+    protected $riskCheckResponseConverter;
 
     /**
      * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverter $riskCheckRequestConverter
@@ -43,28 +43,28 @@ class SoapApiAdapter implements ApiAdapterInterface
     public function __construct(
         RiskCheckRequestConverter $riskCheckRequestConverter,
         RiskCheckRequestHeaderConverter $riskCheckRequestHeaderConverter,
-        ArvatoRssResponseConverter $responseToRiskCheckResponseTransferConverter
+        ArvatoRssResponseConverter $riskCheckResponseConverter
     )
     {
         $this->riskCheckRequestConverter = $riskCheckRequestConverter;
         $this->riskCheckRequestHeaderConverter = $riskCheckRequestHeaderConverter;
-        $this->responseToRiskCheckResponseTransferConverter = $responseToRiskCheckResponseTransferConverter;
+        $this->riskCheckResponseConverter = $riskCheckResponseConverter;
     }
 
     /**
      * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $quoteTransfer
      *
-     * @return array
+     * @return \Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer
      */
     public function performRiskCheck(ArvatoRssRiskCheckRequestTransfer $requestTransfer)
     {
         $params = $this->riskCheckRequestConverter->convert($requestTransfer);
         $soapClient = $this->createSoapClient($requestTransfer);
         $response = $soapClient->RiskCheck($params);
-        //TODO: check response inside
+        //TODO: check if the response has an exception
         $this->handleExceptions($response);
 
-        return $response;
+        return $this->riskCheckResponseConverter->convert($response);
     }
 
     /**
