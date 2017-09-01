@@ -5,83 +5,34 @@
 
     <transfer name="ArvatoRssIdentificationRequestTransfer">
         <property name="clientId" type="string" />
-        <property name="subClientId" type="string" />
         <!--Password-->
         <property name="authorisation" type="string" />
-        <property name="clientTransactionId" type="string" />
-        <property name="processControl" type="string" />
-        <property name="communicationToken" type="sting" />
     </transfer>
 
     <transfer name="ArvatoRssBillingCustomer">
-        <property name="clientCustomerId" type="string" />
-        <property name="debitorNumber" type="string"  />
         <property name="firstName" type="string" />
         <property name="lastName" type="string" />
         <property name="salutation" type="string" />
-        <property name="title" type="string" />
         <property name="birthDay" type="string" />
         <property name="email" type="string" />
         <property name="telephoneNumber" type="string" />
-        <property name="mobileNumber" type="string" />
-        <property name="facsimileNumber" type="string" />
-        <!--TODO: use cutomer address transfer if so exists-->
         <property name="address" type="ArvatoRssCustomerAddress" />
-        <property name="extendedCustomerData" type="ArvatoRssExtendedCustomerData" />
-
     </transfer>
 
     <transfer name="ArvatoRssCustomerAddress">
-        <property name="careOf" type="string" />
         <property name="street" type="string" />
         <property name="streetNumber" type="string" />
-        <property name="streetNumberAdditional" type="string" />
         <property name="zipCode" type="string" />
         <property name="city" type="string" />
         <property name="country" type="string" />
     </transfer>
 
-    <transfer name="ArvatoRssExtendedCustomerData">
-        <property name="existingCustomer" type="bool" />
-        <property name="verifiedCustomerIdentification" type="bool" />
-        <!--Example: 2008-12-31-->
-        <property name="customerSince" type="date" />
-        <!--In range 1-5 -->
-        <property name="customerClassification" type="int" />
-        <property name="hasCustomerCard" type="bool" />
-        <!--Example: 2008-12-31-->
-        <property name="customerCardSince" type="date" />
-        <!--In range 1-5 -->
-        <property name="customerCardClassification" type="int" />
-        <property name="customerAcquisitionChannel" type="string" />
-        <property name="hasMarketingOptIn" type="bool" />
-        <property name="currentOutstandingSaldo" type="string" />
-        <property name="maxOutstandingSaldo" type="string" />
-        <property name="maxBalanceChange" type="string" />
-        <property name="currentDunningLevel" type="string" />
-        <property name="currentDunningLevel" type="string" />
-        <property name="maxDunningLevelEver" type="string" />
-        <property name="currentPaymentSaldo" type="string" />
-        <property name="currentReshipmentSaldo" type="string" />
-        <property name="lastPaymentReceiptDate" type="string" />
-        <property name="returnDebitNoteCount" type="string" />
-        <property name="lastReturnDebitDate" type="string" />
-        <property name="decisionProcessData" type="ArvatoRssDecisionProcessData" />
-    </transfer>
-
-    <transfer name="ArvatoRssDecisionProcessData">
-        <property name="name" type="string" />
-    </transfer>
-
     <transfer name="ArvatoRssOrder">
-        <property name="orderChannel" type="string" />
-        <property name="deliveryType" type="string" />
         <property name="registeredOrder" type="bool" />
-        <property name="paymentType" type="string" />
         <property name="currency" type="string" />
         <property name="grossTotalBill" type="string" />
         <property name="totalOrderValue" type="string" />
-        <property name="item" type="ArvatoRssOrderItem[]" />
+        <property name="items" type="ArvatoRssOrderItem[]" />
     </transfer>
 
     <transfer name="ArvatoRssOrderItem">
@@ -90,14 +41,12 @@
         <property name="productGroupId" type="int" />
         <property name="unitPrice" type="float" />
         <property name="unitCount" type="int" />
-        <property name="remarks" type="string" />
     </transfer>
 
     <transfer name="ArvatoRssRiskCheckRequest">
         <property name="identification" type="ArvatoRssIdentificationRequest" />
         <property name="billingCustomer" type="ArvatoRssBillingCustomer" />
         <property name="order" type="ArvatoRssOrder" />
-        <property name="requestTimestamp" type="string" />
     </transfer>
 
     <transfer name="ArvatoRssRiskCheckResponse">
