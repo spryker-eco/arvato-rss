@@ -30,7 +30,12 @@ class RiskCheckRequestConverter implements RiskCheckRequestConverterInterface
         return $result;
     }
 
-    protected function convertBillingCustomer($arvatoRssRiskCheckRequestTransfer)
+    /**
+     * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $arvatoRssRiskCheckRequestTransfer
+     *
+     * @return array
+     */
+    protected function convertBillingCustomer(ArvatoRssRiskCheckRequestTransfer $arvatoRssRiskCheckRequestTransfer)
     {
         $result = [];
         $billingCustomerTransfer = $arvatoRssRiskCheckRequestTransfer->getBillingCustomer();
@@ -50,8 +55,36 @@ class RiskCheckRequestConverter implements RiskCheckRequestConverterInterface
         return $result;
     }
 
-    protected function convertOrder($arvatoRssRiskCheckRequestTransfer)
+    /**
+     * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $arvatoRssRiskCheckRequestTransfer
+     *
+     * @return array
+     */
+    protected function convertOrder(ArvatoRssRiskCheckRequestTransfer $arvatoRssRiskCheckRequestTransfer)
     {
+        $result = [];
+        $order = $arvatoRssRiskCheckRequestTransfer->getOrder();
 
+        $result['Order'] = [
+            //TODO: Clarify what it means
+            'RegisteredOrder' => true,
+            'Currency' => $order->getCurrency(),
+            'GrossTotalBill' => $order->getGrossTotalBill(),
+            'TotalOrderValue' => $order->getTotalOrderValue()
+        ];
+        // TODO: deal with items.
+        /*$result['Order']['Item'] = [];
+        foreach ($order->getItem() as $item) {
+            $result['Order']['Item'][] = [
+                //TODO: clarify this. Is it sku?
+                'ProductNumber' => $item->getProductNumber(),
+                //TODO: clarify
+                'ProductGroupId' => $item->getProductGroupId(),
+                'UnitPrice' => $item->getUnitPrice(),
+                'UnitCount' => $item->getUnitCount()
+            ];
+        }*/
+
+        return $result;
     }
 }
