@@ -54,7 +54,7 @@ class RiskCheckHandler implements RiskCheckHandlerInterface
     {
         $requestTransfer = $this->riskCheckRequestMapper->mapQuoteToRequestTranfer($quoteTransfer);
         $responseTransfer = $this->apiAdapter->performRiskCheck($requestTransfer);
-        $quoteTransfer = $this->riskCheckResponseMapper->mapResponseToQuote($responseTransfer);
+        $quoteTransfer = $this->riskCheckResponseMapper->mapResponseToQuote($responseTransfer, $quoteTransfer);
 
         return $quoteTransfer;
     }
