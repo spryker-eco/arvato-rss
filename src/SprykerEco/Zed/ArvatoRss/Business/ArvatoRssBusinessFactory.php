@@ -10,7 +10,7 @@ namespace SprykerEco\Zed\ArvatoRss\Business;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerEco\Zed\ArvatoRss\ArvatoRssDependencyProvider;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\SoapApiAdapter;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\ArvatoRssResponseConverter;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverter;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverter;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestHeaderConverter;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapper;
@@ -82,11 +82,11 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\ArvatoRssResponseConverter
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverter
      */
     protected function createResponseToRiskCheckResponseTransferConverter()
     {
-        return new ArvatoRssResponseConverter();
+        return new RiskCheckResponseConverter();
     }
 
     protected function getMoney()

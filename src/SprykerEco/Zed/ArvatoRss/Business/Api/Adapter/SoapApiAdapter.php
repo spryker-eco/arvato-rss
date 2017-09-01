@@ -10,7 +10,7 @@ namespace SprykerEco\Zed\ArvatoRss\Business\Api\Adapter;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\ArvatoRssResponseConverter;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverter;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverter;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestHeaderConverter;
 
@@ -33,17 +33,19 @@ class SoapApiAdapter implements ApiAdapterInterface
     protected $riskCheckRequestHeaderConverter;
 
     /**
-     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\ArvatoRssResponseConverter
+     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverter
      */
     protected $riskCheckResponseConverter;
 
     /**
      * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverter $riskCheckRequestConverter
+     * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestHeaderConverter $riskCheckRequestHeaderConverter
+     * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverter $riskCheckResponseConverter
      */
     public function __construct(
         RiskCheckRequestConverter $riskCheckRequestConverter,
         RiskCheckRequestHeaderConverter $riskCheckRequestHeaderConverter,
-        ArvatoRssResponseConverter $riskCheckResponseConverter
+        RiskCheckResponseConverter $riskCheckResponseConverter
     )
     {
         $this->riskCheckRequestConverter = $riskCheckRequestConverter;
