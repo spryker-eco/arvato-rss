@@ -16,7 +16,7 @@ class RiskCheckHandler implements RiskCheckHandlerInterface
 {
 
     /**
-     * @var \SprykerEco\Zed\ArvatoRss\Business\Mapper\RiskCheckRequestMapperInterface $riskCheckRequestMapper
+     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapperInterface $riskCheckRequestMapper
      */
     protected $riskCheckRequestMapper;
 
