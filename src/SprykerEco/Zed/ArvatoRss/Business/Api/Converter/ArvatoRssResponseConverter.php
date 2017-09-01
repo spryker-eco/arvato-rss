@@ -7,16 +7,27 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Converter;
 
-//TODO: implement interface
+use Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer;
+use \stdClass;
+
 class ArvatoRssResponseConverter implements ArvatoRssResponseConverterInterface
 {
 
     /**
-     * @param array $response
+     * @param \stdClass $response
+     *
+     * @return \Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer
      */
-    public function convert(array $response)
+    public function convert(stdClass $response)
     {
-        // TODO: implement once it is possible to request arvato(credentials are provided)
+        $responseTransfer = new ArvatoRssRiskCheckResponseTransfer();
+
+        $responseTransfer->setResult($response->Decision->Result);
+        $responseTransfer->setResultCode($response->Decision->ResultCode);
+        $responseTransfer->setActionCode($response->Decision->ActionCode);
+        $responseTransfer->setIsNewCustomer($response->Decision->IsNewCustomer);
+
+        return $responseTransfer;
     }
 
 }

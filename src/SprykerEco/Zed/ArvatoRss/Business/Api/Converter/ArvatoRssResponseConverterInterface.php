@@ -7,12 +7,16 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Converter;
 
+use \stdClass;
+
 interface ArvatoRssResponseConverterInterface
 {
 
     /**
-     * @param array $response
+     * @param \stdClass $response
+     *
+     * @return
      */
-    public function convert(array $response);
+    public function convert(stdClass $response);
 
 }
