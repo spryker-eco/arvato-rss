@@ -32,7 +32,7 @@
         <property name="currency" type="string" />
         <property name="grossTotalBill" type="string" />
         <property name="totalOrderValue" type="string" />
-        <property name="items" type="ArvatoRssOrderItem[]" />
+        <property name="item" type="ArvatoRssOrderItem[]" />
     </transfer>
 
     <transfer name="ArvatoRssOrderItem">
@@ -58,7 +58,7 @@
         <property name="scoreFeatureName" type="string" />
         <property name="scoreFeatureValue" type="string" />
         <!--duplicate ID-->
-        <property name="RmfCustomerId" type="string" />
+        <property name="rmfCustomerId" type="string" />
         <property name="isNewCustomer" type="bool" />
         <property name="communicationToken" type="string" />
         <!-- Address Correction-->
