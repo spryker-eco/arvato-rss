@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\ArvatoRss\Business;
 
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
+use Spryker\Zed\Money\Business\MoneyFacade;
 use SprykerEco\Zed\ArvatoRss\ArvatoRssDependencyProvider;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\SoapApiAdapter;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverter;
@@ -60,8 +61,8 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     {
         return new SoapApiAdapter(
             $this->createRiskCheckRequestConverter(),
-            $this->createRiskCheckHeaderConverter(),
-            $this->createResponseToRiskCheckResponseTransferConverter()
+            $this->createRiskCheckRequestHeaderConverter(),
+            $this->createResponseConverter()
         );
     }
 
@@ -76,7 +77,7 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestHeaderConverter
      */
-    protected function createRiskCheckHeaderConverter()
+    protected function createRiskCheckRequestHeaderConverter()
     {
         return new RiskCheckRequestHeaderConverter();
     }
@@ -84,11 +85,14 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverter
      */
-    protected function createResponseToRiskCheckResponseTransferConverter()
+    protected function createResponseConverter()
     {
         return new RiskCheckResponseConverter();
     }
 
+    /**
+     * @return \SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface
+     */
     protected function getMoney()
     {
         return $this->getProvidedDependency(ArvatoRssDependencyProvider::FACADE_MONEY);
