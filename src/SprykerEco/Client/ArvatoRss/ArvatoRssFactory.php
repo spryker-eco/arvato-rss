@@ -7,8 +7,8 @@
 
 namespace SprykerEco\Client\ArvatoRss;
 
-use Pyz\Client\ArvatoRss\Zed\ArvatoRssStub;
 use Spryker\Client\Kernel\AbstractFactory;
+use SprykerEco\Client\ArvatoRss\Zed\ArvatoRssStub;
 
 class ArvatoRssFactory extends AbstractFactory
 {

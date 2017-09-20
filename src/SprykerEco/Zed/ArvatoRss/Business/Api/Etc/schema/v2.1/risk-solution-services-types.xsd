@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 72523 $ -->
+<!-- $Date: 2013-07-02 09:13:04 +0200 (Di, 02 Jul 2013) $ -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:risk-solution-services-types:v2.1"
+	xmlns:urn="urn:risk-solution-services-types:v2.1" xmlns:rmf="http://rmf.arvato-infoscore.de/RMF_V2.1"
+	elementFormDefault="qualified">
+
+	<xs:import namespace="http://rmf.arvato-infoscore.de/RMF_V2.1" schemaLocation="rmf-complete.xsd" />
+
+	<xs:element name="Identification" type="rmf:IdentificationType" />
+	<xs:element name="DeviceIdentification" type="rmf:DeviceIdentificationType" />
+
+	<xs:element name="RiskCheck" type="rmf:RiskCheckType" />
+	<xs:element name="RiskAccountCheck" type="rmf:RiskAccountCheckType" />
+	<xs:element name="AddressCheck" type="rmf:AddressCheckType" />
+	<xs:element name="AccountCheck" type="rmf:AccountCheckType" />
+	<xs:element name="StoreOrder" type="rmf:StoreOrderType" />
+
+	<xs:element name="RiskCheckResponse" type="rmf:RiskCheckResponseType" />
+	<xs:element name="RiskAccountCheckResponse" type="rmf:RiskAccountCheckResponseType" />
+	<xs:element name="AddressCheckResponse" type="rmf:AddressCheckResponseType" />
+	<xs:element name="AccountCheckResponse" type="rmf:AccountCheckResponseType" />
+	<xs:element name="StoreOrderResponse" type="rmf:StoreOrderResponseType" />
+
+	<xs:element name="RmfException" type="rmf:RmfExceptionType" />
+	<xs:element name="RmfAuthenticationException" type="rmf:RmfAuthenticationExceptionType" />
+	<xs:element name="RmfAccessDeniedException" type="rmf:RmfAccessDeniedExceptionType" />
+	<xs:element name="RmfIllegalArgumentException" type="rmf:RmfIllegalArgumentExceptionType" />
+
+</xs:schema>

@@ -13,9 +13,9 @@ interface ApiAdapterInterface
 {
 
     /**
-     * @param Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $quoteTransfer
      *
-     * @return mixed
+     * @return \Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer
      */
     public function performRiskCheck(ArvatoRssRiskCheckRequestTransfer $requestTransfer);
 

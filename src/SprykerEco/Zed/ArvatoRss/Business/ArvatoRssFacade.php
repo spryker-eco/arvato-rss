@@ -17,13 +17,13 @@ class ArvatoRssFacade extends AbstractFacade implements ArvatoRssFacadeInterface
 {
 
     /**
-     * @param Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return QuoteTransfer
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function performRiskCheck(QuoteTransfer $quoteTransfer)
     {
-        return $this->getFactory()-createRiskCheckHandler()->performRiskCheck($quoteTransfer);
+        return $this->getFactory()->createRiskCheckHandler()->performRiskCheck($quoteTransfer);
     }
 
 }

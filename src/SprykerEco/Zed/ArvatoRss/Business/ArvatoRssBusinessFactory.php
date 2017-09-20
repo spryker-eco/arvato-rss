@@ -8,9 +8,11 @@
 namespace SprykerEco\Zed\ArvatoRss\Business;
 
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
+use SprykerEco\Zed\ArvatoRss\ArvatoRssDependencyProvider;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\SoapApiAdapter;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\ResponseToRiskCheckResponseTransferConverter;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestToArrayConverter;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverter;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverter;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestHeaderConverter;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapper;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckResponseMapper;
 use SprykerEco\Zed\ArvatoRss\Business\Handler\RiskCheckHandler;
@@ -38,7 +40,9 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
      */
     protected function createRiskCheckRequestMapper()
     {
-        return new RiskCheckRequestMapper();
+        return new RiskCheckRequestMapper(
+            $this->getMoney()
+        );
     }
 
     /**
@@ -55,25 +59,39 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     protected function createSoapApiAdapter()
     {
         return new SoapApiAdapter(
-            $this->createRiskCheckToArrayConverter(),
+            $this->createRiskCheckRequestConverter(),
+            $this->createRiskCheckHeaderConverter(),
             $this->createResponseToRiskCheckResponseTransferConverter()
         );
     }
 
     /**
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestToArrayConverter
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverter
      */
-    protected function createRiskCheckToArrayConverter()
+    protected function createRiskCheckRequestConverter()
     {
-        return new RiskCheckRequestToArrayConverter();
+        return new RiskCheckRequestConverter();
     }
 
     /**
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\ResponseToRiskCheckResponseTransferConverter
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestHeaderConverter
+     */
+    protected function createRiskCheckHeaderConverter()
+    {
+        return new RiskCheckRequestHeaderConverter();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverter
      */
     protected function createResponseToRiskCheckResponseTransferConverter()
     {
-        return new ResponseToRiskCheckResponseTransferConverter();
+        return new RiskCheckResponseConverter();
+    }
+
+    protected function getMoney()
+    {
+        return $this->getProvidedDependency(ArvatoRssDependencyProvider::FACADE_MONEY);
     }
 
 }
