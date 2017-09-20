@@ -2,8 +2,8 @@
   "name": "spryker-eco/arvato-rss",
   "autoload": {
     "psr-0": {
-      "SprykerEco": "src/",
-      "Function": "tests/"
+      "SprykerEco\\": "src/",
+      "Functional\\": "tests/"
     }
   },
   "require": {
