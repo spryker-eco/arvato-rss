@@ -13,7 +13,7 @@ interface RiskCheckHandlerInterface
 {
 
     /**
-     * @param Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return QuoteTransfer
      */

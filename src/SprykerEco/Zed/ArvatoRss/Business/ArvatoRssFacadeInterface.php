@@ -13,7 +13,7 @@ interface ArvatoRssFacadeInterface
 {
 
     /**
-     * @param Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
