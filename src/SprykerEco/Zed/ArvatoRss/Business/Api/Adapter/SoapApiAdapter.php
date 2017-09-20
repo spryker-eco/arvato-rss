@@ -17,7 +17,7 @@ class SoapApiAdapter implements ApiAdapterInterface
     /**
      * @const WSDL_PATH
      */
-    const WSDL_PATH = __DIR__."/../../../../../assets/risk-solution-services.v2.1.wsdl";
+    const WSDL_PATH = __DIR__."/../Etc/risk-solution-services.v2.1.wsdl";
 
     /**
      * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestToArrayConverter
