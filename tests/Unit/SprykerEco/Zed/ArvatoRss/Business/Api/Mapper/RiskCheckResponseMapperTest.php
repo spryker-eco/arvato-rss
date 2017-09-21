@@ -40,7 +40,7 @@ class RiskCheckResponseMapperTest extends TestCase
                         'result' => 'R',
                         'resultCode' => 'R',
                         'actionCode' => 'IPT999',
-                        'resultDescription' => 'Test',
+                        'resultText' => 'Test',
                         'scoreValue' => '12',
                         'scoreFeatureName' => 'Test',
                         'scoreFeatuteValue' => 'Test',
@@ -90,19 +90,8 @@ class RiskCheckResponseMapperTest extends TestCase
         $transfer = new ArvatoRssRiskCheckResponseTransfer();
         $transfer->setResult($data->getResult());
         $transfer->setActionCode($data->getActionCode());
-        $transfer->setResultCode($data->getResultCode());
-        $transfer->setResultDescription($data->getResultDescription());
-        $transfer->setScoreValue($data->getScoreValue());
-        $transfer->setScoreFeatureName($data->getScoreFeatureName());
-        $transfer->setScoreFeatureValue($data->getScoreFeatureValue());
-        $transfer->setRmfCustomerId($data->getRmfCustomerId());
-        $transfer->setIsNewCustomer($data->getIsNewCustomer());
-        $transfer->setCommunicationToken($data->getCommunicationToken());
-        $transfer->setReturnCode($data->getReturnCode());
-        $transfer->setStreet($data->getStreet());
-        $transfer->setStreetNumber($data->getStreetNumber());
-        $transfer->setZipCode($data->getZipCode());
-        $transfer->setCity($data->getCity());
+        $transfer->setActionCode($data->getActionCode());
+        $transfer->setResultText($data->getResultText());
 
         return $transfer;
     }

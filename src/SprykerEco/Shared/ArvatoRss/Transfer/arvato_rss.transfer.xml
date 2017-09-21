@@ -53,19 +53,6 @@
         <property name="actionCode" type="string" />
         <property name="resultCode" type="string" />
         <property name="resultText" type="string" />
-        <property name="scoreValue" type="string" />
-        <property name="scoreFeatureName" type="string" />
-        <property name="scoreFeatureValue" type="string" />
-        <property name="rmfCustomerId" type="string" />
-        <property name="isNewCustomer" type="bool" />
-        <property name="communicationToken" type="string" />
-        <!-- Address Correction-->
-        <property name="returnCode" type="int" />
-        <property name="street" type="string" />
-        <property name="streetNumber" type="string" />
-        <property name="streetNumberAdditional" type="string" />
-        <property name="zipCode" type="string" />
-        <property name="city" type="string" />
     </transfer>
 
     <transfer name="Quote">
