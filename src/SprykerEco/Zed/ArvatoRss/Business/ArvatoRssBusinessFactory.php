@@ -42,7 +42,7 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     protected function createRiskCheckRequestMapper()
     {
         return new RiskCheckRequestMapper(
-            $this->getMoney()
+            $this->getMoneyFacade()
         );
     }
 
@@ -93,7 +93,7 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface
      */
-    protected function getMoney()
+    protected function getMoneyFacade()
     {
         return $this->getProvidedDependency(ArvatoRssDependencyProvider::FACADE_MONEY);
     }
