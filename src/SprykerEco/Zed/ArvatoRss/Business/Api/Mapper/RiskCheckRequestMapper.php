@@ -126,7 +126,6 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
     protected function mapOrder($requestTransfer, $quoteTransfer)
     {
         $orderTransfer = new ArvatoRssOrderTransfer();
-        $itemTransfer = new ArvatoRssOrderItemTransfer();
 
         $orderTransfer->setCurrency(Store::getInstance()->getCurrencyIsoCode());
         $orderTransfer->setGrossTotalBill(
@@ -136,6 +135,7 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
             $this->money->convertIntegerToDecimal($quoteTransfer->getTotals()->getGrandTotal())
         );
         foreach ($quoteTransfer->getItems() as $item) {
+            $itemTransfer = new ArvatoRssOrderItemTransfer();
             $itemTransfer->setUnitPrice(
                 $this->money->convertIntegerToDecimal($item->getUnitPrice())
             );
