@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Converter;
 
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
+use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface;
 
 class RiskCheckRequestConverter implements RiskCheckRequestConverterInterface
 {
@@ -73,7 +74,8 @@ class RiskCheckRequestConverter implements RiskCheckRequestConverterInterface
             'TotalOrderValue' => $order->getTotalOrderValue()
         ];
         // TODO: deal with items.
-        /*$result['Order']['Item'] = [];
+        $result['Order']['Item'] = [];
+
         foreach ($order->getItem() as $item) {
             $result['Order']['Item'][] = [
                 //TODO: clarify this. Is it sku?
@@ -83,7 +85,7 @@ class RiskCheckRequestConverter implements RiskCheckRequestConverterInterface
                 'UnitPrice' => $item->getUnitPrice(),
                 'UnitCount' => $item->getUnitCount()
             ];
-        }*/
+        }
 
         return $result;
     }
