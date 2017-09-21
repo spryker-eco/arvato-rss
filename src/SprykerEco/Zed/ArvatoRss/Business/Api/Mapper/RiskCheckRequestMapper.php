@@ -15,6 +15,7 @@ use Generated\Shared\Transfer\ArvatoRssOrderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
 use Spryker\Shared\Config\Config;
+use SprykerEco\Service\ArvatoRss\Iso3166ConverterInterface;
 use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
 use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface;
 
@@ -28,11 +29,21 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
     protected $money;
 
     /**
-     * @param \SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface $money
+     * @var \SprykerEco\Service\ArvatoRss\Iso3166ConverterInterface $iso3166
      */
-    public function __construct(ArvatoRssToMoneyInterface $money)
+    protected $iso3166;
+
+    /**
+     * @param \SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface $money
+     * @param \SprykerEco\Service\ArvatoRss\Iso3166ConverterInterface $iso3166
+     */
+    public function __construct(
+        ArvatoRssToMoneyInterface $money,
+        Iso3166ConverterInterface $iso3166
+    )
     {
         $this->money  = $money;
+        $this->iso3166 = $iso3166;
     }
 
     /**
@@ -87,8 +98,7 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
         $customer = $quoteTransfer->getCustomer();
         $billingAddress = $quoteTransfer->getBillingAddress();
 
-        // TODO: set the country properly
-        $address->setCountry(276);
+        $address->setCountry($this->iso3166->iso2ToNumeric($billingAddress->getIso2Code()));
         $address->setCity($billingAddress->getCity());
         $address->setStreet($billingAddress->getAddress1());
         $address->setStreetNumber($billingAddress->getAddress2());

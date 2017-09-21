@@ -9,6 +9,7 @@ namespace SprykerEco\Zed\ArvatoRss\Business;
 
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use Spryker\Zed\Money\Business\MoneyFacade;
+use SprykerEco\Service\ArvatoRss\Iso3166Converter;
 use SprykerEco\Zed\ArvatoRss\ArvatoRssDependencyProvider;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\SoapApiAdapter;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverter;
@@ -42,7 +43,8 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     protected function createRiskCheckRequestMapper()
     {
         return new RiskCheckRequestMapper(
-            $this->getMoneyFacade()
+            $this->getMoneyFacade(),
+            $this->createIso3166Converter()
         );
     }
 
@@ -96,6 +98,14 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     protected function getMoneyFacade()
     {
         return $this->getProvidedDependency(ArvatoRssDependencyProvider::FACADE_MONEY);
+    }
+
+    /**
+     * @return \SprykerEco\Service\ArvatoRss\Iso3166ConverterInterface
+     */
+    protected function createIso3166Converter()
+    {
+        return new Iso3166Converter();
     }
 
 }

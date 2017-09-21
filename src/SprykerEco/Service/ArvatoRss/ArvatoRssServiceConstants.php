@@ -5,9 +5,9 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Zed\ArvatoRss\Business\Api;
+namespace SprykerEco\Service\ArvatoRss;
 
-interface ArvatoRssApiConstants
+interface ArvatoRssServiceConstants
 {
     /**
      * @const array ISO3166 Temporary list of numeric country codes needed by arvato rss request.
