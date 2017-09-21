@@ -16,9 +16,24 @@ use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
+use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface;
 
 class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
 {
+
+
+    /**
+     * @var \SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface $money
+     */
+    protected $money;
+
+    /**
+     * @param \SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface $money
+     */
+    public function __construct(ArvatoRssToMoneyInterface $money)
+    {
+        $this->money  = $money;
+    }
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -29,9 +44,9 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
     {
         $requestTransfer = new ArvatoRssRiskCheckRequestTransfer();
 
-        $this->mapIdentification($requestTransfer, $quoteTransfer);
-        $this->mapBillingCustomer($requestTransfer, $quoteTransfer);
-        $this->mapOrder($requestTransfer, $quoteTransfer);
+        $requestTransfer = $this->mapIdentification($requestTransfer, $quoteTransfer);
+        $requestTransfer = $this->mapBillingCustomer($requestTransfer, $quoteTransfer);
+        $requestTransfer = $this->mapOrder($requestTransfer, $quoteTransfer);
 
         return $requestTransfer;
     }
@@ -41,7 +56,7 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
      * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $arvatoRssRiskCheckRequestTransfer
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer
      */
     protected function mapIdentification($requestTransfer, $quoteTransfer)
     {
@@ -55,25 +70,29 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
             Config::get(ArvatoRssConstants::ARVATORSS)[ArvatoRssConstants::ARVATORSS_PASSWORD]
         );
         $requestTransfer->setIdentification($identificationTransfer);
+
+        return $requestTransfer;
     }
 
     /**
      * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $arvatoRssRiskCheckRequestTransfer
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer
      */
     protected function mapBillingCustomer($requestTransfer, $quoteTransfer)
     {
         $billingCustomerTransfer = new ArvatoRssBillingCustomerTransfer();
         $address = new ArvatoRssCustomerAddressTransfer();
         $customer = $quoteTransfer->getCustomer();
-        $customerAddress = $customer->getDefaultBillingAddress();
+        $billingAddress = $quoteTransfer->getBillingAddress();
 
-        $address->setCountry($customerAddress->getCountry());
-        $address->setCity($customerAddress->getCity());
-        $address->setStreet($customerAddress->getAddress1());
-        $address->setZipCode($customerAddress->getZipCode());
+        // TODO: set the country properly
+        $address->setCountry(276);
+        $address->setCity($billingAddress->getCity());
+        $address->setStreet($billingAddress->getAddress1());
+        $address->setStreetNumber($billingAddress->getAddress2());
+        $address->setZipCode($billingAddress->getZipCode());
         $billingCustomerTransfer->setAddress($address);
         $billingCustomerTransfer->setFirstName($customer->getFirstName());
         $billingCustomerTransfer->setLastName($customer->getLastName());
@@ -83,28 +102,41 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
         $billingCustomerTransfer->setBirthDay($customer->getDateOfBirth());
 
         $requestTransfer->setBillingCustomer($billingCustomerTransfer);
+
+        return $requestTransfer;
     }
 
     /**
      * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $arvatoRssRiskCheckRequestTransfer
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer
      */
     protected function mapOrder($requestTransfer, $quoteTransfer)
     {
         $orderTransfer = new ArvatoRssOrderTransfer();
         $itemTransfer = new ArvatoRssOrderItemTransfer();
 
+        $orderTransfer->setCurrency('EUR');
+        $orderTransfer->setGrossTotalBill(
+            $this->money->convertIntegerToDecimal($quoteTransfer->getTotals()->getGrandTotal())
+        );
+        $orderTransfer->setTotalOrderValue(
+            $this->money->convertIntegerToDecimal($quoteTransfer->getTotals()->getGrandTotal())
+        );
         foreach ($quoteTransfer->getItems() as $item) {
-            $itemTransfer->setPosition(1);
-            $itemTransfer->setUnitPrice($item->getUnitPrice());
-            $itemTransfer->setProductNumber($item->getProductConcrete()->getSku());
+            $itemTransfer->setUnitPrice(
+                $this->money->convertIntegerToDecimal($item->getUnitPrice())
+            );
+            $itemTransfer->setProductNumber($item->getSku());
             $itemTransfer->setUnitCount($item->getQuantity());
+            $itemTransfer->setProductGroupId(1);
             $orderTransfer->addItem($itemTransfer);
         }
 
         $requestTransfer->setOrder($orderTransfer);
+
+        return $requestTransfer;
     }
 
 }
