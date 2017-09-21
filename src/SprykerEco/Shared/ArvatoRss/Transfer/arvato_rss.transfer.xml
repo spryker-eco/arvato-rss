@@ -52,7 +52,7 @@
         <property name="result" type="string" />
         <property name="actionCode" type="string" />
         <property name="resultCode" type="string" />
-        <property name="resultDescription" type="string" />
+        <property name="resultText" type="string" />
         <property name="scoreValue" type="string" />
         <property name="scoreFeatureName" type="string" />
         <property name="scoreFeatureValue" type="string" />
