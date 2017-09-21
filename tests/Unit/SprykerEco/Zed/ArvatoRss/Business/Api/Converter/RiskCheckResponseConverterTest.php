@@ -1,8 +1,20 @@
 <?php
 
+/**
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
 namespace Unit\SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
 
-class RiskCheckRequestConverterTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class RiskCheckRequestConverterTest extends TestCase
 {
+
+    public function testConvert()
+    {
+
+    }
 
 }
