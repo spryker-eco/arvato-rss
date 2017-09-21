@@ -18,9 +18,9 @@ class Iso3166Converter extends AbstractService implements Iso3166ConverterInterf
     const ISO2_KEY = 'alpha2';
 
     /**
-     * @const string NUMERIC_KEY
+     * @const string ISO3166_KEY
      */
-    const NUMERIC_KEY = 'numeric';
+    const ISO3166_KEY = 'numeric';
 
     /**
      * @param string $iso2CountryCode
@@ -31,7 +31,7 @@ class Iso3166Converter extends AbstractService implements Iso3166ConverterInterf
     {
         $key = $this->searchArrayIndex($iso2CountryCode, static::ISO2_KEY);
         if ($key !== false) {
-            return ArvatoRssServiceConstants::ISO3166[$key][static::NUMERIC_KEY];
+            return ArvatoRssServiceConstants::ISO3166[$key][static::ISO3166_KEY];
         }
 
         return null;
@@ -44,7 +44,7 @@ class Iso3166Converter extends AbstractService implements Iso3166ConverterInterf
      */
     public function numericToIso2($iso3166CountryCode)
     {
-        $key = $this->searchArrayIndex($iso3166CountryCode, static::NUMERIC_KEY);
+        $key = $this->searchArrayIndex($iso3166CountryCode, static::ISO3166_KEY);
         if ($key !== false) {
             return ArvatoRssServiceConstants::ISO3166[$key][static::ISO2_KEY];
         }

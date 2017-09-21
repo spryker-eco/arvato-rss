@@ -15,6 +15,7 @@ use Generated\Shared\Transfer\ArvatoRssOrderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
 use Spryker\Shared\Config\Config;
+use Spryker\Shared\Kernel\Store;
 use SprykerEco\Service\ArvatoRss\Iso3166ConverterInterface;
 use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
 use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface;
@@ -127,7 +128,7 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
         $orderTransfer = new ArvatoRssOrderTransfer();
         $itemTransfer = new ArvatoRssOrderItemTransfer();
 
-        $orderTransfer->setCurrency('EUR');
+        $orderTransfer->setCurrency(Store::getInstance()->getCurrencyIsoCode());
         $orderTransfer->setGrossTotalBill(
             $this->money->convertIntegerToDecimal($quoteTransfer->getTotals()->getGrandTotal())
         );
