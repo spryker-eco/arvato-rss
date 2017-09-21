@@ -26,6 +26,8 @@ class RiskCheckResponseConverter implements RiskCheckResponseConverterInterface
         $responseTransfer->setResultCode($response->Decision->ResultCode);
         $responseTransfer->setActionCode($response->Decision->ActionCode);
         $responseTransfer->setIsNewCustomer($response->Decision->IsNewCustomer);
+        $responseTransfer->setResultText($response->Decision->ResultText);
+        $responseTransfer->setCommunicationToken($response->Decision->CommunicationToken);
 
         return $responseTransfer;
     }
