@@ -5,6 +5,8 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
+namespace SprykerEco\Zed\ArvatoRss\Business\Api;
+
 interface ArvatoRssApiConstants
 {
     /**
