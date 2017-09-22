@@ -51,7 +51,7 @@ class RiskCheckRequestHeaderConverter implements RiskCheckRequestHeaderConverter
         $result = [];
         $fields = $this->getRequestFields();
         array_walk($fields, function ($item, $key) use (
-            &$result, &$arvatoRssIdentificationRequestTransfer
+            &$result, $arvatoRssIdentificationRequestTransfer
         ) {
             $result[$key] = $arvatoRssIdentificationRequestTransfer->{'get'.$item}();
         });
