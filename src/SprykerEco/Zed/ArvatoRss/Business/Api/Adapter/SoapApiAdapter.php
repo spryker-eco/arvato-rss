@@ -62,16 +62,7 @@ class SoapApiAdapter implements ApiAdapterInterface
     public function performRiskCheck(ArvatoRssRiskCheckRequestTransfer $requestTransfer)
     {
         $params = $this->riskCheckRequestConverter->convert($requestTransfer);
-        $header = $this->riskCheckRequestHeaderConverter->convert($requestTransfer);
-        $options = [
-            'exceptions' => false
-        ];
-        $soapClient = new \SoapClient(static::WSDL_PATH, $options);
-        $soapClient->__setSoapHeaders($header);
-        // TODO: add config get service to avoid direct config call
-        $soapClient->__setLocation(
-            Config::get(ArvatoRssConstants::ARVATORSS)[ArvatoRssConstants::ARVATORSS_URL]
-        );
+        $soapClient = $this->createSoapClient($requestTransfer);
 
         $result = $soapClient->RiskCheck($params);
         if ($result instanceof \SoapFault) {
@@ -81,6 +72,26 @@ class SoapApiAdapter implements ApiAdapterInterface
         }
 
         return $this->riskCheckResponseConverter->convert($result);
+    }
+
+    /**
+     * @return \SoapClient
+     */
+    protected function createSoapClient($requestTransfer)
+    {
+        $header = $this->riskCheckRequestHeaderConverter->convert($requestTransfer);
+        $options = [
+            'exceptions' => false
+        ];
+
+        $soapClient = new \SoapClient(static::WSDL_PATH, $options);
+        $soapClient->__setSoapHeaders($header);
+        // TODO: add config get service to avoid direct config call
+        $soapClient->__setLocation(
+            Config::get(ArvatoRssConstants::ARVATORSS)[ArvatoRssConstants::ARVATORSS_URL]
+        );
+
+        return $soapClient;
     }
 
 }
