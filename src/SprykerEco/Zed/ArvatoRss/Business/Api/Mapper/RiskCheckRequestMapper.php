@@ -25,26 +25,26 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
 {
 
     /**
-     * @var \SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface $money
+     * @var \SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface $moneyFacade
      */
-    protected $money;
+    protected $moneyFacade;
 
     /**
      * @var \SprykerEco\Service\ArvatoRss\Iso3166ConverterInterface $iso3166
      */
-    protected $iso3166;
+    protected $iso3166Converter;
 
     /**
-     * @param \SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface $money
-     * @param \SprykerEco\Service\ArvatoRss\Iso3166ConverterInterface $iso3166
+     * @param \SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface $moneyFacade
+     * @param \SprykerEco\Service\ArvatoRss\Iso3166ConverterInterface $iso3166Converter
      */
     public function __construct(
-        ArvatoRssToMoneyInterface $money,
-        Iso3166ConverterInterface $iso3166
+        ArvatoRssToMoneyInterface $moneyFacade,
+        Iso3166ConverterInterface $iso3166Converter
     ) {
 
-        $this->money = $money;
-        $this->iso3166 = $iso3166;
+        $this->moneyFacade = $moneyFacade;
+        $this->iso3166Converter = $iso3166Converter;
     }
 
     /**
@@ -98,7 +98,7 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
         $customer = $quoteTransfer->getCustomer();
         $billingAddress = $quoteTransfer->getBillingAddress();
 
-        $address->setCountry($this->iso3166->iso2ToNumeric($billingAddress->getIso2Code()));
+        $address->setCountry($this->iso3166Converter->iso2ToNumeric($billingAddress->getIso2Code()));
         $address->setCity($billingAddress->getCity());
         $address->setStreet($billingAddress->getAddress1());
         $address->setStreetNumber($billingAddress->getAddress2());
@@ -131,15 +131,15 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
 
         $orderTransfer->setCurrency(Store::getInstance()->getCurrencyIsoCode());
         $orderTransfer->setGrossTotalBill(
-            $this->money->convertIntegerToDecimal($quoteTransfer->getTotals()->getGrandTotal())
+            $this->moneyFacade->convertIntegerToDecimal($quoteTransfer->getTotals()->getGrandTotal())
         );
         $orderTransfer->setTotalOrderValue(
-            $this->money->convertIntegerToDecimal($quoteTransfer->getTotals()->getGrandTotal())
+            $this->moneyFacade->convertIntegerToDecimal($quoteTransfer->getTotals()->getGrandTotal())
         );
         foreach ($quoteTransfer->getItems() as $item) {
             $itemTransfer = new ArvatoRssOrderItemTransfer();
             $itemTransfer->setUnitPrice(
-                $this->money->convertIntegerToDecimal($item->getUnitPrice())
+                $this->moneyFacade->convertIntegerToDecimal($item->getUnitPrice())
             );
             $itemTransfer->setProductNumber($item->getSku());
             $itemTransfer->setUnitCount($item->getQuantity());

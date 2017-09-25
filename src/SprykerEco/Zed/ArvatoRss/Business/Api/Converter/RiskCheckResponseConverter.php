@@ -14,7 +14,7 @@ class RiskCheckResponseConverter implements RiskCheckResponseConverterInterface
 {
 
     /**
-     * @param \stdClass $response
+     * @param stdClass $response
      *
      * @return \Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer
      */

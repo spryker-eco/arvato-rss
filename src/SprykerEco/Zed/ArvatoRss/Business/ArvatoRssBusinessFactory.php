@@ -25,7 +25,7 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
 {
 
     /**
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Handler\RiskCheckHandler
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Handler\RiskCheckHandlerInterface
      */
     public function createRiskCheckHandler()
     {
@@ -37,7 +37,7 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapper
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapperInterface
      */
     protected function createRiskCheckRequestMapper()
     {
@@ -48,7 +48,7 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckResponseMapper
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckResponseMapperInterface
      */
     protected function createRiskCheckResponseMapper()
     {
@@ -56,7 +56,7 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\SoapApiAdapter
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiAdapterInterface
      */
     protected function createSoapApiAdapter()
     {
@@ -68,7 +68,7 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverter
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverterInterface
      */
     protected function createRiskCheckRequestConverter()
     {
@@ -76,7 +76,7 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestHeaderConverter
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestHeaderConverterInterface
      */
     protected function createRiskCheckRequestHeaderConverter()
     {
@@ -84,7 +84,7 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverter
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverterInterface
      */
     protected function createResponseConverter()
     {

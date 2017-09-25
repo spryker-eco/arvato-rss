@@ -83,7 +83,7 @@ class SoapApiAdapter implements ApiAdapterInterface
      *
      * @return \SoapClient
      */
-    protected function createSoapClient($requestTransfer)
+    protected function createSoapClient(ArvatoRssRiskCheckRequestTransfer $requestTransfer)
     {
         $header = $this->riskCheckRequestHeaderConverter->convert($requestTransfer);
         $options = [
