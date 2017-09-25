@@ -42,12 +42,12 @@ class RiskCheckRequestConverter implements RiskCheckRequestConverterInterface
         $billingCustomerTransfer = $arvatoRssRiskCheckRequestTransfer->getBillingCustomer();
         $addressTranfer = $billingCustomerTransfer->getAddress();
         $address = [
-            ArvatoRssApiConstants::ARVATORSS_API_ADDRESS => $addressTranfer->getCountry(),
+            ArvatoRssApiConstants::ARVATORSS_API_COUNTRY => $addressTranfer->getCountry(),
             ArvatoRssApiConstants:: ARVATORSS_API_CITY => $addressTranfer->getCity(),
             ArvatoRssApiConstants::ARVATORSS_API_STREET => $addressTranfer->getStreet(),
             ArvatoRssApiConstants::ARVATORSS_API_ZIPCODE => $addressTranfer->getZipCode(),
         ];
-        $result[ArvatoRssApiConstants::ARVATORSS_API_ZIPCODE] = [
+        $result[ArvatoRssApiConstants::ARVATORSS_API_BILLINGCUSTOMER] = [
             ArvatoRssApiConstants::ARVATORSS_API_FIRSTNAME => $billingCustomerTransfer->getFirstName(),
             ArvatoRssApiConstants::ARVATORSS_API_LASTNAME => $billingCustomerTransfer->getLastName(),
             ArvatoRssApiConstants::ARVATORSS_API_ADDRESS => $address,
