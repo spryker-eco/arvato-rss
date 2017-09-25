@@ -14,7 +14,6 @@ use Generated\Shared\Transfer\ArvatoRssIdentificationRequestTransfer;
 use Generated\Shared\Transfer\ArvatoRssOrderItemTransfer;
 use Generated\Shared\Transfer\ArvatoRssOrderTransfer;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
-use SprykerEco\Service\ArvatoRss\Iso3166Converter;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapper;
 use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyBridge;
 
@@ -129,7 +128,7 @@ class RiskCheckRequestMapperTest extends AbstractMapperTest
     {
         return new RiskCheckRequestMapper(
             $this->createMoneyFacadeMock(),
-            $this->createConverter()
+            $this->helper->createConverter()
         );
     }
 
@@ -146,14 +145,6 @@ class RiskCheckRequestMapperTest extends AbstractMapperTest
             ->willReturn(static::DECIMAL_VALUE);
 
         return $moneyFacadeMock;
-    }
-
-    /**
-     * @return \SprykerEco\Service\ArvatoRss\Iso3166Converter
-     */
-    protected function createConverter()
-    {
-        return new Iso3166Converter();
     }
 
 }

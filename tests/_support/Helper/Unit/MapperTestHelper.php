@@ -13,6 +13,7 @@ use Generated\Shared\Transfer\AddressTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use SprykerEco\Service\ArvatoRss\Iso3166Converter;
 
 class MapperTestHelper extends Module
 {
@@ -65,6 +66,14 @@ class MapperTestHelper extends Module
      */
     public function createResponseMapper()
     {
+    }
+s
+    /**
+     * @return \SprykerEco\Service\ArvatoRss\Iso3166Converter
+     */
+    public function createConverter()
+    {
+        return new Iso3166Converter();
     }
 
 }
