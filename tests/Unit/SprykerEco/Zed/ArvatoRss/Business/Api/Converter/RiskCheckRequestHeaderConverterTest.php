@@ -11,6 +11,7 @@ use Generated\Shared\Transfer\ArvatoRssIdentificationRequestTransfer;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
 use PHPUnit\Framework\TestCase;
 use SoapHeader;
+use SprykerEco\Zed\ArvatoRss\Business\Api\ArvatoRssApiConstants;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestHeaderConverter;
 
 class RiskCheckRequestHeaderConverterTest extends TestCase
@@ -57,8 +58,8 @@ class RiskCheckRequestHeaderConverterTest extends TestCase
             'Authorisation' => $identification->getAuthorisation(),
         ];
         $soapHeader = new SoapHeader(
-            RiskCheckRequestHeaderConverter::IDENTIFICATION_NAMESPACE,
-            RiskCheckRequestHeaderConverter::IDENTIFICATION_HEADER_NAME,
+            ArvatoRssApiConstants::ARVATORSS_API_IDENTIFICATION_NAMESPACE,
+            ArvatoRssApiConstants::ARVATORSS_API_IDENTIFICATION_HEADER_NAME,
             $requestData
         );
 
