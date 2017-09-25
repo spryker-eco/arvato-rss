@@ -67,7 +67,7 @@ class MapperTestHelper extends Module
     public function createResponseMapper()
     {
     }
-s
+
     /**
      * @return \SprykerEco\Service\ArvatoRss\Iso3166Converter
      */

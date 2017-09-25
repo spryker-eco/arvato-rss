@@ -15,7 +15,7 @@ interface RiskCheckResponseConverterInterface
     /**
      * @param \stdClass $response
      *
-     * @return
+     * @return void
      */
     public function convert(stdClass $response);
 
