@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
 
+use DateTime;
 use Generated\Shared\Transfer\ArvatoRssBillingCustomerTransfer;
 use Generated\Shared\Transfer\ArvatoRssCustomerAddressTransfer;
 use Generated\Shared\Transfer\ArvatoRssIdentificationRequestTransfer;
@@ -151,7 +152,6 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
         return $requestTransfer;
     }
 
-
     /**
      * @param string $dateOfBirth
      *
@@ -159,7 +159,7 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
      */
     protected function prepareDateOfBirth($dateOfBirth)
     {
-        return $dateOfBirth ? (new \DateTime($dateOfBirth))->format("Y-m-d") : null;
+        return $dateOfBirth ? (new DateTime($dateOfBirth))->format("Y-m-d") : null;
     }
 
 }
