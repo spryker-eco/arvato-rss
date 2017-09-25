@@ -7,18 +7,18 @@
 
 namespace Unit\SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
 
+use ArrayObject;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer;
-use Generated\Shared\Transfer\QuoteTransfer;
-use PHPUnit\Framework\TestCase;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckResponseMapper;
-use \ArrayObject;
 
 //TODO: please, configure project to run tests and check tests.
-class RiskCheckResponseMapperTest extends TestCase
+class RiskCheckResponseMapperTest extends AbstractMapperTest
 {
 
     /**
      * @dataProvider responseDataProvider
+     *
+     * @return void
      */
     public function mapResponseToQuoteTest($data)
     {
@@ -27,7 +27,7 @@ class RiskCheckResponseMapperTest extends TestCase
         $expected = $this->createExpectedTransfer($data)->toArray(true);
         $actual = $mapper->mapResponseToQuote(
             $this->createResponseTransfer($data),
-            $this->createQuoteTranfer()
+            $this->helper->createQuoteTransfer()
         )->toArray(true);
 
         $this->assertEquals($expected, $actual);
@@ -40,7 +40,7 @@ class RiskCheckResponseMapperTest extends TestCase
     {
         return [
             [
-                new \ArrayObject(
+                new ArrayObject(
                     [
                         'result' => 'R',
                         'resultCode' => 'R',
@@ -56,19 +56,11 @@ class RiskCheckResponseMapperTest extends TestCase
                         'street' => 'Europa-Allee 50',
                         'streetNumber' => '12',
                         'zipCode' => '12312',
-                        'city' => 'Berlin'
+                        'city' => 'Berlin',
                     ]
                 )
-            ]
+            ],
         ];
-    }
-
-    /**
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
-    protected function createQuoteTranfer()
-    {
-        return new QuoteTransfer();
     }
 
     /**
@@ -78,7 +70,7 @@ class RiskCheckResponseMapperTest extends TestCase
      */
     protected function createExpectedTransfer(ArrayObject $data)
     {
-        $quoteTranfer = $this->createQuoteTranfer();
+        $quoteTranfer = $this->helper->createQuoteTranfer();
         $responseTransfer = $this->createResponseTransfer($data);
         $quoteTranfer->setArvatoRssRiskCheckResponse($responseTransfer);
 

@@ -7,22 +7,18 @@
 
 namespace Unit\SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
 
-use Generated\Shared\Transfer\AddressTransfer;
+use ArrayObject;
 use Generated\Shared\Transfer\ArvatoRssBillingCustomerTransfer;
 use Generated\Shared\Transfer\ArvatoRssCustomerAddressTransfer;
 use Generated\Shared\Transfer\ArvatoRssIdentificationRequestTransfer;
 use Generated\Shared\Transfer\ArvatoRssOrderItemTransfer;
 use Generated\Shared\Transfer\ArvatoRssOrderTransfer;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
-use Generated\Shared\Transfer\CustomerTransfer;
-use Generated\Shared\Transfer\ItemTransfer;
-use Generated\Shared\Transfer\QuoteTransfer;
-use PHPUnit\Framework\TestCase;
 use SprykerEco\Service\ArvatoRss\Iso3166Converter;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapper;
 use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyBridge;
 
-class RiskCheckRequestMapperTest extends TestCase
+class RiskCheckRequestMapperTest extends AbstractMapperTest
 {
 
     const INT_VALUE = 12475;
@@ -30,12 +26,14 @@ class RiskCheckRequestMapperTest extends TestCase
 
     /**
      * @dataProvider userData
+     *
+     * @return void
      */
     public function testMapQuoteToRequestTranfer($data)
     {
         $mapper = $this->createMapper();
 
-        $quoteTranfer = $this->getQuoteTranfer($data);
+        $quoteTranfer = $this->helper->createQuoteTransfer($data);
         $expected = $this->getExpectedRequestTransfer($data)->toArray(true);
         $actual = $mapper->mapQuoteToRequest($quoteTranfer)->toArray(true);
 
@@ -49,62 +47,28 @@ class RiskCheckRequestMapperTest extends TestCase
     {
         return [
             [
-                new \ArrayObject(
+                new ArrayObject(
                     [
-                        'clientId'          => '00000000',
-                        'authorisation'     => '11111111',
-                        'country'           => 'DE',
-                        'city'              => 'Berlin',
-                        'street'            => 'Europa-Allee 50',
-                        'zipCode'           => '60327',
-                        'firstName'         => 'Michael',
-                        'lastName'          => 'Duglas',
-                        'salutation'        => 'Mr.',
-                        'email'             => 'duglas@gmail.com',
-                        'telephoneNumber'   => '123213',
-                        'birthDay'          => '20/04/1978',
-                        'position'          => 1,
-                        'productNumber'     => '777777',
-                        'unitPrice'         => static::INT_VALUE,
-                        'unitCount'         => 1
+                        'clientId' => '00000000',
+                        'authorisation' => '11111111',
+                        'country' => 'DE',
+                        'city' => 'Berlin',
+                        'street' => 'Europa-Allee 50',
+                        'zipCode' => '60327',
+                        'firstName' => 'Michael',
+                        'lastName' => 'Duglas',
+                        'salutation' => 'Mr.',
+                        'email' => 'duglas@gmail.com',
+                        'telephoneNumber' => '123213',
+                        'birthDay' => '20/04/1978',
+                        'position' => 1,
+                        'productNumber' => '777777',
+                        'unitPrice' => static::INT_VALUE,
+                        'unitCount' => 1,
                     ]
                 )
-            ]
+            ],
         ];
-    }
-
-    /**
-     * @param \ArrayObject $data
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
-    protected function getQuoteTranfer($data)
-    {
-        $quoteTransfer = new QuoteTransfer();
-        $customerTranfer = new CustomerTransfer();
-        $billingAddress = new AddressTransfer();
-        $orderItem = new ItemTransfer();
-
-        $billingAddress->setIso2Code($data->getCountry());
-        $billingAddress->setCity($data->getCity());
-        $billingAddress->setAddress1($data->getStreet());
-        $billingAddress->setZipCode($data->getZipCode());
-
-        $customerTranfer->setFirstName($data->getFirstName());
-        $customerTranfer->setLastName($data->getLastName());
-        $customerTranfer->setSalutation($data->getSalutation());
-        $customerTranfer->setEmail($data->getEmail());
-        $customerTranfer->setPhone($data->getPhoneNumber());
-        $customerTranfer->setDateOfBirth($data->getBirthDay());
-
-        $orderItem->setUnitPrice($data->getUnitPrice());
-        $orderItem->setSku($data->getProductNumber());
-
-        $quoteTransfer->setCustomer($customerTranfer);
-        $quoteTransfer->setBillingAddress($billingAddress);
-        $quoteTransfer->addItem($orderItem);
-
-        return $quoteTransfer;
     }
 
     /**
