@@ -31,6 +31,11 @@ class RiskCheckRequestMapperTest extends AbstractMapperTest
     const DECIMAL_VALUE = 124.75;
 
     /**
+     * @const int UNIT_COUNT
+     */
+    const UNIT_COUNT = 1;
+
+    /**
      * @dataProvider userDataProvider
      *
      * @param \ArrayObject $data
@@ -39,11 +44,12 @@ class RiskCheckRequestMapperTest extends AbstractMapperTest
      */
     public function testMapQuoteToRequestTranfer(ArrayObject $data)
     {
+        $quoteTranfer = $this->helper->createQuoteTransfer($data);
         $mapper = $this->createMapper();
 
-        $quoteTranfer = $this->helper->createQuoteTransfer($data);
+
         $expected = $this->getExpectedRequestTransfer($data)->toArray(true);
-        $actual = $mapper->mapQuoteToRequest($quoteTranfer)->toArray(true);
+        $actual = $mapper->mapQuoteToRequestTranfer($quoteTranfer)->toArray(true);
 
         $this->assertEquals($expected, $actual);
     }
@@ -67,13 +73,14 @@ class RiskCheckRequestMapperTest extends AbstractMapperTest
                         'lastName' => 'Duglas',
                         'salutation' => 'Mr.',
                         'email' => 'duglas@gmail.com',
-                        'telephoneNumber' => '123213',
+                        'phoneNumber' => '123213',
                         'birthDay' => '20/04/1978',
                         'position' => 1,
                         'productNumber' => '777777',
                         'unitPrice' => static::INT_VALUE,
                         'unitCount' => 1,
-                    ]
+                    ],
+                    ArrayObject::ARRAY_AS_PROPS
                 )
             ],
         ];
@@ -93,25 +100,24 @@ class RiskCheckRequestMapperTest extends AbstractMapperTest
         $orderTransfer = new ArvatoRssOrderTransfer();
         $itemTransfer = new ArvatoRssOrderItemTransfer();
 
-        $identificationTransfer->setClientId($data->getClientId());
-        $identificationTransfer->setAuthorisation($data->getAuthorisation());
+        $identificationTransfer->setClientId($data->clientId);
+        $identificationTransfer->setAuthorisation($data->authorisation);
 
-        $address->setCountry($data->getCountry());
-        $address->setCity($data->getCity());
-        $address->setStreet($data->getStreet());
-        $address->setZipCode($data->getZipCode());
+        $address->setCountry($data->country);
+        $address->setCity($data->city);
+        $address->setStreet($data->street);
+        $address->setZipCode($data->zipCode);
         $billingCustomerTransfer->setAddress($address);
-        $billingCustomerTransfer->setFirstName($data->getFirstName());
-        $billingCustomerTransfer->setLastName($data->getLastName());
-        $billingCustomerTransfer->setSalutation($data->getSalutation());
-        $billingCustomerTransfer->setEmail($data->getEmail());
-        $billingCustomerTransfer->setTelephoneNumber($data->getTelephoneNumber());
-        $billingCustomerTransfer->setBirthDay($data->getBirthDay());
+        $billingCustomerTransfer->setFirstName($data->firstName);
+        $billingCustomerTransfer->setLastName($data->lastName);
+        $billingCustomerTransfer->setSalutation($data->salutation);
+        $billingCustomerTransfer->setEmail($data->email);
+        $billingCustomerTransfer->setTelephoneNumber($data->phoneNumber);
+        $billingCustomerTransfer->setBirthDay($data->birthDay);
 
-        $itemTransfer->setPosition($data->getPosition());
-        $itemTransfer->setProductNumber($data->getProductNumber());
+        $itemTransfer->setProductNumber($data->productNumber);
         $itemTransfer->setUnitPrice(static::INT_VALUE);
-        $itemTransfer->setUnitCount(1);
+        $itemTransfer->setUnitCount(static::UNIT_COUNT);
 
         $orderTransfer->addItem($itemTransfer);
         $requestTransfer->setIdentification($identificationTransfer);

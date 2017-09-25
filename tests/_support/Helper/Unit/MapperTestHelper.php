@@ -31,20 +31,20 @@ class MapperTestHelper extends Module
             $billingAddress = new AddressTransfer();
             $orderItem = new ItemTransfer();
 
-            $billingAddress->setIso2Code($data->getCountry());
-            $billingAddress->setCity($data->getCity());
-            $billingAddress->setAddress1($data->getStreet());
-            $billingAddress->setZipCode($data->getZipCode());
+            $billingAddress->setIso2Code($data->country);
+            $billingAddress->setCity($data->city);
+            $billingAddress->setAddress1($data->street);
+            $billingAddress->setZipCode($data->zipCode);
 
-            $customerTranfer->setFirstName($data->getFirstName());
-            $customerTranfer->setLastName($data->getLastName());
-            $customerTranfer->setSalutation($data->getSalutation());
-            $customerTranfer->setEmail($data->getEmail());
-            $customerTranfer->setPhone($data->getPhoneNumber());
-            $customerTranfer->setDateOfBirth($data->getBirthDay());
+            $customerTranfer->setFirstName($data->firstName);
+            $customerTranfer->setLastName($data->lastName);
+            $customerTranfer->setSalutation($data->salutation);
+            $customerTranfer->setEmail($data->email);
+            $customerTranfer->setPhone($data->phoneNumber);
+            $customerTranfer->setDateOfBirth($data->birthDay);
 
-            $orderItem->setUnitPrice($data->getUnitPrice());
-            $orderItem->setSku($data->getProductNumber());
+            $orderItem->setUnitPrice($data->unitPrice);
+            $orderItem->setSku($data->productNumber);
 
             $quoteTransfer->setCustomer($customerTranfer);
             $quoteTransfer->setBillingAddress($billingAddress);

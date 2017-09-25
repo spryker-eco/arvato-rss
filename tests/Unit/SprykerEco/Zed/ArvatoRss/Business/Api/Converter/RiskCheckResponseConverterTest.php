@@ -7,12 +7,12 @@
 
 namespace Unit\SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
 
+use Codeception\TestCase\Test;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer;
-use PHPUnit\Framework\TestCase;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverter;
 use stdClass;
 
-class RiskCheckResponseConverterTest extends TestCase
+class RiskCheckResponseConverterTest extends Test
 {
 
     /**

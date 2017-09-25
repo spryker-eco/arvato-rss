@@ -8,9 +8,9 @@
 namespace Unit\SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
 
 use Helper\Unit\MapperTestHelper;
-use PHPUnit\Framework\TestCase;
+use Codeception\TestCase\Test;
 
-class AbstractMapperTest extends TestCase
+class AbstractMapperTest extends Test
 {
 
     /**

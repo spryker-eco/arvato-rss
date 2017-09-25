@@ -7,14 +7,14 @@
 
 namespace Unit\SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
 
+use Codeception\TestCase\Test;
 use Generated\Shared\Transfer\ArvatoRssIdentificationRequestTransfer;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
-use PHPUnit\Framework\TestCase;
 use SoapHeader;
 use SprykerEco\Zed\ArvatoRss\Business\Api\ArvatoRssApiConstants;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestHeaderConverter;
 
-class RiskCheckRequestHeaderConverterTest extends TestCase
+class RiskCheckRequestHeaderConverterTest extends Test
 {
 
     /**
