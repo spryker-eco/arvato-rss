@@ -108,7 +108,10 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
         $billingCustomerTransfer->setSalutation($customer->getSalutation());
         $billingCustomerTransfer->setEmail($customer->getEmail());
         $billingCustomerTransfer->setTelephoneNumber($customer->getPhone());
-        $billingCustomerTransfer->setBirthDay($customer->getDateOfBirth());
+
+        $dateOfBirth = $this->prepareDateOfBirth($customer->getDateOfBirth());
+
+        $billingCustomerTransfer->setBirthDay($dateOfBirth);
 
         $requestTransfer->setBillingCustomer($billingCustomerTransfer);
 
@@ -146,6 +149,17 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
         $requestTransfer->setOrder($orderTransfer);
 
         return $requestTransfer;
+    }
+
+
+    /**
+     * @param string $dateOfBirth
+     *
+     * @return string|null
+     */
+    protected function prepareDateOfBirth($dateOfBirth)
+    {
+        return $dateOfBirth ? (new \DateTime($dateOfBirth))->format("Y-m-d") : null;
     }
 
 }
