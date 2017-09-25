@@ -8,13 +8,12 @@
 namespace SprykerEco\Zed\ArvatoRss\Business;
 
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
-use Spryker\Zed\Money\Business\MoneyFacade;
 use SprykerEco\Service\ArvatoRss\Iso3166Converter;
 use SprykerEco\Zed\ArvatoRss\ArvatoRssDependencyProvider;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\SoapApiAdapter;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverter;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverter;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestHeaderConverter;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverter;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapper;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckResponseMapper;
 use SprykerEco\Zed\ArvatoRss\Business\Handler\RiskCheckHandler;

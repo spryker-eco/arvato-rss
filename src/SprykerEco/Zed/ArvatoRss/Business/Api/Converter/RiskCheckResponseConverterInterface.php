@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Converter;
 
-use \stdClass;
+use stdClass;
 
 interface RiskCheckResponseConverterInterface
 {

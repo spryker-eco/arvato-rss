@@ -21,15 +21,24 @@ use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyBridge;
 class RiskCheckRequestMapperTest extends AbstractMapperTest
 {
 
+    /**
+     * @const int INT_VALUE
+     */
     const INT_VALUE = 12475;
+
+    /**
+     * @const double DECIMAL_VALUE
+     */
     const DECIMAL_VALUE = 124.75;
 
     /**
      * @dataProvider userData
      *
+     * @param \ArrayObject $data
+     *
      * @return void
      */
-    public function testMapQuoteToRequestTranfer($data)
+    public function testMapQuoteToRequestTranfer(ArrayObject $data)
     {
         $mapper = $this->createMapper();
 
@@ -76,7 +85,7 @@ class RiskCheckRequestMapperTest extends AbstractMapperTest
      *
      * @return \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer
      */
-    protected function getExpectedRequestTransfer($data)
+    protected function getExpectedRequestTransfer(ArrayObject $data)
     {
         $requestTransfer = new ArvatoRssRiskCheckRequestTransfer();
         $identificationTransfer = new ArvatoRssIdentificationRequestTransfer();

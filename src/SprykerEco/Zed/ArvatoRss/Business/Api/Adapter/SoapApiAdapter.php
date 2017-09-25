@@ -8,6 +8,8 @@
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Adapter;
 
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
+use SoapClient;
+use SoapFault;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverter;
@@ -21,7 +23,7 @@ class SoapApiAdapter implements ApiAdapterInterface
     /**
      * @const WSDL_PATH
      */
-    const WSDL_PATH = __DIR__."/../Etc/risk-solution-services.v2.1.wsdl";
+    const WSDL_PATH = __DIR__ . "/../Etc/risk-solution-services.v2.1.wsdl";
 
     /**
      * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverter
@@ -47,15 +49,17 @@ class SoapApiAdapter implements ApiAdapterInterface
         RiskCheckRequestConverter $riskCheckRequestConverter,
         RiskCheckRequestHeaderConverter $riskCheckRequestHeaderConverter,
         RiskCheckResponseConverter $riskCheckResponseConverter
-    )
-    {
+    ) {
+
         $this->riskCheckRequestConverter = $riskCheckRequestConverter;
         $this->riskCheckRequestHeaderConverter = $riskCheckRequestHeaderConverter;
         $this->riskCheckResponseConverter = $riskCheckResponseConverter;
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $requestTransfers
+     * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $requestTransfer
+     *
+     * @throws \SprykerEco\Zed\ArvatoRss\Business\Api\Exception\ArvatoRssRiskCheckApiException
      *
      * @return \Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer
      */
@@ -65,7 +69,7 @@ class SoapApiAdapter implements ApiAdapterInterface
         $soapClient = $this->createSoapClient($requestTransfer);
 
         $result = $soapClient->RiskCheck($params);
-        if ($result instanceof \SoapFault) {
+        if ($result instanceof SoapFault) {
             $exceptionName = array_keys(get_object_vars($result->detail))[0];
             $exceptionObj = $result->detail->{$exceptionName};
             throw new ArvatoRssRiskCheckApiException($exceptionObj->Description);
@@ -75,16 +79,18 @@ class SoapApiAdapter implements ApiAdapterInterface
     }
 
     /**
+     * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $requestTransfer
+     *
      * @return \SoapClient
      */
     protected function createSoapClient($requestTransfer)
     {
         $header = $this->riskCheckRequestHeaderConverter->convert($requestTransfer);
         $options = [
-            'exceptions' => false
+            'exceptions' => false,
         ];
 
-        $soapClient = new \SoapClient(static::WSDL_PATH, $options);
+        $soapClient = new SoapClient(static::WSDL_PATH, $options);
         $soapClient->__setSoapHeaders($header);
         // TODO: add config get service to avoid direct config call
         $soapClient->__setLocation(

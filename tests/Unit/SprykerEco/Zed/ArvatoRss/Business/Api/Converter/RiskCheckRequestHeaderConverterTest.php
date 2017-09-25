@@ -10,6 +10,7 @@ namespace Unit\SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
 use Generated\Shared\Transfer\ArvatoRssIdentificationRequestTransfer;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
 use PHPUnit\Framework\TestCase;
+use SoapHeader;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestHeaderConverter;
 
 class RiskCheckRequestHeaderConverterTest extends TestCase
@@ -44,6 +45,8 @@ class RiskCheckRequestHeaderConverterTest extends TestCase
     }
 
     /**
+     * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestHeaderConverter $requestTransfer
+     *
      * @return \SoapHeader
      */
     protected function createExpectedResult($requestTransfer)
@@ -51,9 +54,9 @@ class RiskCheckRequestHeaderConverterTest extends TestCase
         $identification = $requestTransfer->getIdentification();
         $requestData = [
             'ClientID' => $identification->getClientId(),
-            'Authorisation' => $identification->getAuthorisation()
+            'Authorisation' => $identification->getAuthorisation(),
         ];
-        $soapHeader = new \SoapHeader(
+        $soapHeader = new SoapHeader(
             RiskCheckRequestHeaderConverter::IDENTIFICATION_NAMESPACE,
             RiskCheckRequestHeaderConverter::IDENTIFICATION_HEADER_NAME,
             $requestData

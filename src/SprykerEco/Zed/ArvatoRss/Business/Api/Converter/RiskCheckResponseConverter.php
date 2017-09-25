@@ -8,7 +8,7 @@
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Converter;
 
 use Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer;
-use \stdClass;
+use stdClass;
 
 class RiskCheckResponseConverter implements RiskCheckResponseConverterInterface
 {

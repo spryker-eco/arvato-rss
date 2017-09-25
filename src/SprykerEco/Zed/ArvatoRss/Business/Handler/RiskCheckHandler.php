@@ -22,7 +22,6 @@ class RiskCheckHandler implements RiskCheckHandlerInterface
      */
     protected $riskCheckRequestMapper;
 
-
     /**
      * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckResponseMapperInterface $riskCheckResponseMapper
      */
@@ -35,13 +34,15 @@ class RiskCheckHandler implements RiskCheckHandlerInterface
 
     /**
      * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapperInterface $riskCheckRequestMapper
+     * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckResponseMapperInterface $riskCheckResponseMapper
+     * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiAdapterInterface $apiAdapter
      */
     public function __construct(
         RiskCheckRequestMapperInterface $riskCheckRequestMapper,
         RiskCheckResponseMapperInterface $riskCheckResponseMapper,
         ApiAdapterInterface $apiAdapter
-    )
-    {
+    ) {
+
         $this->riskCheckRequestMapper = $riskCheckRequestMapper;
         $this->riskCheckResponseMapper = $riskCheckResponseMapper;
         $this->apiAdapter = $apiAdapter;

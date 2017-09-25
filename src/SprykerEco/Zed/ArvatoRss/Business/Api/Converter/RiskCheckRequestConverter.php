@@ -44,12 +44,12 @@ class RiskCheckRequestConverter implements RiskCheckRequestConverterInterface
             'Country' => $addressTranfer->getCountry(),
             'City' => $addressTranfer->getCity(),
             'Street' => $addressTranfer->getStreet(),
-            'ZipCode' => $addressTranfer->getZipCode()
+            'ZipCode' => $addressTranfer->getZipCode(),
         ];
         $result['BillingCustomer'] = [
             'FirstName' => $billingCustomerTransfer->getFirstName(),
-            'LastName'  => $billingCustomerTransfer->getLastName(),
-            'Address'   => $address
+            'LastName' => $billingCustomerTransfer->getLastName(),
+            'Address' => $address,
         ];
 
         return $result;
@@ -70,7 +70,7 @@ class RiskCheckRequestConverter implements RiskCheckRequestConverterInterface
             'RegisteredOrder' => true,
             'Currency' => $order->getCurrency(),
             'GrossTotalBill' => $order->getGrossTotalBill(),
-            'TotalOrderValue' => $order->getTotalOrderValue()
+            'TotalOrderValue' => $order->getTotalOrderValue(),
         ];
         // TODO: deal with items.
         $result['Order']['Item'] = [];
@@ -82,10 +82,11 @@ class RiskCheckRequestConverter implements RiskCheckRequestConverterInterface
                 //TODO: clarify
                 'ProductGroupId' => $item->getProductGroupId(),
                 'UnitPrice' => $item->getUnitPrice(),
-                'UnitCount' => $item->getUnitCount()
+                'UnitCount' => $item->getUnitCount(),
             ];
         }
 
         return $result;
     }
+
 }

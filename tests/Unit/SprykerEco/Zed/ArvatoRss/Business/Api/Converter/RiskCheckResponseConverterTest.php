@@ -10,8 +10,9 @@ namespace Unit\SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer;
 use PHPUnit\Framework\TestCase;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverter;
+use StdClass;
 
-class RiskCheckRequestConverterTest extends TestCase
+class RiskCheckResponseConverterTest extends TestCase
 {
 
     /**
@@ -32,7 +33,7 @@ class RiskCheckRequestConverterTest extends TestCase
      */
     protected function createResponse()
     {
-        $response = new \StdClass();
+        $response = new StdClass();
         $response->Decision->Result = 'R';
         $response->Decision->ResultCode = '123123';
         $response->Decision->ActionCode = '123123';
@@ -42,6 +43,8 @@ class RiskCheckRequestConverterTest extends TestCase
     }
 
     /**
+     * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverter $response
+     *
      * @return \Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer
      */
     protected function createExpectedResult($response)

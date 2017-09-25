@@ -7,8 +7,8 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Communication\Controller;
 
-use Spryker\Zed\Kernel\Communication\Controller\AbstractGatewayController;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Spryker\Zed\Kernel\Communication\Controller\AbstractGatewayController;
 
 /**
  * @method \SprykerEco\Zed\ArvatoRss\Business\ArvatoRssFacade getFacade()

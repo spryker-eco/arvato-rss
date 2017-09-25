@@ -38,8 +38,6 @@ class ArvatoRssFacadeRiskCheckTest extends TestCase
         $stub = $builder->getMock();
 
         return $stub;
-
-
     }
 
     /**

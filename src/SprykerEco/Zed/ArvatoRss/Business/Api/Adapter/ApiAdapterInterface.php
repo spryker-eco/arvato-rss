@@ -7,13 +7,13 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Adapter;
 
-use \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
+use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
 
 interface ApiAdapterInterface
 {
 
     /**
-     * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $requestTransfer
      *
      * @return \Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer
      */

@@ -14,6 +14,8 @@ interface ArvatoRssClientInterface
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function performRiskCheck(QuoteTransfer $quoteTransfer);
 

@@ -11,12 +11,13 @@ use ArrayObject;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckResponseMapper;
 
-//TODO: please, configure project to run tests and check tests.
 class RiskCheckResponseMapperTest extends AbstractMapperTest
 {
 
     /**
      * @dataProvider responseDataProvider
+     *
+     * @param \ArrayObject $data
      *
      * @return void
      */

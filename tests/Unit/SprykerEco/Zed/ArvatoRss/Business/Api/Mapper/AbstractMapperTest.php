@@ -13,6 +13,9 @@ use PHPUnit\Framework\TestCase;
 class AbstractMapperTest extends TestCase
 {
 
+    /**
+     * @var \Helper\Unit\MapperTestHelper $helper
+     */
     protected $helper;
 
     /**

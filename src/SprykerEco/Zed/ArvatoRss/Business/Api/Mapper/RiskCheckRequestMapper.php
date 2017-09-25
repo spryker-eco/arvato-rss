@@ -12,8 +12,8 @@ use Generated\Shared\Transfer\ArvatoRssCustomerAddressTransfer;
 use Generated\Shared\Transfer\ArvatoRssIdentificationRequestTransfer;
 use Generated\Shared\Transfer\ArvatoRssOrderItemTransfer;
 use Generated\Shared\Transfer\ArvatoRssOrderTransfer;
-use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
+use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Store;
 use SprykerEco\Service\ArvatoRss\Iso3166ConverterInterface;
@@ -22,7 +22,6 @@ use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface;
 
 class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
 {
-
 
     /**
      * @var \SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface $money
@@ -41,9 +40,9 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
     public function __construct(
         ArvatoRssToMoneyInterface $money,
         Iso3166ConverterInterface $iso3166
-    )
-    {
-        $this->money  = $money;
+    ) {
+
+        $this->money = $money;
         $this->iso3166 = $iso3166;
     }
 
@@ -63,9 +62,8 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
         return $requestTransfer;
     }
 
-
     /**
-     * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $arvatoRssRiskCheckRequestTransfer
+     * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $requestTransfer
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer
@@ -87,7 +85,7 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $arvatoRssRiskCheckRequestTransfer
+     * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $requestTransfer
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer
@@ -118,7 +116,7 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $arvatoRssRiskCheckRequestTransfer
+     * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $requestTransfer
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer

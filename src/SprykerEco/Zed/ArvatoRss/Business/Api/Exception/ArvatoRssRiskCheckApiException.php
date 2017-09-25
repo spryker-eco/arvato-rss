@@ -7,7 +7,8 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Exception;
 
-class ArvatoRssRiskCheckApiException extends \Exception
-{
+use Exception;
 
+class ArvatoRssRiskCheckApiException extends Exception
+{
 }

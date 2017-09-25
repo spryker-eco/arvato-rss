@@ -12,14 +12,18 @@ use Generated\Shared\Transfer\ArvatoRssCustomerAddressTransfer;
 use Generated\Shared\Transfer\ArvatoRssOrderItemTransfer;
 use Generated\Shared\Transfer\ArvatoRssOrderTransfer;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverter;
 use PHPUnit\Framework\TestCase;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverter;
 
 class RiskCheckRequestConverterTest extends TestCase
 {
 
     /**
      * @dataProvider transfer
+     *
+     * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $data
+     *
+     * @return void
      */
     public function testConvert($data)
     {
@@ -90,12 +94,12 @@ class RiskCheckRequestConverterTest extends TestCase
             'Country' => $addressTranfer->getCountry(),
             'City' => $addressTranfer->getCity(),
             'Street' => $addressTranfer->getStreet(),
-            'ZipCode' => $addressTranfer->getZipCode()
+            'ZipCode' => $addressTranfer->getZipCode(),
         ];
         $result['BillingCustomer'] = [
             'FirstName' => $billingCustomerTransfer->getFirstName(),
-            'LastName'  => $billingCustomerTransfer->getLastName(),
-            'Address'   => $address
+            'LastName' => $billingCustomerTransfer->getLastName(),
+            'Address' => $address,
         ];
 
         $order = $data->getOrder();
@@ -104,7 +108,7 @@ class RiskCheckRequestConverterTest extends TestCase
             'RegisteredOrder' => true,
             'Currency' => $order->getCurrency(),
             'GrossTotalBill' => $order->getGrossTotalBill(),
-            'TotalOrderValue' => $order->getTotalOrderValue()
+            'TotalOrderValue' => $order->getTotalOrderValue(),
         ];
 
         $result['Order']['Item'] = [];
@@ -114,7 +118,7 @@ class RiskCheckRequestConverterTest extends TestCase
                 'ProductNumber' => $item->getProductNumber(),
                 'ProductGroupId' => $item->getProductGroupId(),
                 'UnitPrice' => $item->getUnitPrice(),
-                'UnitCount' => $item->getUnitCount()
+                'UnitCount' => $item->getUnitCount(),
             ];
         }
 

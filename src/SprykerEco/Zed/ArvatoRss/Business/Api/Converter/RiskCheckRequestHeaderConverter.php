@@ -9,6 +9,7 @@ namespace SprykerEco\Zed\ArvatoRss\Business\Api\Converter;
 
 use Generated\Shared\Transfer\ArvatoRssIdentificationRequestTransfer;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
+use SoapHeader;
 
 class RiskCheckRequestHeaderConverter implements RiskCheckRequestHeaderConverterInterface
 {
@@ -32,7 +33,7 @@ class RiskCheckRequestHeaderConverter implements RiskCheckRequestHeaderConverter
     {
         $identification = $arvatoRssRiskCheckRequestTransfer->getIdentification();
         $requestData = $this->createRequestData($identification);
-        $soapHeader = new \SoapHeader(
+        $soapHeader = new SoapHeader(
             self::IDENTIFICATION_NAMESPACE,
             self::IDENTIFICATION_HEADER_NAME,
             $requestData
@@ -50,10 +51,14 @@ class RiskCheckRequestHeaderConverter implements RiskCheckRequestHeaderConverter
     {
         $result = [];
         $fields = $this->getRequestFields();
-        array_walk($fields, function ($item, $key) use (
-            &$result, $arvatoRssIdentificationRequestTransfer
+        array_walk($fields, function (
+            $item,
+            $key
+        ) use (
+            &$result,
+            $arvatoRssIdentificationRequestTransfer
         ) {
-            $result[$key] = $arvatoRssIdentificationRequestTransfer->{'get'.$item}();
+            $result[$key] = $arvatoRssIdentificationRequestTransfer->{'get' . $item}();
         });
 
         return $result;
@@ -66,7 +71,7 @@ class RiskCheckRequestHeaderConverter implements RiskCheckRequestHeaderConverter
     {
         return [
             'ClientID' => 'clientId',
-            'Authorisation' => 'authorisation'
+            'Authorisation' => 'authorisation',
         ];
     }
 
