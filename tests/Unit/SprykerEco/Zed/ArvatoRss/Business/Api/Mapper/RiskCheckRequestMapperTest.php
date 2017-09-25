@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
 namespace Unit\SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
 
 use Generated\Shared\Transfer\AddressTransfer;
@@ -13,6 +18,7 @@ use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use PHPUnit\Framework\TestCase;
+use SprykerEco\Service\ArvatoRss\Iso3166Converter;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapper;
 use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyBridge;
 
@@ -148,7 +154,10 @@ class RiskCheckRequestMapperTest extends TestCase
      */
     protected function createMapper()
     {
-        return new RiskCheckRequestMapper($this->createMoneyFacadeMock());
+        return new RiskCheckRequestMapper(
+            $this->createMoneyFacadeMock(),
+            $this->createConverter()
+        );
     }
 
     /**
@@ -164,6 +173,14 @@ class RiskCheckRequestMapperTest extends TestCase
             ->willReturn(static::DECIMAL_VALUE);
 
         return $moneyFacadeMock;
+    }
+
+    /**
+     * @return \SprykerEco\Service\ArvatoRss\Iso3166Converter
+     */
+    protected function createConverter()
+    {
+        return new Iso3166Converter();
     }
 
 }
