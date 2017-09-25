@@ -24,10 +24,23 @@ class RiskCheckRequestHeaderConverterTest extends TestCase
     {
         $converter = new RiskCheckRequestHeaderConverter();
         $requestTranfer = $this->createRequestTransfer();
-        $expected = $this->createExpectedResult($requestTranfer);
+        //$expected = $this->createExpectedResult($requestTranfer);
         $actual = $converter->convert($requestTranfer);
 
-        $this->assertEquals($expected, $actual);
+        $this->assertInstanceOf(SoapHeader::class, $actual);
+        $this->assertEquals(
+            $requestTranfer
+                ->getIdentification()
+                ->getClientId(),
+            $actual->data[ArvatoRssApiConstants::ARVATORSS_API_CLIENTID]
+        );
+
+        $this->assertEquals(
+            $requestTranfer
+                ->getIdentification()
+                ->getAuthorisation(),
+            $actual->data[ArvatoRssApiConstants::ARVATORSS_API_AUTHORISATION]
+        );
     }
 
     /**
@@ -43,27 +56,6 @@ class RiskCheckRequestHeaderConverterTest extends TestCase
         $requestTransfer->setIdentification($identificationTransfer);
 
         return $requestTransfer;
-    }
-
-    /**
-     * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestHeaderConverter $requestTransfer
-     *
-     * @return \SoapHeader
-     */
-    protected function createExpectedResult($requestTransfer)
-    {
-        $identification = $requestTransfer->getIdentification();
-        $requestData = [
-            'ClientID' => $identification->getClientId(),
-            'Authorisation' => $identification->getAuthorisation(),
-        ];
-        $soapHeader = new SoapHeader(
-            ArvatoRssApiConstants::ARVATORSS_API_IDENTIFICATION_NAMESPACE,
-            ArvatoRssApiConstants::ARVATORSS_API_IDENTIFICATION_HEADER_NAME,
-            $requestData
-        );
-
-        return $soapHeader;
     }
 
 }
