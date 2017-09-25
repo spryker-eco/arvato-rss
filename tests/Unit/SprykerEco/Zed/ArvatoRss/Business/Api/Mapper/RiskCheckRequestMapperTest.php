@@ -31,7 +31,7 @@ class RiskCheckRequestMapperTest extends AbstractMapperTest
     const DECIMAL_VALUE = 124.75;
 
     /**
-     * @dataProvider userData
+     * @dataProvider userDataProvider
      *
      * @param \ArrayObject $data
      *

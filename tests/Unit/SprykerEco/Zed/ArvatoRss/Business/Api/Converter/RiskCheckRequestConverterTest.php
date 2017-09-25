@@ -19,7 +19,7 @@ class RiskCheckRequestConverterTest extends TestCase
 {
 
     /**
-     * @dataProvider transfer
+     * @dataProvider transferProvider
      *
      * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $data
      *
@@ -69,7 +69,7 @@ class RiskCheckRequestConverterTest extends TestCase
             ->setOrder($order);
 
         return [
-            $requestTransfer
+            [$requestTransfer]
         ];
     }
 
@@ -88,8 +88,8 @@ class RiskCheckRequestConverterTest extends TestCase
      */
     protected function createExpectedResult($data)
     {
-        $addressTranfer = $data->getAddress();
         $billingCustomerTransfer = $data->getBillingCustomer();
+        $addressTranfer = $billingCustomerTransfer->getAddress();
         $address = [
             'Country' => $addressTranfer->getCountry(),
             'City' => $addressTranfer->getCity(),
