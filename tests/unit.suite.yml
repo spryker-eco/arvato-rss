@@ -4,3 +4,4 @@ modules:
         - Asserts
         - \Helper\Unit
         - \Helper\Unit\MapperTestHelper
+        - \Module\EnvironmentModule
