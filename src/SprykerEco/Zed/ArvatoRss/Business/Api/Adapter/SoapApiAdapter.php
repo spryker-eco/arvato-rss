@@ -12,9 +12,9 @@ use SoapClient;
 use SoapFault;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverter;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestHeaderConverter;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverter;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverterInterface;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestHeaderConverterInterface;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverterInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Exception\ArvatoRssRiskCheckApiException;
 
 class SoapApiAdapter implements ApiAdapterInterface
@@ -26,29 +26,29 @@ class SoapApiAdapter implements ApiAdapterInterface
     const WSDL_PATH = __DIR__ . "/../Etc/risk-solution-services.v2.1.wsdl";
 
     /**
-     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverter
+     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverterInterface
      */
     protected $riskCheckRequestConverter;
 
     /**
-     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestHeaderConverter
+     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestHeaderConverterInterface
      */
     protected $riskCheckRequestHeaderConverter;
 
     /**
-     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverter
+     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverterInterface
      */
     protected $riskCheckResponseConverter;
 
     /**
-     * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverter $riskCheckRequestConverter
-     * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestHeaderConverter $riskCheckRequestHeaderConverter
-     * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverter $riskCheckResponseConverter
+     * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverterInterface $riskCheckRequestConverter
+     * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestHeaderConverterInterface $riskCheckRequestHeaderConverter
+     * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverterInterface $riskCheckResponseConverter
      */
     public function __construct(
-        RiskCheckRequestConverter $riskCheckRequestConverter,
-        RiskCheckRequestHeaderConverter $riskCheckRequestHeaderConverter,
-        RiskCheckResponseConverter $riskCheckResponseConverter
+        RiskCheckRequestConverterInterface $riskCheckRequestConverter,
+        RiskCheckRequestHeaderConverterInterface $riskCheckRequestHeaderConverter,
+        RiskCheckResponseConverterInterface $riskCheckResponseConverter
     ) {
 
         $this->riskCheckRequestConverter = $riskCheckRequestConverter;
@@ -81,7 +81,7 @@ class SoapApiAdapter implements ApiAdapterInterface
     /**
      * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $requestTransfer
      *
-     * @return \SoapClient
+     * @return SoapClient
      */
     protected function createSoapClient(ArvatoRssRiskCheckRequestTransfer $requestTransfer)
     {
@@ -92,7 +92,6 @@ class SoapApiAdapter implements ApiAdapterInterface
 
         $soapClient = new SoapClient(static::WSDL_PATH, $options);
         $soapClient->__setSoapHeaders($header);
-        // TODO: add config get service to avoid direct config call
         $soapClient->__setLocation(
             Config::get(ArvatoRssConstants::ARVATORSS)[ArvatoRssConstants::ARVATORSS_URL]
         );
