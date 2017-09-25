@@ -25,7 +25,7 @@ class Iso3166Converter extends AbstractService implements Iso3166ConverterInterf
     /**
      * @param string $iso2CountryCode
      *
-     * @return string
+     * @return string|null
      */
     public function iso2ToNumeric($iso2CountryCode)
     {
@@ -40,7 +40,7 @@ class Iso3166Converter extends AbstractService implements Iso3166ConverterInterf
     /**
      * @param string $iso3166CountryCode
      *
-     * @return string
+     * @return string|null
      */
     public function numericToIso2($iso3166CountryCode)
     {
