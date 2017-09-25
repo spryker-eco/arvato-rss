@@ -10,6 +10,7 @@ namespace SprykerEco\Zed\ArvatoRss\Business\Api\Adapter;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
 use SoapClient;
 use SoapFault;
+use stdClass;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverterInterface;
@@ -69,11 +70,7 @@ class SoapApiAdapter implements ApiAdapterInterface
         $soapClient = $this->createSoapClient($requestTransfer);
 
         $result = $soapClient->RiskCheck($params);
-        if ($result instanceof SoapFault) {
-            $exceptionName = array_keys(get_object_vars($result->detail))[0];
-            $exceptionObj = $result->detail->{$exceptionName};
-            throw new ArvatoRssRiskCheckApiException($exceptionObj->Description);
-        }
+        $this->validateResponse($result);
 
         return $this->riskCheckResponseConverter->convert($result);
     }
@@ -86,10 +83,7 @@ class SoapApiAdapter implements ApiAdapterInterface
     protected function createSoapClient(ArvatoRssRiskCheckRequestTransfer $requestTransfer)
     {
         $header = $this->riskCheckRequestHeaderConverter->convert($requestTransfer);
-        $options = [
-            'exceptions' => false,
-        ];
-
+        $options = $this->getRequestOptions();
         $soapClient = new SoapClient(static::WSDL_PATH, $options);
         $soapClient->__setSoapHeaders($header);
         $soapClient->__setLocation(
@@ -97,6 +91,32 @@ class SoapApiAdapter implements ApiAdapterInterface
         );
 
         return $soapClient;
+    }
+
+    /**
+     * @param SoapFault|stdClass $result
+     *
+     * @throws \SprykerEco\Zed\ArvatoRss\Business\Api\Exception\ArvatoRssRiskCheckApiException
+     *
+     * @return void
+     */
+    protected function validateResponse($result)
+    {
+        if ($result instanceof SoapFault) {
+            $exceptionName = array_keys(get_object_vars($result->detail))[0];
+            $exceptionObj = $result->detail->{$exceptionName};
+            throw new ArvatoRssRiskCheckApiException($exceptionObj->Description);
+        }
+    }
+
+    /**
+     * @return array
+     */
+    protected function getRequestOptions()
+    {
+        return [
+            'exceptions' => false,
+        ];
     }
 
 }
