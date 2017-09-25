@@ -25,6 +25,11 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
 {
 
     /**
+     * @const string DATE_FORMAT
+     */
+    const DATE_FORMAT = 'Y-m-d';
+
+    /**
      * @var \SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface $moneyFacade
      */
     protected $moneyFacade;
@@ -159,7 +164,7 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
      */
     protected function prepareDateOfBirth($dateOfBirth)
     {
-        return $dateOfBirth ? (new DateTime($dateOfBirth))->format("Y-m-d") : null;
+        return $dateOfBirth ? (new DateTime($dateOfBirth))->format(static::DATE_FORMAT) : null;
     }
 
 }

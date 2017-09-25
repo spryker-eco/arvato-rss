@@ -10,19 +10,10 @@ namespace SprykerEco\Zed\ArvatoRss\Business\Api\Converter;
 use Generated\Shared\Transfer\ArvatoRssIdentificationRequestTransfer;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
 use SoapHeader;
+use SprykerEco\Zed\ArvatoRss\Business\Api\ArvatoRssApiConstants;
 
 class RiskCheckRequestHeaderConverter implements RiskCheckRequestHeaderConverterInterface
 {
-
-    /**
-     * @const string IDENTIFICATION_NAMESPACE
-     */
-    const IDENTIFICATION_NAMESPACE = 'urn:risk-solution-services-types:v2.1';
-
-    /**
-     * @const string IDENTIFICATION_HEADER_NAME
-     */
-    const IDENTIFICATION_HEADER_NAME = 'Identification';
 
     /**
      * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $arvatoRssRiskCheckRequestTransfer
@@ -34,8 +25,8 @@ class RiskCheckRequestHeaderConverter implements RiskCheckRequestHeaderConverter
         $identification = $arvatoRssRiskCheckRequestTransfer->getIdentification();
         $requestData = $this->createRequestData($identification);
         $soapHeader = new SoapHeader(
-            self::IDENTIFICATION_NAMESPACE,
-            self::IDENTIFICATION_HEADER_NAME,
+            ArvatoRssApiConstants::ARVATORSS_API_IDENTIFICATION_NAMESPACE,
+            ArvatoRssApiConstants::ARVATORSS_API_IDENTIFICATION_HEADER_NAME,
             $requestData
         );
 
@@ -58,7 +49,7 @@ class RiskCheckRequestHeaderConverter implements RiskCheckRequestHeaderConverter
             &$result,
             $arvatoRssIdentificationRequestTransfer
         ) {
-            $result[$key] = $arvatoRssIdentificationRequestTransfer->{'get' . $item}();
+            $result[$key] = $arvatoRssIdentificationRequestTransfer->{'get' . ucfirst($item)}();
         });
 
         return $result;
@@ -70,8 +61,8 @@ class RiskCheckRequestHeaderConverter implements RiskCheckRequestHeaderConverter
     protected function getRequestFields()
     {
         return [
-            'ClientID' => 'clientId',
-            'Authorisation' => 'authorisation',
+            ArvatoRssApiConstants::ARVATORSS_API_CLIENTID => 'clientId',
+            ArvatoRssApiConstants::ARVATORSS_API_AUTHORISATION => 'authorisation',
         ];
     }
 

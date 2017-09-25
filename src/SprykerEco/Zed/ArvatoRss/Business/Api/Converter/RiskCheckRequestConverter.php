@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Converter;
 
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
+use SprykerEco\Zed\ArvatoRss\Business\Api\ArvatoRssApiConstants;
 
 class RiskCheckRequestConverter implements RiskCheckRequestConverterInterface
 {
@@ -41,15 +42,15 @@ class RiskCheckRequestConverter implements RiskCheckRequestConverterInterface
         $billingCustomerTransfer = $arvatoRssRiskCheckRequestTransfer->getBillingCustomer();
         $addressTranfer = $billingCustomerTransfer->getAddress();
         $address = [
-            'Country' => $addressTranfer->getCountry(),
-            'City' => $addressTranfer->getCity(),
-            'Street' => $addressTranfer->getStreet(),
-            'ZipCode' => $addressTranfer->getZipCode(),
+            ArvatoRssApiConstants::ARVATORSS_API_ADDRESS => $addressTranfer->getCountry(),
+            ArvatoRssApiConstants:: ARVATORSS_API_CITY => $addressTranfer->getCity(),
+            ArvatoRssApiConstants::ARVATORSS_API_STREET => $addressTranfer->getStreet(),
+            ArvatoRssApiConstants::ARVATORSS_API_ZIPCODE => $addressTranfer->getZipCode(),
         ];
-        $result['BillingCustomer'] = [
-            'FirstName' => $billingCustomerTransfer->getFirstName(),
-            'LastName' => $billingCustomerTransfer->getLastName(),
-            'Address' => $address,
+        $result[ArvatoRssApiConstants::ARVATORSS_API_ZIPCODE] = [
+            ArvatoRssApiConstants::ARVATORSS_API_FIRSTNAME => $billingCustomerTransfer->getFirstName(),
+            ArvatoRssApiConstants::ARVATORSS_API_LASTNAME => $billingCustomerTransfer->getLastName(),
+            ArvatoRssApiConstants::ARVATORSS_API_ADDRESS => $address,
         ];
 
         return $result;
@@ -65,24 +66,24 @@ class RiskCheckRequestConverter implements RiskCheckRequestConverterInterface
         $result = [];
         $order = $arvatoRssRiskCheckRequestTransfer->getOrder();
 
-        $result['Order'] = [
+        $result[ArvatoRssApiConstants::ARVATORSS_API_ORDER] = [
             //TODO: Clarify what it means
-            'RegisteredOrder' => true,
-            'Currency' => $order->getCurrency(),
-            'GrossTotalBill' => $order->getGrossTotalBill(),
-            'TotalOrderValue' => $order->getTotalOrderValue(),
+            ArvatoRssApiConstants::ARVATORSS_API_REGISTEREDORDER=> true,
+            ArvatoRssApiConstants::ARVATORSS_API_CURRENCY => $order->getCurrency(),
+            ArvatoRssApiConstants::ARVATORSS_API_GROSSTOTALBILL => $order->getGrossTotalBill(),
+            ArvatoRssApiConstants::ARVATORSS_API_TOTALORDERVALUE => $order->getTotalOrderValue(),
         ];
         // TODO: deal with items.
-        $result['Order']['Item'] = [];
+        $result[ArvatoRssApiConstants::ARVATORSS_API_ORDER][ArvatoRssApiConstants::ARVATORSS_API_ITEM] = [];
 
         foreach ($order->getItem() as $item) {
-            $result['Order']['Item'][] = [
+            $result[ArvatoRssApiConstants::ARVATORSS_API_ORDER][ArvatoRssApiConstants::ARVATORSS_API_ITEM][] = [
                 //TODO: clarify this. Is it sku?
-                'ProductNumber' => $item->getProductNumber(),
+                ArvatoRssApiConstants::ARVATORSS_API_PRODUCTNUMBER => $item->getProductNumber(),
                 //TODO: clarify
-                'ProductGroupId' => $item->getProductGroupId(),
-                'UnitPrice' => $item->getUnitPrice(),
-                'UnitCount' => $item->getUnitCount(),
+                ArvatoRssApiConstants::ARVATORSS_API_PRODUCTGROUPID => $item->getProductGroupId(),
+                ArvatoRssApiConstants::ARVATORSS_API_UNITPRICE => $item->getUnitPrice(),
+                ArvatoRssApiConstants::ARVATORSS_API_UNITCOUNT => $item->getUnitCount(),
             ];
         }
 
