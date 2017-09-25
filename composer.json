@@ -8,13 +8,12 @@
   },
   "require": {
     "ext-soap": "*",
-    "spryker/kernel": "^3.0.0"
+    "spryker/kernel": "^3.0.0",
+    "spryker/money": "^2.1.0",
+    "spryker/config": "^3.0.0"
   },
   "require-dev": {
-    "spryker/code-sniffer": "*",
-    "spryker/propel": "*",
-    "spryker/silex": "*",
-    "spryker/testify": "*"
+    "spryker/code-sniffer": "*"
   },
   "description": "Arvato risk security check module",
   "license": "proprietary",
