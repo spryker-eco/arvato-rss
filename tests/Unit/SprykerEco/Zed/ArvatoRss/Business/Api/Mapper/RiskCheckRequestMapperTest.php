@@ -14,7 +14,9 @@ use Generated\Shared\Transfer\ArvatoRssIdentificationRequestTransfer;
 use Generated\Shared\Transfer\ArvatoRssOrderItemTransfer;
 use Generated\Shared\Transfer\ArvatoRssOrderTransfer;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapper;
+use Spryker\Shared\Config\Config;
+use Spryker\Shared\Kernel\Store;
+use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
 use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyBridge;
 
 class RiskCheckRequestMapperTest extends AbstractMapperTest
@@ -36,6 +38,11 @@ class RiskCheckRequestMapperTest extends AbstractMapperTest
     const UNIT_COUNT = 1;
 
     /**
+     * @const int PRODUCT_GROUP_ID
+     */
+    const PRODUCT_GROUP_ID = 1;
+
+    /**
      * @dataProvider userDataProvider
      *
      * @param \ArrayObject $data
@@ -45,10 +52,10 @@ class RiskCheckRequestMapperTest extends AbstractMapperTest
     public function testMapQuoteToRequestTranfer(ArrayObject $data)
     {
         $quoteTranfer = $this->helper->createQuoteTransfer($data);
-        $mapper = $this->createMapper();
-
+        $mapper = $this->helper->createRequestMapper($this->createMoneyFacadeMock());
 
         $expected = $this->getExpectedRequestTransfer($data)->toArray(true);
+
         $actual = $mapper->mapQuoteToRequestTranfer($quoteTranfer)->toArray(true);
 
         $this->assertEquals($expected, $actual);
@@ -63,18 +70,19 @@ class RiskCheckRequestMapperTest extends AbstractMapperTest
             [
                 new ArrayObject(
                     [
-                        'clientId' => '00000000',
-                        'authorisation' => '11111111',
+                        'clientId' => Config::get(ArvatoRssConstants::ARVATORSS)[ArvatoRssConstants::ARVATORSS_CLIENTID],
+                        'authorisation' => Config::get(ArvatoRssConstants::ARVATORSS)[ArvatoRssConstants::ARVATORSS_PASSWORD],
                         'country' => 'DE',
                         'city' => 'Berlin',
                         'street' => 'Europa-Allee 50',
+                        'streetNumber' => '17',
                         'zipCode' => '60327',
                         'firstName' => 'Michael',
                         'lastName' => 'Duglas',
-                        'salutation' => 'Mr.',
+                        'salutation' => 'MR',
                         'email' => 'duglas@gmail.com',
                         'phoneNumber' => '123213',
-                        'birthDay' => '20/04/1978',
+                        'birthDay' => '1978-10-01',
                         'position' => 1,
                         'productNumber' => '777777',
                         'unitPrice' => static::INT_VALUE,
@@ -103,9 +111,12 @@ class RiskCheckRequestMapperTest extends AbstractMapperTest
         $identificationTransfer->setClientId($data->clientId);
         $identificationTransfer->setAuthorisation($data->authorisation);
 
-        $address->setCountry($data->country);
+        $address->setCountry(
+            $this->helper->createConverter()->iso2ToNumeric($data->country)
+        );
         $address->setCity($data->city);
         $address->setStreet($data->street);
+        $address->setStreetNumber($data->streetNumber);
         $address->setZipCode($data->zipCode);
         $billingCustomerTransfer->setAddress($address);
         $billingCustomerTransfer->setFirstName($data->firstName);
@@ -116,26 +127,21 @@ class RiskCheckRequestMapperTest extends AbstractMapperTest
         $billingCustomerTransfer->setBirthDay($data->birthDay);
 
         $itemTransfer->setProductNumber($data->productNumber);
-        $itemTransfer->setUnitPrice(static::INT_VALUE);
+        $itemTransfer->setUnitPrice(static::DECIMAL_VALUE);
         $itemTransfer->setUnitCount(static::UNIT_COUNT);
+        $itemTransfer->setProductGroupId(static::PRODUCT_GROUP_ID);
 
         $orderTransfer->addItem($itemTransfer);
+        $orderTransfer->setCurrency(Store::getInstance()->getCurrencyIsoCode());
+        $orderTransfer->setGrossTotalBill(static::DECIMAL_VALUE);
+        $orderTransfer->setTotalOrderValue(static::DECIMAL_VALUE);
+
         $requestTransfer->setIdentification($identificationTransfer);
         $requestTransfer->setBillingCustomer($billingCustomerTransfer);
         $requestTransfer->setOrder($orderTransfer);
 
-        return $requestTransfer;
-    }
 
-    /**
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapper
-     */
-    protected function createMapper()
-    {
-        return new RiskCheckRequestMapper(
-            $this->createMoneyFacadeMock(),
-            $this->helper->createConverter()
-        );
+        return $requestTransfer;
     }
 
     /**

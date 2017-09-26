@@ -21,7 +21,7 @@ class RiskCheckResponseMapperTest extends AbstractMapperTest
      *
      * @return void
      */
-    public function mapResponseToQuoteTest($data)
+    public function testMapResponseToQuote($data)
     {
         $mapper = $this->createMapper();
 
@@ -58,7 +58,8 @@ class RiskCheckResponseMapperTest extends AbstractMapperTest
                         'streetNumber' => '12',
                         'zipCode' => '12312',
                         'city' => 'Berlin',
-                    ]
+                    ],
+                    ArrayObject::ARRAY_AS_PROPS
                 )
             ],
         ];
@@ -71,7 +72,7 @@ class RiskCheckResponseMapperTest extends AbstractMapperTest
      */
     protected function createExpectedTransfer(ArrayObject $data)
     {
-        $quoteTranfer = $this->helper->createQuoteTranfer();
+        $quoteTranfer = $this->helper->createQuoteTransfer();
         $responseTransfer = $this->createResponseTransfer($data);
         $quoteTranfer->setArvatoRssRiskCheckResponse($responseTransfer);
 
@@ -86,10 +87,10 @@ class RiskCheckResponseMapperTest extends AbstractMapperTest
     protected function createResponseTransfer(ArrayObject $data)
     {
         $transfer = new ArvatoRssRiskCheckResponseTransfer();
-        $transfer->setResult($data->getResult());
-        $transfer->setActionCode($data->getActionCode());
-        $transfer->setActionCode($data->getActionCode());
-        $transfer->setResultText($data->getResultText());
+        $transfer->setResult($data->result);
+        $transfer->setActionCode($data->actionCode);
+        $transfer->setResultCode($data->resultCode);
+        $transfer->setResultText($data->resultText);
 
         return $transfer;
     }

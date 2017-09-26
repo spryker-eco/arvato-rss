@@ -94,6 +94,7 @@ class RiskCheckRequestConverterTest extends Test
             'Country' => $addressTranfer->getCountry(),
             'City' => $addressTranfer->getCity(),
             'Street' => $addressTranfer->getStreet(),
+            'StreetNumber' => $addressTranfer->getStreetNumber(),
             'ZipCode' => $addressTranfer->getZipCode(),
         ];
         $result['BillingCustomer'] = [

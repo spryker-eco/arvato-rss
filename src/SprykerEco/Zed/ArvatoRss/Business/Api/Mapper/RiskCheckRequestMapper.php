@@ -84,8 +84,8 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
     protected function mapIdentification(
         ArvatoRssRiskCheckRequestTransfer $requestTransfer,
         QuoteTransfer $quoteTransfer
-    )
-    {
+    ) {
+
         $requestTransfer = new ArvatoRssRiskCheckRequestTransfer();
         $identificationTransfer = new ArvatoRssIdentificationRequestTransfer();
 
@@ -109,8 +109,8 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
     protected function mapBillingCustomer(
         ArvatoRssRiskCheckRequestTransfer $requestTransfer,
         QuoteTransfer $quoteTransfer
-    )
-    {
+    ) {
+
         $billingCustomerTransfer = $this->prepareBillingCustomer($quoteTransfer);
         $requestTransfer->setBillingCustomer($billingCustomerTransfer);
 
@@ -126,8 +126,8 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
     protected function mapOrder(
         ArvatoRssRiskCheckRequestTransfer $requestTransfer,
         QuoteTransfer $quoteTransfer
-    )
-    {
+    ) {
+
         $orderTransfer = new ArvatoRssOrderTransfer();
 
         $orderTransfer->setCurrency(Store::getInstance()->getCurrencyIsoCode());
@@ -149,7 +149,7 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
     /**
      * @param \Generated\Shared\Transfer\ItemTransfer $item
      *
-     * @return \Generated\Shared\Transfer\ItemTransfer
+     * @return \Generated\Shared\Transfer\ArvatoRssOrderItemTransfer
      */
     protected function prepareOrderItem(ItemTransfer $item)
     {

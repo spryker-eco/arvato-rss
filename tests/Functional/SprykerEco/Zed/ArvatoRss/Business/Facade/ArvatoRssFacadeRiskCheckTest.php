@@ -15,7 +15,7 @@ class ArvatoRssFacadeRiskCheckTest extends TestCase
     /**
      * @return void
      */
-    public function performRiskCheckTest()
+    public function testPerformRiskCheck()
     {
         $quoteTransfer = $this->createQuoteTransfer();
         $facade = new ArvatoRssFacade();

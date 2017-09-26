@@ -13,7 +13,9 @@ use Generated\Shared\Transfer\AddressTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Generated\Shared\Transfer\TotalsTransfer;
 use SprykerEco\Service\ArvatoRss\Iso3166Converter;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapper;
 
 class MapperTestHelper extends Module
 {
@@ -34,31 +36,43 @@ class MapperTestHelper extends Module
             $billingAddress->setIso2Code($data->country);
             $billingAddress->setCity($data->city);
             $billingAddress->setAddress1($data->street);
+            $billingAddress->setAddress2($data->streetNumber);
             $billingAddress->setZipCode($data->zipCode);
+            $billingAddress->setFirstName($data->firstName);
+            $billingAddress->setLastName($data->lastName);
+            $billingAddress->setPhone($data->phoneNumber);
 
-            $customerTranfer->setFirstName($data->firstName);
-            $customerTranfer->setLastName($data->lastName);
             $customerTranfer->setSalutation($data->salutation);
             $customerTranfer->setEmail($data->email);
-            $customerTranfer->setPhone($data->phoneNumber);
             $customerTranfer->setDateOfBirth($data->birthDay);
 
             $orderItem->setUnitPrice($data->unitPrice);
             $orderItem->setSku($data->productNumber);
+            $orderItem->setQuantity(1);
 
             $quoteTransfer->setCustomer($customerTranfer);
             $quoteTransfer->setBillingAddress($billingAddress);
             $quoteTransfer->addItem($orderItem);
+
+            $quoteTransfer->setTotals(
+                (new TotalsTransfer())
+                    ->setGrandTotal(15000)
+                    ->setSubtotal(14000)
+            );
         }
 
         return $quoteTransfer;
     }
 
     /**
-     * @return void
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapper
      */
-    public function createRequestMapper()
+    public function createRequestMapper($moneyFacade)
     {
+        return new RiskCheckRequestMapper(
+            $moneyFacade,
+            $this->createConverter()
+        );
     }
 
     /**
