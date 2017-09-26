@@ -13,7 +13,7 @@ interface RiskCheckResponseConverterInterface
 {
 
     /**
-     * @param stdClass $response
+     * @param \stdClass $response
      *
      * @return void
      */

@@ -69,7 +69,7 @@ class RiskCheckRequestConverterTest extends Test
             ->setOrder($order);
 
         return [
-            [$requestTransfer]
+            [$requestTransfer],
         ];
     }
 

@@ -43,7 +43,7 @@ class RiskCheckRequestConverter implements RiskCheckRequestConverterInterface
         $addressTranfer = $billingCustomerTransfer->getAddress();
         $address = [
             ArvatoRssApiConstants::ARVATORSS_API_COUNTRY => $addressTranfer->getCountry(),
-            ArvatoRssApiConstants:: ARVATORSS_API_CITY => $addressTranfer->getCity(),
+            ArvatoRssApiConstants::ARVATORSS_API_CITY => $addressTranfer->getCity(),
             ArvatoRssApiConstants::ARVATORSS_API_STREET => $addressTranfer->getStreet(),
             ArvatoRssApiConstants::ARVATORSS_API_STREET_NUMBER => $addressTranfer->getStreetNumber(),
             ArvatoRssApiConstants::ARVATORSS_API_ZIPCODE => $addressTranfer->getZipCode(),
@@ -69,7 +69,7 @@ class RiskCheckRequestConverter implements RiskCheckRequestConverterInterface
 
         $result[ArvatoRssApiConstants::ARVATORSS_API_ORDER] = [
             //TODO: Clarify what it means
-            ArvatoRssApiConstants::ARVATORSS_API_REGISTEREDORDER=> true,
+            ArvatoRssApiConstants::ARVATORSS_API_REGISTEREDORDER => true,
             ArvatoRssApiConstants::ARVATORSS_API_CURRENCY => $order->getCurrency(),
             ArvatoRssApiConstants::ARVATORSS_API_GROSSTOTALBILL => $order->getGrossTotalBill(),
             ArvatoRssApiConstants::ARVATORSS_API_TOTALORDERVALUE => $order->getTotalOrderValue(),

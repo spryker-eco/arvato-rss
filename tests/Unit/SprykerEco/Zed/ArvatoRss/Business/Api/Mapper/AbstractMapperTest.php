@@ -7,8 +7,8 @@
 
 namespace Unit\SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
 
-use Helper\Unit\MapperTestHelper;
 use Codeception\TestCase\Test;
+use Helper\Unit\MapperTestHelper;
 
 class AbstractMapperTest extends Test
 {

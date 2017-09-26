@@ -10,7 +10,6 @@ namespace SprykerEco\Zed\ArvatoRss\Business\Api\Adapter;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
 use SoapClient;
 use SoapFault;
-use stdClass;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverterInterface;
@@ -60,8 +59,6 @@ class SoapApiAdapter implements ApiAdapterInterface
     /**
      * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $requestTransfer
      *
-     * @throws \SprykerEco\Zed\ArvatoRss\Business\Api\Exception\ArvatoRssRiskCheckApiException
-     *
      * @return \Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer
      */
     public function performRiskCheck(ArvatoRssRiskCheckRequestTransfer $requestTransfer)
@@ -78,7 +75,7 @@ class SoapApiAdapter implements ApiAdapterInterface
     /**
      * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $requestTransfer
      *
-     * @return SoapClient
+     * @return \SoapClient
      */
     protected function createSoapClient(ArvatoRssRiskCheckRequestTransfer $requestTransfer)
     {
@@ -94,7 +91,7 @@ class SoapApiAdapter implements ApiAdapterInterface
     }
 
     /**
-     * @param SoapFault|stdClass $result
+     * @param \SoapFault|\stdClass $result
      *
      * @throws \SprykerEco\Zed\ArvatoRss\Business\Api\Exception\ArvatoRssRiskCheckApiException
      *

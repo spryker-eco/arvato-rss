@@ -29,7 +29,7 @@ class RiskCheckResponseConverterTest extends Test
     }
 
     /**
-     * @return stdClass
+     * @return \stdClass
      */
     protected function createResponse()
     {
