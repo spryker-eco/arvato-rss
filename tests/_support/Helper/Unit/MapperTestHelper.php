@@ -16,6 +16,7 @@ use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\TotalsTransfer;
 use SprykerEco\Service\ArvatoRss\Iso3166Converter;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapper;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckResponseMapper;
 
 class MapperTestHelper extends Module
 {
@@ -76,10 +77,11 @@ class MapperTestHelper extends Module
     }
 
     /**
-     * @return void
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckResponseMapper
      */
     public function createResponseMapper()
     {
+        return new RiskCheckResponseMapper();
     }
 
     /**

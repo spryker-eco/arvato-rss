@@ -9,7 +9,6 @@ namespace Unit\SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
 
 use ArrayObject;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckResponseMapper;
 
 class RiskCheckResponseMapperTest extends AbstractMapperTest
 {
@@ -23,7 +22,7 @@ class RiskCheckResponseMapperTest extends AbstractMapperTest
      */
     public function testMapResponseToQuote($data)
     {
-        $mapper = $this->createMapper();
+        $mapper = $this->helper->createResponseMapper();
 
         $expected = $this->createExpectedTransfer($data)->toArray(true);
         $actual = $mapper->mapResponseToQuote(
@@ -93,14 +92,6 @@ class RiskCheckResponseMapperTest extends AbstractMapperTest
         $transfer->setResultText($data->resultText);
 
         return $transfer;
-    }
-
-    /**
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckResponseMapper
-     */
-    protected function createMapper()
-    {
-        return new RiskCheckResponseMapper();
     }
 
 }

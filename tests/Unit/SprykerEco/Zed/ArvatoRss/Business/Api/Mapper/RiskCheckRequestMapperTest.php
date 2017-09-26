@@ -140,7 +140,6 @@ class RiskCheckRequestMapperTest extends AbstractMapperTest
         $requestTransfer->setBillingCustomer($billingCustomerTransfer);
         $requestTransfer->setOrder($orderTransfer);
 
-
         return $requestTransfer;
     }
 
