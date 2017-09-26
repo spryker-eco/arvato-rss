@@ -8,6 +8,7 @@
 namespace Unit\SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
 
 use Codeception\TestCase\Test;
+use Helper\QuoteHelper;
 use Helper\Unit\MapperTestHelper;
 
 class AbstractMapperTest extends Test
@@ -19,13 +20,20 @@ class AbstractMapperTest extends Test
     protected $helper;
 
     /**
+     * @var \Helper\QuoteHelper $quoteHelper
+     */
+    protected $quoteHelper;
+
+    /**
      * @param \Helper\Unit\MapperTestHelper $mapperHelper
+     * @param \Helper\QuoteHelper $quoteHelper
      *
      * @return void
      */
-    protected function _inject(MapperTestHelper $mapperHelper)
+    protected function _inject(MapperTestHelper $mapperHelper, QuoteHelper $quoteHelper)
     {
         $this->helper = $mapperHelper;
+        $this->quoteHelper = $quoteHelper;
     }
 
 }

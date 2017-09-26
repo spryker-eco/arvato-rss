@@ -9,4 +9,5 @@ actor: FunctionalTester
 modules:
     enabled:
         - Asserts
+        - \Helper\QuoteHelper
         - \Module\EnvironmentModule

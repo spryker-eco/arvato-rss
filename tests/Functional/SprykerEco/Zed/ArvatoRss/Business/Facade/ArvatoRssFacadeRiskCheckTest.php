@@ -3,27 +3,69 @@
 namespace Functional\SprykerEco\Zed\ArvatoRss\Business\Facade;
 
 use Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer;
-use Generated\Shared\Transfer\QuoteTransfer;
-use PHPUnit\Framework\TestCase;
+use Helper\QuoteHelper;
+use Codeception\TestCase\Test;
+use Spryker\Shared\Config\Config;
+use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\SoapApiAdapter;
 use SprykerEco\Zed\ArvatoRss\Business\ArvatoRssBusinessFactory;
 use SprykerEco\Zed\ArvatoRss\Business\ArvatoRssFacade;
 
-class ArvatoRssFacadeRiskCheckTest extends TestCase
+class ArvatoRssFacadeRiskCheckTest extends Test
 {
 
     /**
+     * @var $quoteHelper
+     */
+    protected $quoteHelper;
+
+    /**
+     * @dataProvider quoteDataProvider
+     *
      * @return void
      */
-    public function testPerformRiskCheck()
+    public function testPerformRiskCheck($data)
     {
-        $quoteTransfer = $this->createQuoteTransfer();
+        $quoteTransfer = $this->quoteHelper->createQuoteTransfer($data);
         $facade = new ArvatoRssFacade();
 
         $response = $facade->performRiskCheck($quoteTransfer);
         $expected = $this->createExpectedResult();
         $actual = $response->getArvatoRssRiskCheckResponse();
         $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * @return array
+     */
+    public function quoteDataProvider()
+    {
+        return [
+            [
+                new \ArrayObject(
+                    [
+                        'clientId' => Config::get(ArvatoRssConstants::ARVATORSS)[ArvatoRssConstants::ARVATORSS_CLIENTID],
+                        'authorisation' => Config::get(ArvatoRssConstants::ARVATORSS)[ArvatoRssConstants::ARVATORSS_PASSWORD],
+                        'country' => 'DE',
+                        'city' => 'Berlin',
+                        'street' => 'Europa-Allee 50',
+                        'streetNumber' => '17',
+                        'zipCode' => '60327',
+                        'firstName' => 'Michael',
+                        'lastName' => 'Duglas',
+                        'salutation' => 'MR',
+                        'email' => 'duglas@gmail.com',
+                        'phoneNumber' => '123213',
+                        'birthDay' => '1978-10-01',
+                        'position' => 1,
+                        'productNumber' => '777777',
+                        'unitPrice' => 12000,
+                        'unitCount' => 1,
+                    ],
+                    \ArrayObject::ARRAY_AS_PROPS
+                )
+            ],
+        ];
     }
 
     /**
@@ -41,23 +83,15 @@ class ArvatoRssFacadeRiskCheckTest extends TestCase
     }
 
     /**
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
-    protected function createQuoteTransfer()
-    {
-        return new QuoteTransfer();
-    }
-
-    /**
      * @return \Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer
      */
     protected function createExpectedResult()
     {
         return (new ArvatoRssRiskCheckResponseTransfer())
             ->setResult('R')
-            ->setResultText('text')
-            ->setResultCode('aaa')
-            ->setActionCode('test');
+            ->setResultCode('AVD999')
+            ->setActionCode('O_I')
+            ->setResultText('Address invalid invoice');
     }
 
     /**
@@ -70,6 +104,16 @@ class ArvatoRssFacadeRiskCheckTest extends TestCase
             ->method('performRiskCheck')
             ->willReturn($this->createExpectedResult());
         return $mock;
+    }
+
+    /**
+     * @param \Helper\QuoteHelper $quoteHelper
+     *
+     * @return void
+     */
+    protected function _inject(QuoteHelper $quoteHelper)
+    {
+        $this->quoteHelper = $quoteHelper;
     }
 
 }

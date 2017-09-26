@@ -51,7 +51,7 @@ class RiskCheckRequestMapperTest extends AbstractMapperTest
      */
     public function testMapQuoteToRequestTranfer(ArrayObject $data)
     {
-        $quoteTranfer = $this->helper->createQuoteTransfer($data);
+        $quoteTranfer = $this->quoteHelper->createQuoteTransfer($data);
         $mapper = $this->helper->createRequestMapper($this->createMoneyFacadeMock());
 
         $expected = $this->getExpectedRequestTransfer($data)->toArray(true);

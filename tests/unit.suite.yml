@@ -2,5 +2,6 @@ actor: UnitTester
 modules:
     enabled:
         - Asserts
+        - \Helper\QuoteHelper
         - \Helper\Unit\MapperTestHelper
         - \Module\EnvironmentModule

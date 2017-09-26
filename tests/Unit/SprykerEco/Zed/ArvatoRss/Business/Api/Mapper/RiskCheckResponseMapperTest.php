@@ -27,7 +27,7 @@ class RiskCheckResponseMapperTest extends AbstractMapperTest
         $expected = $this->createExpectedTransfer($data)->toArray(true);
         $actual = $mapper->mapResponseToQuote(
             $this->createResponseTransfer($data),
-            $this->helper->createQuoteTransfer()
+            $this->quoteHelper->createQuoteTransfer()
         )->toArray(true);
 
         $this->assertEquals($expected, $actual);
@@ -71,7 +71,7 @@ class RiskCheckResponseMapperTest extends AbstractMapperTest
      */
     protected function createExpectedTransfer(ArrayObject $data)
     {
-        $quoteTranfer = $this->helper->createQuoteTransfer();
+        $quoteTranfer = $this->quoteHelper->createQuoteTransfer();
         $responseTransfer = $this->createResponseTransfer($data);
         $quoteTranfer->setArvatoRssRiskCheckResponse($responseTransfer);
 
