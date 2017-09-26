@@ -8,12 +8,14 @@
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
 
 use DateTime;
+use Generated\Shared\Transfer\AddressTransfer;
 use Generated\Shared\Transfer\ArvatoRssBillingCustomerTransfer;
 use Generated\Shared\Transfer\ArvatoRssCustomerAddressTransfer;
 use Generated\Shared\Transfer\ArvatoRssIdentificationRequestTransfer;
 use Generated\Shared\Transfer\ArvatoRssOrderItemTransfer;
 use Generated\Shared\Transfer\ArvatoRssOrderTransfer;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
+use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Store;
@@ -23,6 +25,11 @@ use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface;
 
 class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
 {
+
+    /**
+     * @const int PRODUCT_GROUP_ID
+     */
+    const PRODUCT_GROUP_ID = 1;
 
     /**
      * @const string DATE_FORMAT
@@ -74,7 +81,10 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
      *
      * @return \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer
      */
-    protected function mapIdentification($requestTransfer, $quoteTransfer)
+    protected function mapIdentification(
+        ArvatoRssRiskCheckRequestTransfer $requestTransfer,
+        QuoteTransfer $quoteTransfer
+    )
     {
         $requestTransfer = new ArvatoRssRiskCheckRequestTransfer();
         $identificationTransfer = new ArvatoRssIdentificationRequestTransfer();
@@ -96,29 +106,12 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
      *
      * @return \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer
      */
-    protected function mapBillingCustomer($requestTransfer, $quoteTransfer)
+    protected function mapBillingCustomer(
+        ArvatoRssRiskCheckRequestTransfer $requestTransfer,
+        QuoteTransfer $quoteTransfer
+    )
     {
-        $billingCustomerTransfer = new ArvatoRssBillingCustomerTransfer();
-        $address = new ArvatoRssCustomerAddressTransfer();
-        $customer = $quoteTransfer->getCustomer();
-        $billingAddress = $quoteTransfer->getBillingAddress();
-
-        $address->setCountry($this->iso3166Converter->iso2ToNumeric($billingAddress->getIso2Code()));
-        $address->setCity($billingAddress->getCity());
-        $address->setStreet($billingAddress->getAddress1());
-        $address->setStreetNumber($billingAddress->getAddress2());
-        $address->setZipCode($billingAddress->getZipCode());
-        $billingCustomerTransfer->setAddress($address);
-        $billingCustomerTransfer->setFirstName($customer->getFirstName());
-        $billingCustomerTransfer->setLastName($customer->getLastName());
-        $billingCustomerTransfer->setSalutation($customer->getSalutation());
-        $billingCustomerTransfer->setEmail($customer->getEmail());
-        $billingCustomerTransfer->setTelephoneNumber($customer->getPhone());
-
-        $dateOfBirth = $this->prepareDateOfBirth($customer->getDateOfBirth());
-
-        $billingCustomerTransfer->setBirthDay($dateOfBirth);
-
+        $billingCustomerTransfer = $this->prepareBillingCustomer($quoteTransfer);
         $requestTransfer->setBillingCustomer($billingCustomerTransfer);
 
         return $requestTransfer;
@@ -130,7 +123,10 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
      *
      * @return \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer
      */
-    protected function mapOrder($requestTransfer, $quoteTransfer)
+    protected function mapOrder(
+        ArvatoRssRiskCheckRequestTransfer $requestTransfer,
+        QuoteTransfer $quoteTransfer
+    )
     {
         $orderTransfer = new ArvatoRssOrderTransfer();
 
@@ -139,22 +135,75 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
             $this->moneyFacade->convertIntegerToDecimal($quoteTransfer->getTotals()->getGrandTotal())
         );
         $orderTransfer->setTotalOrderValue(
-            $this->moneyFacade->convertIntegerToDecimal($quoteTransfer->getTotals()->getGrandTotal())
+            $this->moneyFacade->convertIntegerToDecimal($quoteTransfer->getTotals()->getSubtotal())
         );
         foreach ($quoteTransfer->getItems() as $item) {
-            $itemTransfer = new ArvatoRssOrderItemTransfer();
-            $itemTransfer->setUnitPrice(
-                $this->moneyFacade->convertIntegerToDecimal($item->getUnitPrice())
-            );
-            $itemTransfer->setProductNumber($item->getSku());
-            $itemTransfer->setUnitCount($item->getQuantity());
-            $itemTransfer->setProductGroupId(1);
+            $itemTransfer = $this->prepareOrderItem($item);
             $orderTransfer->addItem($itemTransfer);
         }
-
         $requestTransfer->setOrder($orderTransfer);
 
         return $requestTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ItemTransfer $item
+     *
+     * @return \Generated\Shared\Transfer\ItemTransfer
+     */
+    protected function prepareOrderItem(ItemTransfer $item)
+    {
+        $itemTransfer = new ArvatoRssOrderItemTransfer();
+        $itemTransfer->setUnitPrice(
+            $this->moneyFacade->convertIntegerToDecimal($item->getUnitPrice())
+        );
+        $itemTransfer->setProductNumber($item->getSku());
+        $itemTransfer->setUnitCount($item->getQuantity());
+        $itemTransfer->setProductGroupId(static::PRODUCT_GROUP_ID);
+
+        return $itemTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\AddressTransfer $billingAddress
+     *
+     * @return \Generated\Shared\Transfer\ArvatoRssCustomerAddressTransfer
+     */
+    protected function prepareAddressTransfer(AddressTransfer $billingAddress)
+    {
+        $address = new ArvatoRssCustomerAddressTransfer();
+        $address->setCountry($this->iso3166Converter->iso2ToNumeric($billingAddress->getIso2Code()));
+        $address->setCity($billingAddress->getCity());
+        $address->setStreet($billingAddress->getAddress1());
+        $address->setStreetNumber($billingAddress->getAddress2());
+        $address->setZipCode($billingAddress->getZipCode());
+
+        return $address;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     *
+     * @return \Generated\Shared\Transfer\ArvatoRssBillingCustomerTransfer
+     */
+    protected function prepareBillingCustomer(QuoteTransfer $quoteTransfer)
+    {
+        $customer = $quoteTransfer->getCustomer();
+        $billingAddress = $quoteTransfer->getBillingAddress();
+
+        $billingCustomerTransfer = new ArvatoRssBillingCustomerTransfer();
+        $address = $this->prepareAddressTransfer($billingAddress);
+        $billingCustomerTransfer->setAddress($address);
+        $billingCustomerTransfer->setFirstName($billingAddress->getFirstName());
+        $billingCustomerTransfer->setLastName($billingAddress->getLastName());
+        $billingCustomerTransfer->setSalutation(strtoupper($customer->getSalutation()));
+        $billingCustomerTransfer->setEmail($customer->getEmail());
+        $billingCustomerTransfer->setTelephoneNumber($billingAddress->getPhone());
+
+        $dateOfBirth = $this->prepareDateOfBirth($customer->getDateOfBirth());
+        $billingCustomerTransfer->setBirthDay($dateOfBirth);
+
+        return $billingCustomerTransfer;
     }
 
     /**
