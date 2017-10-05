@@ -39,15 +39,11 @@
     },
     {
       "type": "git",
-      "url": "git@github.com:spryker/architecture-sniffer.git"
+      "url": "git@github.com:spryker/code-sniffer.git"
     },
     {
       "type": "composer",
       "url": "https://code.spryker.com/repo/private"
-    },
-    {
-      "type": "git",
-      "url": "https://github.com/spryker-eco/arvato-rss.git"
     }
   ],
   "config": {
