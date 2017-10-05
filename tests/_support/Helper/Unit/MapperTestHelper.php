@@ -7,24 +7,21 @@
 
 namespace Helper\Unit;
 
-use ArrayObject;
 use Codeception\Module;
-use Generated\Shared\Transfer\AddressTransfer;
-use Generated\Shared\Transfer\CustomerTransfer;
-use Generated\Shared\Transfer\ItemTransfer;
-use Generated\Shared\Transfer\QuoteTransfer;
-use Generated\Shared\Transfer\TotalsTransfer;
 use SprykerEco\Service\ArvatoRss\Iso3166Converter;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapper;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckResponseMapper;
+use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface;
 
 class MapperTestHelper extends Module
 {
 
     /**
+     * @param \SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface $moneyFacade
+     *
      * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapper
      */
-    public function createRequestMapper($moneyFacade)
+    public function createRequestMapper(ArvatoRssToMoneyInterface $moneyFacade)
     {
         return new RiskCheckRequestMapper(
             $moneyFacade,

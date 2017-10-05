@@ -1,6 +1,7 @@
 <?php
 namespace Helper;
 
+use ArrayObject;
 use Codeception\Module;
 use Generated\Shared\Transfer\AddressTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
@@ -16,7 +17,7 @@ class QuoteHelper extends Module
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function createQuoteTransfer(\ArrayObject $data = null)
+    public function createQuoteTransfer(ArrayObject $data = null)
     {
         $quoteTransfer = new QuoteTransfer();
         if ($data) {

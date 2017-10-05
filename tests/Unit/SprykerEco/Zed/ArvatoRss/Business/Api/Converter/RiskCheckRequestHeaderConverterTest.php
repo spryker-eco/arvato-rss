@@ -24,7 +24,6 @@ class RiskCheckRequestHeaderConverterTest extends Test
     {
         $converter = new RiskCheckRequestHeaderConverter();
         $requestTranfer = $this->createRequestTransfer();
-        //$expected = $this->createExpectedResult($requestTranfer);
         $actual = $converter->convert($requestTranfer);
 
         $this->assertInstanceOf(SoapHeader::class, $actual);

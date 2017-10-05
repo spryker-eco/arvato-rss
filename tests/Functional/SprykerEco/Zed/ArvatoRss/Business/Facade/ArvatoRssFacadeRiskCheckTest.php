@@ -2,9 +2,10 @@
 
 namespace Functional\SprykerEco\Zed\ArvatoRss\Business\Facade;
 
+use ArrayObject;
+use Codeception\TestCase\Test;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer;
 use Helper\QuoteHelper;
-use Codeception\TestCase\Test;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\SoapApiAdapter;
@@ -15,16 +16,18 @@ class ArvatoRssFacadeRiskCheckTest extends Test
 {
 
     /**
-     * @var $quoteHelper
+     * @var \Helper\QuoteHelper $quoteHelper
      */
     protected $quoteHelper;
 
     /**
      * @dataProvider quoteDataProvider
      *
+     * @param \ArrayObject $data
+     *
      * @return void
      */
-    public function testPerformRiskCheck($data)
+    public function testPerformRiskCheck(ArrayObject $data)
     {
         $quoteTransfer = $this->quoteHelper->createQuoteTransfer($data);
         $facade = new ArvatoRssFacade();
@@ -42,7 +45,7 @@ class ArvatoRssFacadeRiskCheckTest extends Test
     {
         return [
             [
-                new \ArrayObject(
+                new ArrayObject(
                     [
                         'clientId' => Config::get(ArvatoRssConstants::ARVATORSS)[ArvatoRssConstants::ARVATORSS_CLIENTID],
                         'authorisation' => Config::get(ArvatoRssConstants::ARVATORSS)[ArvatoRssConstants::ARVATORSS_PASSWORD],
@@ -62,7 +65,7 @@ class ArvatoRssFacadeRiskCheckTest extends Test
                         'unitPrice' => 12000,
                         'unitCount' => 1,
                     ],
-                    \ArrayObject::ARRAY_AS_PROPS
+                    ArrayObject::ARRAY_AS_PROPS
                 )
             ],
         ];
