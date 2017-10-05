@@ -16,7 +16,7 @@
     "spryker/code-sniffer": "*"
   },
   "description": "Arvato risk security check module",
-  "license": "proprietary",
+  "license": "MIT",
   "minimum-stability": "dev",
   "prefer-stable": true,
   "config": {
