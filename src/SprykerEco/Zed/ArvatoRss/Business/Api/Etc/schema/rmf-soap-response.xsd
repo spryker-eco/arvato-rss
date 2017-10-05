@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://schemas.xmlsoap.org/soap/envelope/"
+	xmlns:tns="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v10="urn:risk-solution-services-types:v1.0" xmlns:v11="urn:risk-solution-services-types:v1.1"
+	xmlns:v20="urn:risk-solution-services-types:v2.0" xmlns:v21="urn:risk-solution-services-types:v2.1" elementFormDefault="qualified">
+
+	<xs:import namespace="urn:risk-solution-services-types:v1.0" schemaLocation="v1.0/risk-solution-services-types.xsd" />
+	<xs:import namespace="urn:risk-solution-services-types:v1.1" schemaLocation="v1.1/risk-solution-services-types.xsd" />
+	<xs:import namespace="urn:risk-solution-services-types:v2.0" schemaLocation="v2.0/risk-solution-services-types.xsd" />
+	<xs:import namespace="urn:risk-solution-services-types:v2.1" schemaLocation="v2.1/risk-solution-services-types.xsd" />
+
+	<xs:element name="Envelope" type="tns:SoapEnvelopeType" />
+
+	<xs:complexType name="SoapEnvelopeType">
+		<xs:sequence>
+			<xs:element name="Header" />
+			<xs:element name="Body" type="tns:SoapBodyType" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="SoapBodyType">
+		<xs:choice>
+			<xs:choice>
+				<xs:element ref="v10:RiskCheckResponse" />
+				<xs:element ref="v10:RiskAccountCheckResponse" />
+				<xs:element ref="v10:AddressCheckResponse" />
+				<xs:element ref="v10:AccountCheckResponse" />
+				<xs:element ref="v10:StoreOrderResponse" />
+
+				<xs:element ref="v11:RiskCheckResponse" />
+				<xs:element ref="v11:RiskAccountCheckResponse" />
+				<xs:element ref="v11:AddressCheckResponse" />
+				<xs:element ref="v11:AccountCheckResponse" />
+				<xs:element ref="v11:StoreOrderResponse" />
+
+				<xs:element ref="v20:RiskCheckResponse" />
+				<xs:element ref="v20:RiskAccountCheckResponse" />
+				<xs:element ref="v20:AddressCheckResponse" />
+				<xs:element ref="v20:AccountCheckResponse" />
+				<xs:element ref="v20:StoreOrderResponse" />
+
+				<xs:element ref="v21:RiskCheckResponse" />
+				<xs:element ref="v21:RiskAccountCheckResponse" />
+				<xs:element ref="v21:AddressCheckResponse" />
+				<xs:element ref="v21:AccountCheckResponse" />
+				<xs:element ref="v21:StoreOrderResponse" />
+			</xs:choice>
+			<xs:choice>
+				<xs:element ref="v10:RmfException" />
+				<xs:element ref="v10:RmfAuthenticationException" />
+				<xs:element ref="v10:RmfAccessDeniedException" />
+				<xs:element ref="v10:RmfIllegalArgumentException" />
+
+				<xs:element ref="v11:RmfException" />
+				<xs:element ref="v11:RmfAuthenticationException" />
+				<xs:element ref="v11:RmfAccessDeniedException" />
+				<xs:element ref="v11:RmfIllegalArgumentException" />
+
+				<xs:element ref="v20:RmfException" />
+				<xs:element ref="v20:RmfAuthenticationException" />
+				<xs:element ref="v20:RmfAccessDeniedException" />
+				<xs:element ref="v20:RmfIllegalArgumentException" />
+
+				<xs:element ref="v21:RmfException" />
+				<xs:element ref="v21:RmfAuthenticationException" />
+				<xs:element ref="v21:RmfAccessDeniedException" />
+				<xs:element ref="v21:RmfIllegalArgumentException" />
+			</xs:choice>
+		</xs:choice>
+	</xs:complexType>
+
+</xs:schema>
