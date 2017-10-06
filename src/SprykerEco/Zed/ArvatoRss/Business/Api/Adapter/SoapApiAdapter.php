@@ -20,9 +20,6 @@ use SprykerEco\Zed\ArvatoRss\Business\Api\Exception\ArvatoRssRiskCheckApiExcepti
 class SoapApiAdapter implements ApiAdapterInterface
 {
 
-    /**
-     * @const WSDL_PATH
-     */
     const WSDL_PATH = __DIR__ . "/../Etc/risk-solution-services.v2.1.wsdl";
 
     /**
