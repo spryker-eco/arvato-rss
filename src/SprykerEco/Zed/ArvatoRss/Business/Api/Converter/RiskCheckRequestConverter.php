@@ -20,15 +20,12 @@ class RiskCheckRequestConverter implements RiskCheckRequestConverterInterface
      */
     public function convert(ArvatoRssRiskCheckRequestTransfer $arvatoRssRiskCheckRequestTransfer)
     {
-        $result = [];
 
         $billingCustomer = $this->convertBillingCustomer($arvatoRssRiskCheckRequestTransfer);
         $order = $this->convertOrder($arvatoRssRiskCheckRequestTransfer);
 
-        $result = array_merge($result, $billingCustomer);
-        $result = array_merge($result, $order);
-
-        return $result;
+        //Merge arrays.
+        return $billingCustomer + $order;
     }
 
     /**
