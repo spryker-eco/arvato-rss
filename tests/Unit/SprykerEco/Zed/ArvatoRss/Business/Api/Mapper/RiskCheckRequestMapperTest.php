@@ -70,8 +70,8 @@ class RiskCheckRequestMapperTest extends AbstractMapperTest
             [
                 new ArrayObject(
                     [
-                        'clientId' => Config::get(ArvatoRssConstants::ARVATORSS)[ArvatoRssConstants::ARVATORSS_CLIENTID],
-                        'authorisation' => Config::get(ArvatoRssConstants::ARVATORSS)[ArvatoRssConstants::ARVATORSS_PASSWORD],
+                        'clientId' => Config::get(ArvatoRssConstants::ARVATORSS_CLIENTID),
+                        'authorisation' => Config::get(ArvatoRssConstants::ARVATORSS_PASSWORD),
                         'country' => 'DE',
                         'city' => 'Berlin',
                         'street' => 'Europa-Allee 50',

@@ -90,10 +90,10 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
         $identificationTransfer = new ArvatoRssIdentificationRequestTransfer();
 
         $identificationTransfer->setClientId(
-            Config::get(ArvatoRssConstants::ARVATORSS)[ArvatoRssConstants::ARVATORSS_CLIENTID]
+            Config::get(ArvatoRssConstants::ARVATORSS_CLIENTID)
         );
         $identificationTransfer->setAuthorisation(
-            Config::get(ArvatoRssConstants::ARVATORSS)[ArvatoRssConstants::ARVATORSS_PASSWORD]
+            Config::get(ArvatoRssConstants::ARVATORSS_PASSWORD)
         );
         $requestTransfer->setIdentification($identificationTransfer);
 
