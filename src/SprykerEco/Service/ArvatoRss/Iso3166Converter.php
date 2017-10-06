@@ -12,14 +12,7 @@ use Spryker\Service\Kernel\AbstractService;
 class Iso3166Converter extends AbstractService implements Iso3166ConverterInterface
 {
 
-    /**
-     * @const string ISO2_KEY
-     */
     const ISO2_KEY = 'alpha2';
-
-    /**
-     * @const string ISO3166_KEY
-     */
     const ISO3166_KEY = 'numeric';
 
     /**
