@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 72523 $ -->
+<!-- $Date: 2013-07-02 09:13:04 +0200 (Di, 02 Jul 2013) $ -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://rmf.arvato-infoscore.de/RMF_V2.1" targetNamespace="http://rmf.arvato-infoscore.de/RMF_V2.1"
+	elementFormDefault="qualified">
+	<xs:include schemaLocation="rmf-common-types.xsd" />
+	<!-- REQUEST PART -->
+	<xs:complexType name="RequestType">
+		<xs:sequence>
+			<xs:element name="Identification" type="tns:IdentificationType" />
+			<xs:choice>
+				<xs:element name="RiskCheck" type="tns:RiskCheckType" />
+				<xs:element name="RiskAccountCheck" type="tns:RiskAccountCheckType" />
+				<xs:element name="AddressCheck" type="tns:AddressCheckType" />
+				<xs:element name="AccountCheck" type="tns:AccountCheckType" />
+				<xs:element name="StoreOrder" type="tns:StoreOrderType" />
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="IdentificationType">
+		<xs:sequence>
+			<xs:element name="ClientID" type="xs:int" />
+			<xs:element name="SubClientID" type="tns:S30" minOccurs="0" />
+			<xs:element name="Authorisation" type="tns:S30" />
+			<xs:element name="ClientTransactionID" type="tns:S100"
+				minOccurs="0" />
+			<xs:element name="ProcessControl" type="tns:S10"
+				minOccurs="0" />
+			<xs:element name="CommunicationToken" type="xs:long"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DeviceIdentificationType">
+		<xs:annotation>
+			<xs:documentation>
+				Der Typ DeviceIdentification enthaelt optionale
+				Informationen, die zur
+				eindeutigen Geraete-Identifikation dienen:
+				HashID: enthaelt verschiedene Geraeteinformationen
+				SessionIDAddegree: SessionID von Addegree zu Recherchezwecken
+				ReasonCodeAddegree: Bewertungscode von Addegree
+				IPAddress: IP-Adresse
+				des Endanwenders (Shopkunden)
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="HashID" type="tns:S100" minOccurs="0" />
+			<xs:element name="SessionIDAddegree" type="tns:S100"
+				minOccurs="0" />
+			<xs:element name="ReasonCodeAddegree" type="tns:ZeroToThousandType"
+				minOccurs="0" />
+			<xs:element name="HardwareScore" type="tns:ZeroToThousandType"
+				minOccurs="0" />
+			<xs:element name="IPAddress" type="tns:S50" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CustomerIndividualScoringType">
+		<xs:sequence>
+			<xs:element name="RiskValue" type="tns:RiskValueType"
+				minOccurs="0" />
+			<xs:element name="RiskGroup" type="tns:RiskGroupType"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="RiskCheckResponseCustomerType">
+		<xs:sequence>
+			<xs:element name="BillingCustomer" type="tns:RiskCheckCustomerType" />
+			<xs:element name="DeliveryCustomer" type="tns:RiskCheckCustomerType"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RiskCheckType">
+		<xs:complexContent>
+			<xs:extension base="tns:RiskCheckResponseCustomerType">
+				<xs:sequence>
+					<xs:element name="Order" type="tns:RiskCheckOrderType"
+						minOccurs="0" />
+					<xs:element name="DeviceIdentification" type="tns:DeviceIdentificationType"
+						minOccurs="0" />
+					<xs:element name="CustomerIndividualScoring" type="tns:CustomerIndividualScoringType"
+						minOccurs="0" />
+					<xs:element name="RequestTimestamp" type="xs:dateTime"
+						minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Zeitstempel der Requesterzeugung beim Kunden
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RiskAccountCheckType">
+		<xs:complexContent>
+			<xs:extension base="tns:RiskCheckResponseCustomerType">
+				<xs:sequence>
+					<xs:element name="Bank" type="tns:BankType" minOccurs="0" />
+					<xs:element name="Order" type="tns:RiskCheckOrderType"
+						minOccurs="0" />
+					<xs:element name="DeviceIdentification" type="tns:DeviceIdentificationType"
+						minOccurs="0" />
+					<xs:element name="CustomerIndividualScoring" type="tns:CustomerIndividualScoringType"
+						minOccurs="0" />
+					<xs:element name="RequestTimestamp" type="xs:dateTime"
+						minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Zeitstempel der Requesterzeugung beim Kunden
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="StoreOrderOrderType">
+		<xs:sequence>
+			<xs:element name="OrderNumber" type="tns:S20" />
+			<xs:element name="DebitorNumber" type="tns:S100" />
+			<xs:element name="PaymentType" type="tns:PaymentType" />
+			<xs:element name="Currency" type="tns:CurrencyCodeType" />
+			<xs:element name="GrossTotalBill" type="tns:MoneyType" />
+			<xs:element name="TotalOrderValue" type="tns:MoneyType" />
+			<xs:element name="Item" type="tns:ItemType" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="RateInfo" type="tns:RateInfoType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RiskCheckOrderType">
+		<xs:sequence>
+			<xs:element name="OrderChannel" type="tns:OrderChannelEnum"
+				minOccurs="0" />
+			<xs:element name="DeliveryType" type="tns:CourierEnum"
+				minOccurs="0" />
+			<xs:element name="RegisteredOrder" type="xs:boolean" />
+			<xs:element name="PaymentType" type="tns:PaymentType"
+				minOccurs="0" />
+			<xs:element name="Currency" type="tns:CurrencyCodeType" />
+			<xs:element name="GrossTotalBill" type="tns:MoneyType" />
+			<xs:element name="TotalOrderValue" type="tns:MoneyType" />
+			<xs:element name="Item" type="tns:ItemType" minOccurs="0"
+				maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="PaymentType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="OI" />
+			<xs:enumeration value="DD" />
+			<xs:enumeration value="CC" />
+			<xs:enumeration value="IP" />
+			<xs:enumeration value="COD" />
+			<xs:enumeration value="AP" />
+			<xs:enumeration value="EP" />
+			<xs:enumeration value="other" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="ItemType">
+		<xs:sequence>
+			<xs:element name="ProductNumber" type="tns:S100" />
+			<xs:element name="ProductGroupId" type="xs:int" />
+			<xs:element name="UnitPrice" type="tns:MoneyType" />
+			<xs:element name="UnitCount" type="tns:UnitCountType" />
+			<xs:element name="Remarks" type="tns:S100" minOccurs="0" />
+		</xs:sequence>
+		<xs:attribute name="pos" type="xs:int" use="optional">
+			<xs:annotation>
+				<xs:documentation>Position des Artikels im Warenkorb
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="AccountCheckType">
+		<xs:sequence>
+			<xs:element name="Bank" type="tns:BankType" />
+			<xs:element name="DeviceIdentification" type="tns:DeviceIdentificationType"
+				minOccurs="0" />
+			<xs:element name="RequestTimestamp" type="xs:dateTime"
+				minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Zeitstempel der Requesterzeugung beim Kunden
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="StoreOrderType">
+		<xs:sequence>
+			<xs:element name="Order" type="tns:StoreOrderOrderType" />
+			<xs:element name="DeviceIdentification" type="tns:DeviceIdentificationType"
+				minOccurs="0" />
+			<xs:element name="RequestTimestamp" type="xs:dateTime"
+				minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Zeitstempel der Requesterzeugung beim Kunden
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- RESPONSE PART -->
+	<xs:complexType name="AnalysisHeadGroupType">
+		<xs:sequence>
+			<xs:element name="System" type="tns:SystemType" />
+			<xs:element name="Decision" type="tns:AnalysisDecisionType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PersonDataGroupType">
+		<xs:sequence>
+			<xs:element name="PersonIdentification" type="tns:PersonIdentificationResponseType"
+				minOccurs="0" />
+			<xs:element name="AddressValidationResponse" type="tns:AddressValidationResponseType"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ResponseType">
+		<xs:choice>
+			<xs:element name="RiskCheckResponse" type="tns:RiskCheckResponseType" />
+			<xs:element name="RiskAccountCheckResponse" type="tns:RiskAccountCheckResponseType" />
+			<xs:element name="AddressCheckResponse" type="tns:AddressCheckResponseType" />
+			<xs:element name="AccountCheckResponse" type="tns:AccountCheckResponseType" />
+			<xs:element name="StoreOrderResponse" type="tns:StoreOrderResponseType" />
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="RiskCheckResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:AnalysisHeadGroupType">
+				<xs:sequence>
+					<xs:element name="Details" type="tns:RiskCheckDetailsType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RiskAccountCheckResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:AnalysisHeadGroupType">
+				<xs:sequence>
+					<xs:element name="Details" type="tns:RiskAccountCheckDetailsType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="AddressCheckResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:AnalysisHeadGroupType">
+				<xs:sequence>
+					<xs:element name="Details" type="tns:AddressCheckDetailsType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="StoreOrderResponseType">
+		<xs:sequence>
+			<xs:element name="System" type="tns:SystemType" />
+			<xs:element name="Decision" type="tns:SimpleDecisionType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AccountCheckResponseType">
+		<xs:complexContent>
+			<xs:extension base="tns:StoreOrderResponseType">
+				<xs:sequence>
+					<xs:element name="Details" type="tns:AccountDetailsType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RiskCheckDetailsType">
+		<xs:sequence>
+			<xs:element name="BillingCustomerResult" type="tns:RiskCustomerResultType" />
+			<xs:element name="DeliveryCustomerResult" type="tns:RiskCustomerResultType"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RiskAccountCheckDetailsType">
+		<xs:complexContent>
+			<xs:extension base="tns:RiskCheckDetailsType">
+				<xs:sequence>
+					<xs:element name="AccountResult" type="tns:AccountResultType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SystemType">
+		<xs:sequence>
+			<xs:element name="TransactionId" type="xs:int" />
+			<xs:element name="StatusCode" type="tns:N3" />
+			<xs:element name="StatusDescription" type="tns:S100" />
+			<xs:element name="RequestEntryTimestamp" type="xs:dateTime"
+				minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						Zeitpunkt des Eingangs der Anfrage im System
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ResponseExitTimestamp" type="xs:dateTime"
+				minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						Zeitpunkt des Ausgangs der Antwort aus dem System
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SimpleDecisionType">
+		<xs:sequence>
+			<xs:element name="Result" type="tns:S30" />
+			<xs:element name="ActionCode" type="tns:S30" />
+			<xs:element name="ResultCode" type="tns:S30" />
+			<xs:element name="ResultText" type="tns:S50" />
+			<xs:element name="RateRuntimeClasses" type="tns:RateRuntimeClasses" minOccurs="0"/>	
+			<xs:element name="CommunicationToken" type="xs:long" minOccurs="0" />
+			<xs:element name="IsNewCustomer" type="xs:boolean" />
+			<xs:element name="Reasons" type="tns:ReasonsType" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AnalysisDecisionType">
+		<xs:complexContent>
+			<xs:extension base="tns:SimpleDecisionType">
+				<xs:sequence>
+					<xs:element name="RiskAnalysis" type="tns:RiskAnalysis"
+						minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ReasonsType">
+		<xs:sequence>
+			<xs:element name="Reason" type="tns:ReasonType" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ReasonType">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="name" type="tns:S30" />
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="RiskAnalysis">
+		<xs:sequence>
+			<xs:element name="ScoreValue" type="tns:N_MAX_5"
+				minOccurs="0" />
+			<xs:element name="ScoreFeature" type="tns:ScoreFeatureType"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ScoreFeatureType">
+		<xs:sequence>
+			<xs:element name="Name" type="tns:S30" />
+			<xs:element name="Value" type="tns:S50" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RiskCustomerResultType">
+		<xs:sequence>
+			<xs:element name="RequestData" type="tns:RiskCheckCustomerType" />
+			<xs:element name="ServiceResults" type="tns:RiskServiceResultsType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AddressCustomerResultType">
+		<xs:sequence>
+			<xs:element name="RequestData" type="tns:AddressCheckCustomerType" />
+			<xs:element name="ServiceResults" type="tns:AddressServiceResultsType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RiskServiceResultsType">
+		<xs:complexContent>
+			<xs:extension base="tns:PersonDataGroupType">
+				<xs:sequence>
+					<xs:element name="NegPosListResponse" minOccurs="0" />
+					<xs:element name="IcdResponse" minOccurs="0" />
+					<xs:element name="SchufaResponse" minOccurs="0" />
+					<xs:element name="AccumioResponse" minOccurs="0" />
+					<xs:element name="BuergelResponse" minOccurs="0" />
+					<xs:element name="ExperianResponse" minOccurs="0" />
+					<xs:element name="DeltavistaResponse" minOccurs="0" />
+					<xs:element name="KlicktelResponse" minOccurs="0" />
+					<xs:element name="IdCheckerResponse" minOccurs="0" />
+					<xs:element name="CrifResponse" minOccurs="0" />
+					<xs:element name="AzPickResponse" minOccurs="0" />
+					<xs:element name="PostDirektResponse" minOccurs="0" />
+					<xs:element name="VelocityCheckResponse" minOccurs="0" />
+					<xs:element name="CallCreditResponse" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="AddressServiceResultsType">
+		<xs:complexContent>
+			<xs:extension base="tns:PersonDataGroupType">
+				<xs:sequence>
+					<xs:element name="NegPosListResponse" minOccurs="0" />
+					<xs:element name="VelocityCheckResponse" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PersonIdentificationResponseType">
+		<xs:sequence>
+			<xs:element name="RMFCustomerId" type="xs:int" />
+			<xs:element name="IsNewCustomerRequest" type="xs:boolean" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PhoneValidationType">
+		<xs:sequence>
+			<xs:element name="Validated" type="xs:boolean" />
+			<xs:element name="TelephoneNumber" type="tns:PhoneNumberType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AddressValidationResponseType">
+		<xs:sequence>
+			<xs:element name="Validated" type="xs:boolean" />
+			<xs:element name="ReturnCode" type="tns:S10" />
+			<xs:element name="Street" type="tns:S100" />
+			<xs:element name="StreetNumber" type="tns:S10" minOccurs="0" />
+			<xs:element name="StreetNumberAdditional" type="tns:S10"
+				minOccurs="0" />
+			<xs:element name="ZipCode" type="tns:S10" />
+			<xs:element name="City" type="tns:S100" />
+			<xs:element name="Country" type="tns:N3" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AccountResultType">
+		<xs:sequence>
+			<xs:element name="RequestData" type="tns:AccountRequestDataType" />
+			<xs:element name="ServiceResults" type="tns:AccountServiceResultsType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AccountRequestDataType">
+		<xs:sequence>
+			<xs:element name="Bank" type="tns:BankType" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AccountServiceResultsType">
+		<xs:sequence>
+			<xs:element name="RppResponse" minOccurs="0" />
+			<xs:element name="NegPosListResponse" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AccountDetailsType">
+		<xs:sequence>
+			<xs:element name="AccountResult" type="tns:AccountResultType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AddressCheckDetailsType">
+		<xs:sequence>
+			<xs:element name="BillingCustomerResult" type="tns:AddressCustomerResultType" />
+			<xs:element name="DeliveryCustomerResult" type="tns:AddressCustomerResultType"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<!-- EXCEPTION PART -->
+	<xs:complexType name="RmfExceptionInfoType">
+		<xs:sequence>
+			<xs:element name="TransactionId" type="xs:int" />
+			<xs:element name="ErrorCode" type="tns:N3" />
+			<xs:element name="Description" type="tns:S50" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RmfExceptionType">
+		<xs:complexContent>
+			<xs:extension base="tns:RmfExceptionInfoType" />
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RmfAuthenticationExceptionType">
+		<xs:complexContent>
+			<xs:extension base="tns:RmfExceptionInfoType" />
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RmfAccessDeniedExceptionType">
+		<xs:complexContent>
+			<xs:extension base="tns:RmfExceptionInfoType" />
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RmfIllegalArgumentExceptionType">
+		<xs:complexContent>
+			<xs:extension base="tns:RmfExceptionInfoType" />
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="EngineAnswerType">
+		<xs:sequence>
+			<xs:element name="TransactionId" type="xs:int" />
+			<xs:element name="EngineData" type="tns:EngineDataType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EngineDataType">
+		<xs:sequence>
+			<xs:element name="Error" type="tns:ErrorType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ErrorType">
+		<xs:sequence>
+			<xs:element name="ErrorCode1" type="tns:N3" />
+			<xs:element name="Description" type="tns:S50" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AddressCheckType">
+		<xs:sequence>
+			<xs:element name="BillingCustomer" type="tns:AddressCheckCustomerType" />
+			<xs:element name="DeliveryCustomer" type="tns:AddressCheckCustomerType"
+				minOccurs="0" />
+			<xs:element name="DeviceIdentification" type="tns:DeviceIdentificationType"
+				minOccurs="0" />
+			<xs:element name="RequestTimestamp" type="xs:dateTime"
+				minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Zeitstempel der Requesterzeugung beim Kunden
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RateInfoType">
+		<xs:sequence>
+			<xs:element name="RateNumber" type="tns:NUM_1_999"/>
+			<xs:element name="RateValue" type="tns:PositiveMoneyType"/>		
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RateRuntimeClasses">
+		<xs:sequence>
+			<xs:element name="RuntimeClass1" type="tns:NUM_1_999" minOccurs="0"/>
+			<xs:element name="RuntimeClass2" type="tns:NUM_1_999" minOccurs="0"/>
+			<xs:element name="RuntimeClass3" type="tns:NUM_1_999" minOccurs="0"/>
+			<xs:element name="RuntimeClass4" type="tns:NUM_1_999" minOccurs="0"/>
+			<xs:element name="RuntimeClass5" type="tns:NUM_1_999" minOccurs="0"/>
+			<xs:element name="RuntimeClass6" type="tns:NUM_1_999" minOccurs="0"/>
+			<xs:element name="RuntimeClass7" type="tns:NUM_1_999" minOccurs="0"/>
+			<xs:element name="RuntimeClass8" type="tns:NUM_1_999" minOccurs="0"/>
+			<xs:element name="RuntimeClass9" type="tns:NUM_1_999" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>	
+</xs:schema>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://schemas.xmlsoap.org/soap/envelope/"
+	xmlns:tns="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v10="urn:risk-solution-services-types:v1.0" xmlns:v11="urn:risk-solution-services-types:v1.1"
+	xmlns:v20="urn:risk-solution-services-types:v2.0" xmlns:v21="urn:risk-solution-services-types:v2.1" elementFormDefault="qualified">
+
+	<xs:import namespace="urn:risk-solution-services-types:v1.0" schemaLocation="v1.0/risk-solution-services-types.xsd" />
+	<xs:import namespace="urn:risk-solution-services-types:v1.1" schemaLocation="v1.1/risk-solution-services-types.xsd" />
+	<xs:import namespace="urn:risk-solution-services-types:v2.0" schemaLocation="v2.0/risk-solution-services-types.xsd" />
+	<xs:import namespace="urn:risk-solution-services-types:v2.1" schemaLocation="v2.1/risk-solution-services-types.xsd" />
+
+	<xs:element name="Envelope" type="tns:SoapEnvelopeType" />
+
+	<xs:complexType name="SoapEnvelopeType">
+		<xs:sequence>
+			<xs:element name="Header" type="tns:SoapHeaderType" />
+			<xs:element name="Body" type="tns:SoapBodyType" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="SoapHeaderType">
+		<xs:sequence>
+			<xs:choice>
+				<xs:element ref="v10:Identification" />
+				<xs:element ref="v11:Identification" />
+				<xs:element ref="v20:Identification" />
+				<xs:element ref="v21:Identification" />
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="SoapBodyType">
+		<xs:choice>
+			<xs:element ref="v10:RiskCheck" />
+			<xs:element ref="v10:RiskAccountCheck" />
+			<xs:element ref="v10:AddressCheck" />
+			<xs:element ref="v10:AccountCheck" />
+			<xs:element ref="v10:StoreOrder" />
+
+			<xs:element ref="v11:RiskCheck" />
+			<xs:element ref="v11:RiskAccountCheck" />
+			<xs:element ref="v11:AddressCheck" />
+			<xs:element ref="v11:AccountCheck" />
+			<xs:element ref="v11:StoreOrder" />
+
+			<xs:element ref="v20:RiskCheck" />
+			<xs:element ref="v20:RiskAccountCheck" />
+			<xs:element ref="v20:AddressCheck" />
+			<xs:element ref="v20:AccountCheck" />
+			<xs:element ref="v20:StoreOrder" />
+
+			<xs:element ref="v21:RiskCheck" />
+			<xs:element ref="v21:RiskAccountCheck" />
+			<xs:element ref="v21:AddressCheck" />
+			<xs:element ref="v21:AccountCheck" />
+			<xs:element ref="v21:StoreOrder" />
+		</xs:choice>
+	</xs:complexType>
+
+</xs:schema>

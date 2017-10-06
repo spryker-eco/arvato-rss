@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 72523 $ -->
+<!-- $Date: 2013-07-02 09:13:04 +0200 (Di, 02 Jul 2013) $ -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://rmf.arvato-infoscore.de/RMF_V2.1"
+	xmlns:tns="http://rmf.arvato-infoscore.de/RMF_V2.1" elementFormDefault="qualified">
+
+	<xs:include schemaLocation="rmf-simple-types.xsd" />
+
+	<xs:complexType name="AddressType">
+		<xs:sequence>
+			<xs:element name="CareOf" type="tns:S50" minOccurs="0" />
+			<xs:element name="Street" type="tns:S100" />
+			<xs:element name="StreetNumber" type="tns:S30" minOccurs="0" />
+			<xs:element name="StreetNumberAdditional" type="tns:S10" minOccurs="0" />
+			<xs:element name="ZipCode" type="tns:S10" />
+			<xs:element name="City" type="tns:S50" />
+			<xs:element name="Country" type="tns:N3">
+				<xs:annotation>
+					<xs:documentation>ISO3166 numeric country code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CustomerType">
+		<xs:sequence>
+			<xs:element name="ClientCustomerID" type="tns:S100" minOccurs="0" />
+			<xs:element name="DebitorNumber" type="tns:S100" minOccurs="0" />
+			<xs:element name="LastName" type="tns:S50" />
+			<xs:element name="FirstName" type="tns:S50" />
+			<xs:element name="Salutation" type="tns:SalutationEnumType" minOccurs="0" />
+			<xs:element name="Title" type="tns:S30" minOccurs="0" />
+			<xs:element name="BirthDay" type="xs:date" minOccurs="0" />
+			<xs:element name="Email" type="tns:EmailAddressType" minOccurs="0" />
+			<xs:element name="TelephoneNumber" type="tns:PhoneNumberType" minOccurs="0" />
+			<xs:element name="MobileNumber" type="tns:PhoneNumberType" minOccurs="0" />
+			<xs:element name="FacsimileNumber" type="tns:PhoneNumberType" minOccurs="0" />
+			<xs:element name="Address" type="tns:AddressType" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AddressCheckCustomerType">
+		<xs:complexContent>
+			<xs:extension base="tns:CustomerType" />
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="RiskCheckCustomerType">
+		<xs:complexContent>
+			<xs:extension base="tns:AddressCheckCustomerType">
+				<xs:sequence>
+					<xs:element name="ExtendedCustomerData" type="tns:ExtendedCustomerDataType"
+						minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="ExtendedCustomerDataType">
+		<xs:sequence>
+			<xs:element name="ExistingCustomer" type="xs:boolean" minOccurs="0" />
+			<xs:element name="VerifiedCustomerIdentification" type="xs:boolean" minOccurs="0" />
+			<xs:element name="CustomerSince" type="xs:date" minOccurs="0" />
+			<xs:element name="CustomerClassification" type="tns:NUM_1_5" minOccurs="0" />
+			<xs:element name="HasCustomerCard" type="xs:boolean" minOccurs="0" />
+			<xs:element name="CustomerCardSince" type="xs:date" minOccurs="0" />
+			<xs:element name="CustomerCardClassification" type="tns:NUM_1_5" minOccurs="0" />
+			<xs:element name="CustomerAcquisitionChannel" type="tns:CustomerAcquisitionChannelEnum"
+				minOccurs="0" />
+			<xs:element name="HasMarketingOptIn" type="xs:boolean" minOccurs="0" />
+			<xs:element name="CurrentOutstandingSaldo" type="xs:float" minOccurs="0" />
+			<xs:element name="MaxOutstandingSaldo" type="xs:float" minOccurs="0" />
+			<xs:element name="MaxBalanceChange" type="xs:float" minOccurs="0" />
+			<xs:element name="CurrentDunningLevel" type="xs:int" minOccurs="0" />
+			<xs:element name="MaxDunningLevelEver" type="xs:int" minOccurs="0" />
+			<xs:element name="CurrentPaymentSaldo" type="xs:float" minOccurs="0" />
+			<xs:element name="CurrentReshipmentSaldo" type="xs:float" minOccurs="0" />
+			<xs:element name="LastPaymentReceiptDate" type="xs:date" minOccurs="0" />
+			<xs:element name="ReturnDebitNoteCount" type="xs:int" minOccurs="0" />
+			<xs:element name="LastReturnDebitDate" type="xs:date" minOccurs="0" />
+			<xs:element name="DecisionProcessData" type="tns:DecisionProcessDataType" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="DecisionProcessDataType">
+		<xs:sequence>
+			<xs:element name="Parameter" type="tns:ParameterType" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ParameterType">
+		<xs:simpleContent>
+			<xs:extension base="tns:S200">
+				<xs:attribute name="name" type="tns:S50" />
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="BankType">
+		<xs:sequence>
+			<xs:choice>
+				<xs:sequence>
+					<xs:element name="BankCode" type="tns:BankCodeType" />
+					<xs:element name="AccountNumber" type="tns:AccountNumType" />
+				</xs:sequence>
+				<xs:sequence>
+					<xs:element name="Iban" type="tns:IbanType" />
+					<xs:element name="Bic" type="tns:BicType" minOccurs="0" />
+				</xs:sequence>
+			</xs:choice>
+			<xs:element name="BankName" type="xs:string" minOccurs="0" />
+			<xs:element name="BankCountry" type="tns:N3" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>ISO3166 numeric country code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>
