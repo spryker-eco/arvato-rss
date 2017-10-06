@@ -81,7 +81,7 @@ class SoapApiAdapter implements ApiAdapterInterface
         $soapClient = new SoapClient(static::WSDL_PATH, $options);
         $soapClient->__setSoapHeaders($header);
         $soapClient->__setLocation(
-            Config::get(ArvatoRssConstants::ARVATORSS)[ArvatoRssConstants::ARVATORSS_URL]
+            Config::get(ArvatoRssConstants::ARVATORSS_URL)
         );
 
         return $soapClient;
