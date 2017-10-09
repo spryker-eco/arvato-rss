@@ -48,7 +48,7 @@ class ArvatoRssFacadeRiskCheckTest extends Test
                 new ArrayObject(
                     [
                         'clientId' => Config::get(ArvatoRssConstants::ARVATORSS)[ArvatoRssConstants::ARVATORSS_CLIENTID],
-                        'authorisation' => Config::get(ArvatoRssConstants::ARVATORSS)[ArvatoRssConstants::ARVATORSS_PASSWORD],
+                        'authorisation' => Config::get(ArvatoRssConstants::ARVATORSS)[ArvatoRssConstants::ARVATORSS_AUTHORISATION],
                         'country' => 'DE',
                         'city' => 'Berlin',
                         'street' => 'Europa-Allee 50',
