@@ -25,13 +25,8 @@ class RiskCheckRequestHeaderConverter implements RiskCheckRequestHeaderConverter
     {
         $identification = $arvatoRssRiskCheckRequestTransfer->getIdentification();
         $requestData = $this->createRequestData($identification);
-        $soapHeader = new SoapHeader(
-            ArvatoRssIdentificationApiConstants::ARVATORSS_API_IDENTIFICATION_NAMESPACE,
-            ArvatoRssIdentificationApiConstants::ARVATORSS_API_IDENTIFICATION_HEADER_NAME,
-            $requestData
-        );
 
-        return $soapHeader;
+        return $this->createRequestHeader($requestData);
     }
 
     /**
@@ -54,6 +49,21 @@ class RiskCheckRequestHeaderConverter implements RiskCheckRequestHeaderConverter
         });
 
         return $result;
+    }
+
+
+    /**
+     * @param array $requestData
+     *
+     * @return SoapHeader
+     */
+    protected function createRequestHeader($requestData)
+    {
+        return new SoapHeader(
+            ArvatoRssIdentificationApiConstants::ARVATORSS_API_IDENTIFICATION_NAMESPACE,
+            ArvatoRssIdentificationApiConstants::ARVATORSS_API_IDENTIFICATION_HEADER_NAME,
+            $requestData
+        );
     }
 
     /**
