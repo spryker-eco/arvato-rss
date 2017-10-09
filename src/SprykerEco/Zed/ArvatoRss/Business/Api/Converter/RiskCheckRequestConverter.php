@@ -20,7 +20,6 @@ class RiskCheckRequestConverter implements RiskCheckRequestConverterInterface
      */
     public function convert(ArvatoRssRiskCheckRequestTransfer $arvatoRssRiskCheckRequestTransfer)
     {
-
         $billingCustomer = $this->convertBillingCustomer($arvatoRssRiskCheckRequestTransfer);
         $order = $this->convertOrder($arvatoRssRiskCheckRequestTransfer);
 
