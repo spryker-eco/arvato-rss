@@ -32,20 +32,6 @@
       "dev-master": "1.0.x-dev"
     }
   },
-  "repositories": [
-    {
-      "type": "git",
-      "url": "git@github.com:spryker/spryker.git"
-    },
-    {
-      "type": "git",
-      "url": "git@github.com:spryker/code-sniffer.git"
-    },
-    {
-      "type": "composer",
-      "url": "https://code.spryker.com/repo/private"
-    }
-  ],
   "config": {
     "sort-packages": true
   }
