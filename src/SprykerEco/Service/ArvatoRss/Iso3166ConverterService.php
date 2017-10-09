@@ -8,8 +8,9 @@
 namespace SprykerEco\Service\ArvatoRss;
 
 use Spryker\Service\Kernel\AbstractService;
+use SprykerEco\Shared\ArvatoRss\ArvatoRssCountryConstants;
 
-class Iso3166Converter extends AbstractService implements Iso3166ConverterInterface
+class Iso3166ConverterService extends AbstractService implements Iso3166ConverterServiceInterface
 {
 
     const ISO2_KEY = 'alpha2';
@@ -24,7 +25,7 @@ class Iso3166Converter extends AbstractService implements Iso3166ConverterInterf
     {
         $key = $this->searchArrayIndex($iso2CountryCode, static::ISO2_KEY);
         if ($key !== false) {
-            return ArvatoRssServiceConstants::ISO3166[$key][static::ISO3166_KEY];
+            return ArvatoRssCountryConstants::ISO3166[$key][static::ISO3166_KEY];
         }
 
         return null;
@@ -39,7 +40,7 @@ class Iso3166Converter extends AbstractService implements Iso3166ConverterInterf
     {
         $key = $this->searchArrayIndex($iso3166CountryCode, static::ISO3166_KEY);
         if ($key !== false) {
-            return ArvatoRssServiceConstants::ISO3166[$key][static::ISO2_KEY];
+            return ArvatoRssCountryConstants::ISO3166[$key][static::ISO2_KEY];
         }
 
         return null;
@@ -53,7 +54,7 @@ class Iso3166Converter extends AbstractService implements Iso3166ConverterInterf
      */
     protected function searchArrayIndex($value, $columnName)
     {
-        return array_search($value, array_column(ArvatoRssServiceConstants::ISO3166, $columnName));
+        return array_search($value, array_column(ArvatoRssCountryConstants::ISO3166, $columnName));
     }
 
 }

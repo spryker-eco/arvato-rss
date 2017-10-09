@@ -74,7 +74,7 @@ class RiskCheckRequestConverterTest extends Test
     }
 
     /**
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverter
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverterInterface
      */
     protected function createRiskCheckToRequestConverter()
     {

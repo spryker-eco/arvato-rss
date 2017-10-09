@@ -8,7 +8,7 @@
 namespace SprykerEco\Zed\ArvatoRss\Business;
 
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
-use SprykerEco\Service\ArvatoRss\Iso3166Converter;
+use SprykerEco\Service\ArvatoRss\Iso3166ConverterService;
 use SprykerEco\Zed\ArvatoRss\ArvatoRssDependencyProvider;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\SoapApiAdapter;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverter;
@@ -100,11 +100,11 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Service\ArvatoRss\Iso3166ConverterInterface
+     * @return \SprykerEco\Service\ArvatoRss\Iso3166ConverterServiceInterface
      */
     protected function createIso3166Converter()
     {
-        return new Iso3166Converter();
+        return new Iso3166ConverterService();
     }
 
 }

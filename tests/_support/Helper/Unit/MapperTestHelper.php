@@ -8,7 +8,7 @@
 namespace Helper\Unit;
 
 use Codeception\Module;
-use SprykerEco\Service\ArvatoRss\Iso3166Converter;
+use SprykerEco\Service\ArvatoRss\Iso3166ConverterService;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapper;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckResponseMapper;
 use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface;
@@ -19,7 +19,7 @@ class MapperTestHelper extends Module
     /**
      * @param \SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface $moneyFacade
      *
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapper
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapperInterface
      */
     public function createRequestMapper(ArvatoRssToMoneyInterface $moneyFacade)
     {
@@ -30,7 +30,7 @@ class MapperTestHelper extends Module
     }
 
     /**
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckResponseMapper
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckResponseMapperInterface
      */
     public function createResponseMapper()
     {
@@ -38,11 +38,11 @@ class MapperTestHelper extends Module
     }
 
     /**
-     * @return \SprykerEco\Service\ArvatoRss\Iso3166Converter
+     * @return \SprykerEco\Service\ArvatoRss\Iso3166ConverterServiceInterface
      */
     public function createConverter()
     {
-        return new Iso3166Converter();
+        return new Iso3166ConverterService();
     }
 
 }

@@ -19,7 +19,7 @@ use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Store;
-use SprykerEco\Service\ArvatoRss\Iso3166ConverterInterface;
+use SprykerEco\Service\ArvatoRss\Iso3166ConverterServiceInterface;
 use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
 use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface;
 
@@ -42,17 +42,17 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
     protected $moneyFacade;
 
     /**
-     * @var \SprykerEco\Service\ArvatoRss\Iso3166ConverterInterface $iso3166
+     * @var \SprykerEco\Service\ArvatoRss\Iso3166ConverterServiceInterface $iso3166
      */
     protected $iso3166Converter;
 
     /**
      * @param \SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface $moneyFacade
-     * @param \SprykerEco\Service\ArvatoRss\Iso3166ConverterInterface $iso3166Converter
+     * @param \SprykerEco\Service\ArvatoRss\Iso3166ConverterServiceInterface $iso3166Converter
      */
     public function __construct(
         ArvatoRssToMoneyInterface $moneyFacade,
-        Iso3166ConverterInterface $iso3166Converter
+        Iso3166ConverterServiceInterface $iso3166Converter
     ) {
 
         $this->moneyFacade = $moneyFacade;

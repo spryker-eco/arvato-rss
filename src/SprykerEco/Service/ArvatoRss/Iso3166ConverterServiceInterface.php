@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Service\ArvatoRss;
 
-interface Iso3166ConverterInterface
+interface Iso3166ConverterServiceInterface
 {
 
     /**

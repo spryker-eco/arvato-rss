@@ -5,9 +5,9 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Service\ArvatoRss;
+namespace SprykerEco\Shared\ArvatoRss;
 
-interface ArvatoRssServiceConstants
+interface ArvatoRssCountryConstants
 {
 
     /**
