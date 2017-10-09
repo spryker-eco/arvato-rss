@@ -56,12 +56,7 @@ class RiskCheckHandler implements RiskCheckHandlerInterface
     public function performRiskCheck(QuoteTransfer $quoteTransfer)
     {
         $requestTransfer = $this->riskCheckRequestMapper->mapQuoteToRequestTranfer($quoteTransfer);
-        try {
-            $responseTransfer = $this->apiAdapter->performRiskCheck($requestTransfer);
-        } catch (ArvatoRssRiskCheckApiException $exception) {
-            $responseTransfer = new ArvatoRssRiskCheckResponseTransfer();
-        }
-
+        $responseTransfer = $this->apiAdapter->performRiskCheck($requestTransfer);
         $quoteTransfer = $this->riskCheckResponseMapper->mapResponseToQuote($responseTransfer, $quoteTransfer);
 
         return $quoteTransfer;

@@ -64,7 +64,14 @@ class SoapApiAdapter implements ApiAdapterInterface
         $soapClient = $this->createSoapClient($requestTransfer);
 
         $result = $soapClient->RiskCheck($params);
-        $this->validateResponse($result);
+        try {
+            $this->validateResponse($result);
+        } catch (ArvatoRssRiskCheckApiException $exception) {
+            $responseTransfer = new ArvatoRssRiskCheckResponseTransfer();
+            $responseTransfer->setIsError(true);
+            $responseTransfer->setErrorMessage($exception->getMessage());
+            return $responseTransfer;
+        }
 
         return $this->riskCheckResponseConverter->convert($result);
     }
