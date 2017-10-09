@@ -103,7 +103,7 @@ class SoapApiAdapter implements ApiAdapterInterface
      */
     protected function validateResponse($result)
     {
-        if ($result instanceof SoapFault) {
+        if (is_soap_fault($result)) {
             $exceptionName = array_keys(get_object_vars($result->detail))[0];
             $exceptionObj = $result->detail->{$exceptionName};
             throw new ArvatoRssRiskCheckApiException($exceptionObj->Description);
