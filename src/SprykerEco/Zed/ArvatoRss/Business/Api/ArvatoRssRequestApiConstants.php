@@ -2,10 +2,9 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Business\Api;
 
-interface ArvatoRssApiConstants
+interface ArvatoRssRequestApiConstants
 {
 
-    // Request constants
     const ARVATORSS_API_COUNTRY = 'Country';
     const ARVATORSS_API_CITY = 'City';
     const ARVATORSS_API_STREET = 'Street';
@@ -25,11 +24,5 @@ interface ArvatoRssApiConstants
     const ARVATORSS_API_PRODUCTGROUPID = 'ProductGroupId';
     const ARVATORSS_API_UNITPRICE = 'UnitPrice';
     const ARVATORSS_API_UNITCOUNT = 'UnitCount';
-
-    // Request: identification part
-    const ARVATORSS_API_IDENTIFICATION_NAMESPACE = 'urn:risk-solution-services-types:v2.1';
-    const ARVATORSS_API_IDENTIFICATION_HEADER_NAME = 'Identification';
-    const ARVATORSS_API_CLIENTID = 'ClientID';
-    const ARVATORSS_API_AUTHORISATION = 'Authorisation';
 
 }

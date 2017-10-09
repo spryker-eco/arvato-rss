@@ -10,7 +10,8 @@ namespace SprykerEco\Zed\ArvatoRss\Business\Api\Converter;
 use Generated\Shared\Transfer\ArvatoRssIdentificationRequestTransfer;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
 use SoapHeader;
-use SprykerEco\Zed\ArvatoRss\Business\Api\ArvatoRssApiConstants;
+use SprykerEco\Zed\ArvatoRss\Business\Api\ArvatoRssIdentificationApiConstants;
+use SprykerEco\Zed\ArvatoRss\Business\Api\ArvatoRssRequestApiConstants;
 
 class RiskCheckRequestHeaderConverter implements RiskCheckRequestHeaderConverterInterface
 {
@@ -25,8 +26,8 @@ class RiskCheckRequestHeaderConverter implements RiskCheckRequestHeaderConverter
         $identification = $arvatoRssRiskCheckRequestTransfer->getIdentification();
         $requestData = $this->createRequestData($identification);
         $soapHeader = new SoapHeader(
-            ArvatoRssApiConstants::ARVATORSS_API_IDENTIFICATION_NAMESPACE,
-            ArvatoRssApiConstants::ARVATORSS_API_IDENTIFICATION_HEADER_NAME,
+            ArvatoRssIdentificationApiConstants::ARVATORSS_API_IDENTIFICATION_NAMESPACE,
+            ArvatoRssIdentificationApiConstants::ARVATORSS_API_IDENTIFICATION_HEADER_NAME,
             $requestData
         );
 
@@ -61,8 +62,8 @@ class RiskCheckRequestHeaderConverter implements RiskCheckRequestHeaderConverter
     protected function getRequestFields()
     {
         return [
-            ArvatoRssApiConstants::ARVATORSS_API_CLIENTID => 'clientId',
-            ArvatoRssApiConstants::ARVATORSS_API_AUTHORISATION => 'authorisation',
+            ArvatoRssIdentificationApiConstants::ARVATORSS_API_CLIENTID => 'clientId',
+            ArvatoRssIdentificationApiConstants::ARVATORSS_API_AUTHORISATION => 'authorisation',
         ];
     }
 
