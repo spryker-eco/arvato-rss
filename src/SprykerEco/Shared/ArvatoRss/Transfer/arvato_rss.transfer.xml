@@ -5,7 +5,6 @@
 
     <transfer name="ArvatoRssIdentificationRequestTransfer">
         <property name="clientId" type="string" />
-        <!--Password-->
         <property name="authorisation" type="string" />
     </transfer>
 
