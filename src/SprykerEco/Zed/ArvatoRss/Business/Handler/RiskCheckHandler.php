@@ -18,17 +18,17 @@ class RiskCheckHandler implements RiskCheckHandlerInterface
 {
 
     /**
-     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapperInterface $riskCheckRequestMapper
+     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapperInterface
      */
     protected $riskCheckRequestMapper;
 
     /**
-     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckResponseMapperInterface $riskCheckResponseMapper
+     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckResponseMapperInterface
      */
     protected $riskCheckResponseMapper;
 
     /**
-     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiAdapterInterface $apiAdapter
+     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiAdapterInterface
      */
     protected $apiAdapter;
 

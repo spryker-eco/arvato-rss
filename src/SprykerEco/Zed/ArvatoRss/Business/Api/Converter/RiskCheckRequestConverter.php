@@ -65,20 +65,16 @@ class RiskCheckRequestConverter implements RiskCheckRequestConverterInterface
         $order = $arvatoRssRiskCheckRequestTransfer->getOrder();
 
         $result[ArvatoRssApiConstants::ARVATORSS_API_ORDER] = [
-            //TODO: Clarify what it means
             ArvatoRssApiConstants::ARVATORSS_API_REGISTEREDORDER => true,
             ArvatoRssApiConstants::ARVATORSS_API_CURRENCY => $order->getCurrency(),
             ArvatoRssApiConstants::ARVATORSS_API_GROSSTOTALBILL => $order->getGrossTotalBill(),
             ArvatoRssApiConstants::ARVATORSS_API_TOTALORDERVALUE => $order->getTotalOrderValue(),
         ];
-        // TODO: deal with items.
         $result[ArvatoRssApiConstants::ARVATORSS_API_ORDER][ArvatoRssApiConstants::ARVATORSS_API_ITEM] = [];
 
         foreach ($order->getItem() as $item) {
             $result[ArvatoRssApiConstants::ARVATORSS_API_ORDER][ArvatoRssApiConstants::ARVATORSS_API_ITEM][] = [
-                //TODO: clarify this. Is it sku?
                 ArvatoRssApiConstants::ARVATORSS_API_PRODUCTNUMBER => $item->getProductNumber(),
-                //TODO: clarify
                 ArvatoRssApiConstants::ARVATORSS_API_PRODUCTGROUPID => $item->getProductGroupId(),
                 ArvatoRssApiConstants::ARVATORSS_API_UNITPRICE => $item->getUnitPrice(),
                 ArvatoRssApiConstants::ARVATORSS_API_UNITCOUNT => $item->getUnitCount(),
