@@ -13,11 +13,11 @@ class QuoteHelper extends Module
 {
 
     /**
-     * @param \ArrayObject|null $data
+     * @param array|null $data
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function createQuoteTransfer(ArrayObject $data = null)
+    public function createQuoteTransfer(array $data = null)
     {
         $quoteTransfer = new QuoteTransfer();
         if ($data) {
@@ -25,22 +25,22 @@ class QuoteHelper extends Module
             $billingAddress = new AddressTransfer();
             $orderItem = new ItemTransfer();
 
-            $billingAddress->setIso2Code($data->country);
-            $billingAddress->setCity($data->city);
-            $billingAddress->setAddress1($data->street);
-            $billingAddress->setAddress2($data->streetNumber);
-            $billingAddress->setZipCode($data->zipCode);
-            $billingAddress->setFirstName($data->firstName);
-            $billingAddress->setLastName($data->lastName);
-            $billingAddress->setPhone($data->phoneNumber);
+            $billingAddress->setIso2Code($data['country']);
+            $billingAddress->setCity($data['city']);
+            $billingAddress->setAddress1($data['street']);
+            $billingAddress->setAddress2($data['streetNumber']);
+            $billingAddress->setZipCode($data['zipCode']);
+            $billingAddress->setFirstName($data['firstName']);
+            $billingAddress->setLastName($data['lastName']);
+            $billingAddress->setPhone($data['phoneNumber']);
 
-            $customerTranfer->setSalutation($data->salutation);
-            $customerTranfer->setEmail($data->email);
-            $customerTranfer->setDateOfBirth($data->birthDay);
+            $customerTranfer->setSalutation($data['salutation']);
+            $customerTranfer->setEmail($data['email']);
+            $customerTranfer->setDateOfBirth($data['birthDay']);
 
-            $orderItem->setUnitPrice($data->unitPrice);
-            $orderItem->setSku($data->productNumber);
-            $orderItem->setQuantity(1);
+            $orderItem->setUnitPrice($data['unitPrice']);
+            $orderItem->setSku($data['productNumber']);
+            $orderItem->setQuantity($data['itemQuantity']);
 
             $quoteTransfer->setCustomer($customerTranfer);
             $quoteTransfer->setBillingAddress($billingAddress);
@@ -48,8 +48,8 @@ class QuoteHelper extends Module
 
             $quoteTransfer->setTotals(
                 (new TotalsTransfer())
-                    ->setGrandTotal(15000)
-                    ->setSubtotal(14000)
+                    ->setGrandTotal($data['grandTotal'])
+                    ->setSubtotal($data['subTotal'])
             );
         }
 

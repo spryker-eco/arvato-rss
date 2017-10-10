@@ -9,6 +9,7 @@ namespace Unit\SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
 
 use ArrayObject;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer;
+use Generated\Shared\Transfer\QuoteTranfer;
 
 class RiskCheckResponseMapperTest extends AbstractMapperTest
 {
@@ -59,19 +60,20 @@ class RiskCheckResponseMapperTest extends AbstractMapperTest
                         'city' => 'Berlin',
                     ],
                     ArrayObject::ARRAY_AS_PROPS
-                )
+                ),
+                $this->quoteHelper->createQuoteTransfer()
             ],
         ];
     }
 
     /**
      * @param \ArrayObject $data
+     * @param \Generated\Shared\Transfer\QuoteTranfer $quoteTranfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    protected function createExpectedTransfer(ArrayObject $data)
+    protected function createExpectedTransfer(ArrayObject $data, QuoteTranfer $quoteTranfer)
     {
-        $quoteTranfer = $this->quoteHelper->createQuoteTransfer();
         $responseTransfer = $this->createResponseTransfer($data);
         $quoteTranfer->setArvatoRssRiskCheckResponse($responseTransfer);
 

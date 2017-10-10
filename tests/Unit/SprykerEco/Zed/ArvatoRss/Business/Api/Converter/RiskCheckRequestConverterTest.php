@@ -25,7 +25,7 @@ class RiskCheckRequestConverterTest extends Test
      *
      * @return void
      */
-    public function testConvert($data)
+    public function testConvert(ArvatoRssRiskCheckRequestTransfer $data)
     {
         $converter = $this->createRiskCheckToRequestConverter();
         $expected = $this->createExpectedResult($data);

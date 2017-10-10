@@ -11,6 +11,7 @@ use Codeception\TestCase\Test;
 use Generated\Shared\Transfer\ArvatoRssIdentificationRequestTransfer;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
 use SoapHeader;
+use SprykerEco\Zed\ArvatoRss\Business\Api\ArvatoRssIdentificationApiConstants;
 use SprykerEco\Zed\ArvatoRss\Business\Api\ArvatoRssRequestApiConstants;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestHeaderConverter;
 
@@ -31,14 +32,14 @@ class RiskCheckRequestHeaderConverterTest extends Test
             $requestTranfer
                 ->getIdentification()
                 ->getClientId(),
-            $actual->data[ArvatoRssRequestApiConstants::ARVATORSS_API_CLIENTID]
+            $actual->data[ArvatoRssIdentificationApiConstants::ARVATORSS_API_CLIENTID]
         );
 
         $this->assertEquals(
             $requestTranfer
                 ->getIdentification()
                 ->getAuthorisation(),
-            $actual->data[ArvatoRssRequestApiConstants::ARVATORSS_API_AUTHORISATION]
+            $actual->data[ArvatoRssIdentificationApiConstants::ARVATORSS_API_AUTHORISATION]
         );
     }
 
