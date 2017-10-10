@@ -2,6 +2,11 @@
   "name": "spryker-eco/arvato-rss",
   "description": "Arvato risk security check module",
   "license": "MIT",
+  "autoload": {
+    "psr-0": {
+      "SprykerEco\\": "src/"
+    }
+  },
   "require": {
     "ext-soap": "*",
     "spryker/kernel": "^3.0.0",
