@@ -5,7 +5,7 @@ namespace Functional\SprykerEco\Zed\ArvatoRss\Business\Facade;
 use Codeception\TestCase\Test;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer;
 use Generated\Shared\Transfer\QuoteTranfer;
-use Helper\QuoteHelper;
+use ArvatoRss\Helper\QuoteHelper;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\SoapApiAdapter;
@@ -16,7 +16,7 @@ class ArvatoRssFacadeRiskCheckTest extends Test
 {
 
     /**
-     * @var \Helper\QuoteHelper $quoteHelper
+     * @var \ArvatoRss\Helper\QuoteHelper $quoteHelper
      */
     protected $quoteHelper;
 
@@ -113,7 +113,7 @@ class ArvatoRssFacadeRiskCheckTest extends Test
     }
 
     /**
-     * @param \Helper\QuoteHelper $quoteHelper
+     * @param \ArvatoRss\Helper\QuoteHelper $quoteHelper
      *
      * @return void
      */

@@ -5,6 +5,8 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
+namespace ArvatoRss;
+
 /**
  * Inherited Methods
  * @method void wantToTest($text)
@@ -23,7 +25,7 @@
 class UnitTester extends \Codeception\Actor
 {
 
-    use ArvatoRss\_generated\UnitTesterActions;
+    use _generated\UnitTesterActions;
 
    /**
     * Define custom actions here
