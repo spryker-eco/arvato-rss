@@ -23,7 +23,7 @@
 class AcceptanceTester extends \Codeception\Actor
 {
 
-    use _generated\AcceptanceTesterActions;
+    use ArvatoRss\_generated\AcceptanceTesterActions;
 
    /**
     * Define custom actions here

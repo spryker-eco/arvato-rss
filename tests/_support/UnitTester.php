@@ -23,7 +23,7 @@
 class UnitTester extends \Codeception\Actor
 {
 
-    use _generated\UnitTesterActions;
+    use ArvatoRss\_generated\UnitTesterActions;
 
    /**
     * Define custom actions here

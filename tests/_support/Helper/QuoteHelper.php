@@ -1,5 +1,5 @@
 <?php
-namespace Helper;
+namespace ArvatoRss\Helper;
 
 use ArrayObject;
 use Codeception\Module;
