@@ -20,7 +20,7 @@ function runTests {
     fi
     echo "Running tests..."
     cd "vendor/spryker-eco/$moduleName/"
-    "$shopPath/vendor/bin/codecept" run
+    APPLICATION_ROOT_DIR="$shopPath" "$shopPath/vendor/bin/codecept" run
     if [ "$?" = 0 ]; then
         newMessage=$'\nTests are green'
         message="$message$newMessage"

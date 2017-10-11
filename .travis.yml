@@ -8,9 +8,6 @@ env:
     - APPLICATION_ENV=devtest
     - APPLICATION_STORE=DE
     - APPLICATION_=DE
-    - APPLICATION_ROOT_DIR=$HOME/demoshop
-
-
 
 #Possible travis events (push, pull_request, cron, or api)
 matrix:
@@ -40,7 +37,6 @@ services:
 sudo: required
 
 install:
-  - echo $APPLICATION_ROOT_DIR
   - chmod +x move-module.sh
   - chmod +x checkout-latest-tag.sh
   - if [[ *$TRAVIS_EVENT_TYPE* = 'cron' ]]; then ./checkout-latest-tag.sh; fi
