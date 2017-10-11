@@ -40,7 +40,7 @@ install:
   - chmod +x move-module.sh
   - chmod +x checkout-latest-tag.sh
   - if [[ *$TRAVIS_EVENT_TYPE* = 'cron' ]]; then ./checkout-latest-tag.sh; fi
-  - ./move-module.sh`
+  - ./move-module.sh
   - echo "Cloning demoshop..."
   - git clone https://github.com/spryker/demoshop.git current
 
