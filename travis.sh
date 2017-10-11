@@ -19,15 +19,18 @@ function runTests {
     fi
     echo "Running tests..."
     cd "vendor/spryker-eco/$moduleName/"
-    vendor/bin/codecept run
+    codecept run
     if [ "$?" = 0 ]; then
         newMessage=$'\nTests are green'
         message="$message$newMessage"
+        testResult=0
     else
         newMessage=$'\nTests are failing'
         message="$message$newMessage"
+        testResult=1
     fi
     echo "Done tests"
+    return $testResult
 }
 
 function checkWithLatestDemoShop {
