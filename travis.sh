@@ -10,8 +10,8 @@ message=""
 function runTests {
     echo "Preparing environment..."
     echo "Adding PSR-0 namespaces"
-    php composer-add-psr-4.php composer.json Unit vendor/spryker-eco/arvato-rss/tests
-    php composer-add-psr-4.php composer.json Functional vendor/spryker-eco/arvato-rss/tests
+    php "$modulePath/composer-add-psr-4.php" composer.json Unit vendor/spryker-eco/arvato-rss/tests
+    php "$modulePath/composer-add-psr-4.php" composer.json Functional vendor/spryker-eco/arvato-rss/tests
     echo "Copy configuration..."
     if [ -f "vendor/spryker-eco/$moduleName/config/Shared/config.dist.php" ]; then
         tail -n +2 "vendor/spryker-eco/$moduleName/config/Shared/config.dist.php" >> config/Shared/config_default-devtest.php
