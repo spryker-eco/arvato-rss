@@ -9,7 +9,7 @@ namespace Unit\SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
 
 use ArrayObject;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer;
-use Generated\Shared\Transfer\QuoteTranfer;
+use Generated\Shared\Transfer\QuoteTransfer;
 
 class RiskCheckResponseMapperTest extends AbstractMapperTest
 {
@@ -24,11 +24,11 @@ class RiskCheckResponseMapperTest extends AbstractMapperTest
     public function testMapResponseToQuote($data)
     {
         $mapper = $this->helper->createResponseMapper();
-
-        $expected = $this->createExpectedTransfer($data)->toArray(true);
+        $quoteTranfer = $this->quoteHelper->createQuoteTransfer();
+        $expected = $this->createExpectedTransfer($data, $quoteTranfer)->toArray(true);
         $actual = $mapper->mapResponseToQuote(
             $this->createResponseTransfer($data),
-            $this->quoteHelper->createQuoteTransfer()
+            $quoteTranfer
         )->toArray(true);
 
         $this->assertEquals($expected, $actual);
@@ -60,24 +60,23 @@ class RiskCheckResponseMapperTest extends AbstractMapperTest
                         'city' => 'Berlin',
                     ],
                     ArrayObject::ARRAY_AS_PROPS
-                ),
-                $this->quoteHelper->createQuoteTransfer()
+                )
             ],
         ];
     }
 
     /**
      * @param \ArrayObject $data
-     * @param \Generated\Shared\Transfer\QuoteTranfer $quoteTranfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTranfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    protected function createExpectedTransfer(ArrayObject $data, QuoteTranfer $quoteTranfer)
+    protected function createExpectedTransfer(ArrayObject $data, QuoteTransfer $quoteTransfer)
     {
         $responseTransfer = $this->createResponseTransfer($data);
-        $quoteTranfer->setArvatoRssRiskCheckResponse($responseTransfer);
+        $quoteTransfer->setArvatoRssRiskCheckResponse($responseTransfer);
 
-        return $quoteTranfer;
+        return $quoteTransfer;
     }
 
     /**
