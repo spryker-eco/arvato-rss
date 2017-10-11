@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- $Revision: 54474 $ -->
+<!-- $Date: 2012-03-06 18:24:48 +0100 (Di, 06 Mrz 2012) $ -->
+<wsdl:definitions 
+	xmlns:typ="urn:risk-solution-services-types:v2.1"
+	xmlns:env="urn:risk-solution-services:v2.1"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	name="risk-solution-services.v2.1" 
+	targetNamespace="urn:risk-solution-services:v2.1">
+
+	<wsdl:types>
+		<xsd:schema targetNamespace="urn:risk-solution-services-types:v2.1">
+			<xsd:include schemaLocation="schema/v2.1/risk-solution-services-types.xsd"/>
+		</xsd:schema>
+	</wsdl:types>
+
+	<!-- EXCEPTION MESSAGES -->
+
+	<wsdl:message name="RmfException">
+		<wsdl:part element="typ:RmfException" name="fault"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="RmfAuthenticationException">
+		<wsdl:part element="typ:RmfAuthenticationException" name="fault"></wsdl:part>
+	</wsdl:message>
+	
+	<wsdl:message name="RmfAccessDeniedException">
+		<wsdl:part element="typ:RmfAccessDeniedException" name="fault"></wsdl:part>
+	</wsdl:message>	
+
+	<wsdl:message name="RmfIllegalArgumentException">
+		<wsdl:part element="typ:RmfIllegalArgumentException" name="fault"></wsdl:part>
+	</wsdl:message>
+
+	<!-- RISKCHECK MESSAGES -->
+
+	<wsdl:message name="RiskCheckRequestMessage">
+		<wsdl:part element="typ:Identification" name="header" />
+		<wsdl:part element="typ:RiskCheck" name="payload" />
+	</wsdl:message>
+
+	<wsdl:message name="RiskCheckResponseMessage">
+		<wsdl:part element="typ:RiskCheckResponse" name="response" />
+	</wsdl:message>
+	
+	<!-- RISKACCOUNTCHECK MESSAGES -->
+	
+	<wsdl:message name="RiskAccountCheckRequestMessage">
+		<wsdl:part element="typ:Identification" name="header" />
+		<wsdl:part element="typ:RiskAccountCheck" name="payload" />
+	</wsdl:message>
+
+	<wsdl:message name="RiskAccountCheckResponseMessage">
+		<wsdl:part element="typ:RiskAccountCheckResponse" name="response" />
+	</wsdl:message>
+
+	<!-- ADDRESSCHECK MESSAGES -->
+	
+	<wsdl:message name="AddressCheckRequestMessage">
+		<wsdl:part element="typ:Identification" name="header" />
+		<wsdl:part element="typ:AddressCheck" name="payload" />
+	</wsdl:message>
+
+	<wsdl:message name="AddressCheckResponseMessage">
+		<wsdl:part element="typ:AddressCheckResponse" name="response" />
+	</wsdl:message>	
+	
+	<!-- ACCOUNTCHECK MESSAGES -->
+	
+	<wsdl:message name="AccountCheckRequestMessage">
+		<wsdl:part element="typ:Identification" name="header" />
+		<wsdl:part element="typ:AccountCheck" name="payload" />
+	</wsdl:message>
+
+	<wsdl:message name="AccountCheckResponseMessage">
+		<wsdl:part element="typ:AccountCheckResponse" name="response" />
+	</wsdl:message>	
+
+	<!-- STOREORDER MESSAGES -->
+
+	<wsdl:message name="StoreOrderRequestMessage">
+		<wsdl:part element="typ:Identification" name="header" />
+		<wsdl:part element="typ:StoreOrder" name="payload" />
+	</wsdl:message>
+
+	<wsdl:message name="StoreOrderResponseMessage">
+		<wsdl:part element="typ:StoreOrderResponse" name="response" />
+	</wsdl:message>	
+	
+	<!-- PRESENTED INTERFACES MESSAGES -->
+
+	<wsdl:portType name="RmfPortTypeV21">
+		<wsdl:operation name="RiskCheck">
+			<wsdl:input message="env:RiskCheckRequestMessage" />
+			<wsdl:output message="env:RiskCheckResponseMessage" />
+			<wsdl:fault message="env:RmfException" name="RmfException" />
+			<wsdl:fault message="env:RmfAuthenticationException" name="RmfAuthenticationException"/>
+			<wsdl:fault message="env:RmfAccessDeniedException" name="RmfAccessDeniedException"/>
+			<wsdl:fault message="env:RmfIllegalArgumentException" name="RmfIllegalArgumentException"/>
+		</wsdl:operation>
+		<wsdl:operation name="RiskAccountCheck">
+			<wsdl:input message="env:RiskAccountCheckRequestMessage" />
+			<wsdl:output message="env:RiskAccountCheckResponseMessage" />
+			<wsdl:fault message="env:RmfException" name="RmfException" />
+			<wsdl:fault message="env:RmfAuthenticationException" name="RmfAuthenticationException"/>
+			<wsdl:fault message="env:RmfAccessDeniedException" name="RmfAccessDeniedException"/>
+			<wsdl:fault message="env:RmfIllegalArgumentException" name="RmfIllegalArgumentException"/>
+		</wsdl:operation>
+		<wsdl:operation name="AddressCheck">
+			<wsdl:input message="env:AddressCheckRequestMessage" />
+			<wsdl:output message="env:AddressCheckResponseMessage" />
+			<wsdl:fault message="env:RmfException" name="RmfException" />
+			<wsdl:fault message="env:RmfAuthenticationException" name="RmfAuthenticationException"/>
+			<wsdl:fault message="env:RmfAccessDeniedException" name="RmfAccessDeniedException"/>
+			<wsdl:fault message="env:RmfIllegalArgumentException" name="RmfIllegalArgumentException"/>
+		</wsdl:operation>
+		<wsdl:operation name="AccountCheck">
+			<wsdl:input message="env:AccountCheckRequestMessage" />
+			<wsdl:output message="env:AccountCheckResponseMessage" />
+			<wsdl:fault message="env:RmfException" name="RmfException" />
+			<wsdl:fault message="env:RmfAuthenticationException" name="RmfAuthenticationException"/>
+			<wsdl:fault message="env:RmfAccessDeniedException" name="RmfAccessDeniedException"/>
+			<wsdl:fault message="env:RmfIllegalArgumentException" name="RmfIllegalArgumentException"/>
+		</wsdl:operation>		
+		<wsdl:operation name="StoreOrder">
+			<wsdl:input message="env:StoreOrderRequestMessage" />
+			<wsdl:output message="env:StoreOrderResponseMessage" />
+			<wsdl:fault message="env:RmfException" name="RmfException" />
+			<wsdl:fault message="env:RmfAuthenticationException" name="RmfAuthenticationException"/>
+			<wsdl:fault message="env:RmfAccessDeniedException" name="RmfAccessDeniedException"/>
+			<wsdl:fault message="env:RmfIllegalArgumentException" name="RmfIllegalArgumentException"/>
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="RmfPortV21SOAPBinding" type="env:RmfPortTypeV21">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		
+		<wsdl:operation name="RiskCheck">
+			<soap:operation
+				soapAction="urn:risk-solution-services:v2.1/RmfPortV21.RiskCheck" />
+			<wsdl:input>
+				<soap:header use="literal" part="header"
+					message="env:RiskCheckRequestMessage" />
+				<soap:body use="literal" parts="payload" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" parts="response" />
+			</wsdl:output>
+			<wsdl:fault name="RmfException">
+				<soap:fault name="RmfException" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="RmfAuthenticationException">
+				<soap:fault name="RmfAuthenticationException" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="RmfAccessDeniedException">
+				<soap:fault name="RmfAccessDeniedException" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="RmfIllegalArgumentException">
+				<soap:fault name="RmfIllegalArgumentException" use="literal"/>
+			</wsdl:fault>			
+		</wsdl:operation>
+		
+		<wsdl:operation name="RiskAccountCheck">
+			<soap:operation
+				soapAction="urn:risk-solution-services:v2.1/RmfPortV21.RiskAccountCheck" />
+			<wsdl:input>
+				<soap:header use="literal" part="header"
+					message="env:RiskAccountCheckRequestMessage" />
+				<soap:body use="literal" parts="payload" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" parts="response" />
+			</wsdl:output>
+			<wsdl:fault name="RmfException">
+				<soap:fault name="RmfException" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="RmfAuthenticationException">
+				<soap:fault name="RmfAuthenticationException" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="RmfAccessDeniedException">
+				<soap:fault name="RmfAccessDeniedException" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="RmfIllegalArgumentException">
+				<soap:fault name="RmfIllegalArgumentException" use="literal"/>
+			</wsdl:fault>			
+		</wsdl:operation>
+		
+		<wsdl:operation name="AddressCheck">
+			<soap:operation
+				soapAction="urn:risk-solution-services:v2.1/RmfPortV21.AddressCheck" />
+			<wsdl:input>
+				<soap:header use="literal" part="header"
+					message="env:AddressCheckRequestMessage" />
+				<soap:body use="literal" parts="payload" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" parts="response" />
+			</wsdl:output>
+			<wsdl:fault name="RmfException">
+				<soap:fault name="RmfException" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="RmfAuthenticationException">
+				<soap:fault name="RmfAuthenticationException" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="RmfAccessDeniedException">
+				<soap:fault name="RmfAccessDeniedException" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="RmfIllegalArgumentException">
+				<soap:fault name="RmfIllegalArgumentException" use="literal"/>
+			</wsdl:fault>			
+		</wsdl:operation>		
+		
+		<wsdl:operation name="AccountCheck">
+			<soap:operation
+				soapAction="urn:risk-solution-services:v2.1/RmfPortV21.AccountCheck" />
+			<wsdl:input>
+				<soap:header use="literal" part="header"
+					message="env:AccountCheckRequestMessage" />
+				<soap:body use="literal" parts="payload" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" parts="response" />
+			</wsdl:output>
+			<wsdl:fault name="RmfException">
+				<soap:fault name="RmfException" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="RmfAuthenticationException">
+				<soap:fault name="RmfAuthenticationException" use="literal"/>
+			</wsdl:fault>			
+			<wsdl:fault name="RmfAccessDeniedException">
+				<soap:fault name="RmfAccessDeniedException" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="RmfIllegalArgumentException">
+				<soap:fault name="RmfIllegalArgumentException" use="literal"/>
+			</wsdl:fault>			
+		</wsdl:operation>				
+
+		<wsdl:operation name="StoreOrder">
+			<soap:operation
+				soapAction="urn:risk-solution-services:v2.1/RmfPortV21.StoreOrder" />
+			<wsdl:input>
+				<soap:header use="literal" part="header"
+					message="env:StoreOrderRequestMessage" />
+				<soap:body use="literal" parts="payload" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" parts="response" />
+			</wsdl:output>
+			<wsdl:fault name="RmfException">
+				<soap:fault name="RmfException" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="RmfAuthenticationException">
+				<soap:fault name="RmfAuthenticationException" use="literal"/>
+			</wsdl:fault>			
+			<wsdl:fault name="RmfAccessDeniedException">
+				<soap:fault name="RmfAccessDeniedException" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="RmfIllegalArgumentException">
+				<soap:fault name="RmfIllegalArgumentException" use="literal"/>
+			</wsdl:fault>			
+		</wsdl:operation>	
+				
+	</wsdl:binding>
+
+	<wsdl:service name="RmfService">
+		<wsdl:port binding="env:RmfPortV21SOAPBinding" name="RmfPortV21">
+			<soap:address location="http://rmf.arvato-infoscore.de/RmfPortV21" />
+		</wsdl:port>
+	</wsdl:service>
+
+</wsdl:definitions>
