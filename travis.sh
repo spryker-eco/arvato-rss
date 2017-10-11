@@ -1,28 +1,25 @@
 #!/usr/bin/env bash
 
 moduleName='arvato-rss'
-moduleNiceName='Arvatorss'
+moduleNiceName='arvato-rss'
 cpath=`pwd`
 modulePath="$cpath/module"
 globalResult=1
 message=""
 
 function runTests {
-    return 0
     echo "Preparing environment..."
-    echo "Copying test files to DemoShop folder "
-    cp -r "vendor/spryker-eco/$moduleName/tests/Functional/SprykerEco/Zed/$moduleNiceName" tests/PyzTest/Zed/
-    echo "Fix namespace of tests..."
-    grep -rl ' Functional\\SprykerEco' "tests/PyzTest/Zed/$moduleNiceName/Business/" | xargs sed -i -e 's/ Functional\\SprykerEco/ PyzTest/g'
+    echo "Adding PSR-0 namespaces"
+    php composer-add-psr-4.php composer.json Unit vendor/spryker-eco/arvato-rss/tests
+    php composer-add-psr-4.php composer.json Functional vendor/spryker-eco/arvato-rss/tests
     echo "Copy configuration..."
     if [ -f "vendor/spryker-eco/$moduleName/config/Shared/config.dist.php" ]; then
         tail -n +2 "vendor/spryker-eco/$moduleName/config/Shared/config.dist.php" >> config/Shared/config_default-devtest.php
         php "$modulePath/fix-config.php" config/Shared/config_default-devtest.php
     fi
-    echo "Setup test environment..."
-    ./setup_test -f
     echo "Running tests..."
-    vendor/bin/codecept run -c "tests/PyzTest/Zed/$moduleNiceName" Business
+    cd "vendor/spryker-eco/$moduleName/"
+    vendor/bin/codecept run
     if [ "$?" = 0 ]; then
         newMessage=$'\nTests are green'
         message="$message$newMessage"
