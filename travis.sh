@@ -11,8 +11,8 @@ message=""
 function runTests {
     echo "Preparing environment..."
     echo "Adding PSR-0 namespaces"
-    php "$modulePath/composer-add-psr-4.php" composer.json Unit vendor/spryker-eco/arvato-rss/tests
-    php "$modulePath/composer-add-psr-4.php" composer.json Functional vendor/spryker-eco/arvato-rss/tests
+    php "$modulePath/composer-add-psr.php" composer.json 0 Unit vendor/spryker-eco/arvato-rss/tests
+    php "$modulePath/composer-add-psr.php" composer.json 0 Functional vendor/spryker-eco/arvato-rss/tests
     echo "define('APPLICATION_ROOT_DIR', '$shopPath');" >> "$shopPath/vendor/composer/autoload_real.php"
     echo "Copy configuration..."
     if [ -f "vendor/spryker-eco/$moduleName/config/config.dist.php" ]; then

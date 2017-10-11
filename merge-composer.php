@@ -15,4 +15,4 @@ foreach ($fromComposer[PATH_REQUIRE] as $module => &$version) {
     }
 }
 
-file_put_contents($argv[3], json_encode($fromComposer).PHP_EOL);
+file_put_contents($argv[3], json_encode($fromComposer, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
