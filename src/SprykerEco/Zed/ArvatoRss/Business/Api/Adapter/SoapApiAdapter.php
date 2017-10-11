@@ -115,7 +115,7 @@ class SoapApiAdapter implements ApiAdapterInterface
      */
     protected function extractExceptionMessage($result)
     {
-        if(!empty(array_keys(get_object_vars($result->detail))[0]))
+        if(isset($result->detail) && !empty(array_keys(get_object_vars($result->detail))[0]))
         {
             $exceptionName = array_keys(get_object_vars($result->detail))[0];
             $exceptionObj = $result->detail->{$exceptionName};
