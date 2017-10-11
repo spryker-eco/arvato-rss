@@ -4,7 +4,7 @@ moduleName='arvato-rss'
 moduleNiceName='arvato-rss'
 cpath=`pwd`
 modulePath="$cpath/module"
-shopPath="$cpath/demoshop"
+shopPath="$cpath/current"
 globalResult=1
 message=""
 
@@ -77,7 +77,7 @@ function checkModuleWithLatestVersionOfDemoshop {
     fi
 }
 
-cd demoshop/
+cd current/
 composer install
 
 checkWithLatestDemoShop
