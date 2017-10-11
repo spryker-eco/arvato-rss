@@ -122,7 +122,7 @@ class SoapApiAdapter implements ApiAdapterInterface
             return $exceptionObj->Description;
         }
 
-        return $result->message ?: '';
+        return $result->getMessage();
     }
 
     /**
