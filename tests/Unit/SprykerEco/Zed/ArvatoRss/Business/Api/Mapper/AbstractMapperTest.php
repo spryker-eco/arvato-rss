@@ -8,25 +8,25 @@
 namespace Unit\SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
 
 use Codeception\TestCase\Test;
-use Helper\QuoteHelper;
-use Helper\Unit\MapperTestHelper;
+use ArvatoRss\Helper\QuoteHelper;
+use ArvatoRss\Helper\Unit\MapperTestHelper;
 
 class AbstractMapperTest extends Test
 {
 
     /**
-     * @var \Helper\Unit\MapperTestHelper $helper
+     * @var \ArvatoRss\Helper\Unit\MapperTestHelper $helper
      */
     protected $helper;
 
     /**
-     * @var \Helper\QuoteHelper $quoteHelper
+     * @var \ArvatoRss\Helper\QuoteHelper $quoteHelper
      */
     protected $quoteHelper;
 
     /**
-     * @param \Helper\Unit\MapperTestHelper $mapperHelper
-     * @param \Helper\QuoteHelper $quoteHelper
+     * @param ArvatoRss\Helper\Unit\MapperTestHelper $mapperHelper
+     * @param ArvatoRss\Helper\QuoteHelper $quoteHelper
      *
      * @return void
      */

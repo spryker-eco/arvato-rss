@@ -1,7 +1,6 @@
 <?php
-namespace Helper;
+namespace ArvatoRss\Helper;
 
-use ArrayObject;
 use Codeception\Module;
 use Generated\Shared\Transfer\AddressTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;

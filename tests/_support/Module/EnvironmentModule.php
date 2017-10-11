@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Module;
+namespace ArvatoRss\Module;
 
 use Codeception\Lib\ModuleContainer;
 use SprykerTest\Shared\Testify\Helper\Environment;

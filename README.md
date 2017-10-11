@@ -1,4 +1,4 @@
-# ArvatoRSS Bundle
+# ArvatoRss module
 
 ## Installation
 
@@ -7,7 +7,7 @@ composer require spryker-eco/arvato-rss
 ```
 
 ## Documentation
-[ArvatoRSS documentation](https://academy.spryker.com/developing_with_spryker/3rd-party_integration/arvatorss/integration_arvato_rss.html)
+[ArvatoRss documentation](https://academy.spryker.com/developing_with_spryker/3rd-party_integration/arvatorss/integration_arvato_rss.html)
 
 ## Code checks
 

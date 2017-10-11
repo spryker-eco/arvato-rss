@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Helper\Unit;
+namespace ArvatoRss\Helper\Unit;
 
 use Codeception\Module;
 use SprykerEco\Service\ArvatoRss\Iso3166ConverterService;

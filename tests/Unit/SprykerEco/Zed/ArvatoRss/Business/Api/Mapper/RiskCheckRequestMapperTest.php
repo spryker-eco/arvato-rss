@@ -46,12 +46,13 @@ class RiskCheckRequestMapperTest extends AbstractMapperTest
     /**
      * @dataProvider userDataProvider
      *
-     * @param \Generated\Shared\Transfer\QuoteTranfer $quoteTransfer
+     * @param array $data
      *
      * @return void
      */
-    public function testMapQuoteToRequestTranfer(QuoteTransfer $quoteTransfer)
+    public function testMapQuoteToRequestTranfer(array $data)
     {
+        $quoteTransfer = $this->quoteHelper->createQuoteTransfer($data);
         $mapper = $this->helper->createRequestMapper($this->createMoneyFacadeMock());
         $expected = $this->getExpectedRequestTransfer($quoteTransfer)->toArray(true);
         $actual = $mapper->mapQuoteToRequestTranfer($quoteTransfer)->toArray(true);
@@ -66,39 +67,36 @@ class RiskCheckRequestMapperTest extends AbstractMapperTest
     {
         $data = [
             [
-                'clientId' => Config::get(ArvatoRssConstants::ARVATORSS_CLIENTID),
-                'authorisation' => Config::get(ArvatoRssConstants::ARVATORSS_AUTHORISATION),
-                'country' => 'DE',
-                'city' => 'Berlin',
-                'street' => 'Europa-Allee 50',
-                'streetNumber' => '17',
-                'zipCode' => '60327',
-                'firstName' => 'Michael',
-                'lastName' => 'Duglas',
-                'salutation' => 'MR',
-                'email' => 'duglas@gmail.com',
-                'phoneNumber' => '123213',
-                'birthDay' => '1978-10-01',
-                'position' => 1,
-                'productNumber' => '777777',
-                'unitPrice' => 12000,
-                'unitCount' => 1,
-                'itemQuantity' => 1,
-                'grandTotal' => 15000,
-                'subTotal' => 14000
+                [
+                    'clientId' => Config::get(ArvatoRssConstants::ARVATORSS_CLIENTID),
+                    'authorisation' => Config::get(ArvatoRssConstants::ARVATORSS_AUTHORISATION),
+                    'country' => 'DE',
+                    'city' => 'Berlin',
+                    'street' => 'Europa-Allee 50',
+                    'streetNumber' => '17',
+                    'zipCode' => '60327',
+                    'firstName' => 'Michael',
+                    'lastName' => 'Duglas',
+                    'salutation' => 'MR',
+                    'email' => 'duglas@gmail.com',
+                    'phoneNumber' => '123213',
+                    'birthDay' => '1978-10-01',
+                    'position' => 1,
+                    'productNumber' => '777777',
+                    'unitPrice' => 12000,
+                    'unitCount' => 1,
+                    'itemQuantity' => 1,
+                    'grandTotal' => 15000,
+                    'subTotal' => 14000
+                ]
             ]
         ];
 
-        return array_map(
-            function($arr) {
-                return $this->quoteHelper->createQuoteTransfer($arr);
-            },
-            $data
-        );
+        return $data;
     }
 
     /**
-     * @param \Generated\Shared\Transfer\QuoteTranfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer
      */
@@ -111,30 +109,36 @@ class RiskCheckRequestMapperTest extends AbstractMapperTest
         $orderTransfer = new ArvatoRssOrderTransfer();
         $itemTransfer = new ArvatoRssOrderItemTransfer();
 
-        $identificationTransfer->setClientId($quoteTransfer->getClientId());
-        $identificationTransfer->setAuthorisation($quoteTransfer->getAuthorisation());
+        $identificationTransfer->setClientId(Config::get(ArvatoRssConstants::ARVATORSS_CLIENTID));
+        $identificationTransfer->setAuthorisation(Config::get(ArvatoRssConstants::ARVATORSS_AUTHORISATION));
 
         $address->setCountry(
-            $this->helper->createConverter()->iso2ToNumeric($quoteTransfer->getCountry())
+            $this->helper->createConverter()->iso2ToNumeric(
+                $quoteTransfer
+                    ->getBillingAddress()
+                    ->getIso2Code()
+            )
         );
-        $address->setCity($quoteTransfer->getCity());
-        $address->setStreet($quoteTransfer->getStreet());
-        $address->setStreetNumber($quoteTransfer->getStreetNumber());
-        $address->setZipCode($quoteTransfer->getZipCode());
+        $address->setCity($quoteTransfer->getBillingAddress()->getCity());
+        $address->setStreet($quoteTransfer->getBillingAddress()->getAddress1());
+        $address->setStreetNumber($quoteTransfer->getBillingAddress()->getAddress2());
+        $address->setZipCode($quoteTransfer->getBillingAddress()->getZipCode());
         $billingCustomerTransfer->setAddress($address);
-        $billingCustomerTransfer->setFirstName($quoteTransfer->getFirstName());
-        $billingCustomerTransfer->setLastName($quoteTransfer->getLastName());
-        $billingCustomerTransfer->setSalutation($quoteTransfer->getSalutation());
-        $billingCustomerTransfer->setEmail($quoteTransfer->getEmail());
-        $billingCustomerTransfer->setTelephoneNumber($quoteTransfer->getPhoneNumber());
-        $billingCustomerTransfer->setBirthDay($quoteTransfer->getBirthDay());
+        $billingCustomerTransfer->setFirstName($quoteTransfer->getBillingAddress()->getFirstName());
+        $billingCustomerTransfer->setLastName($quoteTransfer->getBillingAddress()->getLastName());
+        $billingCustomerTransfer->setSalutation($quoteTransfer->getCustomer()->getSalutation());
+        $billingCustomerTransfer->setEmail($quoteTransfer->getCustomer()->getEmail());
+        $billingCustomerTransfer->setTelephoneNumber($quoteTransfer->getBillingAddress()->getPhone());
+        $billingCustomerTransfer->setBirthDay($quoteTransfer->getCustomer()->getDateOfBirth());
 
-        $itemTransfer->setProductNumber($quoteTransfer->getProductNumber());
-        $itemTransfer->setUnitPrice(static::DECIMAL_VALUE);
-        $itemTransfer->setUnitCount($quoteTransfer->getUnitCount());
-        $itemTransfer->setProductGroupId($quoteTransfer->getProductGroupId());
+        foreach ($quoteTransfer->getItems() as $item) {
+            $itemTransfer->setProductNumber($item->getSku());
+            $itemTransfer->setUnitPrice(static::DECIMAL_VALUE);
+            $itemTransfer->setUnitCount($item->getQuantity());
+            $itemTransfer->setProductGroupId(static::PRODUCT_GROUP_ID);
+            $orderTransfer->addItem($itemTransfer);
+        }
 
-        $orderTransfer->addItem($itemTransfer);
         $orderTransfer->setCurrency(Store::getInstance()->getCurrencyIsoCode());
         $orderTransfer->setGrossTotalBill(static::DECIMAL_VALUE);
         $orderTransfer->setTotalOrderValue(static::DECIMAL_VALUE);

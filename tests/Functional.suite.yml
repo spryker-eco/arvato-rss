@@ -9,5 +9,5 @@ actor: FunctionalTester
 modules:
     enabled:
         - Asserts
-        - \Helper\QuoteHelper
-        - \Module\EnvironmentModule
+        - \ArvatoRss\Helper\QuoteHelper
+        - \ArvatoRss\Module\EnvironmentModule

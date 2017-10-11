@@ -4,8 +4,8 @@ namespace Functional\SprykerEco\Zed\ArvatoRss\Business\Facade;
 
 use Codeception\TestCase\Test;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer;
-use Generated\Shared\Transfer\QuoteTranfer;
-use Helper\QuoteHelper;
+use Generated\Shared\Transfer\QuoteTransfer;
+use ArvatoRss\Helper\QuoteHelper;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\SoapApiAdapter;
@@ -16,20 +16,21 @@ class ArvatoRssFacadeRiskCheckTest extends Test
 {
 
     /**
-     * @var \Helper\QuoteHelper $quoteHelper
+     * @var \ArvatoRss\Helper\QuoteHelper $quoteHelper
      */
     protected $quoteHelper;
 
     /**
      * @dataProvider quoteDataProvider
      *
-     * @param \Generated\Shared\Transfer\QuoteTranfer $quoteTransfer
+     * @param array $data
      *
      * @return void
      */
-    public function testPerformRiskCheck(QuoteTranfer $quoteTransfer)
+    public function testPerformRiskCheck(array $data)
     {
         $facade = new ArvatoRssFacade();
+        $quoteTransfer = $this->quoteHelper->createQuoteTransfer($data);
         $response = $facade->performRiskCheck($quoteTransfer);
         $expected = $this->createExpectedResult();
         $actual = $response->getArvatoRssRiskCheckResponse();
@@ -43,35 +44,32 @@ class ArvatoRssFacadeRiskCheckTest extends Test
     {
         $data = [
             [
-                'clientId' => Config::get(ArvatoRssConstants::ARVATORSS_CLIENTID),
-                'authorisation' => Config::get(ArvatoRssConstants::ARVATORSS_AUTHORISATION),
-                'country' => 'DE',
-                'city' => 'Berlin',
-                'street' => 'Europa-Allee 50',
-                'streetNumber' => '17',
-                'zipCode' => '60327',
-                'firstName' => 'Michael',
-                'lastName' => 'Duglas',
-                'salutation' => 'MR',
-                'email' => 'duglas@gmail.com',
-                'phoneNumber' => '123213',
-                'birthDay' => '1978-10-01',
-                'position' => 1,
-                'productNumber' => '777777',
-                'unitPrice' => 12000,
-                'unitCount' => 1,
-                'itemQuantity' => 1,
-                'grandTotal' => 15000,
-                'subTotal' => 14000
+                [
+                    'clientId' => Config::get(ArvatoRssConstants::ARVATORSS_CLIENTID),
+                    'authorisation' => Config::get(ArvatoRssConstants::ARVATORSS_AUTHORISATION),
+                    'country' => 'DE',
+                    'city' => 'Berlin',
+                    'street' => 'Europa-Allee 50',
+                    'streetNumber' => '17',
+                    'zipCode' => '60327',
+                    'firstName' => 'Michael',
+                    'lastName' => 'Duglas',
+                    'salutation' => 'MR',
+                    'email' => 'duglas@gmail.com',
+                    'phoneNumber' => '123213',
+                    'birthDay' => '1978-10-01',
+                    'position' => 1,
+                    'productNumber' => '777777',
+                    'unitPrice' => 12000,
+                    'unitCount' => 1,
+                    'itemQuantity' => 1,
+                    'grandTotal' => 15000,
+                    'subTotal' => 14000
+                ]
             ]
         ];
 
-        return array_map(
-            function($arr) {
-                return $this->quoteHelper->createQuoteTransfer($arr);
-            },
-            $data
-        );
+        return $data;
     }
 
     /**
@@ -113,7 +111,7 @@ class ArvatoRssFacadeRiskCheckTest extends Test
     }
 
     /**
-     * @param \Helper\QuoteHelper $quoteHelper
+     * @param \ArvatoRss\Helper\QuoteHelper $quoteHelper
      *
      * @return void
      */

@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Adapter;
 
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
+use Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer;
 use SoapClient;
 use SoapFault;
 use Spryker\Shared\Config\Config;
