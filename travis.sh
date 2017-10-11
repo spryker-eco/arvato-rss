@@ -20,7 +20,7 @@ function runTests {
         php "$modulePath/fix-config.php" config/Shared/config_default-devtest.php
     fi
     echo "Building transfer objects..."
-    console transfer:generate
+    "$shopPath/vendor/bin/console" transfer:generate
     echo "Running tests..."
     cd "vendor/spryker-eco/$moduleName/"
     "$shopPath/vendor/bin/codecept" run
