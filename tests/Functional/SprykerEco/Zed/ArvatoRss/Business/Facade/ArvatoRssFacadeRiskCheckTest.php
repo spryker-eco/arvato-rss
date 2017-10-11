@@ -4,13 +4,14 @@ namespace Functional\SprykerEco\Zed\ArvatoRss\Business\Facade;
 
 use Codeception\TestCase\Test;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer;
-use Generated\Shared\Transfer\QuoteTransfer;
 use ArvatoRss\Helper\QuoteHelper;
+use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\SoapApiAdapter;
 use SprykerEco\Zed\ArvatoRss\Business\ArvatoRssBusinessFactory;
 use SprykerEco\Zed\ArvatoRss\Business\ArvatoRssFacade;
+use SprykerEco\Zed\ArvatoRss\Business\Handler\RiskCheckHandlerInterface;
 
 class ArvatoRssFacadeRiskCheckTest extends Test
 {
@@ -30,6 +31,7 @@ class ArvatoRssFacadeRiskCheckTest extends Test
     public function testPerformRiskCheck(array $data)
     {
         $facade = new ArvatoRssFacade();
+        $facade->setFactory($this->createFactory());
         $quoteTransfer = $this->quoteHelper->createQuoteTransfer($data);
         $response = $facade->performRiskCheck($quoteTransfer);
         $expected = $this->createExpectedResult();
@@ -77,13 +79,15 @@ class ArvatoRssFacadeRiskCheckTest extends Test
      */
     protected function createFactory()
     {
-        $builder = $this->getMockBuilder(ArvatoRssBusinessFactory::class);
-        $builder
-            ->method('createSoapApiAdapter')
-            ->willReturn($this->createSoapApiAdapter());
-        $stub = $builder->getMock();
+        $mock = $this->getMockBuilder(ArvatoRssBusinessFactory::class)
+            ->setMethods(['createRiskCheckHandler'])
+            ->getMock();
+        $mock
+            ->expects($this->once())
+            ->method('createRiskCheckHandler')
+            ->willReturn($this->createRiskCheckHandler());
 
-        return $stub;
+        return $mock;
     }
 
     /**
@@ -101,12 +105,20 @@ class ArvatoRssFacadeRiskCheckTest extends Test
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject
      */
-    protected function createSoapApiAdapter()
+    protected function createRiskCheckHandler()
     {
-        $mock = $this->createPartialMock(SoapApiAdapter::class, ['performRiskCheck']);
-        $mock
+        $mock = $this->getMockBuilder(RiskCheckHandlerInterface::class)
+            ->setMethods(['performRiskCheck'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $mock->expects($this->once())
             ->method('performRiskCheck')
-            ->willReturn($this->createExpectedResult());
+            ->willReturn(
+                (new QuoteTransfer())
+                    ->setArvatoRssRiskCheckResponse($this->createExpectedResult())
+            );
+
         return $mock;
     }
 
