@@ -4,6 +4,7 @@ moduleName='arvato-rss'
 moduleNiceName='arvato-rss'
 cpath=`pwd`
 modulePath="$cpath/module"
+shopPath="$cpath/demoshop"
 globalResult=1
 message=""
 
@@ -19,7 +20,7 @@ function runTests {
     fi
     echo "Running tests..."
     cd "vendor/spryker-eco/$moduleName/"
-    codecept run
+    "$shopPath/vendor/bin/codecept" run
     if [ "$?" = 0 ]; then
         newMessage=$'\nTests are green'
         message="$message$newMessage"
