@@ -15,7 +15,7 @@ interface RiskCheckResponseConverterInterface
     /**
      * @param \stdClass $response
      *
-     * @return void
+     * @return \Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer
      */
     public function convert(stdClass $response);
 
