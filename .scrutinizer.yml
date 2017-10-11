@@ -1,4 +1,6 @@
 build:
+    before:
+        - composer config repositories.spryker git git@github.com:spryker/spryker.git
     environment:
         php:
             version: 7.1
