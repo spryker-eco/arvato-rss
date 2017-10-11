@@ -2,7 +2,9 @@
 
 echo "Moving module to a subfolder..."
 mkdir module
-if [ `mv * module/` = 0 ]; then
+mv * module/
+result=$?
+if [ "$result" = 0 ]; then
     echo 'copied'
 fi
 echo 'copied'
