@@ -74,4 +74,7 @@
         <property name="arvatoRssRiskCheckResponse" type="ArvatoRssRiskCheckResponse" />
     </transfer>
 
+    <transfer name="Order">
+        <property name="arvatoRssStoreOrderResponse" type="ArvatoRssStoreOrderResponse" />
+    </transfer>
 </transfers>
