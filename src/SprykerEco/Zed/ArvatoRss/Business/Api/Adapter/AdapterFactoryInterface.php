@@ -1,9 +1,8 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: sikachev
- * Date: 11/8/17
- * Time: 4:20 PM
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Adapter;
