@@ -11,48 +11,30 @@ use Generated\Shared\Transfer\ArvatoRssIdentificationRequestTransfer;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer;
 use Generated\Shared\Transfer\ArvatoRssStoreOrderRequestTransfer;
+use Generated\Shared\Transfer\ArvatoRssStoreOrderResponseTransfer;
 use SoapClient;
 use SoapFault;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverterInterface;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestHeaderConverterInterface;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverterInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Exception\ArvatoRssRiskCheckApiException;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Exception\ArvatoRssStoreOrderApiException;
 
 class SoapApiAdapter implements ApiAdapterInterface
 {
-    const WSDL_PATH = __DIR__ . "/../Etc/risk-solution-services.v2.1.wsdl";
+    const WSDL_PATH = __DIR__ . "../Etc/risk-solution-services.v2.1.wsdl";
 
     /**
-     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverterInterface
+     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\AdapterFactoryInterface
      */
-    protected $riskCheckRequestConverter;
+    protected $adapterFactory;
 
     /**
-     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestHeaderConverterInterface
-     */
-    protected $riskCheckRequestHeaderConverter;
-
-    /**
-     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverterInterface
-     */
-    protected $riskCheckResponseConverter;
-
-    /**
-     * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverterInterface $riskCheckRequestConverter
-     * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestHeaderConverterInterface $riskCheckRequestHeaderConverter
-     * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverterInterface $riskCheckResponseConverter
+     * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\AdapterFactoryInterface $adapterFactory
      */
     public function __construct(
-        RiskCheckRequestConverterInterface $riskCheckRequestConverter,
-        RiskCheckRequestHeaderConverterInterface $riskCheckRequestHeaderConverter,
-        RiskCheckResponseConverterInterface $riskCheckResponseConverter
+        AdapterFactoryInterface $adapterFactory
     ) {
-
-        $this->riskCheckRequestConverter = $riskCheckRequestConverter;
-        $this->riskCheckRequestHeaderConverter = $riskCheckRequestHeaderConverter;
-        $this->riskCheckResponseConverter = $riskCheckResponseConverter;
+        $this->adapterFactory = $adapterFactory;
     }
 
     /**
@@ -62,8 +44,12 @@ class SoapApiAdapter implements ApiAdapterInterface
      */
     public function performRiskCheck(ArvatoRssRiskCheckRequestTransfer $requestTransfer)
     {
-        $params = $this->riskCheckRequestConverter->convert($requestTransfer);
-        $soapClient = $this->createSoapClient($requestTransfer);
+        $params = $this->adapterFactory
+            ->createRiskCheckRequestConverter()
+            ->convert($requestTransfer);
+        $soapClient = $this->createSoapClient(
+            $requestTransfer->getIdentification()
+        );
 
         $result = $soapClient->RiskCheck($params);
         try {
@@ -75,32 +61,44 @@ class SoapApiAdapter implements ApiAdapterInterface
             return $responseTransfer;
         }
 
-        return $this->riskCheckResponseConverter->convert($result);
+        return $this->adapterFactory->createRiskCheckResponseConverter()->convert($result);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ArvatoRssStoreOrderRequestTransfer $requestTransfer
+     *
+     * @return \Generated\Shared\Transfer\ArvatoRssStoreOrderResponseTransfer
+     */
+    public function storeOrder(ArvatoRssStoreOrderRequestTransfer $requestTransfer)
+    {
+        $params = $this->adapterFactory
+            ->createStoreOrderRequestConverter()
+            ->convert($requestTransfer);
+        $soapClient = $this->createSoapClient(
+            $requestTransfer->getIdentification()
+        );
+
+        $result = $soapClient->StoreOrder($params);
+        try {
+            $this->validateResponse($result);
+        } catch (ArvatoRssStoreOrderApiException $exception) {
+            $responseTransfer = new ArvatoRssStoreOrderResponseTransfer();
+            $responseTransfer->setIsError(true);
+            $responseTransfer->setErrorMessage($exception->getMessage());
+            return $responseTransfer;
+        }
+
+        return $this->adapterFactory->createStoreOrderResponseConverter()->convert($result);
     }
 
     /**
      * @param \Generated\Shared\Transfer\ArvatoRssIdentificationRequestTransfer $identification
-     * @param array $requestParameters
-     *
-     * @return \Generated\Shared\Transfer\ArvatoRssStoreOrderResponseTransfer
-     */
-    public function storeOrder(
-        ArvatoRssIdentificationRequestTransfer $identification,
-        array $requestParameters
-    )
-    {
-        // TODO: Implement storeOrder() method.
-    }
-
-
-    /**
-     * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $requestTransfer
      *
      * @return \SoapClient
      */
-    protected function createSoapClient(ArvatoRssRiskCheckRequestTransfer $requestTransfer)
+    protected function createSoapClient(ArvatoRssIdentificationRequestTransfer $identification)
     {
-        $header = $this->riskCheckRequestHeaderConverter->convert($requestTransfer);
+        $header = $this->adapterFactory->createRequestHeaderConverter()->convert($identification);
         $options = $this->getRequestOptions();
         $soapClient = new SoapClient(static::WSDL_PATH, $options);
         $soapClient->__setSoapHeaders($header);
