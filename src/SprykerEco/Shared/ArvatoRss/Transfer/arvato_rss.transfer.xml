@@ -66,6 +66,8 @@
 
     <transfer name="ArvatoRssStoreOrderResponse">
         <property name="result" type="string" />
+        <property name="isError" type="bool" />
+        <property name="errorMessage" type="string" />
     </transfer>
 
     <transfer name="Quote">
