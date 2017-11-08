@@ -13,7 +13,6 @@ use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyBridge;
 
 class ArvatoRssDependencyProvider extends AbstractBundleDependencyProvider
 {
-
     const FACADE_MONEY = "FACADE_MONEY";
 
     /**
@@ -29,5 +28,4 @@ class ArvatoRssDependencyProvider extends AbstractBundleDependencyProvider
 
         return $container;
     }
-
 }

@@ -15,7 +15,6 @@ use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface;
 
 class MapperTestHelper extends Module
 {
-
     /**
      * @param \SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface $moneyFacade
      *
@@ -44,5 +43,4 @@ class MapperTestHelper extends Module
     {
         return new Iso3166ConverterService();
     }
-
 }

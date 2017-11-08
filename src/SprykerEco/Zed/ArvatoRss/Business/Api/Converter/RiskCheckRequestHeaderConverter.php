@@ -11,11 +11,9 @@ use Generated\Shared\Transfer\ArvatoRssIdentificationRequestTransfer;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
 use SoapHeader;
 use SprykerEco\Zed\ArvatoRss\Business\Api\ArvatoRssIdentificationApiConstants;
-use SprykerEco\Zed\ArvatoRss\Business\Api\ArvatoRssRequestApiConstants;
 
 class RiskCheckRequestHeaderConverter implements RiskCheckRequestHeaderConverterInterface
 {
-
     /**
      * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $arvatoRssRiskCheckRequestTransfer
      *
@@ -51,11 +49,10 @@ class RiskCheckRequestHeaderConverter implements RiskCheckRequestHeaderConverter
         return $result;
     }
 
-
     /**
      * @param array $requestData
      *
-     * @return SoapHeader
+     * @return \SoapHeader
      */
     protected function createRequestHeader($requestData)
     {
@@ -76,5 +73,4 @@ class RiskCheckRequestHeaderConverter implements RiskCheckRequestHeaderConverter
             ArvatoRssIdentificationApiConstants::ARVATORSS_API_AUTHORISATION => 'authorisation',
         ];
     }
-
 }

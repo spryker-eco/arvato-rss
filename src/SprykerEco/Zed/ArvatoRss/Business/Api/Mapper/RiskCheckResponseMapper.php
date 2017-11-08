@@ -12,7 +12,6 @@ use Generated\Shared\Transfer\QuoteTransfer;
 
 class RiskCheckResponseMapper implements RiskCheckResponseMapperInterface
 {
-
     /**
      * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer $arvatoRssRiskCheckResponseTransfer
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -26,5 +25,4 @@ class RiskCheckResponseMapper implements RiskCheckResponseMapperInterface
         $quoteTransfer->setArvatoRssRiskCheckResponse($arvatoRssRiskCheckResponseTransfer);
         return $quoteTransfer;
     }
-
 }

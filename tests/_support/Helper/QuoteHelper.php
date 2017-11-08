@@ -10,7 +10,6 @@ use Generated\Shared\Transfer\TotalsTransfer;
 
 class QuoteHelper extends Module
 {
-
     /**
      * @param array|null $data
      *
@@ -54,5 +53,4 @@ class QuoteHelper extends Module
 
         return $quoteTransfer;
     }
-
 }

@@ -9,7 +9,6 @@ namespace SprykerEco\Service\ArvatoRss;
 
 interface Iso3166ConverterServiceInterface
 {
-
     /**
      * @param string $iso2CountryCode
      *
@@ -23,5 +22,4 @@ interface Iso3166ConverterServiceInterface
      * @return string|null
      */
     public function numericToIso2($iso3166CountryCode);
-
 }

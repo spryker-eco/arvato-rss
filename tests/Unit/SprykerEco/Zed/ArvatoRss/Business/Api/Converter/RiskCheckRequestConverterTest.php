@@ -17,7 +17,6 @@ use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverter;
 
 class RiskCheckRequestConverterTest extends Test
 {
-
     /**
      * @dataProvider transferProvider
      *
@@ -125,5 +124,4 @@ class RiskCheckRequestConverterTest extends Test
 
         return $result;
     }
-
 }

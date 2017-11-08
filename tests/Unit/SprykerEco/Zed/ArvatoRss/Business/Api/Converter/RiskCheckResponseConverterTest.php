@@ -14,7 +14,6 @@ use stdClass;
 
 class RiskCheckResponseConverterTest extends Test
 {
-
     /**
      * @return void
      */
@@ -56,5 +55,4 @@ class RiskCheckResponseConverterTest extends Test
             ->setActionCode($response->Decision->ActionCode)
             ->setResultText($response->Decision->ResultText);
     }
-
 }

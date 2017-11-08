@@ -12,12 +12,10 @@ use Generated\Shared\Transfer\ArvatoRssIdentificationRequestTransfer;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
 use SoapHeader;
 use SprykerEco\Zed\ArvatoRss\Business\Api\ArvatoRssIdentificationApiConstants;
-use SprykerEco\Zed\ArvatoRss\Business\Api\ArvatoRssRequestApiConstants;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestHeaderConverter;
 
 class RiskCheckRequestHeaderConverterTest extends Test
 {
-
     /**
      * @return void
      */
@@ -57,5 +55,4 @@ class RiskCheckRequestHeaderConverterTest extends Test
 
         return $requestTransfer;
     }
-
 }

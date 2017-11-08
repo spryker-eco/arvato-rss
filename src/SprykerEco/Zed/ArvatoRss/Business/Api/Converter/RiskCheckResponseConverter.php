@@ -12,7 +12,6 @@ use stdClass;
 
 class RiskCheckResponseConverter implements RiskCheckResponseConverterInterface
 {
-
     /**
      * @param \stdClass $response
      *
@@ -29,5 +28,4 @@ class RiskCheckResponseConverter implements RiskCheckResponseConverterInterface
 
         return $responseTransfer;
     }
-
 }

@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\ArvatoRss\Business\Api;
 
 interface ArvatoRssRequestApiConstants
 {
-
     const ARVATORSS_API_COUNTRY = 'Country';
     const ARVATORSS_API_CITY = 'City';
     const ARVATORSS_API_STREET = 'Street';
@@ -29,5 +28,4 @@ interface ArvatoRssRequestApiConstants
     const ARVATORSS_API_PRODUCTGROUPID = 'ProductGroupId';
     const ARVATORSS_API_UNITPRICE = 'UnitPrice';
     const ARVATORSS_API_UNITCOUNT = 'UnitCount';
-
 }

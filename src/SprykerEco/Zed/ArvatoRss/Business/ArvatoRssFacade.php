@@ -15,7 +15,6 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
  */
 class ArvatoRssFacade extends AbstractFacade implements ArvatoRssFacadeInterface
 {
-
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
@@ -25,5 +24,4 @@ class ArvatoRssFacade extends AbstractFacade implements ArvatoRssFacadeInterface
     {
         return $this->getFactory()->createRiskCheckHandler()->performRiskCheck($quoteTransfer);
     }
-
 }

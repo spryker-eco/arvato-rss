@@ -7,6 +7,8 @@
 
 namespace ArvatoRss;
 
+use Codeception\Actor;
+
 /**
  * Inherited Methods
  * @method void wantToTest($text)
@@ -22,13 +24,11 @@ namespace ArvatoRss;
  *
  * @SuppressWarnings(PHPMD)
  */
-class AcceptanceTester extends \Codeception\Actor
+class AcceptanceTester extends Actor
 {
-
     use _generated\AcceptanceTesterActions;
 
    /**
     * Define custom actions here
     */
-
 }

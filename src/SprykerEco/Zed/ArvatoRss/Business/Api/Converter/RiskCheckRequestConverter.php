@@ -12,7 +12,6 @@ use SprykerEco\Zed\ArvatoRss\Business\Api\ArvatoRssRequestApiConstants;
 
 class RiskCheckRequestConverter implements RiskCheckRequestConverterInterface
 {
-
     /**
      * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $arvatoRssRiskCheckRequestTransfer
      *
@@ -82,5 +81,4 @@ class RiskCheckRequestConverter implements RiskCheckRequestConverterInterface
 
         return $result;
     }
-
 }

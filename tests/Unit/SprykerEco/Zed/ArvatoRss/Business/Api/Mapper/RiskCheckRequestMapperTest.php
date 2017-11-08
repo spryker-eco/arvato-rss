@@ -7,7 +7,6 @@
 
 namespace Unit\SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
 
-use ArrayObject;
 use Generated\Shared\Transfer\ArvatoRssBillingCustomerTransfer;
 use Generated\Shared\Transfer\ArvatoRssCustomerAddressTransfer;
 use Generated\Shared\Transfer\ArvatoRssIdentificationRequestTransfer;
@@ -22,7 +21,6 @@ use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyBridge;
 
 class RiskCheckRequestMapperTest extends AbstractMapperTest
 {
-
     /**
      * @const int INT_VALUE
      */
@@ -87,9 +85,9 @@ class RiskCheckRequestMapperTest extends AbstractMapperTest
                     'unitCount' => 1,
                     'itemQuantity' => 1,
                     'grandTotal' => 15000,
-                    'subTotal' => 14000
-                ]
-            ]
+                    'subTotal' => 14000,
+                ],
+            ],
         ];
 
         return $data;
@@ -164,5 +162,4 @@ class RiskCheckRequestMapperTest extends AbstractMapperTest
 
         return $moneyFacadeMock;
     }
-
 }

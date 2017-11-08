@@ -25,7 +25,6 @@ use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface;
 
 class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
 {
-
     /**
      * @const int PRODUCT_GROUP_ID
      */
@@ -215,5 +214,4 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
     {
         return $dateOfBirth ? (new DateTime($dateOfBirth))->format(static::DATE_FORMAT) : null;
     }
-
 }

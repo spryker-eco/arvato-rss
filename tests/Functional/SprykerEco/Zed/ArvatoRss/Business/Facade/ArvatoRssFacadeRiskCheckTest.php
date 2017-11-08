@@ -2,20 +2,18 @@
 
 namespace Functional\SprykerEco\Zed\ArvatoRss\Business\Facade;
 
+use ArvatoRss\Helper\QuoteHelper;
 use Codeception\TestCase\Test;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer;
-use ArvatoRss\Helper\QuoteHelper;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\SoapApiAdapter;
 use SprykerEco\Zed\ArvatoRss\Business\ArvatoRssBusinessFactory;
 use SprykerEco\Zed\ArvatoRss\Business\ArvatoRssFacade;
 use SprykerEco\Zed\ArvatoRss\Business\Handler\RiskCheckHandlerInterface;
 
 class ArvatoRssFacadeRiskCheckTest extends Test
 {
-
     /**
      * @var \ArvatoRss\Helper\QuoteHelper $quoteHelper
      */
@@ -66,9 +64,9 @@ class ArvatoRssFacadeRiskCheckTest extends Test
                     'unitCount' => 1,
                     'itemQuantity' => 1,
                     'grandTotal' => 15000,
-                    'subTotal' => 14000
-                ]
-            ]
+                    'subTotal' => 14000,
+                ],
+            ],
         ];
 
         return $data;
@@ -131,5 +129,4 @@ class ArvatoRssFacadeRiskCheckTest extends Test
     {
         $this->quoteHelper = $quoteHelper;
     }
-
 }

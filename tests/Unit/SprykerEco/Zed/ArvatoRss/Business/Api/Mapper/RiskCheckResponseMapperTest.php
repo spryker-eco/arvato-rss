@@ -13,7 +13,6 @@ use Generated\Shared\Transfer\QuoteTransfer;
 
 class RiskCheckResponseMapperTest extends AbstractMapperTest
 {
-
     /**
      * @dataProvider responseDataProvider
      *
@@ -60,7 +59,7 @@ class RiskCheckResponseMapperTest extends AbstractMapperTest
                         'city' => 'Berlin',
                     ],
                     ArrayObject::ARRAY_AS_PROPS
-                )
+                ),
             ],
         ];
     }
@@ -94,5 +93,4 @@ class RiskCheckResponseMapperTest extends AbstractMapperTest
 
         return $transfer;
     }
-
 }

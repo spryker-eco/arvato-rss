@@ -11,12 +11,10 @@ use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
 
 interface ApiAdapterInterface
 {
-
     /**
      * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $requestTransfer
      *
      * @return \Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer
      */
     public function performRiskCheck(ArvatoRssRiskCheckRequestTransfer $requestTransfer);
-
 }

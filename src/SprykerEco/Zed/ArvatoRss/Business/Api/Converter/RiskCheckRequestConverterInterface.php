@@ -11,12 +11,10 @@ use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
 
 interface RiskCheckRequestConverterInterface
 {
-
     /**
      * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $arvatoRssRiskCheckRequestTransfer
      *
      * @return array
      */
     public function convert(ArvatoRssRiskCheckRequestTransfer $arvatoRssRiskCheckRequestTransfer);
-
 }

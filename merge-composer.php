@@ -1,8 +1,8 @@
 <?php
 
 const PATH_REQUIRE = 'require';
-if (count($argv)<4) {
-    echo 'Not enough arguments!'.PHP_EOL;
+if (count($argv) < 4) {
+    echo 'Not enough arguments!' . PHP_EOL;
     die(1);
 }
 $fromComposer = json_decode(file_get_contents($argv[1]), true);

@@ -7,16 +7,13 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Business\Handler;
 
-use Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiAdapterInterface;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Exception\ArvatoRssRiskCheckApiException;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapperInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckResponseMapperInterface;
 
 class RiskCheckHandler implements RiskCheckHandlerInterface
 {
-
     /**
      * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapperInterface
      */
@@ -61,5 +58,4 @@ class RiskCheckHandler implements RiskCheckHandlerInterface
 
         return $quoteTransfer;
     }
-
 }

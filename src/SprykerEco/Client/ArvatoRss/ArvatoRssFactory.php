@@ -12,7 +12,6 @@ use SprykerEco\Client\ArvatoRss\Zed\ArvatoRssStub;
 
 class ArvatoRssFactory extends AbstractFactory
 {
-
     /**
      * @return \SprykerEco\Client\ArvatoRss\Zed\ArvatoRssStubInterface
      */
@@ -28,5 +27,4 @@ class ArvatoRssFactory extends AbstractFactory
     {
         return $this->getProvidedDependency(ArvatoRssDependencyProvider::CLIENT_ZED_REQUEST);
     }
-
 }

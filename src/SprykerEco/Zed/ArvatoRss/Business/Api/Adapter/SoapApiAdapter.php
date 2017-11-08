@@ -10,7 +10,6 @@ namespace SprykerEco\Zed\ArvatoRss\Business\Api\Adapter;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer;
 use SoapClient;
-use SoapFault;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverterInterface;
@@ -20,7 +19,6 @@ use SprykerEco\Zed\ArvatoRss\Business\Api\Exception\ArvatoRssRiskCheckApiExcepti
 
 class SoapApiAdapter implements ApiAdapterInterface
 {
-
     const WSDL_PATH = __DIR__ . "/../Etc/risk-solution-services.v2.1.wsdl";
 
     /**
@@ -115,8 +113,7 @@ class SoapApiAdapter implements ApiAdapterInterface
      */
     protected function extractExceptionMessage($result)
     {
-        if(isset($result->detail) && !empty(array_keys(get_object_vars($result->detail))[0]))
-        {
+        if (isset($result->detail) && !empty(array_keys(get_object_vars($result->detail))[0])) {
             $exceptionName = array_keys(get_object_vars($result->detail))[0];
             $exceptionObj = $result->detail->{$exceptionName};
             return $exceptionObj->Description;
@@ -134,5 +131,4 @@ class SoapApiAdapter implements ApiAdapterInterface
             'exceptions' => false,
         ];
     }
-
 }

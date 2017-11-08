@@ -12,7 +12,6 @@ use SprykerEco\Shared\ArvatoRss\ArvatoRssCountryConstants;
 
 class Iso3166ConverterService extends AbstractService implements Iso3166ConverterServiceInterface
 {
-
     const ISO2_KEY = 'alpha2';
     const ISO3166_KEY = 'numeric';
 
@@ -56,5 +55,4 @@ class Iso3166ConverterService extends AbstractService implements Iso3166Converte
     {
         return array_search($value, array_column(ArvatoRssCountryConstants::ISO3166, $columnName));
     }
-
 }

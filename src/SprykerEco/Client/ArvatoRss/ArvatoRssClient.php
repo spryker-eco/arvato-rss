@@ -15,7 +15,6 @@ use Spryker\Client\Kernel\AbstractClient;
  */
 class ArvatoRssClient extends AbstractClient implements ArvatoRssClientInterface
 {
-
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
@@ -25,5 +24,4 @@ class ArvatoRssClient extends AbstractClient implements ArvatoRssClientInterface
     {
         return $this->getFactory()->createZedStub()->performRiskCheck($quoteTransfer);
     }
-
 }

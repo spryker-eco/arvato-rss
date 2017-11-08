@@ -23,7 +23,6 @@ use SprykerEco\Zed\ArvatoRss\Business\Handler\RiskCheckHandler;
  */
 class ArvatoRssBusinessFactory extends AbstractBusinessFactory
 {
-
     /**
      * @return \SprykerEco\Zed\ArvatoRss\Business\Handler\RiskCheckHandlerInterface
      */
@@ -106,5 +105,4 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     {
         return new Iso3166ConverterService();
     }
-
 }
