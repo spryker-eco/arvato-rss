@@ -7,8 +7,10 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Adapter;
 
+use Generated\Shared\Transfer\ArvatoRssIdentificationRequestTransfer;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer;
+use Generated\Shared\Transfer\ArvatoRssStoreOrderRequestTransfer;
 use SoapClient;
 use SoapFault;
 use Spryker\Shared\Config\Config;
@@ -75,6 +77,21 @@ class SoapApiAdapter implements ApiAdapterInterface
 
         return $this->riskCheckResponseConverter->convert($result);
     }
+
+    /**
+     * @param \Generated\Shared\Transfer\ArvatoRssIdentificationRequestTransfer $identification
+     * @param array $requestParameters
+     *
+     * @return \Generated\Shared\Transfer\ArvatoRssStoreOrderResponseTransfer
+     */
+    public function storeOrder(
+        ArvatoRssIdentificationRequestTransfer $identification,
+        array $requestParameters
+    )
+    {
+        // TODO: Implement storeOrder() method.
+    }
+
 
     /**
      * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $requestTransfer
