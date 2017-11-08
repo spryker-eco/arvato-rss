@@ -66,7 +66,7 @@ class RiskCheckResponseMapperTest extends AbstractMapperTest
 
     /**
      * @param \ArrayObject $data
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTranfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */

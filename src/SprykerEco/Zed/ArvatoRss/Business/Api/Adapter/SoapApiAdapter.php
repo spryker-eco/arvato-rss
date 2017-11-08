@@ -10,6 +10,7 @@ namespace SprykerEco\Zed\ArvatoRss\Business\Api\Adapter;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer;
 use SoapClient;
+use SoapFault;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverterInterface;
@@ -109,9 +110,11 @@ class SoapApiAdapter implements ApiAdapterInterface
     }
 
     /**
+     * @param \SoapFault $result
+     *
      * @return string
      */
-    protected function extractExceptionMessage($result)
+    protected function extractExceptionMessage(SoapFault $result)
     {
         if (isset($result->detail) && !empty(array_keys(get_object_vars($result->detail))[0])) {
             $exceptionName = array_keys(get_object_vars($result->detail))[0];
