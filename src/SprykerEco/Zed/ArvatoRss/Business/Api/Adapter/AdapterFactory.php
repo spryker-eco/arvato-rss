@@ -35,7 +35,7 @@ class AdapterFactory extends AbstractBusinessFactory implements AdapterFactoryIn
     /**
      * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverterInterface
      */
-    public function createRiskCheckResponeConverter()
+    public function createRiskCheckResponseConverter()
     {
         return new RiskCheckResponseConverter();
     }
