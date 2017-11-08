@@ -26,7 +26,7 @@ interface AdapterFactoryInterface
     public function createRiskCheckResponeConverter();
 
     /**
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverterInterface
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\StoreOrderRequestConverterInterface
      */
     public function createStoreOrderRequestConverter();
 
