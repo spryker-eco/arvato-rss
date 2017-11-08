@@ -27,12 +27,12 @@ class ArvatoRssFacade extends AbstractFacade implements ArvatoRssFacadeInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\OrderTransfer
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function storeOrder(OrderTransfer $orderTransfer)
+    public function storeOrder(QuoteTransfer $quoteTransfer)
     {
-        return $this->getFactory()->createStoreOrderHandler()->storeOrder($orderTransfer);
+        return $this->getFactory()->createStoreOrderHandler()->storeOrder($quoteTransfer);
     }
 }

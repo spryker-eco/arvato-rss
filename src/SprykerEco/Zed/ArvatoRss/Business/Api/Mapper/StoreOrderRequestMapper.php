@@ -61,29 +61,29 @@ class StoreOrderRequestMapper implements StoreOrderRequestMapperInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTranfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\ArvatoRssStoreOrderRequestTransfer
      */
-    public function mapOrderToRequestTranfer(OrderTransfer $orderTransfer)
+    public function mapQuoteToRequestTransfer(QuoteTransfer $quoteTransfer)
     {
         $requestTransfer = new ArvatoRssStoreOrderRequestTransfer();
 
-        $requestTransfer = $this->mapIdentification($requestTransfer, $orderTransfer);
-        $requestTransfer = $this->mapOrder($requestTransfer, $orderTransfer);
+        $requestTransfer = $this->mapIdentification($requestTransfer, $quoteTransfer);
+        $requestTransfer = $this->mapOrder($requestTransfer, $quoteTransfer);
 
         return $requestTransfer;
     }
 
     /**
      * @param \Generated\Shared\Transfer\ArvatoRssStoreOrderRequestTransfer $requestTransfer
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\ArvatoRssStoreOrderRequestTransfer
      */
     protected function mapIdentification(
         ArvatoRssStoreOrderRequestTransfer $requestTransfer,
-        OrderTransfer $orderTransfer
+        QuoteTransfer $quoteTransfer
     ) {
         $identificationTransfer = new ArvatoRssIdentificationRequestTransfer();
 
@@ -100,25 +100,25 @@ class StoreOrderRequestMapper implements StoreOrderRequestMapperInterface
 
     /**
      * @param \Generated\Shared\Transfer\ArvatoRssStoreOrderRequestTransfer $requestTransfer
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\ArvatoRssStoreOrderRequestTransfer
      */
     protected function mapOrder(
         ArvatoRssRiskCheckRequestTransfer $requestTransfer,
-        OrderTransfer $orderTransfer
+        QuoteTransfer $quoteTransfer
     ) {
 
         $order = new ArvatoRssOrderTransfer();
 
         $order->setCurrency(Store::getInstance()->getCurrencyIsoCode());
         $order->setGrossTotalBill(
-            $this->moneyFacade->convertIntegerToDecimal($orderTransfer->getTotals()->getGrandTotal())
+            $this->moneyFacade->convertIntegerToDecimal($quoteTransfer->getTotals()->getGrandTotal())
         );
         $order->setTotalOrderValue(
-            $this->moneyFacade->convertIntegerToDecimal($orderTransfer->getTotals()->getSubtotal())
+            $this->moneyFacade->convertIntegerToDecimal($quoteTransfer->getTotals()->getSubtotal())
         );
-        foreach ($orderTransfer->getItems() as $item) {
+        foreach ($quoteTransfer->getItems() as $item) {
             $itemTransfer = $this->prepareOrderItem($item);
             $order->addItem($itemTransfer);
         }

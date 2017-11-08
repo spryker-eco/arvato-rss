@@ -16,16 +16,16 @@ class StoreOrderResponseMapper implements StoreOrderResponseMapperInterface
 {
     /**
      * @param \Generated\Shared\Transfer\ArvatoRssStoreOrderResponseTransfer $arvatoRssStoreOrderResponseTransfer
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\OrderTransfer
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function mapResponseToOrder(
+    public function mapResponseToQuote(
         ArvatoRssStoreOrderResponseTransfer $arvatoRssStoreOrderResponseTransfer,
-        OrderTransfer $orderTransfer
+        QuoteTransfer $quoteTransfer
     ) {
-        $orderTransfer->setArvatoRssStoreOrderResponse($arvatoRssStoreOrderResponseTransfer);
+        $quoteTransfer->setArvatoRssStoreOrderResponse($arvatoRssStoreOrderResponseTransfer);
 
-        return $orderTransfer;
+        return $quoteTransfer;
     }
 }

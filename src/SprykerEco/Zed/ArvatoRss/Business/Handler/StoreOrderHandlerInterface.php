@@ -7,14 +7,14 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Business\Handler;
 
-use Generated\Shared\Transfer\OrderTransfer;
+use Generated\Shared\Transfer\QuoteTransfer;
 
 interface StoreOrderHandlerInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\OrderTransfer
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function storeOrder(OrderTransfer $orderTransfer);
+    public function storeOrder(QuoteTransfer $quoteTransfer);
 }

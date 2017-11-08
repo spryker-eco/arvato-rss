@@ -8,18 +8,18 @@
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
 
 use Generated\Shared\Transfer\ArvatoRssStoreOrderResponseTransfer;
-use Generated\Shared\Transfer\OrderTransfer;
+use Generated\Shared\Transfer\QuoteTransfer;
 
 interface StoreOrderResponseMapperInterface
 {
     /**
      * @param \Generated\Shared\Transfer\ArvatoRssStoreOrderResponseTransfer $arvatoRssStoreOrderResponseTransfer
-     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
-     * @return \Generated\Shared\Transfer\OrderTransfer
+     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function mapResponseToOrder(
+    public function mapResponseToQuote(
         ArvatoRssStoreOrderResponseTransfer $arvatoRssStoreOrderResponseTransfer,
-        OrderTransfer $orderTransfer
+        QuoteTransfer $quoteTransfer
     );
 }
