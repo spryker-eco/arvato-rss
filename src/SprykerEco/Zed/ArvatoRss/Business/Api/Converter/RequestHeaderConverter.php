@@ -12,17 +12,16 @@ use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
 use SoapHeader;
 use SprykerEco\Zed\ArvatoRss\Business\Api\ArvatoRssIdentificationApiConstants;
 
-class RiskCheckRequestHeaderConverter implements RiskCheckRequestHeaderConverterInterface
+class RequestHeaderConverter implements RequestHeaderConverterInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $arvatoRssRiskCheckRequestTransfer
+     * @param \Generated\Shared\Transfer\ArvatoRssIdentificationRequestTransfer $arvatoRssIdentificationRequestTransfer
      *
      * @return \SoapHeader
      */
-    public function convert(ArvatoRssRiskCheckRequestTransfer $arvatoRssRiskCheckRequestTransfer)
+    public function convert(ArvatoRssIdentificationRequestTransfer $arvatoRssIdentificationRequestTransfer)
     {
-        $identification = $arvatoRssRiskCheckRequestTransfer->getIdentification();
-        $requestData = $this->createRequestData($identification);
+        $requestData = $this->createRequestData($arvatoRssIdentificationRequestTransfer);
 
         return $this->createRequestHeader($requestData);
     }
