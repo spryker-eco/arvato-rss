@@ -23,7 +23,6 @@ class StoreOrderRequestConverter implements StoreOrderRequestConverterInterface
     }
 
     /**
-     * TODO: move this part somewhere to avoid duplication.
      *
      * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $arvatoRssRiskCheckRequestTransfer
      *
