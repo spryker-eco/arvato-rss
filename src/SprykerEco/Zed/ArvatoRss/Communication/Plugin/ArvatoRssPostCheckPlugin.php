@@ -26,6 +26,6 @@ class ArvatoRssPostCheckPlugin extends BaseAbstractPlugin implements CheckoutPos
      */
     public function execute(QuoteTransfer $quoteTransfer, CheckoutResponseTransfer $checkoutResponse)
     {
-        $this->getFacade()->storeOrder($quoteTransfer, $checkoutResponse);
+        $this->getFacade()->storeOrder($quoteTransfer);
     }
 }
