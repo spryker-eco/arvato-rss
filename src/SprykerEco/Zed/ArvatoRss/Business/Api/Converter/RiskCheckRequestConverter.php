@@ -22,7 +22,6 @@ class RiskCheckRequestConverter implements RiskCheckRequestConverterInterface
         $billingCustomer = $this->convertBillingCustomer($arvatoRssRiskCheckRequestTransfer);
         $order = $this->convertOrder($arvatoRssRiskCheckRequestTransfer);
 
-        //Merge arrays.
         return $billingCustomer + $order;
     }
 
