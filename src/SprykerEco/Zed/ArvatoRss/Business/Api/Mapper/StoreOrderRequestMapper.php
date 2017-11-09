@@ -23,42 +23,38 @@ use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\Store;
 use SprykerEco\Service\ArvatoRss\Iso3166ConverterServiceInterface;
 use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\BillingCustomerMapperInterface;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\IdentificationMapperInterface;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\OrderMapperInterface;
 use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface;
 
 class StoreOrderRequestMapper implements StoreOrderRequestMapperInterface
 {
-    /**
-     * @const int PRODUCT_GROUP_ID
-     */
-    const PRODUCT_GROUP_ID = 1;
 
     /**
-     * @const string DATE_FORMAT
+     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\IdentificationMapperInterface
      */
-    const DATE_FORMAT = 'Y-m-d';
+    protected $identificationMapper;
 
     /**
-     * @var \SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface $moneyFacade
+     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\OrderMapperInterface
      */
-    protected $moneyFacade;
+    protected $orderMapper;
 
     /**
-     * @var \SprykerEco\Service\ArvatoRss\Iso3166ConverterServiceInterface $iso3166
-     */
-    protected $iso3166Converter;
-
-    /**
-     * @param \SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface $moneyFacade
-     * @param \SprykerEco\Service\ArvatoRss\Iso3166ConverterServiceInterface $iso3166Converter
+     * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\IdentificationMapperInterface $identificationMapper
+     * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\BillingCustomerMapperInterface $billingCustomerMapper
+     * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\OrderMapperInterface $orderMapper
      */
     public function __construct(
-        ArvatoRssToMoneyInterface $moneyFacade,
-        Iso3166ConverterServiceInterface $iso3166Converter
-    ) {
-
-        $this->moneyFacade = $moneyFacade;
-        $this->iso3166Converter = $iso3166Converter;
+        IdentificationMapperInterface $identificationMapper,
+        OrderMapperInterface $orderMapper
+    )
+    {
+        $this->identificationMapper = $identificationMapper;
+        $this->orderMapper = $orderMapper;
     }
+
 
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -69,106 +65,12 @@ class StoreOrderRequestMapper implements StoreOrderRequestMapperInterface
     {
         $requestTransfer = new ArvatoRssStoreOrderRequestTransfer();
 
-        $requestTransfer = $this->mapIdentification($requestTransfer, $quoteTransfer);
-        $requestTransfer = $this->mapOrder($requestTransfer, $quoteTransfer);
+        $identification = $this->identificationMapper->map();
+        $order = $this->orderMapper->map($quoteTransfer);
 
-        return $requestTransfer;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ArvatoRssStoreOrderRequestTransfer $requestTransfer
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\ArvatoRssStoreOrderRequestTransfer
-     */
-    protected function mapIdentification(
-        ArvatoRssStoreOrderRequestTransfer $requestTransfer,
-        QuoteTransfer $quoteTransfer
-    ) {
-        $identificationTransfer = new ArvatoRssIdentificationRequestTransfer();
-
-        $identificationTransfer->setClientId(
-            Config::get(ArvatoRssConstants::ARVATORSS_CLIENTID)
-        );
-        $identificationTransfer->setAuthorisation(
-            Config::get(ArvatoRssConstants::ARVATORSS_AUTHORISATION)
-        );
-        $requestTransfer->setIdentification($identificationTransfer);
-
-        return $requestTransfer;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ArvatoRssStoreOrderRequestTransfer $requestTransfer
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\ArvatoRssStoreOrderRequestTransfer
-     */
-    protected function mapOrder(
-        ArvatoRssRiskCheckRequestTransfer $requestTransfer,
-        QuoteTransfer $quoteTransfer
-    ) {
-
-        $order = new ArvatoRssOrderTransfer();
-
-        $order->setCurrency(Store::getInstance()->getCurrencyIsoCode());
-        $order->setGrossTotalBill(
-            $this->moneyFacade->convertIntegerToDecimal($quoteTransfer->getTotals()->getGrandTotal())
-        );
-        $order->setTotalOrderValue(
-            $this->moneyFacade->convertIntegerToDecimal($quoteTransfer->getTotals()->getSubtotal())
-        );
-        foreach ($quoteTransfer->getItems() as $item) {
-            $itemTransfer = $this->prepareOrderItem($item);
-            $order->addItem($itemTransfer);
-        }
+        $requestTransfer->setIdentification($identification);
         $requestTransfer->setOrder($order);
 
         return $requestTransfer;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ItemTransfer $item
-     *
-     * @return \Generated\Shared\Transfer\ArvatoRssOrderItemTransfer
-     */
-    protected function prepareOrderItem(ItemTransfer $item)
-    {
-        $itemTransfer = new ArvatoRssOrderItemTransfer();
-        $itemTransfer->setUnitPrice(
-            $this->moneyFacade->convertIntegerToDecimal($item->getUnitPrice())
-        );
-        $itemTransfer->setProductNumber($item->getSku());
-        $itemTransfer->setUnitCount($item->getQuantity());
-        $itemTransfer->setProductGroupId(static::PRODUCT_GROUP_ID);
-
-        return $itemTransfer;
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\AddressTransfer $billingAddress
-     *
-     * @return \Generated\Shared\Transfer\ArvatoRssCustomerAddressTransfer
-     */
-    protected function prepareAddressTransfer(AddressTransfer $billingAddress)
-    {
-        $address = new ArvatoRssCustomerAddressTransfer();
-        $address->setCountry($this->iso3166Converter->iso2ToNumeric($billingAddress->getIso2Code()));
-        $address->setCity($billingAddress->getCity());
-        $address->setStreet($billingAddress->getAddress1());
-        $address->setStreetNumber($billingAddress->getAddress2());
-        $address->setZipCode($billingAddress->getZipCode());
-
-        return $address;
-    }
-
-    /**
-     * @param string $dateOfBirth
-     *
-     * @return string|null
-     */
-    protected function prepareDateOfBirth($dateOfBirth)
-    {
-        return $dateOfBirth ? (new DateTime($dateOfBirth))->format(static::DATE_FORMAT) : null;
     }
 }

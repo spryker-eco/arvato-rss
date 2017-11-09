@@ -23,6 +23,7 @@ class RiskCheckResponseMapper implements RiskCheckResponseMapperInterface
         QuoteTransfer $quoteTransfer
     ) {
         $quoteTransfer->setArvatoRssRiskCheckResponse($arvatoRssRiskCheckResponseTransfer);
+
         return $quoteTransfer;
     }
 }

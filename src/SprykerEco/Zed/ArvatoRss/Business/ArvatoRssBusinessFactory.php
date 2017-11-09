@@ -15,6 +15,9 @@ use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\SoapApiAdapter;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RequestHeaderConverter;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverter;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverter;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\BillingCustomerMapper;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\IdentificationMapper;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\OrderMapper;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapper;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckResponseMapper;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\StoreOrderRequestMapper;
@@ -57,8 +60,8 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     protected function createStoreOrderRequestMapper()
     {
         return new StoreOrderRequestMapper(
-            $this->getMoneyFacade(),
-            $this->createIso3166Converter()
+            $this->createIdentificationMapper(),
+            $this->createOrderMapper()
         );
     }
 
@@ -76,8 +79,39 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     protected function createRiskCheckRequestMapper()
     {
         return new RiskCheckRequestMapper(
-            $this->getMoneyFacade(),
+            $this->createIdentificationMapper(),
+            $this->createBillingCustomerMapper(),
+            $this->createOrderMapper()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\IdentificationMapper
+     */
+    protected function createIdentificationMapper()
+    {
+        return new IdentificationMapper(
+            $this->getConfig()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\BillingCustomerMapper
+     */
+    protected function createBillingCustomerMapper()
+    {
+        return new BillingCustomerMapper(
             $this->createIso3166Converter()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\OrderMapper
+     */
+    protected function createOrderMapper()
+    {
+        return new OrderMapper(
+            $this->getMoneyFacade()
         );
     }
 
@@ -97,30 +131,6 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
         return new SoapApiAdapter(
             $this->createAdapterFactory()
         );
-    }
-
-    /**
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverterInterface
-     */
-    protected function createRiskCheckRequestConverter()
-    {
-        return new RiskCheckRequestConverter();
-    }
-
-    /**
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RequestHeaderConverterInterface
-     */
-    protected function createRequestHeaderConverter()
-    {
-        return new RequestHeaderConverter();
-    }
-
-    /**
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverterInterface
-     */
-    protected function createResponseConverter()
-    {
-        return new RiskCheckResponseConverter();
     }
 
     /**
