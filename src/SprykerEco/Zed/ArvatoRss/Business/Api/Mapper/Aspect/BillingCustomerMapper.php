@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect;
 
+use DateTime;
 use Generated\Shared\Transfer\AddressTransfer;
 use Generated\Shared\Transfer\ArvatoRssBillingCustomerTransfer;
 use Generated\Shared\Transfer\ArvatoRssCustomerAddressTransfer;
@@ -85,6 +86,6 @@ class BillingCustomerMapper implements BillingCustomerMapperInterface
      */
     protected function prepareDateOfBirth($dateOfBirth)
     {
-        return $dateOfBirth ? (new \DateTime($dateOfBirth))->format(static::DATE_FORMAT) : null;
+        return $dateOfBirth ? (new DateTime($dateOfBirth))->format(static::DATE_FORMAT) : null;
     }
 }

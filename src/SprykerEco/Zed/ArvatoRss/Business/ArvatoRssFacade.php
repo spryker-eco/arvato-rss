@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Business;
 
-use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 

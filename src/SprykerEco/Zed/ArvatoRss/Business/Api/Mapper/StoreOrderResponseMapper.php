@@ -8,9 +8,7 @@
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
 
 use Generated\Shared\Transfer\ArvatoRssQuoteDataTransfer;
-use Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer;
 use Generated\Shared\Transfer\ArvatoRssStoreOrderResponseTransfer;
-use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 
 class StoreOrderResponseMapper implements StoreOrderResponseMapperInterface

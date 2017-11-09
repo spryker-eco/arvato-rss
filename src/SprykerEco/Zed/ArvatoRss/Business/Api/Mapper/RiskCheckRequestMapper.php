@@ -39,8 +39,7 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
         IdentificationMapperInterface $identificationMapper,
         BillingCustomerMapperInterface $billingCustomerMapper,
         OrderMapperInterface $orderMapper
-    )
-    {
+    ) {
         $this->identificationMapper = $identificationMapper;
         $this->billingCustomerMapper = $billingCustomerMapper;
         $this->orderMapper = $orderMapper;

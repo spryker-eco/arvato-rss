@@ -13,7 +13,7 @@ interface Iso3166ConverterServiceInterface
      * Converts ISO2 code to ISO3166.
      *
      * @api
-     * 
+     *
      * @param string $iso2CountryCode
      *
      * @return string|null

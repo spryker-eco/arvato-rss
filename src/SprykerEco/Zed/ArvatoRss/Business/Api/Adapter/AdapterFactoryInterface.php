@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Adapter;
 
-
 interface AdapterFactoryInterface
 {
     /**

@@ -17,7 +17,7 @@ use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\StoreOrderResponseConverter;
 class AdapterFactory extends AbstractBusinessFactory implements AdapterFactoryInterface
 {
     /**
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RequestHeaderConverter
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RequestHeaderConverterInterface
      */
     public function createRequestHeaderConverter()
     {

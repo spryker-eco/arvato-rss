@@ -12,9 +12,6 @@ use SprykerEco\Service\ArvatoRss\Iso3166ConverterService;
 use SprykerEco\Zed\ArvatoRss\ArvatoRssDependencyProvider;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\AdapterFactory;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\SoapApiAdapter;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RequestHeaderConverter;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverter;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverter;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\BillingCustomerMapper;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\IdentificationMapper;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\OrderMapper;
@@ -86,7 +83,7 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\IdentificationMapper
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\IdentificationMapperInterface
      */
     protected function createIdentificationMapper()
     {
@@ -96,7 +93,7 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\BillingCustomerMapper
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\BillingCustomerMapperInterface
      */
     protected function createBillingCustomerMapper()
     {
@@ -106,7 +103,7 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\OrderMapper
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\OrderMapperInterface
      */
     protected function createOrderMapper()
     {
@@ -150,7 +147,7 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\AdapterFactory
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\AdapterFactoryInterface
      */
     protected function createAdapterFactory()
     {

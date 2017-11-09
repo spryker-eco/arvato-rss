@@ -7,6 +7,8 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Converter;
 
+use stdClass;
+
 interface StoreOrderResponseConverterInterface
 {
     /**
@@ -14,5 +16,5 @@ interface StoreOrderResponseConverterInterface
      *
      * @return \Generated\Shared\Transfer\ArvatoRssStoreOrderResponseTransfer
      */
-    public function convert(\stdClass $response);
+    public function convert(stdClass $response);
 }
