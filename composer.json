@@ -3,8 +3,13 @@
   "description": "Arvato risk security check module",
   "license": "MIT",
   "autoload": {
-    "psr-0": {
-      "SprykerEco\\": "src/"
+    "psr-4": {
+      "SprykerEco\\": "src/SprykerEco/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "SprykerEcoTest\\": "tests/SprykerEcoTest/"
     }
   },
   "require": {
