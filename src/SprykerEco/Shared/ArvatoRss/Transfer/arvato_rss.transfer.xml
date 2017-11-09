@@ -70,8 +70,12 @@
         <property name="errorMessage" type="string" />
     </transfer>
 
-    <transfer name="Quote">
+    <transfer name="ArvatoRssQuoteData">
         <property name="arvatoRssRiskCheckResponse" type="ArvatoRssRiskCheckResponse" />
         <property name="arvatoRssStoreOrderResponse" type="ArvatoRssStoreOrderResponse" />
+    </transfer>
+
+    <transfer name="Quote">
+        <property name="arvatoRssQuoteData" type="ArvatoRssQuoteData" />
     </transfer>
 </transfers>

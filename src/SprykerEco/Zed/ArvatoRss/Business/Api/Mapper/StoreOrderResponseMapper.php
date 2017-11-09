@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
 
+use Generated\Shared\Transfer\ArvatoRssQuoteDataTransfer;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer;
 use Generated\Shared\Transfer\ArvatoRssStoreOrderResponseTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
@@ -24,7 +25,11 @@ class StoreOrderResponseMapper implements StoreOrderResponseMapperInterface
         ArvatoRssStoreOrderResponseTransfer $arvatoRssStoreOrderResponseTransfer,
         QuoteTransfer $quoteTransfer
     ) {
-        $quoteTransfer->setArvatoRssStoreOrderResponse($arvatoRssStoreOrderResponseTransfer);
+        if (!$quoteTransfer->getArvatoRssQuoteData()) {
+            $quoteTransfer->setArvatoRssQuoteData(new ArvatoRssQuoteDataTransfer());
+        }
+        $quoteTransfer->getArvatoRssQuoteData()
+            ->setArvatoRssStoreOrderResponse($arvatoRssStoreOrderResponseTransfer);
 
         return $quoteTransfer;
     }
