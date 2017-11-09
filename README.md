@@ -11,8 +11,8 @@ composer require spryker-eco/arvato-rss
 
 ## Code checks
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/spryker-eco/arvato-rss/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/spryker-eco/arvato-rss/?branch=master)
-[![License](https://img.shields.io/github/license/spryker/demoshop.svg)](https://github.com/spryker/demoshop/)
 [![Build Status](https://scrutinizer-ci.com/g/spryker-eco/arvato-rss/badges/build.png?b=master)](https://scrutinizer-ci.com/g/spryker-eco/arvato-rss/build-status/master)
 
 
