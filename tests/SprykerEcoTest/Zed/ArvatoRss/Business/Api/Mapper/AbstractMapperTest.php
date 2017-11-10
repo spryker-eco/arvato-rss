@@ -5,33 +5,58 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Unit\SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
+namespace SprykerEcoTest\Zed\ArvatoRss\Business\Api\Mapper\Aspect;
 
-use ArvatoRss\Helper\QuoteHelper;
-use ArvatoRss\Helper\Unit\MapperTestHelper;
 use Codeception\TestCase\Test;
+use Generated\Shared\DataBuilder\QuoteBuilder;
+use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyBridge;
 
 class AbstractMapperTest extends Test
 {
     /**
-     * @var \ArvatoRss\Helper\Unit\MapperTestHelper $helper
+     * @const double DECIMAL_VALUE
      */
-    protected $helper;
+    const DECIMAL_VALUE = 124.75;
 
     /**
-     * @var \ArvatoRss\Helper\QuoteHelper $quoteHelper
+     * @var \Generated\Shared\Transfer\QuoteTransfer
      */
-    protected $quoteHelper;
+    protected $quote;
 
     /**
-     * @param ArvatoRss\Helper\Unit\MapperTestHelper $mapperHelper
-     * @param ArvatoRss\Helper\QuoteHelper $quoteHelper
-     *
      * @return void
      */
-    protected function _inject(MapperTestHelper $mapperHelper, QuoteHelper $quoteHelper)
+    public function setUp()
     {
-        $this->helper = $mapperHelper;
-        $this->quoteHelper = $quoteHelper;
+        parent::setUp();
+        $this->quote = $this->createQuoteTransfer();
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\QuoteTransfer
+     */
+    protected function createQuoteTransfer()
+    {
+        return (new QuoteBuilder())
+            ->withBillingAddress()
+            ->withCustomer()
+            ->withTotals()
+            ->withItem()
+            ->build();
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected function createMoneyFacadeMock()
+    {
+        $moneyFacadeMock = $this->createPartialMock(
+            ArvatoRssToMoneyBridge::class,
+            ['convertIntegerToDecimal']
+        );
+        $moneyFacadeMock->method('convertIntegerToDecimal')
+            ->willReturn(static::DECIMAL_VALUE);
+
+        return $moneyFacadeMock;
     }
 }

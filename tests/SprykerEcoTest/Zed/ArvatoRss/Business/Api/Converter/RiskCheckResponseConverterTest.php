@@ -43,7 +43,7 @@ class RiskCheckResponseConverterTest extends Test
     }
 
     /**
-     * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverterInterface $response
+     * @param \stdClass
      *
      * @return \Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer
      */

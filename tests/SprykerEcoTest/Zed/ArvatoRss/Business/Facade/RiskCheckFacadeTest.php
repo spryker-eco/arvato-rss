@@ -13,7 +13,7 @@ use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEcoTest\Zed\ArvatoRss\Mock\ArvatoRssBusinessFactoryMock;
 use SprykerTest\Shared\Testify\Helper\BusinessHelper;
 
-class RiskCheckTest extends AbstractTest
+class RiskCheckFacadeTest extends AbstractFacadeTest
 {
     /**
      * @return void

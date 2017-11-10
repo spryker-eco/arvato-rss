@@ -1,6 +1,47 @@
 <?xml version="1.0"?>
 <transfers xmlns="spryker:transfer-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xsd">
+    <transfer name="ArvatoRssIdentificationRequest">
+        <property name="clientId" dataBuilderRule="word" />
+        <property name="authorisation" dataBuilderRule="word" />
+    </transfer>
+
+    <transfer name="ArvatoRssBillingCustomer">
+        <property name="firstName" dataBuilderRule="firstName" />
+        <property name="lastName" dataBuilderRule="lastName" />
+        <property name="salutation" dataBuilderRule="randomElement(['Mr', 'Mrs'])" />
+        <property name="birthDay" dataBuilderRule="string" />
+        <property name="email" dataBuilderRule="string" />
+        <property name="telephoneNumber" dataBuilderRule="string" />
+        <property name="address" dataBuilderRule="ArvatoRssCustomerAddress" />
+    </transfer>
+
+    <transfer name="ArvatoRssCustomerAddress">
+        <property name="street" dataBuilderRule="address" />
+        <property name="streetNumber" dataBuilderRule="randomNumber" />
+        <property name="zipCode" dataBuilderRule="postcode" />
+        <property name="city" dataBuilderRule="=Berlin" />
+        <property name="country" dataBuilderRule="country" />
+    </transfer>
+
+    <transfer name="ArvatoRssOrder">
+        <property name="orderNumber" dataBuilderRule="numberBetween(1000, 10000)" />
+        <property name="debitorNumber" dataBuilderRule="numberBetween(1000, 10000)" />
+        <property name="paymentType" dataBuilderRule="word" />
+        <property name="registeredOrder" dataBuilderRule="=false" />
+        <property name="currency" dataBuilderRule="=EUR" />
+        <property name="grossTotalBill" dataBuilderRule="numberBetween(1000, 10000)" />
+        <property name="totalOrderValue" dataBuilderRule="numberBetween(1000, 10000)" />
+        <property name="items" type="ArvatoRssOrderItem[]" singular="item" />
+    </transfer>
+
+    <transfer name="ArvatoRssOrderItem">
+        <property name="productNumber" dataBuilderRule="numberBetween(10000, 100000)" />
+        <property name="productGroupId" dataBuilderRule="numberBetween(10000, 100000)" />
+        <property name="unitPrice" dataBuilderRule="numberBetween(1000, 10000)" />
+        <property name="unitCount" dataBuilderRule="randomDigit" />
+    </transfer>
+
     <transfer name="ArvatoRssRiskCheckResponse">
         <property name="result" dataBuilderRule="=test" />
         <property name="actionCode" dataBuilderRule="=test" />

@@ -7,14 +7,12 @@
 
 namespace Unit\SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
 
-use Generated\Shared\Transfer\ArvatoRssBillingCustomerTransfer;
 use Generated\Shared\Transfer\ArvatoRssIdentificationRequestTransfer;
 use Generated\Shared\Transfer\ArvatoRssOrderTransfer;
-use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\BillingCustomerMapperInterface;
+use Generated\Shared\Transfer\ArvatoRssStoreOrderRequestTransfer;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\IdentificationMapperInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\OrderMapperInterface;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapper;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\StoreOrderRequestMapper;
 use SprykerEcoTest\Zed\ArvatoRss\Business\Api\Mapper\Aspect\AbstractMapperTest;
 
 class RiskCheckRequestMapperTest extends AbstractMapperTest
@@ -26,12 +24,11 @@ class RiskCheckRequestMapperTest extends AbstractMapperTest
     {
         $quoteTransfer = $this->createQuoteTransfer();
 
-        $mapper = new RiskCheckRequestMapper(
+        $mapper = new StoreOrderRequestMapper(
             $this->createIdentificationMapperMock(),
-            $this->createBillingCustomerMapperMock(),
             $this->createOrderMapperMock()
         );
-        $result = $mapper->mapQuoteToRequestTranfer($quoteTransfer);
+        $result = $mapper->mapQuoteToRequestTransfer($quoteTransfer);
         $this->testResult($result);
     }
 
@@ -40,45 +37,32 @@ class RiskCheckRequestMapperTest extends AbstractMapperTest
      */
     protected function testResult($result)
     {
-        $this->assertInstanceOf(ArvatoRssRiskCheckRequestTransfer::class, $result);
+        $this->assertInstanceOf(ArvatoRssStoreOrderRequestTransfer::class, $result);
         $this->assertInstanceOf(IdentificationMapperInterface::class, $result->getIdentification());
-        $this->assertInstanceOf(BillingCustomerMapperInterface::class, $result->getBillingCustomer());
         $this->assertInstanceOf(OrderMapperInterface::class, $result->getOrder());
     }
 
     protected function createIdentificationMapperMock()
     {
-        $moneyFacadeMock = $this->createPartialMock(
+        $identificationMapperMock = $this->createPartialMock(
             IdentificationMapperInterface::class,
             ['map']
         );
-        $moneyFacadeMock->method('map')
+        $identificationMapperMock->method('map')
             ->willReturn(new ArvatoRssIdentificationRequestTransfer());
 
-        return $moneyFacadeMock;
-    }
-
-    protected function createBillingCustomerMapperMock()
-    {
-        $moneyFacadeMock = $this->createPartialMock(
-            BillingCustomerMapperInterface::class,
-            ['map']
-        );
-        $moneyFacadeMock->method('map')
-            ->willReturn(new ArvatoRssBillingCustomerTransfer());
-
-        return $moneyFacadeMock;
+        return $identificationMapperMock;
     }
 
     protected function createOrderMapperMock()
     {
-        $moneyFacadeMock = $this->createPartialMock(
+        $orderMapperMock = $this->createPartialMock(
             OrderMapperInterface::class,
             ['map']
         );
-        $moneyFacadeMock->method('map')
+        $orderMapperMock->method('map')
             ->willReturn(new ArvatoRssOrderTransfer());
 
-        return $moneyFacadeMock;
+        return $orderMapperMock;
     }
 }

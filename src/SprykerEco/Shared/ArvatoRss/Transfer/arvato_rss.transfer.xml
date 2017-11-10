@@ -3,7 +3,7 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xsd">
 
-    <transfer name="ArvatoRssIdentificationRequestTransfer">
+    <transfer name="ArvatoRssIdentificationRequest">
         <property name="clientId" type="string" />
         <property name="authorisation" type="string" />
     </transfer>
@@ -34,7 +34,7 @@
         <property name="currency" type="string" />
         <property name="grossTotalBill" type="string" />
         <property name="totalOrderValue" type="string" />
-        <property name="item" type="ArvatoRssOrderItem[]" />
+        <property name="items" type="ArvatoRssOrderItem[]" singular="item" />
     </transfer>
 
     <transfer name="ArvatoRssOrderItem">

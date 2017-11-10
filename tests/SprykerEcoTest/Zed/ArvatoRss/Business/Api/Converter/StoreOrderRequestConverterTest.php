@@ -8,10 +8,10 @@
 namespace Unit\SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
 
 use Codeception\TestCase\Test;
-use Generated\Shared\DataBuilder\ArvatoRssRiskCheckRequestBuilder;
-use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
+use Generated\Shared\DataBuilder\ArvatoRssStoreOrderRequestBuilder;
+use Generated\Shared\Transfer\ArvatoRssStoreOrderRequestTransfer;
 use SprykerEco\Zed\ArvatoRss\Business\Api\ArvatoRssRequestApiConstants;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverter;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\StoreOrderRequestConverter;
 
 class RiskCheckRequestConverterTest extends Test
 {
@@ -20,10 +20,9 @@ class RiskCheckRequestConverterTest extends Test
      */
     public function testConvert()
     {
-        $converter = new RiskCheckRequestConverter();
-        $requestTransfer = (new ArvatoRssRiskCheckRequestBuilder())
+        $converter = new StoreOrderRequestConverter();
+        $requestTransfer = (new ArvatoRssStoreOrderRequestBuilder())
             ->withIdentification()
-            ->withBillingCustomer()
             ->withOrder()
             ->build();
         $result = $converter->convert($requestTransfer);
@@ -33,43 +32,8 @@ class RiskCheckRequestConverterTest extends Test
     /**
      * @return void
      */
-    protected function testResult(array $result, ArvatoRssRiskCheckRequestTransfer $requestTranfer)
+    protected function testResult(array $result, ArvatoRssStoreOrderRequestTransfer $requestTranfer)
     {
-        $this->assertNotEmpty($result[ArvatoRssRequestApiConstants::ARVATORSS_API_ADDRESS]);
-        $this->assertEquals(
-            $result[ArvatoRssRequestApiConstants::ARVATORSS_API_ADDRESS][ArvatoRssRequestApiConstants::ARVATORSS_API_COUNTRY],
-            $requestTranfer->getBillingCustomer()->getAddress()->getCountry()
-        );
-        $this->assertEquals(
-            $result[ArvatoRssRequestApiConstants::ARVATORSS_API_ADDRESS][ArvatoRssRequestApiConstants::ARVATORSS_API_CITY],
-            $requestTranfer->getBillingCustomer()->getAddress()->getCity()
-        );
-        $this->assertEquals(
-            $result[ArvatoRssRequestApiConstants::ARVATORSS_API_ADDRESS][ArvatoRssRequestApiConstants::ARVATORSS_API_STREET],
-            $requestTranfer->getBillingCustomer()->getAddress()->getStreet()
-        );
-        $this->assertEquals(
-            $result[ArvatoRssRequestApiConstants::ARVATORSS_API_ADDRESS][ArvatoRssRequestApiConstants::ARVATORSS_API_STREET_NUMBER],
-            $requestTranfer->getBillingCustomer()->getAddress()->getStreetNumber()
-        );
-        $this->assertEquals(
-            $result[ArvatoRssRequestApiConstants::ARVATORSS_API_ADDRESS][ArvatoRssRequestApiConstants::ARVATORSS_API_ZIPCODE],
-            $requestTranfer->getBillingCustomer()->getAddress()->getZipCode()
-        );
-
-        $this->assertEquals(
-            $result[ArvatoRssRequestApiConstants::ARVATORSS_API_BILLINGCUSTOMER][ArvatoRssRequestApiConstants::ARVATORSS_API_FIRSTNAME],
-            $requestTranfer->getBillingCustomer()->getFirstName()
-        );
-        $this->assertEquals(
-            $result[ArvatoRssRequestApiConstants::ARVATORSS_API_BILLINGCUSTOMER][ArvatoRssRequestApiConstants::ARVATORSS_API_LASTNAME],
-            $requestTranfer->getBillingCustomer()->getLastName()
-        );
-        $this->assertEquals(
-            $result[ArvatoRssRequestApiConstants::ARVATORSS_API_BILLINGCUSTOMER][ArvatoRssRequestApiConstants::ARVATORSS_API_LASTNAME],
-            $requestTranfer->getBillingCustomer()->getLastName()
-        );
-
         $this->assertEquals(
             $result[ArvatoRssRequestApiConstants::ARVATORSS_API_ORDER][ArvatoRssRequestApiConstants::ARVATORSS_API_REGISTEREDORDER],
             $requestTranfer->getOrder()->getRegisteredOrder()

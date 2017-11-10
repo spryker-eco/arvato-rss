@@ -8,9 +8,9 @@
 namespace Unit\SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
 
 use Generated\Shared\Transfer\ArvatoRssQuoteDataTransfer;
-use Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer;
+use Generated\Shared\Transfer\ArvatoRssStoreOrderResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckResponseMapper;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\StoreOrderResponseMapper;
 use SprykerEcoTest\Zed\ArvatoRss\Business\Api\Mapper\Aspect\AbstractMapperTest;
 
 class RiskCheckResponseMapperTest extends AbstractMapperTest
@@ -20,9 +20,9 @@ class RiskCheckResponseMapperTest extends AbstractMapperTest
      */
     public function testMapResponseToQuote()
     {
-        $mapper = new RiskCheckResponseMapper();
+        $mapper = new StoreOrderResponseMapper();
         $quoteTransfer = $this->createQuoteTransfer();
-        $result = $mapper->mapResponseToQuote(new ArvatoRssRiskCheckResponseTransfer(), $quoteTransfer);
+        $result = $mapper->mapResponseToQuote(new ArvatoRssStoreOrderResponseTransfer(), $quoteTransfer);
         $this->testResult($result);
     }
 
@@ -36,7 +36,7 @@ class RiskCheckResponseMapperTest extends AbstractMapperTest
         $this->assertInstanceOf(QuoteTransfer::class, $result);
         $this->assertInstanceOf(ArvatoRssQuoteDataTransfer::class, $result->getArvatoRssQuoteData());
         $this->assertInstanceOf(
-            ArvatoRssRiskCheckResponseTransfer::class,
+            ArvatoRssStoreOrderResponseTransfer::class,
             $result->getArvatoRssQuoteData()
                 ->getArvatoRssRiskCheckResponse()
         );

@@ -12,12 +12,10 @@ use SprykerEcoTest\Zed\ArvatoRss\Mock\Api\Adapter\SoapApiAdapterMock;
 
 class ArvatoRssBusinessFactoryMock extends ArvatoRssBusinessFactory
 {
-
     protected function createSoapApiAdapter()
     {
         return new SoapApiAdapterMock(
             $this->createAdapterFactory()
         );
     }
-
 }

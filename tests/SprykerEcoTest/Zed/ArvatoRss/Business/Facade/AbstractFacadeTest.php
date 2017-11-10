@@ -9,19 +9,17 @@ namespace SprykerEcoTest\Zed\ArvatoRss\Business\Facade;
 
 use Codeception\TestCase\Test;
 use Generated\Shared\DataBuilder\QuoteBuilder;
-use Generated\Shared\Transfer\ArvatoRssQuoteDataTransfer;
-use Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer;
-use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
-use SprykerEcoTest\Zed\ArvatoRss\Mock\ArvatoRssBusinessFactoryMock;
-use SprykerTest\Shared\Testify\Helper\BusinessHelper;
 use SprykerTest\Shared\Testify\Helper\ConfigHelper;
 
-class AbstractTest extends Test
+class AbstractFacadeTest extends Test
 {
     const IS_ERROR = false;
     const RESPONSE_STRING_FIElD_VALUE = 'test';
 
+    /**
+     * @return void
+     */
     public function setUp()
     {
         parent::setUp();
@@ -30,7 +28,7 @@ class AbstractTest extends Test
     }
 
     /**
-     * @return QuoteTransfer|\Spryker\Shared\Kernel\Transfer\AbstractTransfer
+     * @return \Generated\Shared\Transfer\QuoteTransfer|\Spryker\Shared\Kernel\Transfer\AbstractTransfer
      */
     protected function getQuoteTransfer()
     {
