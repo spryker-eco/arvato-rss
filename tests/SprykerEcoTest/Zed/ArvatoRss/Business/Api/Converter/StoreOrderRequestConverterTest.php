@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Unit\SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
+namespace SprykerEcoTest\Zed\ArvatoRss\Business\Api\Converter;
 
 use Codeception\TestCase\Test;
 use Generated\Shared\DataBuilder\ArvatoRssStoreOrderRequestBuilder;
@@ -13,7 +13,7 @@ use Generated\Shared\Transfer\ArvatoRssStoreOrderRequestTransfer;
 use SprykerEco\Zed\ArvatoRss\Business\Api\ArvatoRssRequestApiConstants;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\StoreOrderRequestConverter;
 
-class RiskCheckRequestConverterTest extends Test
+class StoreOrderRequestConverterTest extends Test
 {
     /**
      * @return void

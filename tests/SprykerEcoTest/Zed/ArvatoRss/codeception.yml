@@ -14,12 +14,13 @@ coverage:
 suites:
     Zed:
         path: .
-        class_name: <MODULE_NAME>ZedTester
+        class_name: ArvatoRssZedTester
         modules:
             enabled:
                 - Asserts
                 - \SprykerTest\Shared\Testify\Helper\Environment
                 - \SprykerTest\Shared\Testify\Helper\ConfigHelper
+                - \SprykerTest\Shared\Testify\Helper\BusinessHelper
                 - \SprykerTest\Shared\Testify\Helper\LocatorHelper:
                     projectNamespaces: ['SprykerEco']
                 - \SprykerTest\Shared\Testify\Helper\DependencyHelper

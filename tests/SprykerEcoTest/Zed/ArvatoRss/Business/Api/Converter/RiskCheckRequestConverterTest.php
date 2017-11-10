@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Unit\SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
+namespace SprykerEcoTest\Zed\ArvatoRss\Business\Api\Converter;
 
 use Codeception\TestCase\Test;
 use Generated\Shared\DataBuilder\ArvatoRssRiskCheckRequestBuilder;

@@ -13,7 +13,7 @@ use SprykerEco\Zed\ArvatoRss\ArvatoRssConfig;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\IdentificationMapper;
 use SprykerTest\Shared\Testify\Helper\ConfigHelper;
 
-class OrderMapperTest extends AbstractMapperTest
+class IdentificationMapperTest extends AbstractMapperTest
 {
     const CLIENT_ID = 'CLIENT_ID';
     const AUTHORIZATION = 'AUTHORIZATION';

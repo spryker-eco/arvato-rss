@@ -12,7 +12,7 @@ use Generated\Shared\Transfer\ArvatoRssCustomerAddressTransfer;
 use SprykerEco\Service\ArvatoRss\Iso3166ConverterService;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\BillingCustomerMapper;
 
-class OrderMapperTest extends AbstractMapperTest
+class BillingCustomerMapperTest extends AbstractMapperTest
 {
     /**
      * @return void
