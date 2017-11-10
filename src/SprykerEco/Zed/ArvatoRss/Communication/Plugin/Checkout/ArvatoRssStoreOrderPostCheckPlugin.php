@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Spryker\Zed\Braintree\Communication\Plugin\Checkout;
+namespace SprykerEco\Zed\ArvatoRss\Communication\Plugin\Checkout;
 
 use Generated\Shared\Transfer\CheckoutResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
@@ -15,7 +15,7 @@ use Spryker\Zed\Payment\Dependency\Plugin\Checkout\CheckoutPostCheckPluginInterf
 /**
  * @method \SprykerEco\Zed\ArvatoRss\Business\ArvatoRssFacadeInterface getFacade()
  */
-class ArvatoRssPostCheckPlugin extends BaseAbstractPlugin implements CheckoutPostCheckPluginInterface
+class ArvatoRssStoreOrderPostCheckPlugin extends BaseAbstractPlugin implements CheckoutPostCheckPluginInterface
 {
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
