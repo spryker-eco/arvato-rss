@@ -33,7 +33,7 @@ class StoreOrderRequestConverter implements StoreOrderRequestConverterInterface
         $order = $arvatoRssStoreOrderRequestTransfer->getOrder();
 
         $result[ArvatoRssRequestApiConstants::ARVATORSS_API_ORDER] = [
-            ArvatoRssRequestApiConstants::ARVATORSS_API_REGISTEREDORDER => true,
+            ArvatoRssRequestApiConstants::ARVATORSS_API_REGISTEREDORDER => $order->getRegisteredOrder(),
             ArvatoRssRequestApiConstants::ARVATORSS_API_CURRENCY => $order->getCurrency(),
             ArvatoRssRequestApiConstants::ARVATORSS_API_GROSSTOTALBILL => $order->getGrossTotalBill(),
             ArvatoRssRequestApiConstants::ARVATORSS_API_TOTALORDERVALUE => $order->getTotalOrderValue(),
