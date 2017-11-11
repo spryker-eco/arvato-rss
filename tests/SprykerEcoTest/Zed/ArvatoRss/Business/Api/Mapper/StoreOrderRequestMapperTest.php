@@ -22,13 +22,11 @@ class StoreOrderRequestMapperTest extends AbstractMapperTest
      */
     public function testMapQuoteToRequestTranfer()
     {
-        $quoteTransfer = $this->createQuoteTransfer();
-
         $mapper = new StoreOrderRequestMapper(
             $this->createIdentificationMapperMock(),
             $this->createOrderMapperMock()
         );
-        $result = $mapper->mapQuoteToRequestTransfer($quoteTransfer);
+        $result = $mapper->mapQuoteToRequestTransfer($this->quote);
         $this->testResult($result);
     }
 
@@ -38,8 +36,8 @@ class StoreOrderRequestMapperTest extends AbstractMapperTest
     protected function testResult($result)
     {
         $this->assertInstanceOf(ArvatoRssStoreOrderRequestTransfer::class, $result);
-        $this->assertInstanceOf(IdentificationMapperInterface::class, $result->getIdentification());
-        $this->assertInstanceOf(OrderMapperInterface::class, $result->getOrder());
+        $this->assertInstanceOf(ArvatoRssIdentificationRequestTransfer::class, $result->getIdentification());
+        $this->assertInstanceOf(ArvatoRssOrderTransfer::class, $result->getOrder());
     }
 
     protected function createIdentificationMapperMock()

@@ -34,14 +34,12 @@ class BillingCustomerMapperTest extends AbstractMapperTest
     protected function testResult(ArvatoRssBillingCustomerTransfer $result)
     {
         $address = $result->getAddress();
-        $this->assertInstanceOf($address, ArvatoRssCustomerAddressTransfer::class);
+        $this->assertInstanceOf(ArvatoRssCustomerAddressTransfer::class, $address);
 
-        $this->assertEquals($result->getFirstName(), $this->quote->getBillingAddress()->getLastName());
+        $this->assertEquals($result->getFirstName(), $this->quote->getBillingAddress()->getFirstName());
         $this->assertEquals($result->getLastName(), $this->quote->getBillingAddress()->getLastName());
+        $this->assertEquals($result->getTelephoneNumber(), $this->quote->getBillingAddress()->getPhone());
         $this->assertEquals($result->getEmail(), $this->quote->getCustomer()->getEmail());
-
-        $this->assertEquals($result->getFirstName(), $this->quote->getCustomer()->getLastName());
-        $this->assertEquals($result->getFirstName(), $this->quote->getCustomer()->getLastName());
-        $this->assertEquals($result->getFirstName(), $this->quote->getCustomer()->getLastName());
+        $this->assertEquals($result->getSalutation(), strtoupper($this->quote->getCustomer()->getSalutation()));
     }
 }

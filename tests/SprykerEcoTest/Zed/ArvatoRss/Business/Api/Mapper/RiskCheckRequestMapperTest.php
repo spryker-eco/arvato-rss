@@ -24,14 +24,12 @@ class RiskCheckRequestMapperTest extends AbstractMapperTest
      */
     public function testMapQuoteToRequestTranfer()
     {
-        $quoteTransfer = $this->createQuoteTransfer();
-
         $mapper = new RiskCheckRequestMapper(
             $this->createIdentificationMapperMock(),
             $this->createBillingCustomerMapperMock(),
             $this->createOrderMapperMock()
         );
-        $result = $mapper->mapQuoteToRequestTranfer($quoteTransfer);
+        $result = $mapper->mapQuoteToRequestTranfer($this->quote);
         $this->testResult($result);
     }
 
@@ -41,9 +39,9 @@ class RiskCheckRequestMapperTest extends AbstractMapperTest
     protected function testResult($result)
     {
         $this->assertInstanceOf(ArvatoRssRiskCheckRequestTransfer::class, $result);
-        $this->assertInstanceOf(IdentificationMapperInterface::class, $result->getIdentification());
-        $this->assertInstanceOf(BillingCustomerMapperInterface::class, $result->getBillingCustomer());
-        $this->assertInstanceOf(OrderMapperInterface::class, $result->getOrder());
+        $this->assertInstanceOf(ArvatoRssIdentificationRequestTransfer::class, $result->getIdentification());
+        $this->assertInstanceOf(ArvatoRssBillingCustomerTransfer::class, $result->getBillingCustomer());
+        $this->assertInstanceOf(ArvatoRssOrderTransfer::class, $result->getOrder());
     }
 
     protected function createIdentificationMapperMock()

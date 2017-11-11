@@ -8,6 +8,7 @@
 namespace SprykerEcoTest\Zed\ArvatoRss\Business\Api\Converter;
 
 use Codeception\TestCase\Test;
+use Generated\Shared\DataBuilder\ArvatoRssBillingCustomerBuilder;
 use Generated\Shared\DataBuilder\ArvatoRssRiskCheckRequestBuilder;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
 use SprykerEco\Zed\ArvatoRss\Business\Api\ArvatoRssRequestApiConstants;
@@ -23,7 +24,9 @@ class RiskCheckRequestConverterTest extends Test
         $converter = new RiskCheckRequestConverter();
         $requestTransfer = (new ArvatoRssRiskCheckRequestBuilder())
             ->withIdentification()
-            ->withBillingCustomer()
+            ->withBillingCustomer(
+                (new ArvatoRssBillingCustomerBuilder())->withAddress()
+            )
             ->withOrder()
             ->build();
         $result = $converter->convert($requestTransfer);
@@ -35,59 +38,65 @@ class RiskCheckRequestConverterTest extends Test
      */
     protected function testResult(array $result, ArvatoRssRiskCheckRequestTransfer $requestTranfer)
     {
-        $this->assertNotEmpty($result[ArvatoRssRequestApiConstants::ARVATORSS_API_ADDRESS]);
+        $billingCustomer = $result[ArvatoRssRequestApiConstants::ARVATORSS_API_BILLINGCUSTOMER];
+
+        $this->assertNotEmpty($billingCustomer);
+        $this->assertNotEmpty($billingCustomer[ArvatoRssRequestApiConstants::ARVATORSS_API_ADDRESS]);
         $this->assertEquals(
-            $result[ArvatoRssRequestApiConstants::ARVATORSS_API_ADDRESS][ArvatoRssRequestApiConstants::ARVATORSS_API_COUNTRY],
+            $billingCustomer[ArvatoRssRequestApiConstants::ARVATORSS_API_ADDRESS][ArvatoRssRequestApiConstants::ARVATORSS_API_COUNTRY],
             $requestTranfer->getBillingCustomer()->getAddress()->getCountry()
         );
         $this->assertEquals(
-            $result[ArvatoRssRequestApiConstants::ARVATORSS_API_ADDRESS][ArvatoRssRequestApiConstants::ARVATORSS_API_CITY],
+            $billingCustomer[ArvatoRssRequestApiConstants::ARVATORSS_API_ADDRESS][ArvatoRssRequestApiConstants::ARVATORSS_API_CITY],
             $requestTranfer->getBillingCustomer()->getAddress()->getCity()
         );
         $this->assertEquals(
-            $result[ArvatoRssRequestApiConstants::ARVATORSS_API_ADDRESS][ArvatoRssRequestApiConstants::ARVATORSS_API_STREET],
+            $billingCustomer[ArvatoRssRequestApiConstants::ARVATORSS_API_ADDRESS][ArvatoRssRequestApiConstants::ARVATORSS_API_STREET],
             $requestTranfer->getBillingCustomer()->getAddress()->getStreet()
         );
         $this->assertEquals(
-            $result[ArvatoRssRequestApiConstants::ARVATORSS_API_ADDRESS][ArvatoRssRequestApiConstants::ARVATORSS_API_STREET_NUMBER],
+            $billingCustomer[ArvatoRssRequestApiConstants::ARVATORSS_API_ADDRESS][ArvatoRssRequestApiConstants::ARVATORSS_API_STREET_NUMBER],
             $requestTranfer->getBillingCustomer()->getAddress()->getStreetNumber()
         );
         $this->assertEquals(
-            $result[ArvatoRssRequestApiConstants::ARVATORSS_API_ADDRESS][ArvatoRssRequestApiConstants::ARVATORSS_API_ZIPCODE],
+            $billingCustomer[ArvatoRssRequestApiConstants::ARVATORSS_API_ADDRESS][ArvatoRssRequestApiConstants::ARVATORSS_API_ZIPCODE],
             $requestTranfer->getBillingCustomer()->getAddress()->getZipCode()
         );
 
         $this->assertEquals(
-            $result[ArvatoRssRequestApiConstants::ARVATORSS_API_BILLINGCUSTOMER][ArvatoRssRequestApiConstants::ARVATORSS_API_FIRSTNAME],
+            $billingCustomer[ArvatoRssRequestApiConstants::ARVATORSS_API_FIRSTNAME],
             $requestTranfer->getBillingCustomer()->getFirstName()
         );
         $this->assertEquals(
-            $result[ArvatoRssRequestApiConstants::ARVATORSS_API_BILLINGCUSTOMER][ArvatoRssRequestApiConstants::ARVATORSS_API_LASTNAME],
+            $billingCustomer[ArvatoRssRequestApiConstants::ARVATORSS_API_LASTNAME],
             $requestTranfer->getBillingCustomer()->getLastName()
         );
         $this->assertEquals(
-            $result[ArvatoRssRequestApiConstants::ARVATORSS_API_BILLINGCUSTOMER][ArvatoRssRequestApiConstants::ARVATORSS_API_LASTNAME],
+            $billingCustomer[ArvatoRssRequestApiConstants::ARVATORSS_API_LASTNAME],
             $requestTranfer->getBillingCustomer()->getLastName()
         );
 
+        $order = $result[ArvatoRssRequestApiConstants::ARVATORSS_API_ORDER];
+        $this->assertNotEmpty($order);
+
         $this->assertEquals(
-            $result[ArvatoRssRequestApiConstants::ARVATORSS_API_ORDER][ArvatoRssRequestApiConstants::ARVATORSS_API_REGISTEREDORDER],
+            $order[ArvatoRssRequestApiConstants::ARVATORSS_API_REGISTEREDORDER],
             $requestTranfer->getOrder()->getRegisteredOrder()
         );
         $this->assertEquals(
-            $result[ArvatoRssRequestApiConstants::ARVATORSS_API_ORDER][ArvatoRssRequestApiConstants::ARVATORSS_API_CURRENCY],
+            $order[ArvatoRssRequestApiConstants::ARVATORSS_API_CURRENCY],
             $requestTranfer->getOrder()->getCurrency()
         );
         $this->assertEquals(
-            $result[ArvatoRssRequestApiConstants::ARVATORSS_API_ORDER][ArvatoRssRequestApiConstants::ARVATORSS_API_GROSSTOTALBILL],
+            $order[ArvatoRssRequestApiConstants::ARVATORSS_API_GROSSTOTALBILL],
             $requestTranfer->getOrder()->getGrossTotalBill()
         );
         $this->assertEquals(
-            $result[ArvatoRssRequestApiConstants::ARVATORSS_API_ORDER][ArvatoRssRequestApiConstants::ARVATORSS_API_TOTALORDERVALUE],
+            $order[ArvatoRssRequestApiConstants::ARVATORSS_API_TOTALORDERVALUE],
             $requestTranfer->getOrder()->getTotalOrderValue()
         );
 
-        foreach ($result[ArvatoRssRequestApiConstants::ARVATORSS_API_ORDER][ArvatoRssRequestApiConstants::ARVATORSS_API_ITEM] as $key => $item) {
+        foreach ($order[ArvatoRssRequestApiConstants::ARVATORSS_API_ITEM] as $key => $item) {
             $this->assertArrayHasKey($key, $requestTranfer->getOrder()->getItems());
             $this->assertEquals(
                 $item[ArvatoRssRequestApiConstants::ARVATORSS_API_PRODUCTNUMBER],

@@ -24,8 +24,7 @@ class StoreOrderFacadeTest extends AbstractFacadeTest
         $facade->setFactory(
             new ArvatoRssBusinessFactoryMock()
         );
-        $quote = $this->getQuoteTransfer();
-        $response = $facade->storeOrder($quote);
+        $response = $facade->storeOrder($this->quote);
         $this->testResponse($response);
     }
 

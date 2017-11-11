@@ -21,8 +21,7 @@ class StoreOrderResponseMapperTest extends AbstractMapperTest
     public function testMapResponseToQuote()
     {
         $mapper = new StoreOrderResponseMapper();
-        $quoteTransfer = $this->createQuoteTransfer();
-        $result = $mapper->mapResponseToQuote(new ArvatoRssStoreOrderResponseTransfer(), $quoteTransfer);
+        $result = $mapper->mapResponseToQuote(new ArvatoRssStoreOrderResponseTransfer(), $this->quote);
         $this->testResult($result);
     }
 
@@ -38,7 +37,7 @@ class StoreOrderResponseMapperTest extends AbstractMapperTest
         $this->assertInstanceOf(
             ArvatoRssStoreOrderResponseTransfer::class,
             $result->getArvatoRssQuoteData()
-                ->getArvatoRssRiskCheckResponse()
+                ->getArvatoRssStoreOrderResponse()
         );
     }
 }

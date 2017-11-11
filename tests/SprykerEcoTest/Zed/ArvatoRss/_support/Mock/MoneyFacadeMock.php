@@ -7,9 +7,9 @@
 
 namespace SprykerEcoTest\Zed\ArvatoRss\Mock;
 
-use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyBridge;
+use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface;
 
-class MoneyFacadeMock extends ArvatoRssToMoneyBridge
+class MoneyFacadeMock implements ArvatoRssToMoneyInterface
 {
     const DECIMAL_VALUE = 100.00;
     const INT_VALUE = 10000;
@@ -31,6 +31,6 @@ class MoneyFacadeMock extends ArvatoRssToMoneyBridge
      */
     public function convertDecimalToInteger($value)
     {
-        return static::INT_VALUE:
+        return static::INT_VALUE;
     }
 }

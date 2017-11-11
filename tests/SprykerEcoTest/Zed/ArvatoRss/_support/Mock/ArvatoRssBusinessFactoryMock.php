@@ -18,4 +18,9 @@ class ArvatoRssBusinessFactoryMock extends ArvatoRssBusinessFactory
             $this->createAdapterFactory()
         );
     }
+
+    protected function getMoneyFacade()
+    {
+        return new MoneyFacadeMock();
+    }
 }

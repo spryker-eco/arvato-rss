@@ -21,8 +21,7 @@ class RiskCheckResponseMapperTest extends AbstractMapperTest
     public function testMapResponseToQuote()
     {
         $mapper = new RiskCheckResponseMapper();
-        $quoteTransfer = $this->createQuoteTransfer();
-        $result = $mapper->mapResponseToQuote(new ArvatoRssRiskCheckResponseTransfer(), $quoteTransfer);
+        $result = $mapper->mapResponseToQuote(new ArvatoRssRiskCheckResponseTransfer(), $this->quote);
         $this->testResult($result);
     }
 

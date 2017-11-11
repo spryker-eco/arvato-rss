@@ -24,8 +24,7 @@ class RiskCheckFacadeTest extends AbstractFacadeTest
         $facade->setFactory(
             new ArvatoRssBusinessFactoryMock()
         );
-        $quote = $this->getQuoteTransfer();
-        $response = $facade->performRiskCheck($quote);
+        $response = $facade->performRiskCheck($this->quote);
         $this->testResponse($response);
     }
 

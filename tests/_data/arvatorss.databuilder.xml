@@ -10,9 +10,9 @@ xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xs
         <property name="firstName" dataBuilderRule="firstName" />
         <property name="lastName" dataBuilderRule="lastName" />
         <property name="salutation" dataBuilderRule="randomElement(['Mr', 'Mrs'])" />
-        <property name="birthDay" dataBuilderRule="string" />
-        <property name="email" dataBuilderRule="string" />
-        <property name="telephoneNumber" dataBuilderRule="string" />
+        <property name="birthDay" dataBuilderRule="date('Y-m-d', '-20 years')" />
+        <property name="email" dataBuilderRule="email" />
+        <property name="telephoneNumber" dataBuilderRule="e164PhoneNumber" />
         <property name="address" dataBuilderRule="ArvatoRssCustomerAddress" />
     </transfer>
 
@@ -28,7 +28,7 @@ xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xs
         <property name="orderNumber" dataBuilderRule="numberBetween(1000, 10000)" />
         <property name="debitorNumber" dataBuilderRule="numberBetween(1000, 10000)" />
         <property name="paymentType" dataBuilderRule="word" />
-        <property name="registeredOrder" dataBuilderRule="=false" />
+        <property name="registeredOrder" dataBuilderRule="=true" />
         <property name="currency" dataBuilderRule="=EUR" />
         <property name="grossTotalBill" dataBuilderRule="numberBetween(1000, 10000)" />
         <property name="totalOrderValue" dataBuilderRule="numberBetween(1000, 10000)" />
@@ -49,5 +49,9 @@ xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xs
         <property name="resultText" dataBuilderRule="=test" />
         <property name="isError" dataBuilderRule="=false" />
         <property name="errorMessage" dataBuilderRule="=test" />
+    </transfer>
+
+    <transfer name="Store">
+        <property name="selectedCurrencyIsoCode" dataBuilderRule="=EUR" />
     </transfer>
 </transfers>
