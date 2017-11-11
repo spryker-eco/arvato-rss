@@ -13,6 +13,7 @@ use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Store;
 use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface;
+use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToStoreInterface;
 
 class OrderMapper implements OrderMapperInterface
 {
@@ -27,12 +28,20 @@ class OrderMapper implements OrderMapperInterface
     protected $moneyFacade;
 
     /**
+     * @var \SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToStoreInterface
+     */
+    protected $storeFacade;
+
+    /**
      * @param \SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface $moneyFacade
+     * @param \SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToStoreInterface $storeFacade
      */
     public function __construct(
-        ArvatoRssToMoneyInterface $moneyFacade
+        ArvatoRssToMoneyInterface $moneyFacade,
+        ArvatoRssToStoreInterface $storeFacade
     ) {
         $this->moneyFacade = $moneyFacade;
+        $this->storeFacade = $storeFacade;
     }
 
     /**
@@ -46,10 +55,16 @@ class OrderMapper implements OrderMapperInterface
     {
         $orderTransfer = new ArvatoRssOrderTransfer();
 
-        $orderTransfer->setCurrency(Store::getInstance()->getCurrencyIsoCode());
+        $orderTransfer->setCurrency(
+            $this->storeFacade
+                ->getCurrentStore()
+                ->getSelectedCurrencyIsoCode()
+        );
         $orderTransfer->setGrossTotalBill(
             $this->moneyFacade->convertIntegerToDecimal($quoteTransfer->getTotals()->getGrandTotal())
         );
+        $orderTransfer->setPaymentType($quoteTransfer->getPayment()->getPaymentMethod());
+        $orderTransfer->setRegisteredOrder(true);
         $orderTransfer->setTotalOrderValue(
             $this->moneyFacade->convertIntegerToDecimal($quoteTransfer->getTotals()->getSubtotal())
         );
@@ -57,6 +72,8 @@ class OrderMapper implements OrderMapperInterface
             $itemTransfer = $this->prepareOrderItem($item);
             $orderTransfer->addItem($itemTransfer);
         }
+
+        return $orderTransfer;
     }
 
     /**
