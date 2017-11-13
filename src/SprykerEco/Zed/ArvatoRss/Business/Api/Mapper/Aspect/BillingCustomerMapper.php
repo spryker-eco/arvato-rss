@@ -17,7 +17,7 @@ use SprykerEco\Service\ArvatoRss\Iso3166ConverterServiceInterface;
 class BillingCustomerMapper implements BillingCustomerMapperInterface
 {
     /**
-     * @const string DATE_FORMAT
+     * @const string
      */
     const DATE_FORMAT = 'Y-m-d';
 
