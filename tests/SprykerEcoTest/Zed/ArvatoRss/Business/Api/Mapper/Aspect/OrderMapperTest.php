@@ -18,7 +18,7 @@ use SprykerEcoTest\Zed\ArvatoRss\Business\AbstractBusinessTest;
 class OrderMapperTest extends AbstractBusinessTest
 {
     /**
-     * @const double VALUE_DECIMAL
+     * @const float
      */
     const VALUE_DECIMAL = 124.75;
 
