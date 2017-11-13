@@ -27,4 +27,16 @@ class ArvatoRssConfig extends AbstractBundleConfig
     {
         return $this->get(ArvatoRssConstants::ARVATORSS_AUTHORISATION);
     }
+
+    /**
+     * @param string $paymentMethod
+     *
+     * @return mixed
+     */
+    public function getPaymentTypeMapping($paymentMethod)
+    {
+        $mapping = $this->get(ArvatoRssConstants::ARVATORSS_PAYMENT_TYPE_MAPPING);
+
+        return $mapping[$paymentMethod];
+    }
 }
