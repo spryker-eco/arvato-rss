@@ -7,11 +7,12 @@
 
 namespace SprykerEcoTest\Zed\ArvatoRss\Helper;
 
+use Codeception\Module;
 use Generated\Shared\DataBuilder\ArvatoRssQuoteDataBuilder;
 use Generated\Shared\DataBuilder\PaymentBuilder;
 use Generated\Shared\DataBuilder\QuoteBuilder;
 
-class QuoteHelper extends \Codeception\Module
+class QuoteHelper extends Module
 {
     /**
      * @return \Generated\Shared\Transfer\QuoteTransfer

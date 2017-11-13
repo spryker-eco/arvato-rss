@@ -34,6 +34,9 @@ class RiskCheckRequestConverterTest extends Test
     }
 
     /**
+     * @param array $result
+     * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $requestTranfer
+     *
      * @return void
      */
     protected function testResult(array $result, ArvatoRssRiskCheckRequestTransfer $requestTranfer)

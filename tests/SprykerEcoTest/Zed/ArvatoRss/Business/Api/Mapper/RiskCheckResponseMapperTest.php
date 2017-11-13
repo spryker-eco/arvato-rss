@@ -12,7 +12,6 @@ use Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckResponseMapper;
 use SprykerEcoTest\Zed\ArvatoRss\Business\AbstractBusinessTest;
-use SprykerEcoTest\Zed\ArvatoRss\Business\Api\Mapper\Aspect\AbstractMapperTest;
 
 class RiskCheckResponseMapperTest extends AbstractBusinessTest
 {

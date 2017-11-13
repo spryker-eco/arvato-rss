@@ -14,7 +14,6 @@ use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\IdentificationMapperInte
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\OrderMapperInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\StoreOrderRequestMapper;
 use SprykerEcoTest\Zed\ArvatoRss\Business\AbstractBusinessTest;
-use SprykerEcoTest\Zed\ArvatoRss\Business\Api\Mapper\Aspect\AbstractMapperTest;
 
 class StoreOrderRequestMapperTest extends AbstractBusinessTest
 {
@@ -32,15 +31,20 @@ class StoreOrderRequestMapperTest extends AbstractBusinessTest
     }
 
     /**
+     * @param \Generated\Shared\Transfer\ArvatoRssStoreOrderRequestTransfer $result
+     *
      * @return void
      */
-    protected function testResult($result)
+    protected function testResult(ArvatoRssStoreOrderRequestTransfer $result)
     {
         $this->assertInstanceOf(ArvatoRssStoreOrderRequestTransfer::class, $result);
         $this->assertInstanceOf(ArvatoRssIdentificationRequestTransfer::class, $result->getIdentification());
         $this->assertInstanceOf(ArvatoRssOrderTransfer::class, $result->getOrder());
     }
 
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
     protected function createIdentificationMapperMock()
     {
         $identificationMapperMock = $this->createPartialMock(
@@ -53,6 +57,9 @@ class StoreOrderRequestMapperTest extends AbstractBusinessTest
         return $identificationMapperMock;
     }
 
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
     protected function createOrderMapperMock()
     {
         $orderMapperMock = $this->createPartialMock(

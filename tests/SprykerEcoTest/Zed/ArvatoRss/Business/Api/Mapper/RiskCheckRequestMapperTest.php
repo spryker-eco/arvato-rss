@@ -16,7 +16,6 @@ use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\IdentificationMapperInte
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\OrderMapperInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapper;
 use SprykerEcoTest\Zed\ArvatoRss\Business\AbstractBusinessTest;
-use SprykerEcoTest\Zed\ArvatoRss\Business\Api\Mapper\Aspect\AbstractMapperTest;
 
 class RiskCheckRequestMapperTest extends AbstractBusinessTest
 {
@@ -35,6 +34,8 @@ class RiskCheckRequestMapperTest extends AbstractBusinessTest
     }
 
     /**
+     * @param \Generated\Shared\Transfer\ArvatoRssStoreOrderRequestTransfer $result
+     *
      * @return void
      */
     protected function testResult($result)
@@ -45,6 +46,9 @@ class RiskCheckRequestMapperTest extends AbstractBusinessTest
         $this->assertInstanceOf(ArvatoRssOrderTransfer::class, $result->getOrder());
     }
 
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
     protected function createIdentificationMapperMock()
     {
         $moneyFacadeMock = $this->createPartialMock(
@@ -57,6 +61,9 @@ class RiskCheckRequestMapperTest extends AbstractBusinessTest
         return $moneyFacadeMock;
     }
 
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
     protected function createBillingCustomerMapperMock()
     {
         $moneyFacadeMock = $this->createPartialMock(
@@ -69,6 +76,9 @@ class RiskCheckRequestMapperTest extends AbstractBusinessTest
         return $moneyFacadeMock;
     }
 
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
     protected function createOrderMapperMock()
     {
         $moneyFacadeMock = $this->createPartialMock(

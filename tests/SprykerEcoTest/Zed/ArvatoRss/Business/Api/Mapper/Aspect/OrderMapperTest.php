@@ -9,13 +9,11 @@ namespace SprykerEcoTest\Zed\ArvatoRss\Business\Api\Mapper\Aspect;
 
 use Generated\Shared\DataBuilder\StoreBuilder;
 use Generated\Shared\Transfer\ArvatoRssOrderTransfer;
-use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
 use SprykerEco\Zed\ArvatoRss\ArvatoRssConfig;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\OrderMapper;
 use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface;
 use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToStoreInterface;
 use SprykerEcoTest\Zed\ArvatoRss\Business\AbstractBusinessTest;
-use SprykerTest\Shared\Testify\Helper\ConfigHelper;
 
 class OrderMapperTest extends AbstractBusinessTest
 {
@@ -52,7 +50,8 @@ class OrderMapperTest extends AbstractBusinessTest
                 ->getCurrentStore()
                 ->getSelectedCurrencyIsoCode()
         );
-        $this->assertEquals($result->getPaymentType(),
+        $this->assertEquals(
+            $result->getPaymentType(),
             'OI'
         );
         $this->assertEquals($result->getGrossTotalBill(), static::VALUE_DECIMAL);
@@ -63,6 +62,9 @@ class OrderMapperTest extends AbstractBusinessTest
         $this->assertEquals($result->getRegisteredOrder(), true);
     }
 
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
     protected function createMoneyFacadeMock()
     {
         $moneyFacadeMock = $this->createPartialMock(
@@ -75,6 +77,9 @@ class OrderMapperTest extends AbstractBusinessTest
         return $moneyFacadeMock;
     }
 
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
     protected function createStoreFacadeMock()
     {
         $storeFacadeMock = $this->createPartialMock(

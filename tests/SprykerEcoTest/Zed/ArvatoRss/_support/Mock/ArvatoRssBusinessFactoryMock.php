@@ -12,6 +12,9 @@ use SprykerEcoTest\Zed\ArvatoRss\Mock\Api\Adapter\SoapApiAdapterMock;
 
 class ArvatoRssBusinessFactoryMock extends ArvatoRssBusinessFactory
 {
+    /**
+     * @return \SprykerEcoTest\Zed\ArvatoRss\Mock\Api\Adapter\SoapApiAdapterMock
+     */
     protected function createSoapApiAdapter()
     {
         return new SoapApiAdapterMock(
@@ -19,6 +22,9 @@ class ArvatoRssBusinessFactoryMock extends ArvatoRssBusinessFactory
         );
     }
 
+    /**
+     * @return \SprykerEcoTest\Zed\ArvatoRss\Mock\MoneyFacadeMock
+     */
     protected function getMoneyFacade()
     {
         return new MoneyFacadeMock();

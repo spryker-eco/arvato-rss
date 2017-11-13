@@ -43,7 +43,7 @@ class RiskCheckResponseConverterTest extends Test
     }
 
     /**
-     * @param \stdClass
+     * @param \stdClass $response
      *
      * @return \Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer
      */

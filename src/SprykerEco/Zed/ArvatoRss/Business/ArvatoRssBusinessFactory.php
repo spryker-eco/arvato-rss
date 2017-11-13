@@ -114,6 +114,9 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
         );
     }
 
+    /**
+     * @return \Spryker\Zed\Store\Business\StoreFacade
+     */
     protected function getStoreFacade()
     {
         return $this->getProvidedDependency(ArvatoRssDependencyProvider::FACADE_STORE);

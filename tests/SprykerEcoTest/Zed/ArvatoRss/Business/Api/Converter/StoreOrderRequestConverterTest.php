@@ -30,6 +30,9 @@ class StoreOrderRequestConverterTest extends Test
     }
 
     /**
+     * @param array $result
+     * @param \Generated\Shared\Transfer\ArvatoRssStoreOrderRequestTransfer $requestTranfer
+     *
      * @return void
      */
     protected function testResult(array $result, ArvatoRssStoreOrderRequestTransfer $requestTranfer)
