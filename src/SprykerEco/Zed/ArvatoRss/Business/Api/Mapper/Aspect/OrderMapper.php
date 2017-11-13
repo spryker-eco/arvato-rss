@@ -12,6 +12,7 @@ use Generated\Shared\Transfer\ArvatoRssOrderTransfer;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Shared\Kernel\Store;
+use SprykerEco\Zed\ArvatoRss\ArvatoRssConfig;
 use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface;
 use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToStoreInterface;
 
@@ -33,15 +34,23 @@ class OrderMapper implements OrderMapperInterface
     protected $storeFacade;
 
     /**
+     * @var \SprykerEco\Zed\ArvatoRss\ArvatoRssConfig $config
+     */
+    protected $config;
+
+    /**
      * @param \SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface $moneyFacade
      * @param \SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToStoreInterface $storeFacade
+     * @param \SprykerEco\Zed\ArvatoRss\ArvatoRssConfig $config
      */
     public function __construct(
         ArvatoRssToMoneyInterface $moneyFacade,
-        ArvatoRssToStoreInterface $storeFacade
+        ArvatoRssToStoreInterface $storeFacade,
+        ArvatoRssConfig $config
     ) {
         $this->moneyFacade = $moneyFacade;
         $this->storeFacade = $storeFacade;
+        $this->config = $config;
     }
 
     /**
@@ -63,8 +72,14 @@ class OrderMapper implements OrderMapperInterface
         $orderTransfer->setGrossTotalBill(
             $this->moneyFacade->convertIntegerToDecimal($quoteTransfer->getTotals()->getGrandTotal())
         );
-        $orderTransfer->setPaymentType($quoteTransfer->getPayment()->getPaymentMethod());
+        $orderTransfer->setPaymentType(
+            $this->config->getPaymentTypeMapping(
+                $quoteTransfer->getPayment()->getPaymentMethod()
+            )
+        );
         $orderTransfer->setRegisteredOrder(true);
+        $orderTransfer->setDebitorNumber($quoteTransfer->getCustomer()->getIdCustomer());
+        $orderTransfer->setOrderNumber($quoteTransfer->getOrderReference());
         $orderTransfer->setTotalOrderValue(
             $this->moneyFacade->convertIntegerToDecimal($quoteTransfer->getTotals()->getSubtotal())
         );

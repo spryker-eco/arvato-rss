@@ -109,7 +109,8 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     {
         return new OrderMapper(
             $this->getMoneyFacade(),
-            $this->getStoreFacade()
+            $this->getStoreFacade(),
+            $this->getConfig()
         );
     }
 

@@ -20,6 +20,9 @@ interface ArvatoRssRequestApiConstants
     const ARVATORSS_API_ADDRESS = 'Address';
     const ARVATORSS_API_ORDER = 'Order';
     const ARVATORSS_API_REGISTEREDORDER = 'RegisteredOrder';
+    const ARVATORSS_API_ORDER_NUMBER = 'OrderNumber';
+    const ARVATORSS_API_DEBITOR_NUMBER = 'DebitorNumber';
+    const ARVATORSS_API_PAYMENT_TYPE = 'PaymentType';
     const ARVATORSS_API_CURRENCY = 'Currency';
     const ARVATORSS_API_GROSSTOTALBILL = 'GrossTotalBill';
     const ARVATORSS_API_TOTALORDERVALUE = 'TotalOrderValue';
