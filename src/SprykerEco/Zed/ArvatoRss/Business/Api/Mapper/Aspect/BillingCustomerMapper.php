@@ -22,7 +22,7 @@ class BillingCustomerMapper implements BillingCustomerMapperInterface
     const DATE_FORMAT = 'Y-m-d';
 
     /**
-     * @var \SprykerEco\Service\ArvatoRss\Iso3166ConverterServiceInterface $iso3166
+     * @var \SprykerEco\Service\ArvatoRss\Iso3166ConverterServiceInterface
      */
     protected $iso3166Converter;
 
