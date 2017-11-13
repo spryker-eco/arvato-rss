@@ -31,7 +31,7 @@ class ArvatoRssConfig extends AbstractBundleConfig
     /**
      * @param string $paymentMethod
      *
-     * @return mixed
+     * @return string
      */
     public function getPaymentTypeMapping($paymentMethod)
     {
