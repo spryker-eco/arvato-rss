@@ -10,10 +10,11 @@ namespace SprykerEcoTest\Zed\ArvatoRss\Business\Facade;
 use Generated\Shared\Transfer\ArvatoRssQuoteDataTransfer;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use SprykerEcoTest\Zed\ArvatoRss\Business\AbstractBusinessTest;
 use SprykerEcoTest\Zed\ArvatoRss\Mock\ArvatoRssBusinessFactoryMock;
 use SprykerTest\Shared\Testify\Helper\BusinessHelper;
 
-class RiskCheckFacadeTest extends AbstractFacadeTest
+class RiskCheckFacadeTest extends AbstractBusinessTest
 {
     /**
      * @return void
@@ -43,10 +44,10 @@ class RiskCheckFacadeTest extends AbstractFacadeTest
         );
 
         $riskCheckResponse = $response->getArvatoRssQuoteData()->getArvatoRssRiskCheckResponse();
-        $this->assertEquals(static::RESPONSE_STRING_FIElD_VALUE, $riskCheckResponse->getResult());
-        $this->assertEquals(static::RESPONSE_STRING_FIElD_VALUE, $riskCheckResponse->getErrorMessage());
-        $this->assertEquals(static::RESPONSE_STRING_FIElD_VALUE, $riskCheckResponse->getResultCode());
-        $this->assertEquals(static::RESPONSE_STRING_FIElD_VALUE, $riskCheckResponse->getActionCode());
-        $this->assertEquals(static::IS_ERROR, $riskCheckResponse->getIsError());
+        $this->assertEquals(static::RESPONSE_STRING_FIELD_VALUE, $riskCheckResponse->getResult());
+        $this->assertEquals(static::RESPONSE_STRING_FIELD_VALUE, $riskCheckResponse->getErrorMessage());
+        $this->assertEquals(static::RESPONSE_STRING_FIELD_VALUE, $riskCheckResponse->getResultCode());
+        $this->assertEquals(static::RESPONSE_STRING_FIELD_VALUE, $riskCheckResponse->getActionCode());
+        $this->assertFalse($riskCheckResponse->getIsError());
     }
 }

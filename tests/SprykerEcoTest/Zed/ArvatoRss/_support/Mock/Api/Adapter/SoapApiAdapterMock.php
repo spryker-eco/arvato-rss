@@ -8,7 +8,9 @@
 namespace SprykerEcoTest\Zed\ArvatoRss\Mock\Api\Adapter;
 
 use Generated\Shared\DataBuilder\ArvatoRssRiskCheckResponseBuilder;
+use Generated\Shared\DataBuilder\ArvatoRssStoreOrderResponseBuilder;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
+use Generated\Shared\Transfer\ArvatoRssStoreOrderRequestTransfer;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\SoapApiAdapter;
 
 class SoapApiAdapterMock extends SoapApiAdapter
@@ -22,6 +24,16 @@ class SoapApiAdapterMock extends SoapApiAdapter
      */
     public function performRiskCheck(ArvatoRssRiskCheckRequestTransfer $requestTransfer)
     {
-        return (new ArvatoRssRiskCheckResponseBuilder())->build();
+        return (new ArvatoRssRiskCheckResponseBuilder())->build()->setIsError(false);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ArvatoRssStoreOrderRequestTransfer $requestTransfer
+     *
+     * @return \Generated\Shared\Transfer\ArvatoRssStoreOrderResponseTransfer
+     */
+    public function storeOrder(ArvatoRssStoreOrderRequestTransfer $requestTransfer)
+    {
+        return (new ArvatoRssStoreOrderResponseBuilder())->build()->setIsError(false);
     }
 }

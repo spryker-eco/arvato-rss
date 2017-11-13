@@ -11,8 +11,8 @@ use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface;
 
 class MoneyFacadeMock implements ArvatoRssToMoneyInterface
 {
-    const DECIMAL_VALUE = 100.00;
-    const INT_VALUE = 10000;
+    const VALUE_DECIMAL = 100.00;
+    const VALUE_INT = 10000;
 
     /**
      * @param int $value
@@ -21,7 +21,7 @@ class MoneyFacadeMock implements ArvatoRssToMoneyInterface
      */
     public function convertIntegerToDecimal($value)
     {
-        return static::DECIMAL_VALUE;
+        return static::VALUE_DECIMAL;
     }
 
     /**
@@ -31,6 +31,6 @@ class MoneyFacadeMock implements ArvatoRssToMoneyInterface
      */
     public function convertDecimalToInteger($value)
     {
-        return static::INT_VALUE;
+        return static::VALUE_INT;
     }
 }

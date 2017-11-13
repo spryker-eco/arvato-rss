@@ -9,16 +9,20 @@ namespace SprykerEcoTest\Zed\ArvatoRss\Business\Api\Mapper\Aspect;
 
 use Generated\Shared\DataBuilder\StoreBuilder;
 use Generated\Shared\Transfer\ArvatoRssOrderTransfer;
+use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
+use SprykerEco\Zed\ArvatoRss\ArvatoRssConfig;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\OrderMapper;
 use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface;
 use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToStoreInterface;
+use SprykerEcoTest\Zed\ArvatoRss\Business\AbstractBusinessTest;
+use SprykerTest\Shared\Testify\Helper\ConfigHelper;
 
-class OrderMapperTest extends AbstractMapperTest
+class OrderMapperTest extends AbstractBusinessTest
 {
     /**
-     * @const double DECIMAL_VALUE
+     * @const double VALUE_DECIMAL
      */
-    const DECIMAL_VALUE = 124.75;
+    const VALUE_DECIMAL = 124.75;
 
     /**
      * @return void
@@ -27,7 +31,8 @@ class OrderMapperTest extends AbstractMapperTest
     {
         $mapper = new OrderMapper(
             $this->createMoneyFacadeMock(),
-            $this->createStoreFacadeMock()
+            $this->createStoreFacadeMock(),
+            new ArvatoRssConfig()
         );
         $result = $mapper->map($this->quote);
 
@@ -47,9 +52,11 @@ class OrderMapperTest extends AbstractMapperTest
                 ->getCurrentStore()
                 ->getSelectedCurrencyIsoCode()
         );
-        $this->assertEquals($result->getPaymentType(), $this->quote->getPayment()->getPaymentMethod());
-        $this->assertEquals($result->getGrossTotalBill(), static::DECIMAL_VALUE);
-        $this->assertEquals($result->getTotalOrderValue(), static::DECIMAL_VALUE);
+        $this->assertEquals($result->getPaymentType(),
+            'OI'
+        );
+        $this->assertEquals($result->getGrossTotalBill(), static::VALUE_DECIMAL);
+        $this->assertEquals($result->getTotalOrderValue(), static::VALUE_DECIMAL);
         $this->assertEquals(count($result->getItems()), count($this->quote->getItems()));
         $this->assertEquals($result->getOrderNumber(), $this->quote->getOrderReference());
         $this->assertEquals($result->getDebitorNumber(), $this->quote->getCustomer()->getIdCustomer());
@@ -63,7 +70,7 @@ class OrderMapperTest extends AbstractMapperTest
             ['convertIntegerToDecimal', 'convertDecimalToInteger']
         );
         $moneyFacadeMock->method('convertIntegerToDecimal')
-            ->willReturn(static::DECIMAL_VALUE);
+            ->willReturn(static::VALUE_DECIMAL);
 
         return $moneyFacadeMock;
     }

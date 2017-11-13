@@ -30,7 +30,9 @@ class QuoteHelper extends \Codeception\Module
             ->withCurrency()
             ->withItem()
             ->build()->setPayment(
-                (new PaymentBuilder())->build()
+                (new PaymentBuilder())
+                    ->build()
+                    ->setPaymentMethod('Invoice')
             );
     }
 }

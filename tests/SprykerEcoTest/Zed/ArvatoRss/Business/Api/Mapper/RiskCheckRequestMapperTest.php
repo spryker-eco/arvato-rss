@@ -15,9 +15,10 @@ use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\BillingCustomerMapperInt
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\IdentificationMapperInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\OrderMapperInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapper;
+use SprykerEcoTest\Zed\ArvatoRss\Business\AbstractBusinessTest;
 use SprykerEcoTest\Zed\ArvatoRss\Business\Api\Mapper\Aspect\AbstractMapperTest;
 
-class RiskCheckRequestMapperTest extends AbstractMapperTest
+class RiskCheckRequestMapperTest extends AbstractBusinessTest
 {
     /**
      * @return void

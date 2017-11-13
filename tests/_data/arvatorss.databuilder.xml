@@ -51,6 +51,12 @@ xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xs
         <property name="errorMessage" dataBuilderRule="=test" />
     </transfer>
 
+    <transfer name="ArvatoRssStoreOrderResponse">
+        <property name="result" dataBuilderRule="=test" />
+        <property name="isError" dataBuilderRule="=false" />
+        <property name="errorMessage" dataBuilderRule="=test" />
+    </transfer>
+
     <transfer name="Store">
         <property name="selectedCurrencyIsoCode" dataBuilderRule="=EUR" />
     </transfer>

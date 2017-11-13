@@ -11,8 +11,9 @@ use Generated\Shared\Transfer\ArvatoRssBillingCustomerTransfer;
 use Generated\Shared\Transfer\ArvatoRssCustomerAddressTransfer;
 use SprykerEco\Service\ArvatoRss\Iso3166ConverterService;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\BillingCustomerMapper;
+use SprykerEcoTest\Zed\ArvatoRss\Business\AbstractBusinessTest;
 
-class BillingCustomerMapperTest extends AbstractMapperTest
+class BillingCustomerMapperTest extends AbstractBusinessTest
 {
     /**
      * @return void

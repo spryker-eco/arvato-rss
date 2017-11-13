@@ -11,9 +11,10 @@ use Generated\Shared\Transfer\ArvatoRssQuoteDataTransfer;
 use Generated\Shared\Transfer\ArvatoRssStoreOrderResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\StoreOrderResponseMapper;
+use SprykerEcoTest\Zed\ArvatoRss\Business\AbstractBusinessTest;
 use SprykerEcoTest\Zed\ArvatoRss\Business\Api\Mapper\Aspect\AbstractMapperTest;
 
-class StoreOrderResponseMapperTest extends AbstractMapperTest
+class StoreOrderResponseMapperTest extends AbstractBusinessTest
 {
     /**
      * @return void

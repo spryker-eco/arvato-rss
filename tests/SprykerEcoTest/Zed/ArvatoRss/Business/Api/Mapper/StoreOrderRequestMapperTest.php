@@ -13,9 +13,10 @@ use Generated\Shared\Transfer\ArvatoRssStoreOrderRequestTransfer;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\IdentificationMapperInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\OrderMapperInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\StoreOrderRequestMapper;
+use SprykerEcoTest\Zed\ArvatoRss\Business\AbstractBusinessTest;
 use SprykerEcoTest\Zed\ArvatoRss\Business\Api\Mapper\Aspect\AbstractMapperTest;
 
-class StoreOrderRequestMapperTest extends AbstractMapperTest
+class StoreOrderRequestMapperTest extends AbstractBusinessTest
 {
     /**
      * @return void
