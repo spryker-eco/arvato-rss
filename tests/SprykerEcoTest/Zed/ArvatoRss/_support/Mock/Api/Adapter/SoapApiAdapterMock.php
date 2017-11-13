@@ -13,6 +13,8 @@ use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\SoapApiAdapter;
 
 class SoapApiAdapterMock extends SoapApiAdapter
 {
+    const WSDL_PATH = __DIR__ . "/../../../../../../../../src/SprykerEco/Zed/ArvatoRss/Business/Api/Etc/risk-solution-services.v2.1.wsdl";
+
     /**
      * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $requestTransfer
      *
