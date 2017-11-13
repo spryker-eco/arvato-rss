@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
 
+use Generated\Shared\Transfer\ArvatoRssOrderTransfer;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\BillingCustomerMapperInterface;
@@ -57,6 +58,7 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
         $identification = $this->identificationMapper->map();
         $billingCustomer = $this->billingCustomerMapper->map($quoteTransfer);
         $order = $this->orderMapper->map($quoteTransfer);
+
 
         $requestTransfer->setIdentification($identification);
         $requestTransfer->setBillingCustomer($billingCustomer);

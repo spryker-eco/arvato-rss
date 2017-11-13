@@ -58,7 +58,8 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     {
         return new StoreOrderRequestMapper(
             $this->createIdentificationMapper(),
-            $this->createOrderMapper()
+            $this->createOrderMapper(),
+            $this->getConfig()
         );
     }
 
@@ -109,13 +110,12 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     {
         return new OrderMapper(
             $this->getMoneyFacade(),
-            $this->getStoreFacade(),
-            $this->getConfig()
+            $this->getStoreFacade()
         );
     }
 
     /**
-     * @return \Spryker\Zed\Store\Business\StoreFacade
+     * @return \SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToStoreInterface
      */
     protected function getStoreFacade()
     {

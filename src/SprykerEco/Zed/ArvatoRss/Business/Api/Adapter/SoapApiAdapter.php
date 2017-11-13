@@ -21,7 +21,7 @@ use SprykerEco\Zed\ArvatoRss\Business\Api\Exception\ArvatoRssStoreOrderApiExcept
 
 class SoapApiAdapter implements ApiAdapterInterface
 {
-    const WSDL_PATH = __DIR__ . "../Etc/risk-solution-services.v2.1.wsdl";
+    const WSDL_PATH = __DIR__ . "/../Etc/risk-solution-services.v2.1.wsdl";
 
     /**
      * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\AdapterFactoryInterface
