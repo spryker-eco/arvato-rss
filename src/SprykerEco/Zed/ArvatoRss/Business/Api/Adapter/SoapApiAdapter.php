@@ -85,6 +85,7 @@ class SoapApiAdapter implements ApiAdapterInterface
             $responseTransfer = new ArvatoRssStoreOrderResponseTransfer();
             $responseTransfer->setIsError(true);
             $responseTransfer->setErrorMessage($exception->getMessage());
+
             return $responseTransfer;
         }
 
