@@ -65,7 +65,13 @@
     </transfer>
 
     <transfer name="ArvatoRssStoreOrderResponse">
+        <property name="transactionId" type="string" />
+        <property name="statusCode" type="int" />
         <property name="result" type="string" />
+        <property name="actionCode" type="string" />
+        <property name="resultCode" type="string" />
+        <property name="resultText" type="string" />
+        <property name="isNewCustomer" type="bool" />
         <property name="isError" type="bool" />
         <property name="errorMessage" type="string" />
     </transfer>
