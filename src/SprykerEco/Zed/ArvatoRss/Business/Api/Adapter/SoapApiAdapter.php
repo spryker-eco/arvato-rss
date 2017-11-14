@@ -15,7 +15,7 @@ use Generated\Shared\Transfer\ArvatoRssStoreOrderResponseTransfer;
 use SoapClient;
 use SoapFault;
 use Spryker\Shared\Config\Config;
-use SprykerEco\Shared\ArvatoRss\ArvatoRssApiConstants;
+use SprykerEco\Shared\ArvatoRss\ArvatoRssApiConfig;
 use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Exception\ArvatoRssRiskCheckApiException;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Exception\ArvatoRssStoreOrderApiException;
@@ -64,7 +64,7 @@ class SoapApiAdapter implements ApiAdapterInterface
 
         $this->adapterFactory->createTransactionLogger()->log(
             $requestTransfer->getOrder()->getOrderNumber(),
-            ArvatoRssApiConstants::TRANSACTION_TYPE_STORE_ORDER,
+            ArvatoRssApiConfig::TRANSACTION_TYPE_STORE_ORDER,
             $result->Decision->ResultCode,
             $params,
             $result
@@ -100,7 +100,7 @@ class SoapApiAdapter implements ApiAdapterInterface
 
         $this->adapterFactory->createTransactionLogger()->log(
             $requestTransfer->getOrder()->getOrderNumber(),
-            ArvatoRssApiConstants::TRANSACTION_TYPE_STORE_ORDER,
+            ArvatoRssApiConfig::TRANSACTION_TYPE_STORE_ORDER,
             $result->Decision->ResultCode,
             $params,
             $result

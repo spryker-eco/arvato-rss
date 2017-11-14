@@ -11,7 +11,7 @@ use Orm\Zed\ArvatoRss\Persistence\Base\SpyArvatoRssTransactionLog;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItem;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 use Spryker\Zed\Oms\Dependency\Plugin\Condition\ConditionInterface;
-use SprykerEco\Shared\ArvatoRss\ArvatoRssApiConstants;
+use SprykerEco\Shared\ArvatoRss\ArvatoRssApiConfig;
 
 /**
  * @method \SprykerEco\Zed\ArvatoRss\Business\ArvatorssFacadeInterface getFacade()
@@ -61,7 +61,7 @@ class IsStoreOrderSuccessfulPlugin extends AbstractPlugin implements ConditionIn
         return $this->getQueryContainer()
             ->queryTransactionByOrderReferenceAndType(
                 $orderReference,
-                ArvatoRssApiConstants::TRANSACTION_TYPE_STORE_ORDER
+                ArvatoRssApiConfig::TRANSACTION_TYPE_STORE_ORDER
             )
             ->findOne();
     }
@@ -73,6 +73,6 @@ class IsStoreOrderSuccessfulPlugin extends AbstractPlugin implements ConditionIn
      */
     protected function isTransactionSuccessfull(SpyArvatoRssTransactionLog $transactionLog)
     {
-        return $transactionLog->getResultCode() == ArvatoRssApiConstants::RESULT_CODE_SUCCESS;
+        return $transactionLog->getResultCode() == ArvatoRssApiConfig::RESULT_CODE_SUCCESS;
     }
 }

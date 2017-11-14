@@ -8,7 +8,7 @@
 namespace SprykerEcoTest\Zed\ArvatoRss\Business;
 
 use Codeception\TestCase\Test;
-use SprykerEco\Shared\ArvatoRss\ArvatoRssApiConstants;
+use SprykerEco\Shared\ArvatoRss\ArvatoRssApiConfig;
 use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
 use SprykerEcoTest\Zed\ArvatoRss\Helper\QuoteHelper;
 use SprykerTest\Shared\Testify\Helper\ConfigHelper;
@@ -31,7 +31,7 @@ class AbstractBusinessTest extends Test
         $this->getModule('\\' . ConfigHelper::class)->setConfig(ArvatoRssConstants::ARVATORSS_CLIENTID, 'test');
         $this->getModule('\\' . ConfigHelper::class)->setConfig(ArvatoRssConstants::ARVATORSS_AUTHORISATION, 'test');
         $this->getModule('\\' . ConfigHelper::class)->setConfig(ArvatoRssConstants::ARVATORSS_PAYMENT_TYPE_MAPPING, [
-            'Invoice' => ArvatoRssApiConstants::INVOICE,
+            'Invoice' => ArvatoRssApiConfig::INVOICE,
         ]);
         $this->quote = $this->getModule('\\' . QuoteHelper::class)->createQuoteTransfer();
     }

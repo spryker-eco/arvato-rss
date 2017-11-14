@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Shared\ArvatoRss;
 
-interface ArvatoRssApiConstants
+interface ArvatoRssApiConfig
 {
     const RESULT_CODE_SUCCESS = 'SOR000';
 

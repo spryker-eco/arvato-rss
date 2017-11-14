@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Shared\ArvatoRss;
 
-interface ArvatoRssCountryConstants
+interface ArvatoRssCountryConfig
 {
     /**
      * @const array ISO3166 Temporary list of numeric country codes needed by arvato rss request.
