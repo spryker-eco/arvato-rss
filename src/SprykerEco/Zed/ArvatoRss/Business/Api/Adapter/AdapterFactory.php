@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Adapter;
 
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\Transaction\Logger\TransactionLogger;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RequestHeaderConverter;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverter;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverter;
@@ -54,5 +55,13 @@ class AdapterFactory extends AbstractBusinessFactory implements AdapterFactoryIn
     public function createStoreOrderResponseConverter()
     {
         return new StoreOrderResponseConverter();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\Transaction\Logger\TransactionLogger
+     */
+    public function createTransactionLogger()
+    {
+        return new TransactionLogger();
     }
 }

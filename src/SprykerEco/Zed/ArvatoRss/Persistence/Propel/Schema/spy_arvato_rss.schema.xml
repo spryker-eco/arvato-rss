@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<database
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        name="zed"
+        defaultIdMethod="native"
+        xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema-01.xsd"
+        namespace="Orm\Zed\ArvatoRss\Persistence"
+        package="src.Orm.Zed.ArvatoRss.Persistence"
+>
+    <table name="spy_arvato_rss_transaction_log">
+        <column name="id_payment_arvato_rss_transaction_log" type="INTEGER" primaryKey="true" autoIncrement="true"/>
+        <column name="order_reference" required="false" type="VARCHAR"/>
+        <column name="transaction_type" required="false" type="VARCHAR"/>
+        <column name="result_code" required="true" type="VARCHAR"/>
+        <column name="request_payload" required="false" type="LONGVARCHAR"/>
+        <column name="response_payload" required="true" type="LONGVARCHAR"/>
+
+        <foreign-key name="spy_arvato_rss_transaction_log-order_reference" foreignTable="spy_sales_order">
+            <reference foreign="order_reference" local="order_reference"/>
+        </foreign-key>
+        <behavior name="timestampable"/>
+        <id-method-parameter value="spy_arvato_rss_transaction_log_pk_seq"/>
+        <index name="spy_arvato_rss_transaction_log-transaction_type">
+            <index-column name="transaction_type"/>
+        </index>
+    </table>
+</database>

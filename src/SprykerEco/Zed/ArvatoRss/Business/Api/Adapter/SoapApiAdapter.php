@@ -15,6 +15,7 @@ use Generated\Shared\Transfer\ArvatoRssStoreOrderResponseTransfer;
 use SoapClient;
 use SoapFault;
 use Spryker\Shared\Config\Config;
+use SprykerEco\Shared\ArvatoRss\ArvatoRssApiConstants;
 use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Exception\ArvatoRssRiskCheckApiException;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Exception\ArvatoRssStoreOrderApiException;
@@ -50,8 +51,8 @@ class SoapApiAdapter implements ApiAdapterInterface
         $soapClient = $this->createSoapClient(
             $requestTransfer->getIdentification()
         );
-
         $result = $soapClient->RiskCheck($params);
+
         try {
             $this->validateResponse($result);
         } catch (ArvatoRssRiskCheckApiException $exception) {
@@ -60,6 +61,14 @@ class SoapApiAdapter implements ApiAdapterInterface
             $responseTransfer->setErrorMessage($exception->getMessage());
             return $responseTransfer;
         }
+
+        $this->adapterFactory->createTransactionLogger()->log(
+            $requestTransfer->getOrder()->getOrderNumber(),
+            ArvatoRssApiConstants::TRANSACTION_TYPE_STORE_ORDER,
+            $result->Decision->ResultCode,
+            $params,
+            $result
+        );
 
         return $this->adapterFactory->createRiskCheckResponseConverter()->convert($result);
     }
@@ -77,8 +86,8 @@ class SoapApiAdapter implements ApiAdapterInterface
         $soapClient = $this->createSoapClient(
             $requestTransfer->getIdentification()
         );
-
         $result = $soapClient->StoreOrder($params);
+
         try {
             $this->validateResponse($result);
         } catch (ArvatoRssStoreOrderApiException $exception) {
@@ -88,6 +97,14 @@ class SoapApiAdapter implements ApiAdapterInterface
 
             return $responseTransfer;
         }
+
+        $this->adapterFactory->createTransactionLogger()->log(
+            $requestTransfer->getOrder()->getOrderNumber(),
+            ArvatoRssApiConstants::TRANSACTION_TYPE_STORE_ORDER,
+            $result->Decision->ResultCode,
+            $params,
+            $result
+        );
 
         return $this->adapterFactory->createStoreOrderResponseConverter()->convert($result);
     }
