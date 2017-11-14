@@ -25,27 +25,15 @@ class StoreOrderFacadeTest extends AbstractBusinessTest
         $facade->setFactory(
             new ArvatoRssBusinessFactoryMock()
         );
-        $response = $facade->storeOrder($this->quote);
-        $this->testResponse($response);
+        $facade->storeOrder($this->order);
+        $this->test();
     }
 
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $response
-     *
      * @return void
      */
-    protected function testResponse(QuoteTransfer $response)
+    protected function test()
     {
-        $this->assertInstanceOf(ArvatoRssQuoteDataTransfer::class, $response->getArvatoRssQuoteData());
-        $this->assertInstanceOf(
-            ArvatoRssStoreOrderResponseTransfer::class,
-            $response->getArvatoRssQuoteData()
-                ->getArvatoRssStoreOrderResponse()
-        );
 
-        $riskCheckResponse = $response->getArvatoRssQuoteData()->getArvatoRssStoreOrderResponse();
-        $this->assertEquals(static::RESPONSE_STRING_FIELD_VALUE, $riskCheckResponse->getResult());
-        $this->assertEquals(static::RESPONSE_STRING_FIELD_VALUE, $riskCheckResponse->getErrorMessage());
-        $this->assertFalse($riskCheckResponse->getIsError());
     }
 }

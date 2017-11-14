@@ -32,7 +32,11 @@ class OrderMapperTest extends AbstractBusinessTest
             $this->createStoreFacadeMock(),
             new ArvatoRssConfig()
         );
-        $result = $mapper->map($this->quote);
+        $result = $mapper->map(
+            $this->quote->getTotals(),
+            $this->quote->getItems(),
+            $this->quote->getOrderReference()
+        );
 
         $this->testResult($result);
     }
@@ -50,10 +54,7 @@ class OrderMapperTest extends AbstractBusinessTest
                 ->getCurrentStore()
                 ->getSelectedCurrencyIsoCode()
         );
-        $this->assertEquals(
-            $result->getPaymentType(),
-            'OI'
-        );
+
         $this->assertEquals($result->getGrossTotalBill(), static::VALUE_DECIMAL);
         $this->assertEquals($result->getTotalOrderValue(), static::VALUE_DECIMAL);
         $this->assertEquals(count($result->getItems()), count($this->quote->getItems()));

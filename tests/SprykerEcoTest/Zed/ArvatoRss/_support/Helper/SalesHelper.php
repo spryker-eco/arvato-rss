@@ -9,10 +9,12 @@ namespace SprykerEcoTest\Zed\ArvatoRss\Helper;
 
 use Codeception\Module;
 use Generated\Shared\DataBuilder\ArvatoRssQuoteDataBuilder;
+use Generated\Shared\DataBuilder\OrderBuilder;
 use Generated\Shared\DataBuilder\PaymentBuilder;
 use Generated\Shared\DataBuilder\QuoteBuilder;
+use Generated\Shared\Transfer\OrderTransfer;
 
-class QuoteHelper extends Module
+class SalesHelper extends Module
 {
     /**
      * @return \Generated\Shared\Transfer\QuoteTransfer
@@ -23,7 +25,6 @@ class QuoteHelper extends Module
             ->withArvatoRssQuoteData(
                 (new ArvatoRssQuoteDataBuilder())
                     ->withArvatoRssRiskCheckResponse()
-                    ->withArvatoRssStoreOrderResponse()
             )
             ->withBillingAddress()
             ->withCustomer()
@@ -33,7 +34,25 @@ class QuoteHelper extends Module
             ->build()->setPayment(
                 (new PaymentBuilder())
                     ->build()
-                    ->setPaymentMethod('Invoice')
+                    ->setPaymentMethod('invoice')
+            );
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\OrderTransfer
+     */
+    public function createOrderTransfer()
+    {
+        return (new OrderBuilder())
+            ->withBillingAddress()
+            ->withTotals()
+            ->withCustomer()
+            ->withItem()
+            ->withCurrency()
+            ->build()->addPayment(
+                (new PaymentBuilder())
+                    ->build()
+                    ->setPaymentMethod('invoice')
             );
     }
 }

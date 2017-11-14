@@ -78,6 +78,7 @@ class StoreOrderRequestMapper implements StoreOrderRequestMapperInterface
     protected function mapSpecificParameters(OrderTransfer $orderTransfer, ArvatoRssOrderTransfer $order)
     {
         $payment = $orderTransfer->getPayments()[0];
+
         $order->setPaymentType(
             $this->config->getPaymentTypeMapping(
                 $payment->getPaymentMethod()

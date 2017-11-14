@@ -10,6 +10,8 @@ namespace SprykerEcoTest\Zed\ArvatoRss\Business\Api\Mapper;
 use Generated\Shared\Transfer\ArvatoRssIdentificationRequestTransfer;
 use Generated\Shared\Transfer\ArvatoRssOrderTransfer;
 use Generated\Shared\Transfer\ArvatoRssStoreOrderRequestTransfer;
+use SprykerEco\Shared\ArvatoRss\ArvatoRssApiConfig;
+use SprykerEco\Zed\ArvatoRss\ArvatoRssConfig;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\IdentificationMapperInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\OrderMapperInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\StoreOrderRequestMapper;
@@ -24,9 +26,10 @@ class StoreOrderRequestMapperTest extends AbstractBusinessTest
     {
         $mapper = new StoreOrderRequestMapper(
             $this->createIdentificationMapperMock(),
-            $this->createOrderMapperMock()
+            $this->createOrderMapperMock(),
+            new ArvatoRssConfig()
         );
-        $result = $mapper->mapQuoteToRequestTransfer($this->quote);
+        $result = $mapper->mapOrderToRequestTransfer($this->order);
         $this->testResult($result);
     }
 
@@ -40,6 +43,10 @@ class StoreOrderRequestMapperTest extends AbstractBusinessTest
         $this->assertInstanceOf(ArvatoRssStoreOrderRequestTransfer::class, $result);
         $this->assertInstanceOf(ArvatoRssIdentificationRequestTransfer::class, $result->getIdentification());
         $this->assertInstanceOf(ArvatoRssOrderTransfer::class, $result->getOrder());
+        $this->assertEquals(
+            $result->getOrder()->getPaymentType(),
+            ArvatoRssApiConfig::INVOICE
+        );
     }
 
     /**

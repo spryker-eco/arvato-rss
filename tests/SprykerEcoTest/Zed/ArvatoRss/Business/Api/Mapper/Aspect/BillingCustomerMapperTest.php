@@ -23,7 +23,10 @@ class BillingCustomerMapperTest extends AbstractBusinessTest
         $mapper = new BillingCustomerMapper(
             new Iso3166ConverterService()
         );
-        $result = $mapper->map($this->quote);
+        $result = $mapper->map(
+            $this->quote->getBillingAddress(),
+            $this->quote->getCustomer()
+        );
         $this->testResult($result);
     }
 

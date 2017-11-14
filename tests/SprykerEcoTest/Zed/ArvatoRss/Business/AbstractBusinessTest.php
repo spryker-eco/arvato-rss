@@ -10,7 +10,7 @@ namespace SprykerEcoTest\Zed\ArvatoRss\Business;
 use Codeception\TestCase\Test;
 use SprykerEco\Shared\ArvatoRss\ArvatoRssApiConfig;
 use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
-use SprykerEcoTest\Zed\ArvatoRss\Helper\QuoteHelper;
+use SprykerEcoTest\Zed\ArvatoRss\Helper\SalesHelper;
 use SprykerTest\Shared\Testify\Helper\ConfigHelper;
 
 class AbstractBusinessTest extends Test
@@ -23,6 +23,11 @@ class AbstractBusinessTest extends Test
     protected $quote;
 
     /**
+     * @var \Generated\Shared\Transfer\OrderTransfer
+     */
+    protected $order;
+
+    /**
      * @return void
      */
     public function setUp()
@@ -31,8 +36,9 @@ class AbstractBusinessTest extends Test
         $this->getModule('\\' . ConfigHelper::class)->setConfig(ArvatoRssConstants::ARVATORSS_CLIENTID, 'test');
         $this->getModule('\\' . ConfigHelper::class)->setConfig(ArvatoRssConstants::ARVATORSS_AUTHORISATION, 'test');
         $this->getModule('\\' . ConfigHelper::class)->setConfig(ArvatoRssConstants::ARVATORSS_PAYMENT_TYPE_MAPPING, [
-            'Invoice' => ArvatoRssApiConfig::INVOICE,
+            'invoice' => ArvatoRssApiConfig::INVOICE,
         ]);
-        $this->quote = $this->getModule('\\' . QuoteHelper::class)->createQuoteTransfer();
+        $this->quote = $this->getModule('\\' . SalesHelper::class)->createQuoteTransfer();
+        $this->order = $this->getModule('\\' . SalesHelper::class)->createOrderTransfer();
     }
 }
