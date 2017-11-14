@@ -8,8 +8,8 @@
 namespace SprykerEcoTest\Zed\ArvatoRss\Business;
 
 use Codeception\TestCase\Test;
-use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
 use SprykerEco\Shared\ArvatoRss\ArvatoRssApiConstants;
+use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
 use SprykerEcoTest\Zed\ArvatoRss\Helper\QuoteHelper;
 use SprykerTest\Shared\Testify\Helper\ConfigHelper;
 

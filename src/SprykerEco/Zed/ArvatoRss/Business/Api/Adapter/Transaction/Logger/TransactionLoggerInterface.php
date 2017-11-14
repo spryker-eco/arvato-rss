@@ -7,6 +7,8 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\Transaction\Logger;
 
+use stdClass;
+
 interface TransactionLoggerInterface
 {
     /**
@@ -23,6 +25,6 @@ interface TransactionLoggerInterface
         $type,
         $result,
         array $requestPayload,
-        \stdClass $responsePayload
+        stdClass $responsePayload
     );
 }

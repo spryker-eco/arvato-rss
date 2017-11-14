@@ -10,10 +10,7 @@ namespace SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect;
 use Generated\Shared\Transfer\ArvatoRssOrderItemTransfer;
 use Generated\Shared\Transfer\ArvatoRssOrderTransfer;
 use Generated\Shared\Transfer\ItemTransfer;
-use Generated\Shared\Transfer\OrderTransfer;
-use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\TotalsTransfer;
-use SprykerEco\Zed\ArvatoRss\ArvatoRssConfig;
 use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface;
 use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToStoreInterface;
 
@@ -37,7 +34,6 @@ class OrderMapper implements OrderMapperInterface
     /**
      * @param \SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface $moneyFacade
      * @param \SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToStoreInterface $storeFacade
-     * @param \SprykerEco\Zed\ArvatoRss\ArvatoRssConfig $config
      */
     public function __construct(
         ArvatoRssToMoneyInterface $moneyFacade,
@@ -48,8 +44,6 @@ class OrderMapper implements OrderMapperInterface
     }
 
     /**
-     * @api
-     *
      * @param \Generated\Shared\Transfer\TotalsTransfer $totalsTransfer
      * @param array|\ArrayObject $items
      * @param string $orderReference

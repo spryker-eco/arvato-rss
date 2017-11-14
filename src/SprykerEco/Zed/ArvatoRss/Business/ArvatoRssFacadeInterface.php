@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\ArvatoRss\Business;
 
 use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use Generated\Shared\Transfer\SalesDataTransfer;
 
 interface ArvatoRssFacadeInterface
 {

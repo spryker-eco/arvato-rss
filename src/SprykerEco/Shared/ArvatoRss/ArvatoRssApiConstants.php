@@ -24,5 +24,4 @@ interface ArvatoRssApiConstants
     //Transaction types
     const TRANSACTION_TYPE_STORE_ORDER = 'STORE_ORDER';
     const TRANSACTION_TYPE_RISK_CHECK = 'RISK_CHECK';
-
 }

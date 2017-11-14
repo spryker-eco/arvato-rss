@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect;
 
 use Generated\Shared\Transfer\AddressTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
-use Generated\Shared\Transfer\QuoteTransfer;
 
 interface BillingCustomerMapperInterface
 {

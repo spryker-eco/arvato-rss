@@ -8,7 +8,6 @@
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
 
 use Generated\Shared\Transfer\OrderTransfer;
-use Generated\Shared\Transfer\QuoteTransfer;
 
 interface StoreOrderRequestMapperInterface
 {

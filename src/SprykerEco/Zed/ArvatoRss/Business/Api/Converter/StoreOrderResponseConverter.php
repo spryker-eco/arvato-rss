@@ -13,7 +13,7 @@ use stdClass;
 class StoreOrderResponseConverter implements StoreOrderResponseConverterInterface
 {
     /**
-     * @param \stdClass $response
+     * @param \stdClass $outcome
      *
      * @return \Generated\Shared\Transfer\ArvatoRssStoreOrderResponseTransfer
      */

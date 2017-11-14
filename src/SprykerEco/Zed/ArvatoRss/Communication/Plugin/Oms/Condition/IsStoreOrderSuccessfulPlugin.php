@@ -5,7 +5,6 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-
 namespace SprykerEco\Zed\ArvatoRss\Communication\Plugin\Oms\Command;
 
 use Orm\Zed\ArvatoRss\Persistence\Base\SpyArvatoRssTransactionLog;
@@ -15,8 +14,8 @@ use Spryker\Zed\Oms\Dependency\Plugin\Condition\ConditionInterface;
 use SprykerEco\Shared\ArvatoRss\ArvatoRssApiConstants;
 
 /**
- * @method \SprykerEco\Zed\ArvatoRss\Business\ArvatorssFacade getFacade()
- * @method \SprykerEco\Zed\ArvatoRss\Persistence\ArvatoRssQueryContainer getQueryContainer()
+ * @method \SprykerEco\Zed\ArvatoRss\Business\ArvatorssFacadeInterface getFacade()
+ * @method \SprykerEco\Zed\ArvatoRss\Persistence\ArvatoRssQueryContainerInterface getQueryContainer()
  * @method \SprykerEco\Zed\ArvatoRss\Communication\ArvatoRssCommunicationFactory getFactory()
  */
 class IsStoreOrderSuccessfulPlugin extends AbstractPlugin implements ConditionInterface

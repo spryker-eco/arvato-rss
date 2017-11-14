@@ -24,6 +24,7 @@ use SprykerEco\Zed\ArvatoRss\Business\Handler\StoreOrderHandler;
 
 /**
  * @method \SprykerEco\Zed\ArvatoRss\ArvatoRssConfig getConfig()
+ * @method \SprykerEco\Zed\ArvatoRss\Persistence\ArvatoRssQueryContainerInterface getQueryContainer()
  */
 class ArvatoRssBusinessFactory extends AbstractBusinessFactory
 {

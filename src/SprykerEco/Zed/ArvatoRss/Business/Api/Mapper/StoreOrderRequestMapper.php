@@ -10,7 +10,6 @@ namespace SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
 use Generated\Shared\Transfer\ArvatoRssOrderTransfer;
 use Generated\Shared\Transfer\ArvatoRssStoreOrderRequestTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
-use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Zed\ArvatoRss\ArvatoRssConfig;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\IdentificationMapperInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\OrderMapperInterface;
@@ -31,9 +30,11 @@ class StoreOrderRequestMapper implements StoreOrderRequestMapperInterface
      * @var \SprykerEco\Zed\ArvatoRss\ArvatoRssConfig $config
      */
     protected $config;
+
     /**
      * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\IdentificationMapperInterface $identificationMapper
      * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\OrderMapperInterface $orderMapper
+     * @param \SprykerEco\Zed\ArvatoRss\ArvatoRssConfig $config
      */
     public function __construct(
         IdentificationMapperInterface $identificationMapper,

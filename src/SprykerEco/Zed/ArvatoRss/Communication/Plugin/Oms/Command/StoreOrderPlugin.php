@@ -13,7 +13,7 @@ use Spryker\Zed\Oms\Business\Util\ReadOnlyArrayObject;
 use Spryker\Zed\Oms\Dependency\Plugin\Command\CommandByOrderInterface;
 
 /**
- * @method \SprykerEco\Zed\ArvatoRss\Business\ArvatoRssFacade getFacade()
+ * @method \SprykerEco\Zed\ArvatoRss\Business\ArvatoRssFacadeInterface getFacade()
  * @method \SprykerEco\Zed\ArvatoRss\Communication\ArvatoRssCommunicationFactory getFactory()
  */
 class StoreOrderPlugin extends AbstractPlugin implements CommandByOrderInterface
