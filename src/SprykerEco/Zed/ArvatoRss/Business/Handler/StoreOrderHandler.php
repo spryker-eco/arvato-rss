@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Business\Handler;
 
+use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiAdapterInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\StoreOrderRequestMapperInterface;
@@ -46,16 +47,13 @@ class StoreOrderHandler implements StoreOrderHandlerInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
+     * @return void
      */
-    public function storeOrder(QuoteTransfer $quoteTransfer)
+    public function storeOrder(OrderTransfer $orderTransfer)
     {
-        $requestTransfer = $this->storeOrderRequestMapper->mapQuoteToRequestTransfer($quoteTransfer);
-        $responseTransfer = $this->apiAdapter->storeOrder($requestTransfer);
-        $quoteTransfer = $this->storeOrderResponseMapper->mapResponseToQuote($responseTransfer, $quoteTransfer);
-
-        return $quoteTransfer;
+        $requestTransfer = $this->storeOrderRequestMapper->mapOrderToRequestTransfer($orderTransfer);
+        $this->apiAdapter->storeOrder($requestTransfer);
     }
 }

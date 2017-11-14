@@ -9,6 +9,7 @@ namespace SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
 
 use Generated\Shared\Transfer\ArvatoRssOrderTransfer;
 use Generated\Shared\Transfer\ArvatoRssStoreOrderRequestTransfer;
+use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Zed\ArvatoRss\ArvatoRssConfig;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\IdentificationMapperInterface;
@@ -45,16 +46,21 @@ class StoreOrderRequestMapper implements StoreOrderRequestMapperInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return \Generated\Shared\Transfer\ArvatoRssStoreOrderRequestTransfer
      */
-    public function mapQuoteToRequestTransfer(QuoteTransfer $quoteTransfer)
+    public function mapOrderToRequestTransfer(OrderTransfer $orderTransfer)
     {
         $requestTransfer = new ArvatoRssStoreOrderRequestTransfer();
 
         $identification = $this->identificationMapper->map();
-        $order = $this->orderMapper->map($quoteTransfer);
+        $order = $this->orderMapper->map(
+            $orderTransfer->getTotals(),
+            $orderTransfer->getItems(),
+            $orderTransfer->getOrderReference()
+        );
+        $order = $this->mapSpecificParameters($orderTransfer, $order);
 
         $requestTransfer->setIdentification($identification);
         $requestTransfer->setOrder($order);
@@ -63,20 +69,20 @@ class StoreOrderRequestMapper implements StoreOrderRequestMapperInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      * @param \Generated\Shared\Transfer\ArvatoRssOrderTransfer $order
      *
      * @return \Generated\Shared\Transfer\ArvatoRssOrderTransfer
      */
-    protected function mapSpecificParameters(QuoteTransfer $quoteTransfer, ArvatoRssOrderTransfer $order)
+    protected function mapSpecificParameters(OrderTransfer $orderTransfer, ArvatoRssOrderTransfer $order)
     {
+        $payment = $orderTransfer->getPayments()[0];
         $order->setPaymentType(
             $this->config->getPaymentTypeMapping(
-                $quoteTransfer->getPayment()->getPaymentMethod()
+                $payment->getPaymentMethod()
             )
         );
-
-        $order->setDebitorNumber($quoteTransfer->getCustomer()->getIdCustomer());
+        $order->setDebitorNumber($orderTransfer->getCustomer()->getIdCustomer());
 
         return $order;
     }

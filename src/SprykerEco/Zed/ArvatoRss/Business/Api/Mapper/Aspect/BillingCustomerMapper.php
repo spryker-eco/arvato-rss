@@ -11,7 +11,7 @@ use DateTime;
 use Generated\Shared\Transfer\AddressTransfer;
 use Generated\Shared\Transfer\ArvatoRssBillingCustomerTransfer;
 use Generated\Shared\Transfer\ArvatoRssCustomerAddressTransfer;
-use Generated\Shared\Transfer\QuoteTransfer;
+use Generated\Shared\Transfer\CustomerTransfer;
 use SprykerEco\Service\ArvatoRss\Iso3166ConverterServiceInterface;
 
 class BillingCustomerMapper implements BillingCustomerMapperInterface
@@ -38,15 +38,13 @@ class BillingCustomerMapper implements BillingCustomerMapperInterface
     /**
      * @api
      *
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\AddressTransfer $billingAddress
+     * @param \Generated\Shared\Transfer\CustomerTransfer $customer
      *
      * @return \Generated\Shared\Transfer\ArvatoRssBillingCustomerTransfer
      */
-    public function map(QuoteTransfer $quoteTransfer)
+    public function map(AddressTransfer $billingAddress, CustomerTransfer $customer)
     {
-        $customer = $quoteTransfer->getCustomer();
-        $billingAddress = $quoteTransfer->getBillingAddress();
-
         $billingCustomerTransfer = new ArvatoRssBillingCustomerTransfer();
         $address = $this->prepareAddressTransfer($billingAddress);
         $billingCustomerTransfer->setAddress($address);

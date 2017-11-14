@@ -56,8 +56,15 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
         $requestTransfer = new ArvatoRssRiskCheckRequestTransfer();
 
         $identification = $this->identificationMapper->map();
-        $billingCustomer = $this->billingCustomerMapper->map($quoteTransfer);
-        $order = $this->orderMapper->map($quoteTransfer);
+        $billingCustomer = $this->billingCustomerMapper->map(
+            $quoteTransfer->getBillingAddress(),
+            $quoteTransfer->getCustomer()
+        );
+        $order = $this->orderMapper->map(
+            $quoteTransfer->getTotals(),
+            $quoteTransfer->getItems(),
+            $quoteTransfer->getOrderReference()
+        );
 
 
         $requestTransfer->setIdentification($identification);

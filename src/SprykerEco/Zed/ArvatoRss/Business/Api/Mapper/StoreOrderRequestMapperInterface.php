@@ -7,14 +7,15 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
 
+use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 
 interface StoreOrderRequestMapperInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
      * @return \Generated\Shared\Transfer\ArvatoRssStoreOrderRequestTransfer
      */
-    public function mapQuoteToRequestTransfer(QuoteTransfer $quoteTransfer);
+    public function mapOrderToRequestTransfer(OrderTransfer $orderTransfer);
 }

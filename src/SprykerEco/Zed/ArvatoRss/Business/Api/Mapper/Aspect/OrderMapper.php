@@ -10,7 +10,9 @@ namespace SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect;
 use Generated\Shared\Transfer\ArvatoRssOrderItemTransfer;
 use Generated\Shared\Transfer\ArvatoRssOrderTransfer;
 use Generated\Shared\Transfer\ItemTransfer;
+use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
+use Generated\Shared\Transfer\TotalsTransfer;
 use SprykerEco\Zed\ArvatoRss\ArvatoRssConfig;
 use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface;
 use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToStoreInterface;
@@ -48,50 +50,52 @@ class OrderMapper implements OrderMapperInterface
     /**
      * @api
      *
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\TotalsTransfer $totalsTransfer
+     * @param array $items
+     * @param string $orderReference
      *
      * @return \Generated\Shared\Transfer\ArvatoRssOrderTransfer
      */
-    public function map(QuoteTransfer $quoteTransfer)
+    public function map(TotalsTransfer $totalsTransfer, array $items, $orderReference)
     {
-        $orderTransfer = new ArvatoRssOrderTransfer();
+        $order = new ArvatoRssOrderTransfer();
 
-        $orderTransfer->setCurrency(
+        $order->setCurrency(
             $this->storeFacade
                 ->getCurrentStore()
                 ->getSelectedCurrencyIsoCode()
         );
-        $orderTransfer->setRegisteredOrder(true);
-        $orderTransfer->setGrossTotalBill(
-            $this->moneyFacade->convertIntegerToDecimal($quoteTransfer->getTotals()->getGrandTotal())
+        $order->setRegisteredOrder(true);
+        $order->setGrossTotalBill(
+            $this->moneyFacade->convertIntegerToDecimal($totalsTransfer->getGrandTotal())
         );
-        $orderTransfer->setOrderNumber($quoteTransfer->getOrderReference());
-        $orderTransfer->setTotalOrderValue(
-            $this->moneyFacade->convertIntegerToDecimal($quoteTransfer->getTotals()->getSubtotal())
+        $order->setOrderNumber($orderReference);
+        $order->setTotalOrderValue(
+            $this->moneyFacade->convertIntegerToDecimal($totalsTransfer->getSubtotal())
         );
-        foreach ($quoteTransfer->getItems() as $item) {
-            $itemTransfer = $this->prepareOrderItem($item);
-            $orderTransfer->addItem($itemTransfer);
+        foreach ($items as $itemTransfer) {
+            $item = $this->prepareOrderItem($itemTransfer);
+            $order->addItem($item);
         }
 
-        return $orderTransfer;
+        return $order;
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ItemTransfer $item
+     * @param \Generated\Shared\Transfer\ItemTransfer $itemTransfer
      *
      * @return \Generated\Shared\Transfer\ArvatoRssOrderItemTransfer
      */
-    protected function prepareOrderItem(ItemTransfer $item)
+    protected function prepareOrderItem(ItemTransfer $itemTransfer)
     {
-        $itemTransfer = new ArvatoRssOrderItemTransfer();
-        $itemTransfer->setUnitPrice(
-            $this->moneyFacade->convertIntegerToDecimal($item->getUnitPrice())
+        $item = new ArvatoRssOrderItemTransfer();
+        $item->setUnitPrice(
+            $this->moneyFacade->convertIntegerToDecimal($itemTransfer->getUnitPrice())
         );
-        $itemTransfer->setProductNumber($item->getSku());
-        $itemTransfer->setUnitCount($item->getQuantity());
-        $itemTransfer->setProductGroupId(static::PRODUCT_GROUP_ID);
+        $item->setProductNumber($itemTransfer->getSku());
+        $item->setUnitCount($itemTransfer->getQuantity());
+        $item->setProductGroupId(static::PRODUCT_GROUP_ID);
 
-        return $itemTransfer;
+        return $item;
     }
 }

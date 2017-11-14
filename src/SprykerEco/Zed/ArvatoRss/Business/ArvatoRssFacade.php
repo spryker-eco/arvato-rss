@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Business;
 
+use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
@@ -26,12 +27,12 @@ class ArvatoRssFacade extends AbstractFacade implements ArvatoRssFacadeInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
      *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
+     * @return void
      */
-    public function storeOrder(QuoteTransfer $quoteTransfer)
+    public function storeOrder(OrderTransfer $orderTransfer)
     {
-        return $this->getFactory()->createStoreOrderHandler()->storeOrder($quoteTransfer);
+        $this->getFactory()->createStoreOrderHandler()->storeOrder($orderTransfer);
     }
 }
