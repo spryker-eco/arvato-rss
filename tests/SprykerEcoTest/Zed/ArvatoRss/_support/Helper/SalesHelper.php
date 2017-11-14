@@ -12,7 +12,6 @@ use Generated\Shared\DataBuilder\ArvatoRssQuoteDataBuilder;
 use Generated\Shared\DataBuilder\OrderBuilder;
 use Generated\Shared\DataBuilder\PaymentBuilder;
 use Generated\Shared\DataBuilder\QuoteBuilder;
-use Generated\Shared\Transfer\OrderTransfer;
 
 class SalesHelper extends Module
 {
