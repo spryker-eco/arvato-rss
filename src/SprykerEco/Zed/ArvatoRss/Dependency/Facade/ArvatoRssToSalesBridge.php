@@ -29,6 +29,6 @@ class ArvatoRssToSalesBridge implements ArvatoRssToSalesInterface
      */
     public function getOrderByIdSalesOrder($idSalesOrder)
     {
-        $this->salesFacade->getOrderByIdSalesOrder($idSalesOrder);
+        return $this->salesFacade->getOrderByIdSalesOrder($idSalesOrder);
     }
 }
