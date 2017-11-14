@@ -64,7 +64,7 @@ class SoapApiAdapter implements ApiAdapterInterface
 
         $this->adapterFactory->createTransactionLogger()->log(
             $requestTransfer->getOrder()->getOrderNumber(),
-            ArvatoRssApiConfig::TRANSACTION_TYPE_STORE_ORDER,
+            ArvatoRssApiConfig::TRANSACTION_TYPE_RISK_CHECK,
             $result->Decision->ResultCode,
             $params,
             $result
