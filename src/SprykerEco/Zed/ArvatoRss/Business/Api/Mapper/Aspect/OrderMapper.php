@@ -51,12 +51,12 @@ class OrderMapper implements OrderMapperInterface
      * @api
      *
      * @param \Generated\Shared\Transfer\TotalsTransfer $totalsTransfer
-     * @param array $items
+     * @param array|\ArrayObject $items
      * @param string $orderReference
      *
      * @return \Generated\Shared\Transfer\ArvatoRssOrderTransfer
      */
-    public function map(TotalsTransfer $totalsTransfer, array $items, $orderReference)
+    public function map(TotalsTransfer $totalsTransfer, $items, $orderReference)
     {
         $order = new ArvatoRssOrderTransfer();
 
