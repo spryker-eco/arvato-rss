@@ -7,8 +7,11 @@
 
 namespace SprykerEco\Shared\ArvatoRss;
 
-interface ArvatoRssPaymentTypeConstants
+interface ArvatoRssApiConstants
 {
+    const SUCCESS_RESULT_CODE = 'SOR000';
+
+    // Payment methods
     const INVOICE = 'OI';
     const DIRECT_DEBIT = 'DD';
     const CREDIT_CARD = 'CC';
@@ -17,4 +20,6 @@ interface ArvatoRssPaymentTypeConstants
     const CASH_IN_ADVANCE = 'AP';
     const E_PAYMENT = 'EP';
     const OTHER = 'other';
+
+
 }
