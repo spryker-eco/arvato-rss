@@ -26,14 +26,4 @@ class SoapApiAdapterMock extends SoapApiAdapter
     {
         return (new ArvatoRssRiskCheckResponseBuilder())->build()->setIsError(false);
     }
-
-    /**
-     * @param \Generated\Shared\Transfer\ArvatoRssStoreOrderRequestTransfer $requestTransfer
-     *
-     * @return \Generated\Shared\Transfer\ArvatoRssStoreOrderResponseTransfer
-     */
-    public function storeOrder(ArvatoRssStoreOrderRequestTransfer $requestTransfer)
-    {
-        return (new ArvatoRssStoreOrderResponseBuilder())->build()->setIsError(false);
-    }
 }

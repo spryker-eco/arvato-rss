@@ -61,11 +61,7 @@ abstract class AbstractCall implements ApiCallInterface
         array $params
     )
     {
-        $soapClient = $this->createSoapClient(
-            $identification
-        );
-        $result = $this->executeCall($soapClient, $params);
-        $this->validateResponse($result);
+        $result = $this->sendRequest($identification, $params);
 
         $this->apiCallLogger->log(
             $this->retrieveOrderNumber($params),
@@ -94,6 +90,26 @@ abstract class AbstractCall implements ApiCallInterface
      * @throws \Exception
      */
     abstract protected function throwValidationException($message);
+
+    /**
+     * @param \Generated\Shared\Transfer\ArvatoRssIdentificationRequestTransfer $identification
+     * @param array $params
+     *
+     * @return \SoapFault|\stdClass
+     */
+    protected function sendRequest(
+        ArvatoRssIdentificationRequestTransfer $identification,
+        array $params
+    )
+    {
+        $soapClient = $this->createSoapClient(
+            $identification
+        );
+        $result = $this->executeCall($soapClient, $params);
+        $this->validateResponse($result);
+
+        return $result;
+    }
 
     /**
      * @param \Generated\Shared\Transfer\ArvatoRssIdentificationRequestTransfer $identification
