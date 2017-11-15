@@ -9,7 +9,7 @@ namespace SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\Transaction\Logger;
 
 use stdClass;
 
-interface TransactionLoggerInterface
+interface ApiCallLoggerInterface
 {
     /**
      * @param string $orderReference

@@ -7,10 +7,10 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\Transaction\Logger;
 
-use Orm\Zed\ArvatoRss\Persistence\SpyArvatoRssTransactionLog;
+use Orm\Zed\ArvatoRss\Persistence\SpyArvatoRssApiCallLog;
 use stdClass;
 
-class TransactionLogger implements TransactionLoggerInterface
+class ApiCallLogger implements ApiCallLoggerInterface
 {
     /**
      * @param string $orderReference
@@ -28,9 +28,9 @@ class TransactionLogger implements TransactionLoggerInterface
         array $requestPayload,
         stdClass $responsePayload
     ) {
-        $transactionLog = new SpyArvatoRssTransactionLog();
-        $transactionLog->setOrderReference($orderReference)
-            ->setTransactionType($type)
+        $callLog = new SpyArvatoRssApiCallLog();
+        $callLog->setOrderReference($orderReference)
+            ->setCallType($type)
             ->setResultCode($resultCode)
             ->setRequestPayload(
                 print_r($requestPayload, true)
