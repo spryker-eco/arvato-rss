@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Persistence;
 
-use Orm\Zed\ArvatoRss\Persistence\SpyArvatoRssTransactionLogQuery;
+use Orm\Zed\ArvatoRss\Persistence\SpyArvatoRssApiCallLogQuery;
 use Propel\Runtime\ActiveQuery\Criteria;
 use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 
@@ -18,10 +18,10 @@ use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 class ArvatoRssPersistenceFactory extends AbstractPersistenceFactory
 {
     /**
-     * @return \Orm\Zed\ArvatoRss\Persistence\SpyArvatoRssTransactionLogQuery
+     * @return \Orm\Zed\ArvatoRss\Persistence\SpyArvatoRssApiCallLogQuery
      */
-    public function createArvatoRssTransactionLogQuery()
+    public function createArvatoRssApiCallLogQuery()
     {
-        return SpyArvatoRssTransactionLogQuery::create()->orderByUpdatedAt(Criteria::DESC);
+        return SpyArvatoRssApiCallLogQuery::create()->orderByUpdatedAt(Criteria::DESC);
     }
 }

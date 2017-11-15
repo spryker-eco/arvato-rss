@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\ArvatoRss\Communication\Plugin\Oms\Command;
 
 use Orm\Zed\ArvatoRss\Persistence\Base\SpyArvatoRssTransactionLog;
+use Orm\Zed\ArvatoRss\Persistence\SpyArvatoRssApiCallLog;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItem;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 use Spryker\Zed\Oms\Dependency\Plugin\Condition\ConditionInterface;
@@ -43,23 +44,23 @@ class IsStoreOrderSuccessfulPlugin extends AbstractPlugin implements ConditionIn
      */
     protected function isStoreOrderSuccessful($orderReference)
     {
-        $storeOrderTrasactionLog = $this->getTransactionLogEntry($orderReference);
-        if ($storeOrderTrasactionLog === null) {
+        $storeOrderApiCallLog = $this->getApiCallLogEntry($orderReference);
+        if ($storeOrderApiCallLog === null) {
             return false;
         }
 
-        return $this->isTransactionSuccessfull($storeOrderTrasactionLog);
+        return $this->isTransactionSuccessfull($storeOrderApiCallLog);
     }
 
     /**
      * @param string $orderReference
      *
-     * @return \Orm\Zed\ArvatoRss\Persistence\SpyArvatoRssTransactionLog
+     * @return \Orm\Zed\ArvatoRss\Persistence\SpyArvatoRssApiCallLog
      */
-    protected function getTransactionLogEntry($orderReference)
+    protected function getApiCallLogEntry($orderReference)
     {
         return $this->getQueryContainer()
-            ->queryTransactionByOrderReferenceAndType(
+            ->queryApiLogByOrderReferenceAndType(
                 $orderReference,
                 ArvatoRssApiConfig::TRANSACTION_TYPE_STORE_ORDER
             )
@@ -67,12 +68,12 @@ class IsStoreOrderSuccessfulPlugin extends AbstractPlugin implements ConditionIn
     }
 
     /**
-     * @param \Orm\Zed\ArvatoRss\Persistence\Base\SpyArvatoRssTransactionLog $transactionLog
+     * @param \Orm\Zed\ArvatoRss\Persistence\Base\SpyArvatoRssApiCallLog $apiCallLog
      *
      * @return bool
      */
-    protected function isTransactionSuccessfull(SpyArvatoRssTransactionLog $transactionLog)
+    protected function isTransactionSuccessfull(SpyArvatoRssApiCallLog $apiCallLog)
     {
-        return $transactionLog->getResultCode() == ArvatoRssApiConfig::RESULT_CODE_SUCCESS;
+        return $apiCallLog->getResultCode() == ArvatoRssApiConfig::RESULT_CODE_SUCCESS;
     }
 }

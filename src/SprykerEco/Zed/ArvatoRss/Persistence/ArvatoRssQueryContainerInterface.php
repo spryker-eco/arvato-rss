@@ -17,7 +17,7 @@ interface ArvatoRssQueryContainerInterface extends QueryContainerInterface
      * @param string $orderReference
      * @param string $type
      *
-     * @return \Orm\Zed\ArvatoRss\Persistence\SpyArvatoRssTransactionLogQuery
+     * @return \Orm\Zed\ArvatoRss\Persistence\SpyArvatoRssApiCallLogQuery
      */
-    public function queryTransactionByOrderReferenceAndType($orderReference, $type);
+    public function queryApiLogByOrderReferenceAndType($orderReference, $type);
 }

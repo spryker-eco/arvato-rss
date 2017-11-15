@@ -18,10 +18,10 @@ class ArvatoRssQueryContainer extends AbstractQueryContainer implements ArvatoRs
      * @param string $orderReference
      * @param string $type
      *
-     * @return \Orm\Zed\ArvatoRss\Persistence\SpyArvatoRssTransactionLogQuery
+     * @return \Orm\Zed\ArvatoRss\Persistence\SpyArvatoRssApiCallLogQuery
      */
-    public function queryTransactionByOrderReferenceAndType($orderReference, $type)
+    public function queryApiLogByOrderReferenceAndType($orderReference, $type)
     {
-        return $this->getFactory()->createArvatoRssTransactionLogQuery();
+        return $this->getFactory()->createArvatoRssApiCallLogQuery();
     }
 }

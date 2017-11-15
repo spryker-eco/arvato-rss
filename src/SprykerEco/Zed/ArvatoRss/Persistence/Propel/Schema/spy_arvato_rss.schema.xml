@@ -14,10 +14,6 @@
         <column name="result_code" required="true" type="VARCHAR"/>
         <column name="request_payload" required="false" type="LONGVARCHAR"/>
         <column name="response_payload" required="true" type="LONGVARCHAR"/>
-
-        <foreign-key name="spy_arvato_rss_api_call_log-order_reference" foreignTable="spy_sales_order">
-            <reference foreign="order_reference" local="order_reference"/>
-        </foreign-key>
         <behavior name="timestampable"/>
         <id-method-parameter value="spy_arvato_rss_api_call_log_pk_seq"/>
         <index name="spy_arvato_rss_api_call_log-call_type">
