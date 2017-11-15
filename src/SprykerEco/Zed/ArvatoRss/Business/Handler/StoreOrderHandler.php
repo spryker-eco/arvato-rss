@@ -10,7 +10,6 @@ namespace SprykerEco\Zed\ArvatoRss\Business\Handler;
 use Generated\Shared\Transfer\OrderTransfer;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiAdapterInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\StoreOrderRequestMapperInterface;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\StoreOrderResponseMapperInterface;
 
 class StoreOrderHandler implements StoreOrderHandlerInterface
 {

@@ -11,7 +11,6 @@ use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\RiskCheckCall;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\StoreOrderCall;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\Transaction\Logger\ApiCallLogger;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\Transaction\TransactionFactory;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RequestHeaderConverter;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverter;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverter;

@@ -18,7 +18,6 @@ use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\OrderMapper;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapper;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckResponseMapper;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\StoreOrderRequestMapper;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\StoreOrderResponseMapper;
 use SprykerEco\Zed\ArvatoRss\Business\Handler\RiskCheckHandler;
 use SprykerEco\Zed\ArvatoRss\Business\Handler\StoreOrderHandler;
 

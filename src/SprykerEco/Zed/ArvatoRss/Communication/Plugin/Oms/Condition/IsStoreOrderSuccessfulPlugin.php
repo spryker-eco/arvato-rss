@@ -7,7 +7,6 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Communication\Plugin\Oms\Command;
 
-use Orm\Zed\ArvatoRss\Persistence\Base\SpyArvatoRssTransactionLog;
 use Orm\Zed\ArvatoRss\Persistence\SpyArvatoRssApiCallLog;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItem;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;

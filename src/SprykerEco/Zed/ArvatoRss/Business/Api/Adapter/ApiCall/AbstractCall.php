@@ -8,12 +8,13 @@
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall;
 
 use Generated\Shared\Transfer\ArvatoRssIdentificationRequestTransfer;
+use SoapClient;
+use SoapFault;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\Transaction\Logger\ApiCallLoggerInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\ArvatoRssRequestApiConstants;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RequestHeaderConverterInterface;
-use SoapClient;
 
 abstract class AbstractCall implements ApiCallInterface
 {
@@ -44,8 +45,7 @@ abstract class AbstractCall implements ApiCallInterface
     public function __construct(
         RequestHeaderConverterInterface $requestHeaderConverter,
         ApiCallLoggerInterface $apiCallLogger
-    )
-    {
+    ) {
         $this->requestHeaderConverter = $requestHeaderConverter;
         $this->apiCallLogger = $apiCallLogger;
     }
@@ -59,8 +59,7 @@ abstract class AbstractCall implements ApiCallInterface
     public function execute(
         ArvatoRssIdentificationRequestTransfer $identification,
         array $params
-    )
-    {
+    ) {
         $result = $this->sendRequest($identification, $params);
 
         $this->apiCallLogger->log(
@@ -83,11 +82,11 @@ abstract class AbstractCall implements ApiCallInterface
     abstract protected function executeCall(SoapClient $soapClient, array $params);
 
     /**
-     * @param $message
-     *
-     * @return void
+     * @param string $message
      *
      * @throws \Exception
+     *
+     * @return void
      */
     abstract protected function throwValidationException($message);
 
@@ -100,8 +99,7 @@ abstract class AbstractCall implements ApiCallInterface
     protected function sendRequest(
         ArvatoRssIdentificationRequestTransfer $identification,
         array $params
-    )
-    {
+    ) {
         $soapClient = $this->createSoapClient(
             $identification
         );
@@ -132,8 +130,6 @@ abstract class AbstractCall implements ApiCallInterface
     /**
      * @param \SoapFault|\stdClass $result
      *
-     * @throws \Exception
-     *
      * @return void
      */
     protected function validateResponse($result)
@@ -149,7 +145,7 @@ abstract class AbstractCall implements ApiCallInterface
      *
      * @return string
      */
-    protected function extractExceptionMessage(\SoapFault $result)
+    protected function extractExceptionMessage(SoapFault $result)
     {
         if (isset($result->detail) && !empty(array_keys(get_object_vars($result->detail))[0])) {
             $exceptionName = array_keys(get_object_vars($result->detail))[0];
@@ -160,13 +156,17 @@ abstract class AbstractCall implements ApiCallInterface
         return $result->getMessage();
     }
 
-    protected function retrieveOrderNumber($params)
+    /**
+     * @param array $params
+     *
+     * @return string
+     */
+    protected function retrieveOrderNumber(array $params)
     {
         return isset(
-            $params[ArvatoRssRequestApiConstants::ARVATORSS_API_ORDER]
-            [ArvatoRssRequestApiConstants::ARVATORSS_API_ORDER_NUMBER])?
-            $params[ArvatoRssRequestApiConstants::ARVATORSS_API_ORDER]
-            [ArvatoRssRequestApiConstants::ARVATORSS_API_ORDER_NUMBER]:
+            $params[ArvatoRssRequestApiConstants::ARVATORSS_API_ORDER][ArvatoRssRequestApiConstants::ARVATORSS_API_ORDER_NUMBER]
+        )?
+            $params[ArvatoRssRequestApiConstants::ARVATORSS_API_ORDER][ArvatoRssRequestApiConstants::ARVATORSS_API_ORDER_NUMBER]:
             '';
     }
 

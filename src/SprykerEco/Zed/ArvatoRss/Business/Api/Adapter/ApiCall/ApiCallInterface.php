@@ -2,7 +2,6 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall;
 
-
 use Generated\Shared\Transfer\ArvatoRssIdentificationRequestTransfer;
 
 interface ApiCallInterface

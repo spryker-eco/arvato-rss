@@ -30,11 +30,11 @@ class StoreOrderCall extends AbstractCall
     }
 
     /**
-     * @param $message
+     * @param string $message
+     *
+     * @throws \SprykerEco\Zed\ArvatoRss\Business\Api\Exception\ArvatoRssStoreOrderApiException
      *
      * @return void
-     *
-     * @throws \Exception
      */
     protected function throwValidationException($message)
     {

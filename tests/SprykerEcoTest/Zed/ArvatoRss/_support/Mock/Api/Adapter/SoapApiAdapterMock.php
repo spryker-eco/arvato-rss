@@ -8,9 +8,7 @@
 namespace SprykerEcoTest\Zed\ArvatoRss\Mock\Api\Adapter;
 
 use Generated\Shared\DataBuilder\ArvatoRssRiskCheckResponseBuilder;
-use Generated\Shared\DataBuilder\ArvatoRssStoreOrderResponseBuilder;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
-use Generated\Shared\Transfer\ArvatoRssStoreOrderRequestTransfer;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\SoapApiAdapter;
 
 class SoapApiAdapterMock extends SoapApiAdapter

@@ -9,6 +9,7 @@ namespace SprykerEcoTest\Zed\ArvatoRss\Mock\Api\Adapter\ApiCall;
 
 use Generated\Shared\Transfer\ArvatoRssIdentificationRequestTransfer;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\StoreOrderCall;
+use stdClass;
 
 class StoreOrderCallMock extends StoreOrderCall
 {
@@ -21,11 +22,10 @@ class StoreOrderCallMock extends StoreOrderCall
     protected function sendRequest(
         ArvatoRssIdentificationRequestTransfer $identification,
         array $params
-    )
-    {
-        $result = new \stdClass();
-        $decision = new \stdClass();
-        $system = new \stdClass();
+    ) {
+        $result = new stdClass();
+        $decision = new stdClass();
+        $system = new stdClass();
 
         $decision->Result = 'test';
         $decision->ActionCode = 'test';
