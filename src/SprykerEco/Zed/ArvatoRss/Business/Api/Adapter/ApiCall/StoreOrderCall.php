@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall;
 
 use SoapClient;
+use SprykerEco\Shared\ArvatoRss\ArvatoRssApiConfig;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Exception\ArvatoRssStoreOrderApiException;
 
 class StoreOrderCall extends AbstractCall
@@ -15,7 +16,7 @@ class StoreOrderCall extends AbstractCall
     /**
      * @const string
      */
-    const CALL_TYPE = 'STORE_ORDER';
+    const CALL_TYPE = ArvatoRssApiConfig::TRANSACTION_TYPE_STORE_ORDER;
 
     /**
      * @param \SoapClient $soapClient

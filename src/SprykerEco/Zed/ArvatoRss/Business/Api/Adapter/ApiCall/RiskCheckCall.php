@@ -8,6 +8,7 @@
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall;
 
 use SoapClient;
+use SprykerEco\Shared\ArvatoRss\ArvatoRssApiConfig;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Exception\ArvatoRssRiskCheckApiException;
 
 class RiskCheckCall extends AbstractCall
@@ -15,7 +16,7 @@ class RiskCheckCall extends AbstractCall
     /**
      * @const string
      */
-    const CALL_TYPE = 'RISK_CHECK';
+    const CALL_TYPE = ArvatoRssApiConfig::TRANSACTION_TYPE_RISK_CHECK;
 
     /**
      * @param \SoapClient $soapClient
