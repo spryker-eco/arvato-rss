@@ -47,7 +47,6 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     {
         return new StoreOrderHandler(
             $this->createStoreOrderRequestMapper(),
-            $this->createStoreOrderResponseMapper(),
             $this->createSoapApiAdapter()
         );
     }
@@ -62,14 +61,6 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
             $this->createOrderMapper(),
             $this->getConfig()
         );
-    }
-
-    /**
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\StoreOrderResponseMapperInterface
-     */
-    protected function createStoreOrderResponseMapper()
-    {
-        return new StoreOrderResponseMapper();
     }
 
     /**

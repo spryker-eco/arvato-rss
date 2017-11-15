@@ -78,7 +78,6 @@
 
     <transfer name="ArvatoRssQuoteData">
         <property name="arvatoRssRiskCheckResponse" type="ArvatoRssRiskCheckResponse" />
-        <property name="arvatoRssStoreOrderResponse" type="ArvatoRssStoreOrderResponse" />
     </transfer>
 
     <transfer name="Quote">

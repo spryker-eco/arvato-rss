@@ -20,28 +20,20 @@ class StoreOrderHandler implements StoreOrderHandlerInterface
     protected $storeOrderRequestMapper;
 
     /**
-     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\StoreOrderResponseMapperInterface
-     */
-    protected $storeOrderResponseMapper;
-
-    /**
      * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiAdapterInterface
      */
     protected $apiAdapter;
 
     /**
      * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\StoreOrderRequestMapperInterface $storeOrderRequestMapper
-     * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\StoreOrderResponseMapperInterface $storeOrderResponseMapper
      * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiAdapterInterface $apiAdapter
      */
     public function __construct(
         StoreOrderRequestMapperInterface $storeOrderRequestMapper,
-        StoreOrderResponseMapperInterface $storeOrderResponseMapper,
         ApiAdapterInterface $apiAdapter
     ) {
 
         $this->storeOrderRequestMapper = $storeOrderRequestMapper;
-        $this->storeOrderResponseMapper = $storeOrderResponseMapper;
         $this->apiAdapter = $apiAdapter;
     }
 
