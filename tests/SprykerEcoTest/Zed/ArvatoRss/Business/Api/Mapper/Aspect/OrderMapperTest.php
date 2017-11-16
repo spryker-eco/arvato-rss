@@ -33,6 +33,7 @@ class OrderMapperTest extends AbstractBusinessTest
             new ArvatoRssConfig()
         );
         $result = $mapper->map(
+            $this->quote->getCustomer(),
             $this->quote->getTotals(),
             $this->quote->getItems(),
             $this->quote->getOrderReference()

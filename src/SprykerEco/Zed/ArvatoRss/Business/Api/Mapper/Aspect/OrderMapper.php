@@ -9,6 +9,7 @@ namespace SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect;
 
 use Generated\Shared\Transfer\ArvatoRssOrderItemTransfer;
 use Generated\Shared\Transfer\ArvatoRssOrderTransfer;
+use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\ItemTransfer;
 use Generated\Shared\Transfer\TotalsTransfer;
 use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface;
@@ -44,13 +45,14 @@ class OrderMapper implements OrderMapperInterface
     }
 
     /**
+     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
      * @param \Generated\Shared\Transfer\TotalsTransfer $totalsTransfer
      * @param array|\ArrayObject $items
      * @param string $orderReference
      *
      * @return \Generated\Shared\Transfer\ArvatoRssOrderTransfer
      */
-    public function map(TotalsTransfer $totalsTransfer, $items, $orderReference)
+    public function map(CustomerTransfer $customer, TotalsTransfer $totalsTransfer, $items, $orderReference)
     {
         $order = new ArvatoRssOrderTransfer();
 
@@ -59,7 +61,7 @@ class OrderMapper implements OrderMapperInterface
                 ->getCurrentStore()
                 ->getSelectedCurrencyIsoCode()
         );
-        $order->setRegisteredOrder(true);
+        $order->setRegisteredOrder(!$customer->getIsGuest());
         $order->setGrossTotalBill(
             $this->moneyFacade->convertIntegerToDecimal($totalsTransfer->getGrandTotal())
         );

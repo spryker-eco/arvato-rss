@@ -60,6 +60,7 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
             $quoteTransfer->getCustomer()
         );
         $order = $this->orderMapper->map(
+            $quoteTransfer->getCustomer(),
             $quoteTransfer->getTotals(),
             $quoteTransfer->getItems(),
             $quoteTransfer->getOrderReference()

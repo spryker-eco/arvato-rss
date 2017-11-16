@@ -57,6 +57,7 @@ class StoreOrderRequestMapper implements StoreOrderRequestMapperInterface
 
         $identification = $this->identificationMapper->map();
         $order = $this->orderMapper->map(
+            $orderTransfer->getCustomer(),
             $orderTransfer->getTotals(),
             $orderTransfer->getItems(),
             $orderTransfer->getOrderReference()
