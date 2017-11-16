@@ -61,7 +61,7 @@ class OrderMapperTest extends AbstractBusinessTest
         $this->assertEquals(count($result->getItems()), count($this->quote->getItems()));
         $this->assertEquals($result->getOrderNumber(), $this->quote->getOrderReference());
         $this->assertEquals($result->getDebitorNumber(), $this->quote->getCustomer()->getIdCustomer());
-        $this->assertEquals($result->getRegisteredOrder(), true);
+        $this->assertEquals($result->getRegisteredOrder(), false);
     }
 
     /**
