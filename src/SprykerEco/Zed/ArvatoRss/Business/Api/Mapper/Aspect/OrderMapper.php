@@ -59,7 +59,7 @@ class OrderMapper implements OrderMapperInterface
                 ->getCurrentStore()
                 ->getSelectedCurrencyIsoCode()
         );
-        $order->setRegisteredOrder($orderMapperTransfer->getCustomerIsGuest());
+        $order->setRegisteredOrder(!$orderMapperTransfer->getCustomerIsGuest());
         $order->setGrossTotalBill(
             $this->moneyFacade->convertIntegerToDecimal(
                 $orderMapperTransfer
