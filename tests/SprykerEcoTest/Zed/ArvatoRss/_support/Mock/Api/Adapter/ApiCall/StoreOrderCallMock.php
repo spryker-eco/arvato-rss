@@ -31,7 +31,7 @@ class StoreOrderCallMock extends StoreOrderCall
         $decision->ActionCode = 'test';
         $decision->ResultCode = 'test';
         $decision->ResultText = 'test';
-        $decision->isNewCustomer = true;
+        $decision->IsNewCustomer = true;
 
         $system->TransactionId = '000000000000';
         $system->StatusCode = 'test';
