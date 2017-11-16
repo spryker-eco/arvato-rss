@@ -96,4 +96,8 @@
     <transfer name="Quote">
         <property name="arvatoRssQuoteData" type="ArvatoRssQuoteData" />
     </transfer>
+
+    <transfer name="Order">
+        <property name="arvatoRssCommunicationToken" type="string" />
+    </transfer>
 </transfers>
