@@ -11,16 +11,12 @@ use DateTime;
 use Generated\Shared\Transfer\AddressTransfer;
 use Generated\Shared\Transfer\ArvatoRssBillingCustomerTransfer;
 use Generated\Shared\Transfer\ArvatoRssCustomerAddressTransfer;
+use Generated\Shared\Transfer\BillingCustomerMapperTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
 use SprykerEco\Service\ArvatoRss\Iso3166ConverterServiceInterface;
 
 class BillingCustomerMapper implements BillingCustomerMapperInterface
 {
-    /**
-     * @const string
-     */
-    const DATE_FORMAT = 'Y-m-d';
-
     /**
      * @var \SprykerEco\Service\ArvatoRss\Iso3166ConverterServiceInterface
      */
@@ -36,26 +32,21 @@ class BillingCustomerMapper implements BillingCustomerMapperInterface
     }
 
     /**
-     * @api
-     *
-     * @param \Generated\Shared\Transfer\AddressTransfer $billingAddress
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customer
+     * @param \Generated\Shared\Transfer\BillingCustomerMapperTransfer $billingCustomerMapperTransfer
      *
      * @return \Generated\Shared\Transfer\ArvatoRssBillingCustomerTransfer
      */
-    public function map(AddressTransfer $billingAddress, CustomerTransfer $customer)
+    public function map(BillingCustomerMapperTransfer $billingCustomerMapperTransfer)
     {
         $billingCustomerTransfer = new ArvatoRssBillingCustomerTransfer();
+        $billingAddress = $billingCustomerMapperTransfer->getBillingAddress();
         $address = $this->prepareAddressTransfer($billingAddress);
         $billingCustomerTransfer->setAddress($address);
         $billingCustomerTransfer->setFirstName($billingAddress->getFirstName());
         $billingCustomerTransfer->setLastName($billingAddress->getLastName());
-        $billingCustomerTransfer->setSalutation(strtoupper($customer->getSalutation()));
-        $billingCustomerTransfer->setEmail($customer->getEmail());
+        $billingCustomerTransfer->setSalutation(strtoupper($billingCustomerMapperTransfer->getSalutation()));
+        $billingCustomerTransfer->setEmail($billingCustomerMapperTransfer->getEmail());
         $billingCustomerTransfer->setTelephoneNumber($billingAddress->getPhone());
-
-        $dateOfBirth = $this->prepareDateOfBirth($customer->getDateOfBirth());
-        $billingCustomerTransfer->setBirthDay($dateOfBirth);
 
         return $billingCustomerTransfer;
     }
@@ -75,15 +66,5 @@ class BillingCustomerMapper implements BillingCustomerMapperInterface
         $address->setZipCode($billingAddress->getZipCode());
 
         return $address;
-    }
-
-    /**
-     * @param string $dateOfBirth
-     *
-     * @return string|null
-     */
-    protected function prepareDateOfBirth($dateOfBirth)
-    {
-        return $dateOfBirth ? (new DateTime($dateOfBirth))->format(static::DATE_FORMAT) : null;
     }
 }

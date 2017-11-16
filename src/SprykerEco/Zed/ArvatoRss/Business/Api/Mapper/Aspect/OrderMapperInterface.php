@@ -8,19 +8,15 @@
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect;
 
 use Generated\Shared\Transfer\CustomerTransfer;
+use Generated\Shared\Transfer\OrderMapperTransfer;
 use Generated\Shared\Transfer\TotalsTransfer;
 
 interface OrderMapperInterface
 {
     /**
-     * @api
-     *
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customer
-     * @param \Generated\Shared\Transfer\TotalsTransfer $totalsTransfer
-     * @param array|\ArrayObject $items
-     * @param string $orderReference
+     * @param \Generated\Shared\Transfer\OrderMapperTransfer $orderMapperTransfer
      *
      * @return \Generated\Shared\Transfer\ArvatoRssOrderTransfer
      */
-    public function map(CustomerTransfer $customer, TotalsTransfer $totalsTransfer, $items, $orderReference);
+    public function map(OrderMapperTransfer $orderMapperTransfer);
 }

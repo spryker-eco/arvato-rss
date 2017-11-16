@@ -7,18 +7,14 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect;
 
-use Generated\Shared\Transfer\AddressTransfer;
-use Generated\Shared\Transfer\CustomerTransfer;
+use Generated\Shared\Transfer\BillingCustomerMapperTransfer;
 
 interface BillingCustomerMapperInterface
 {
     /**
-     * @api
-     *
-     * @param \Generated\Shared\Transfer\AddressTransfer $billingAddress
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customer
+     * @param \Generated\Shared\Transfer\BillingCustomerMapperTransfer $billingCustomerMapperTransfer
      *
      * @return \Generated\Shared\Transfer\ArvatoRssBillingCustomerTransfer
      */
-    public function map(AddressTransfer $billingAddress, CustomerTransfer $customer);
+    public function map(BillingCustomerMapperTransfer $billingCustomerMapperTransfer);
 }

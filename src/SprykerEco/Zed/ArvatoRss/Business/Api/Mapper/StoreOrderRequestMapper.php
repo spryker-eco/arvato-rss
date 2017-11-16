@@ -9,9 +9,12 @@ namespace SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
 
 use Generated\Shared\Transfer\ArvatoRssOrderTransfer;
 use Generated\Shared\Transfer\ArvatoRssStoreOrderRequestTransfer;
+use Generated\Shared\Transfer\CustomerTransfer;
+use Generated\Shared\Transfer\OrderMapperTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
 use SprykerEco\Zed\ArvatoRss\ArvatoRssConfig;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\IdentificationMapperInterface;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\OrderMapper;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\OrderMapperInterface;
 
 class StoreOrderRequestMapper implements StoreOrderRequestMapperInterface
@@ -57,10 +60,7 @@ class StoreOrderRequestMapper implements StoreOrderRequestMapperInterface
 
         $identification = $this->identificationMapper->map();
         $order = $this->orderMapper->map(
-            $orderTransfer->getCustomer(),
-            $orderTransfer->getTotals(),
-            $orderTransfer->getItems(),
-            $orderTransfer->getOrderReference()
+            $this->createOrderMapperTransfer($orderTransfer)
         );
         $order = $this->mapSpecificParameters($orderTransfer, $order);
 
@@ -85,8 +85,27 @@ class StoreOrderRequestMapper implements StoreOrderRequestMapperInterface
                 $payment->getPaymentMethod()
             )
         );
-        $order->setDebitorNumber($orderTransfer->getCustomer()->getIdCustomer());
+        if ($orderTransfer->getCustomer()) {
+            $order->setDebitorNumber($orderTransfer->getCustomer()->getIdCustomer());
+        }
 
         return $order;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return \Generated\Shared\Transfer\OrderMapperTransfer
+     */
+    protected function createOrderMapperTransfer(OrderTransfer $orderTransfer)
+    {
+        $transfer = new OrderMapperTransfer();
+        $customer = $orderTransfer->getCustomer();
+        $transfer->setItems($orderTransfer->getItems());
+        $transfer->setTotals($orderTransfer->getTotals());
+        $transfer->setOrderReference($orderTransfer->getOrderReference());
+        $transfer->setCustomerIsGuest($customer ? $customer->getIsGuest() : true);
+
+        return $transfer;
     }
 }

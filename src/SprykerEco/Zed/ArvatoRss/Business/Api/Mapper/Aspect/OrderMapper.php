@@ -11,6 +11,7 @@ use Generated\Shared\Transfer\ArvatoRssOrderItemTransfer;
 use Generated\Shared\Transfer\ArvatoRssOrderTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\ItemTransfer;
+use Generated\Shared\Transfer\OrderMapperTransfer;
 use Generated\Shared\Transfer\TotalsTransfer;
 use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface;
 use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToStoreInterface;
@@ -45,14 +46,11 @@ class OrderMapper implements OrderMapperInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customer
-     * @param \Generated\Shared\Transfer\TotalsTransfer $totalsTransfer
-     * @param array|\ArrayObject $items
-     * @param string $orderReference
+     * @param \Generated\Shared\Transfer\OrderMapperTransfer $orderMapperTransfer
      *
      * @return \Generated\Shared\Transfer\ArvatoRssOrderTransfer
      */
-    public function map(CustomerTransfer $customer, TotalsTransfer $totalsTransfer, $items, $orderReference)
+    public function map(OrderMapperTransfer $orderMapperTransfer)
     {
         $order = new ArvatoRssOrderTransfer();
 
@@ -61,15 +59,25 @@ class OrderMapper implements OrderMapperInterface
                 ->getCurrentStore()
                 ->getSelectedCurrencyIsoCode()
         );
-        $order->setRegisteredOrder(!$customer->getIsGuest());
+        $order->setRegisteredOrder($orderMapperTransfer->getCustomerIsGuest());
         $order->setGrossTotalBill(
-            $this->moneyFacade->convertIntegerToDecimal($totalsTransfer->getGrandTotal())
+            $this->moneyFacade->convertIntegerToDecimal(
+                $orderMapperTransfer
+                    ->getTotals()
+                    ->getGrandTotal()
+            )
         );
-        $order->setOrderNumber($orderReference);
+        $order->setOrderNumber(
+            $orderMapperTransfer->getOrderReference()
+        );
         $order->setTotalOrderValue(
-            $this->moneyFacade->convertIntegerToDecimal($totalsTransfer->getSubtotal())
+            $this->moneyFacade->convertIntegerToDecimal(
+                $orderMapperTransfer
+                    ->getTotals()
+                    ->getSubtotal()
+            )
         );
-        foreach ($items as $itemTransfer) {
+        foreach ($orderMapperTransfer->getItems() as $itemTransfer) {
             $item = $this->prepareOrderItem($itemTransfer);
             $order->addItem($item);
         }
