@@ -9,6 +9,7 @@ namespace SprykerEcoTest\Zed\ArvatoRss\Business\Api\Mapper\Aspect;
 
 use Generated\Shared\Transfer\ArvatoRssBillingCustomerTransfer;
 use Generated\Shared\Transfer\ArvatoRssCustomerAddressTransfer;
+use Generated\Shared\Transfer\BillingCustomerMapperTransfer;
 use SprykerEco\Service\ArvatoRss\Iso3166ConverterService;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\BillingCustomerMapper;
 use SprykerEcoTest\Zed\ArvatoRss\Business\AbstractBusinessTest;
@@ -24,8 +25,10 @@ class BillingCustomerMapperTest extends AbstractBusinessTest
             new Iso3166ConverterService()
         );
         $result = $mapper->map(
-            $this->quote->getBillingAddress(),
-            $this->quote->getCustomer()
+            (new BillingCustomerMapperTransfer())
+                ->setSalutation($this->quote->getCustomer()->getSalutation())
+            ->setBillingAddress($this->quote->getBillingAddress())
+            ->setEmail($this->quote->getBillingAddress()->getEmail())
         );
         $this->testResult($result);
     }

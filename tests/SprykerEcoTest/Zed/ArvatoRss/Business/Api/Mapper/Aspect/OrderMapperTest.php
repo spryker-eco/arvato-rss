@@ -9,6 +9,7 @@ namespace SprykerEcoTest\Zed\ArvatoRss\Business\Api\Mapper\Aspect;
 
 use Generated\Shared\DataBuilder\StoreBuilder;
 use Generated\Shared\Transfer\ArvatoRssOrderTransfer;
+use Generated\Shared\Transfer\OrderMapperTransfer;
 use SprykerEco\Zed\ArvatoRss\ArvatoRssConfig;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\OrderMapper;
 use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface;
@@ -33,10 +34,11 @@ class OrderMapperTest extends AbstractBusinessTest
             new ArvatoRssConfig()
         );
         $result = $mapper->map(
-            $this->quote->getCustomer(),
-            $this->quote->getTotals(),
-            $this->quote->getItems(),
-            $this->quote->getOrderReference()
+            (new OrderMapperTransfer())
+                ->setTotals($this->quote->getTotals())
+                ->setItems($this->quote->getItems())
+                ->setCustomerIsGuest($this->quote->getCustomer()->getIsGuest())
+                ->setOrderReference($this->quote->getOrderReference())
         );
 
         $this->testResult($result);
