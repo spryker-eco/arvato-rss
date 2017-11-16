@@ -10,7 +10,7 @@ namespace SprykerEcoTest\Zed\ArvatoRss\Business\Api\Converter;
 use Codeception\TestCase\Test;
 use Generated\Shared\DataBuilder\ArvatoRssStoreOrderRequestBuilder;
 use Generated\Shared\Transfer\ArvatoRssStoreOrderRequestTransfer;
-use SprykerEco\Zed\ArvatoRss\Business\Api\ArvatoRssRequestApiConstants;
+use SprykerEco\Zed\ArvatoRss\Business\Api\ArvatoRssRequestApiConfig;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\StoreOrderRequestConverter;
 
 class StoreOrderRequestConverterTest extends Test
@@ -38,38 +38,38 @@ class StoreOrderRequestConverterTest extends Test
     protected function testResult(array $result, ArvatoRssStoreOrderRequestTransfer $requestTranfer)
     {
         $this->assertEquals(
-            $result[ArvatoRssRequestApiConstants::ARVATORSS_API_ORDER][ArvatoRssRequestApiConstants::ARVATORSS_API_REGISTEREDORDER],
+            $result[ArvatoRssRequestApiConfig::ARVATORSS_API_ORDER][ArvatoRssRequestApiConfig::ARVATORSS_API_REGISTEREDORDER],
             $requestTranfer->getOrder()->getRegisteredOrder()
         );
         $this->assertEquals(
-            $result[ArvatoRssRequestApiConstants::ARVATORSS_API_ORDER][ArvatoRssRequestApiConstants::ARVATORSS_API_CURRENCY],
+            $result[ArvatoRssRequestApiConfig::ARVATORSS_API_ORDER][ArvatoRssRequestApiConfig::ARVATORSS_API_CURRENCY],
             $requestTranfer->getOrder()->getCurrency()
         );
         $this->assertEquals(
-            $result[ArvatoRssRequestApiConstants::ARVATORSS_API_ORDER][ArvatoRssRequestApiConstants::ARVATORSS_API_GROSSTOTALBILL],
+            $result[ArvatoRssRequestApiConfig::ARVATORSS_API_ORDER][ArvatoRssRequestApiConfig::ARVATORSS_API_GROSSTOTALBILL],
             $requestTranfer->getOrder()->getGrossTotalBill()
         );
         $this->assertEquals(
-            $result[ArvatoRssRequestApiConstants::ARVATORSS_API_ORDER][ArvatoRssRequestApiConstants::ARVATORSS_API_TOTALORDERVALUE],
+            $result[ArvatoRssRequestApiConfig::ARVATORSS_API_ORDER][ArvatoRssRequestApiConfig::ARVATORSS_API_TOTALORDERVALUE],
             $requestTranfer->getOrder()->getTotalOrderValue()
         );
 
-        foreach ($result[ArvatoRssRequestApiConstants::ARVATORSS_API_ORDER][ArvatoRssRequestApiConstants::ARVATORSS_API_ITEM] as $key => $item) {
+        foreach ($result[ArvatoRssRequestApiConfig::ARVATORSS_API_ORDER][ArvatoRssRequestApiConfig::ARVATORSS_API_ITEM] as $key => $item) {
             $this->assertArrayHasKey($key, $requestTranfer->getOrder()->getItems());
             $this->assertEquals(
-                $item[ArvatoRssRequestApiConstants::ARVATORSS_API_PRODUCTNUMBER],
+                $item[ArvatoRssRequestApiConfig::ARVATORSS_API_PRODUCTNUMBER],
                 $requestTranfer->getOrder()->getItems()[$key]->getProductNumber()
             );
             $this->assertEquals(
-                $item[ArvatoRssRequestApiConstants::ARVATORSS_API_PRODUCTGROUPID],
+                $item[ArvatoRssRequestApiConfig::ARVATORSS_API_PRODUCTGROUPID],
                 $requestTranfer->getOrder()->getItems()[$key]->getProductGroupId()
             );
             $this->assertEquals(
-                $item[ArvatoRssRequestApiConstants::ARVATORSS_API_UNITPRICE],
+                $item[ArvatoRssRequestApiConfig::ARVATORSS_API_UNITPRICE],
                 $requestTranfer->getOrder()->getItems()[$key]->getUnitPrice()
             );
             $this->assertEquals(
-                $item[ArvatoRssRequestApiConstants::ARVATORSS_API_UNITCOUNT],
+                $item[ArvatoRssRequestApiConfig::ARVATORSS_API_UNITCOUNT],
                 $requestTranfer->getOrder()->getItems()[$key]->getUnitCount()
             );
         }

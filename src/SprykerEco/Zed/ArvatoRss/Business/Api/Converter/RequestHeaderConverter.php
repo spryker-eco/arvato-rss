@@ -9,7 +9,7 @@ namespace SprykerEco\Zed\ArvatoRss\Business\Api\Converter;
 
 use Generated\Shared\Transfer\ArvatoRssIdentificationRequestTransfer;
 use SoapHeader;
-use SprykerEco\Zed\ArvatoRss\Business\Api\ArvatoRssIdentificationApiConstants;
+use SprykerEco\Zed\ArvatoRss\Business\Api\ArvatoRssIdentificationApiConfig;
 
 class RequestHeaderConverter implements RequestHeaderConverterInterface
 {
@@ -55,8 +55,8 @@ class RequestHeaderConverter implements RequestHeaderConverterInterface
     protected function createRequestHeader($requestData)
     {
         return new SoapHeader(
-            ArvatoRssIdentificationApiConstants::ARVATORSS_API_IDENTIFICATION_NAMESPACE,
-            ArvatoRssIdentificationApiConstants::ARVATORSS_API_IDENTIFICATION_HEADER_NAME,
+            ArvatoRssIdentificationApiConfig::ARVATORSS_API_IDENTIFICATION_NAMESPACE,
+            ArvatoRssIdentificationApiConfig::ARVATORSS_API_IDENTIFICATION_HEADER_NAME,
             $requestData
         );
     }
@@ -67,8 +67,8 @@ class RequestHeaderConverter implements RequestHeaderConverterInterface
     protected function getRequestFields()
     {
         return [
-            ArvatoRssIdentificationApiConstants::ARVATORSS_API_CLIENTID => 'clientId',
-            ArvatoRssIdentificationApiConstants::ARVATORSS_API_AUTHORISATION => 'authorisation',
+            ArvatoRssIdentificationApiConfig::ARVATORSS_API_CLIENTID => 'clientId',
+            ArvatoRssIdentificationApiConfig::ARVATORSS_API_AUTHORISATION => 'authorisation',
         ];
     }
 }

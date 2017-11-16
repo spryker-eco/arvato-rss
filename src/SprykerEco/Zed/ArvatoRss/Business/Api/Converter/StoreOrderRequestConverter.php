@@ -8,7 +8,7 @@
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Converter;
 
 use Generated\Shared\Transfer\ArvatoRssStoreOrderRequestTransfer;
-use SprykerEco\Zed\ArvatoRss\Business\Api\ArvatoRssRequestApiConstants;
+use SprykerEco\Zed\ArvatoRss\Business\Api\ArvatoRssRequestApiConfig;
 
 class StoreOrderRequestConverter implements StoreOrderRequestConverterInterface
 {
@@ -32,23 +32,23 @@ class StoreOrderRequestConverter implements StoreOrderRequestConverterInterface
         $result = [];
         $order = $arvatoRssStoreOrderRequestTransfer->getOrder();
 
-        $result[ArvatoRssRequestApiConstants::ARVATORSS_API_ORDER] = [
-            ArvatoRssRequestApiConstants::ARVATORSS_API_REGISTEREDORDER => $order->getRegisteredOrder(),
-            ArvatoRssRequestApiConstants::ARVATORSS_API_ORDER_NUMBER => $order->getOrderNumber(),
-            ArvatoRssRequestApiConstants::ARVATORSS_API_DEBITOR_NUMBER => $order->getDebitorNumber(),
-            ArvatoRssRequestApiConstants::ARVATORSS_API_PAYMENT_TYPE => $order->getPaymentType(),
-            ArvatoRssRequestApiConstants::ARVATORSS_API_CURRENCY => $order->getCurrency(),
-            ArvatoRssRequestApiConstants::ARVATORSS_API_GROSSTOTALBILL => $order->getGrossTotalBill(),
-            ArvatoRssRequestApiConstants::ARVATORSS_API_TOTALORDERVALUE => $order->getTotalOrderValue(),
+        $result[ArvatoRssRequestApiConfig::ARVATORSS_API_ORDER] = [
+            ArvatoRssRequestApiConfig::ARVATORSS_API_REGISTEREDORDER => $order->getRegisteredOrder(),
+            ArvatoRssRequestApiConfig::ARVATORSS_API_ORDER_NUMBER => $order->getOrderNumber(),
+            ArvatoRssRequestApiConfig::ARVATORSS_API_DEBITOR_NUMBER => $order->getDebitorNumber(),
+            ArvatoRssRequestApiConfig::ARVATORSS_API_PAYMENT_TYPE => $order->getPaymentType(),
+            ArvatoRssRequestApiConfig::ARVATORSS_API_CURRENCY => $order->getCurrency(),
+            ArvatoRssRequestApiConfig::ARVATORSS_API_GROSSTOTALBILL => $order->getGrossTotalBill(),
+            ArvatoRssRequestApiConfig::ARVATORSS_API_TOTALORDERVALUE => $order->getTotalOrderValue(),
         ];
-        $result[ArvatoRssRequestApiConstants::ARVATORSS_API_ORDER][ArvatoRssRequestApiConstants::ARVATORSS_API_ITEM] = [];
+        $result[ArvatoRssRequestApiConfig::ARVATORSS_API_ORDER][ArvatoRssRequestApiConfig::ARVATORSS_API_ITEM] = [];
 
         foreach ($order->getItems() as $item) {
-            $result[ArvatoRssRequestApiConstants::ARVATORSS_API_ORDER][ArvatoRssRequestApiConstants::ARVATORSS_API_ITEM][] = [
-                ArvatoRssRequestApiConstants::ARVATORSS_API_PRODUCTNUMBER => $item->getProductNumber(),
-                ArvatoRssRequestApiConstants::ARVATORSS_API_PRODUCTGROUPID => $item->getProductGroupId(),
-                ArvatoRssRequestApiConstants::ARVATORSS_API_UNITPRICE => $item->getUnitPrice(),
-                ArvatoRssRequestApiConstants::ARVATORSS_API_UNITCOUNT => $item->getUnitCount(),
+            $result[ArvatoRssRequestApiConfig::ARVATORSS_API_ORDER][ArvatoRssRequestApiConfig::ARVATORSS_API_ITEM][] = [
+                ArvatoRssRequestApiConfig::ARVATORSS_API_PRODUCTNUMBER => $item->getProductNumber(),
+                ArvatoRssRequestApiConfig::ARVATORSS_API_PRODUCTGROUPID => $item->getProductGroupId(),
+                ArvatoRssRequestApiConfig::ARVATORSS_API_UNITPRICE => $item->getUnitPrice(),
+                ArvatoRssRequestApiConfig::ARVATORSS_API_UNITCOUNT => $item->getUnitCount(),
             ];
         }
 

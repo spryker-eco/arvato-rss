@@ -10,7 +10,7 @@ namespace SprykerEcoTest\Zed\ArvatoRss\Business\Api\Converter;
 use Codeception\TestCase\Test;
 use Generated\Shared\DataBuilder\ArvatoRssIdentificationRequestBuilder;
 use SoapHeader;
-use SprykerEco\Zed\ArvatoRss\Business\Api\ArvatoRssIdentificationApiConstants;
+use SprykerEco\Zed\ArvatoRss\Business\Api\ArvatoRssIdentificationApiConfig;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RequestHeaderConverter;
 
 class RequestHeaderConverterTest extends Test
@@ -28,13 +28,13 @@ class RequestHeaderConverterTest extends Test
         $this->assertEquals(
             $identificationTransfer
                 ->getClientId(),
-            $result->data[ArvatoRssIdentificationApiConstants::ARVATORSS_API_CLIENTID]
+            $result->data[ArvatoRssIdentificationApiConfig::ARVATORSS_API_CLIENTID]
         );
 
         $this->assertEquals(
             $identificationTransfer
                 ->getAuthorisation(),
-            $result->data[ArvatoRssIdentificationApiConstants::ARVATORSS_API_AUTHORISATION]
+            $result->data[ArvatoRssIdentificationApiConfig::ARVATORSS_API_AUTHORISATION]
         );
     }
 

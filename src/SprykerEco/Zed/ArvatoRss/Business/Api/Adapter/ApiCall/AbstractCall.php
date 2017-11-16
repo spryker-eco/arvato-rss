@@ -13,7 +13,7 @@ use SoapFault;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\Transaction\Logger\ApiCallLoggerInterface;
-use SprykerEco\Zed\ArvatoRss\Business\Api\ArvatoRssRequestApiConstants;
+use SprykerEco\Zed\ArvatoRss\Business\Api\ArvatoRssRequestApiConfig;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RequestHeaderConverterInterface;
 
 abstract class AbstractCall implements ApiCallInterface
@@ -164,9 +164,9 @@ abstract class AbstractCall implements ApiCallInterface
     protected function retrieveOrderNumber(array $params)
     {
         return isset(
-            $params[ArvatoRssRequestApiConstants::ARVATORSS_API_ORDER][ArvatoRssRequestApiConstants::ARVATORSS_API_ORDER_NUMBER]
+            $params[ArvatoRssRequestApiConfig::ARVATORSS_API_ORDER][ArvatoRssRequestApiConfig::ARVATORSS_API_ORDER_NUMBER]
         )?
-            $params[ArvatoRssRequestApiConstants::ARVATORSS_API_ORDER][ArvatoRssRequestApiConstants::ARVATORSS_API_ORDER_NUMBER]:
+            $params[ArvatoRssRequestApiConfig::ARVATORSS_API_ORDER][ArvatoRssRequestApiConfig::ARVATORSS_API_ORDER_NUMBER]:
             '';
     }
 

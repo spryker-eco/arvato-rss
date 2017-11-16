@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Business\Api;
 
-interface ArvatoRssRequestApiConstants
+interface ArvatoRssRequestApiConfig
 {
     const ARVATORSS_API_COUNTRY = 'Country';
     const ARVATORSS_API_CITY = 'City';
