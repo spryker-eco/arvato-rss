@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Zed\ArvatoRss\Communication\Plugin\Oms\Command;
+namespace SprykerEco\Zed\ArvatoRss\Communication\Plugin\Oms\Condition;
 
 use Orm\Zed\ArvatoRss\Persistence\SpyArvatoRssApiCallLog;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItem;
