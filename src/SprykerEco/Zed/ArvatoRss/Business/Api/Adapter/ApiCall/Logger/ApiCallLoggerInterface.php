@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\Transaction\Logger;
+namespace SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\Logger;
 
 use stdClass;
 

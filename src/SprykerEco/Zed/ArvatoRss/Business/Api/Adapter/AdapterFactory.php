@@ -10,7 +10,7 @@ namespace SprykerEco\Zed\ArvatoRss\Business\Api\Adapter;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\RiskCheckCall;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\StoreOrderCall;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\Transaction\Logger\ApiCallLogger;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\Logger\ApiCallLogger;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RequestHeaderConverter;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverter;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverter;
@@ -60,7 +60,7 @@ class AdapterFactory extends AbstractBusinessFactory implements AdapterFactoryIn
     }
 
     /**
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\Transaction\Logger\ApiCallLoggerInterface
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\Logger\ApiCallLoggerInterface
      */
     public function createApiCallLogger()
     {

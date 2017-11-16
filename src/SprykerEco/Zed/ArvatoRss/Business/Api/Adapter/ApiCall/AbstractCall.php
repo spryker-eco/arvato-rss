@@ -12,7 +12,7 @@ use SoapClient;
 use SoapFault;
 use Spryker\Shared\Config\Config;
 use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\Transaction\Logger\ApiCallLoggerInterface;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\Logger\ApiCallLoggerInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\ArvatoRssRequestApiConfig;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RequestHeaderConverterInterface;
 
@@ -34,13 +34,13 @@ abstract class AbstractCall implements ApiCallInterface
     protected $requestHeaderConverter;
 
     /**
-     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\Transaction\Logger\ApiCallLoggerInterface
+     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\Logger\ApiCallLoggerInterface
      */
     protected $apiCallLogger;
 
     /**
      * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RequestHeaderConverterInterface $requestHeaderConverter
-     * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\Transaction\Logger\ApiCallLoggerInterface $apiCallLogger
+     * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\Logger\ApiCallLoggerInterface $apiCallLogger
      */
     public function __construct(
         RequestHeaderConverterInterface $requestHeaderConverter,

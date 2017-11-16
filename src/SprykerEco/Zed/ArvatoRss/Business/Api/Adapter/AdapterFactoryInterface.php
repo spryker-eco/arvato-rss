@@ -35,7 +35,7 @@ interface AdapterFactoryInterface
     public function createStoreOrderResponseConverter();
 
     /**
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\Transaction\Logger\ApiCallLogger
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\Logger\ApiCallLogger
      */
     public function createApiCallLogger();
 
