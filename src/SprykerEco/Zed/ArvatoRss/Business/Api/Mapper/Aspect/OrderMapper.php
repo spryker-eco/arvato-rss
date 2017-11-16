@@ -45,7 +45,7 @@ class OrderMapper implements OrderMapperInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
+     * @param \Generated\Shared\Transfer\CustomerTransfer $customer
      * @param \Generated\Shared\Transfer\TotalsTransfer $totalsTransfer
      * @param array|\ArrayObject $items
      * @param string $orderReference
