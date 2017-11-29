@@ -37,32 +37,32 @@ class BillingCustomerMapper implements BillingCustomerMapperInterface
     public function map(BillingCustomerMapperTransfer $billingCustomerMapperTransfer)
     {
         $billingCustomerTransfer = new ArvatoRssBillingCustomerTransfer();
-        $billingAddress = $billingCustomerMapperTransfer->getBillingAddress();
-        $address = $this->prepareAddressTransfer($billingAddress);
-        $billingCustomerTransfer->setAddress($address);
-        $billingCustomerTransfer->setFirstName($billingAddress->getFirstName());
-        $billingCustomerTransfer->setLastName($billingAddress->getLastName());
-        $billingCustomerTransfer->setSalutation(strtoupper($billingAddress->getSalutation()));
+        $addressTransfer = $billingCustomerMapperTransfer->getBillingAddress();
+        $customerAddressTransfer = $this->prepareCustomerAddressTransfer($addressTransfer);
+        $billingCustomerTransfer->setAddress($customerAddressTransfer);
+        $billingCustomerTransfer->setFirstName($addressTransfer->getFirstName());
+        $billingCustomerTransfer->setLastName($addressTransfer->getLastName());
+        $billingCustomerTransfer->setSalutation(strtoupper($addressTransfer->getSalutation()));
         $billingCustomerTransfer->setEmail($billingCustomerMapperTransfer->getEmail());
-        $billingCustomerTransfer->setTelephoneNumber($billingAddress->getPhone());
+        $billingCustomerTransfer->setTelephoneNumber($addressTransfer->getPhone());
 
         return $billingCustomerTransfer;
     }
 
     /**
-     * @param \Generated\Shared\Transfer\AddressTransfer $billingAddress
+     * @param \Generated\Shared\Transfer\AddressTransfer $addressTransfer
      *
      * @return \Generated\Shared\Transfer\ArvatoRssCustomerAddressTransfer
      */
-    protected function prepareAddressTransfer(AddressTransfer $billingAddress)
+    protected function prepareCustomerAddressTransfer(AddressTransfer $addressTransfer)
     {
-        $address = new ArvatoRssCustomerAddressTransfer();
-        $address->setCountry($this->iso3166Converter->iso2ToNumeric($billingAddress->getIso2Code()));
-        $address->setCity($billingAddress->getCity());
-        $address->setStreet($billingAddress->getAddress1());
-        $address->setStreetNumber($billingAddress->getAddress2());
-        $address->setZipCode($billingAddress->getZipCode());
+        $customerAddressTransfer = new ArvatoRssCustomerAddressTransfer();
+        $customerAddressTransfer->setCountry($this->iso3166Converter->iso2ToNumeric($addressTransfer->getIso2Code()));
+        $customerAddressTransfer->setCity($addressTransfer->getCity());
+        $customerAddressTransfer->setStreet($addressTransfer->getAddress1());
+        $customerAddressTransfer->setStreetNumber($addressTransfer->getAddress2());
+        $customerAddressTransfer->setZipCode($addressTransfer->getZipCode());
 
-        return $address;
+        return $customerAddressTransfer;
     }
 }
