@@ -7,9 +7,7 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect;
 
-use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\OrderMapperTransfer;
-use Generated\Shared\Transfer\TotalsTransfer;
 
 interface OrderMapperInterface
 {

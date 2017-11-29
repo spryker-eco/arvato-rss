@@ -9,11 +9,9 @@ namespace SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
 
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
 use Generated\Shared\Transfer\BillingCustomerMapperTransfer;
-use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\DeliveryCustomerMapperTransfer;
 use Generated\Shared\Transfer\OrderMapperTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
-use Generated\Yves\Ide\Quote;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\BillingCustomerMapperInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\DeliveryCustomerMapperInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\IdentificationMapperInterface;
@@ -42,10 +40,10 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
     protected $orderMapper;
 
     /**
-     * @param IdentificationMapperInterface $identificationMapper
-     * @param BillingCustomerMapperInterface $billingCustomerMapper
-     * @param DeliveryCustomerMapperInterface $deliveryCustomerMapper
-     * @param OrderMapperInterface $orderMapper
+     * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\IdentificationMapperInterface $identificationMapper
+     * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\BillingCustomerMapperInterface $billingCustomerMapper
+     * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\DeliveryCustomerMapperInterface $deliveryCustomerMapper
+     * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\OrderMapperInterface $orderMapper
      */
     public function __construct(
         IdentificationMapperInterface $identificationMapper,

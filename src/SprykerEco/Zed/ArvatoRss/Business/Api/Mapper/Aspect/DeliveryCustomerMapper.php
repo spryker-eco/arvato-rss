@@ -8,8 +8,8 @@
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect;
 
 use Generated\Shared\Transfer\AddressTransfer;
-use Generated\Shared\Transfer\ArvatoRssDeliveryCustomerTransfer;
 use Generated\Shared\Transfer\ArvatoRssCustomerAddressTransfer;
+use Generated\Shared\Transfer\ArvatoRssDeliveryCustomerTransfer;
 use Generated\Shared\Transfer\DeliveryCustomerMapperTransfer;
 use SprykerEco\Service\ArvatoRss\Iso3166ConverterServiceInterface;
 
@@ -30,9 +30,9 @@ class DeliveryCustomerMapper implements DeliveryCustomerMapperInterface
     }
 
     /**
-     * @param DeliveryCustomerMapperTransfer $deliveryCustomerMapperTransfer
+     * @param \Generated\Shared\Transfer\DeliveryCustomerMapperTransfer $deliveryCustomerMapperTransfer
      *
-     * @return ArvatoRssDeliveryCustomerTransfer
+     * @return \Generated\Shared\Transfer\ArvatoRssDeliveryCustomerTransfer
      */
     public function map(DeliveryCustomerMapperTransfer $deliveryCustomerMapperTransfer)
     {
