@@ -15,6 +15,7 @@ interface ArvatoRssRequestApiConfig
     const ARVATORSS_API_STREET_NUMBER = 'StreetNumber';
     const ARVATORSS_API_ZIPCODE = 'ZipCode';
     const ARVATORSS_API_BILLINGCUSTOMER = 'BillingCustomer';
+    const ARVATORSS_API_DELIVERYCUSTOMER = 'DeliveryCustomer';
     const ARVATORSS_API_FIRSTNAME = 'FirstName';
     const ARVATORSS_API_LASTNAME = 'LastName';
     const ARVATORSS_API_ADDRESS = 'Address';

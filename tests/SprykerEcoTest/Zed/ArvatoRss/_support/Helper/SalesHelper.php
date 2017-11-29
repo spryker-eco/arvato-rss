@@ -26,6 +26,7 @@ class SalesHelper extends Module
                     ->withArvatoRssRiskCheckResponse()
             )
             ->withBillingAddress()
+            ->withShippingAddress()
             ->withCustomer()
             ->withTotals()
             ->withCurrency()
@@ -44,6 +45,7 @@ class SalesHelper extends Module
     {
         return (new OrderBuilder())
             ->withBillingAddress()
+            ->withShippingAddress()
             ->withTotals()
             ->withCustomer()
             ->withItem()

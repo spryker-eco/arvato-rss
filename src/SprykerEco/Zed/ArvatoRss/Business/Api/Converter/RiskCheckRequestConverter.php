@@ -20,9 +20,10 @@ class RiskCheckRequestConverter implements RiskCheckRequestConverterInterface
     public function convert(ArvatoRssRiskCheckRequestTransfer $arvatoRssRiskCheckRequestTransfer)
     {
         $billingCustomer = $this->convertBillingCustomer($arvatoRssRiskCheckRequestTransfer);
+        $deliveryCustomer = $this->convertDeliveryCustomer($arvatoRssRiskCheckRequestTransfer);
         $order = $this->convertOrder($arvatoRssRiskCheckRequestTransfer);
 
-        return $billingCustomer + $order;
+        return $billingCustomer + $deliveryCustomer + $order;
     }
 
     /**
@@ -45,6 +46,32 @@ class RiskCheckRequestConverter implements RiskCheckRequestConverterInterface
         $result[ArvatoRssRequestApiConfig::ARVATORSS_API_BILLINGCUSTOMER] = [
             ArvatoRssRequestApiConfig::ARVATORSS_API_FIRSTNAME => $billingCustomerTransfer->getFirstName(),
             ArvatoRssRequestApiConfig::ARVATORSS_API_LASTNAME => $billingCustomerTransfer->getLastName(),
+            ArvatoRssRequestApiConfig::ARVATORSS_API_ADDRESS => $address,
+        ];
+
+        return $result;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $arvatoRssRiskCheckRequestTransfer
+     *
+     * @return array
+     */
+    protected function convertDeliveryCustomer(ArvatoRssRiskCheckRequestTransfer $arvatoRssRiskCheckRequestTransfer)
+    {
+        $result = [];
+        $deliveryCustomerTransfer = $arvatoRssRiskCheckRequestTransfer->getDeliveryCustomer();
+        $addressTranfer = $deliveryCustomerTransfer->getAddress();
+        $address = [
+            ArvatoRssRequestApiConfig::ARVATORSS_API_COUNTRY => $addressTranfer->getCountry(),
+            ArvatoRssRequestApiConfig::ARVATORSS_API_CITY => $addressTranfer->getCity(),
+            ArvatoRssRequestApiConfig::ARVATORSS_API_STREET => $addressTranfer->getStreet(),
+            ArvatoRssRequestApiConfig::ARVATORSS_API_STREET_NUMBER => $addressTranfer->getStreetNumber(),
+            ArvatoRssRequestApiConfig::ARVATORSS_API_ZIPCODE => $addressTranfer->getZipCode(),
+        ];
+        $result[ArvatoRssRequestApiConfig::ARVATORSS_API_DELIVERYCUSTOMER] = [
+            ArvatoRssRequestApiConfig::ARVATORSS_API_FIRSTNAME => $deliveryCustomerTransfer->getFirstName(),
+            ArvatoRssRequestApiConfig::ARVATORSS_API_LASTNAME => $deliveryCustomerTransfer->getLastName(),
             ArvatoRssRequestApiConfig::ARVATORSS_API_ADDRESS => $address,
         ];
 

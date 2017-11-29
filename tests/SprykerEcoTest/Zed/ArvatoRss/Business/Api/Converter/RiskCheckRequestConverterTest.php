@@ -9,6 +9,7 @@ namespace SprykerEcoTest\Zed\ArvatoRss\Business\Api\Converter;
 
 use Codeception\TestCase\Test;
 use Generated\Shared\DataBuilder\ArvatoRssBillingCustomerBuilder;
+use Generated\Shared\DataBuilder\ArvatoRssDeliveryCustomerBuilder;
 use Generated\Shared\DataBuilder\ArvatoRssRiskCheckRequestBuilder;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
 use SprykerEco\Zed\ArvatoRss\Business\Api\ArvatoRssRequestApiConfig;
@@ -26,6 +27,9 @@ class RiskCheckRequestConverterTest extends Test
             ->withIdentification()
             ->withBillingCustomer(
                 (new ArvatoRssBillingCustomerBuilder())->withAddress()
+            )
+            ->withDeliveryCustomer(
+                (new ArvatoRssDeliveryCustomerBuilder())->withAddress()
             )
             ->withOrder()
             ->build();

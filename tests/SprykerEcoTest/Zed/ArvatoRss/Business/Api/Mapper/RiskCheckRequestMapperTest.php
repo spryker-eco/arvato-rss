@@ -8,10 +8,12 @@
 namespace SprykerEcoTest\Zed\ArvatoRss\Business\Api\Mapper;
 
 use Generated\Shared\Transfer\ArvatoRssBillingCustomerTransfer;
+use Generated\Shared\Transfer\ArvatoRssDeliveryCustomerTransfer;
 use Generated\Shared\Transfer\ArvatoRssIdentificationRequestTransfer;
 use Generated\Shared\Transfer\ArvatoRssOrderTransfer;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\BillingCustomerMapperInterface;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\DeliveryCustomerMapperInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\IdentificationMapperInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\OrderMapperInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapper;
@@ -27,6 +29,7 @@ class RiskCheckRequestMapperTest extends AbstractBusinessTest
         $mapper = new RiskCheckRequestMapper(
             $this->createIdentificationMapperMock(),
             $this->createBillingCustomerMapperMock(),
+            $this->createDeliveryCustomerMapperMock(),
             $this->createOrderMapperMock()
         );
         $result = $mapper->mapQuoteToRequestTranfer($this->quote);
@@ -43,6 +46,7 @@ class RiskCheckRequestMapperTest extends AbstractBusinessTest
         $this->assertInstanceOf(ArvatoRssRiskCheckRequestTransfer::class, $result);
         $this->assertInstanceOf(ArvatoRssIdentificationRequestTransfer::class, $result->getIdentification());
         $this->assertInstanceOf(ArvatoRssBillingCustomerTransfer::class, $result->getBillingCustomer());
+        $this->assertInstanceOf(ArvatoRssDeliveryCustomerTransfer::class, $result->getDeliveryCustomer());
         $this->assertInstanceOf(ArvatoRssOrderTransfer::class, $result->getOrder());
     }
 
@@ -72,6 +76,21 @@ class RiskCheckRequestMapperTest extends AbstractBusinessTest
         );
         $moneyFacadeMock->method('map')
             ->willReturn(new ArvatoRssBillingCustomerTransfer());
+
+        return $moneyFacadeMock;
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected function createDeliveryCustomerMapperMock()
+    {
+        $moneyFacadeMock = $this->createPartialMock(
+            DeliveryCustomerMapperInterface::class,
+            ['map']
+        );
+        $moneyFacadeMock->method('map')
+            ->willReturn(new ArvatoRssDeliveryCustomerTransfer());
 
         return $moneyFacadeMock;
     }
