@@ -13,6 +13,7 @@ use SprykerEco\Zed\ArvatoRss\ArvatoRssDependencyProvider;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\AdapterFactory;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\SoapApiAdapter;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\BillingCustomerMapper;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\DeliveryCustomerMapper;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\IdentificationMapper;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\OrderMapper;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapper;
@@ -70,6 +71,7 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
         return new RiskCheckRequestMapper(
             $this->createIdentificationMapper(),
             $this->createBillingCustomerMapper(),
+            $this->createDeliveryCustomerMapper(),
             $this->createOrderMapper()
         );
     }
@@ -90,6 +92,16 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     protected function createBillingCustomerMapper()
     {
         return new BillingCustomerMapper(
+            $this->createIso3166Converter()
+        );
+    }
+
+    /**
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\DeliveryCustomerMapperInterface
+     */
+    protected function createDeliveryCustomerMapper()
+    {
+        return new DeliveryCustomerMapper(
             $this->createIso3166Converter()
         );
     }

@@ -8,12 +8,12 @@
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect;
 
 use Generated\Shared\Transfer\AddressTransfer;
-use Generated\Shared\Transfer\ArvatoRssBillingCustomerTransfer;
 use Generated\Shared\Transfer\ArvatoRssCustomerAddressTransfer;
-use Generated\Shared\Transfer\BillingCustomerMapperTransfer;
+use Generated\Shared\Transfer\ArvatoRssDeliveryCustomerTransfer;
+use Generated\Shared\Transfer\DeliveryCustomerMapperTransfer;
 use SprykerEco\Service\ArvatoRss\Iso3166ConverterServiceInterface;
 
-class BillingCustomerMapper implements BillingCustomerMapperInterface
+class DeliveryCustomerMapper implements DeliveryCustomerMapperInterface
 {
     /**
      * @var \SprykerEco\Service\ArvatoRss\Iso3166ConverterServiceInterface
@@ -30,23 +30,23 @@ class BillingCustomerMapper implements BillingCustomerMapperInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\BillingCustomerMapperTransfer $billingCustomerMapperTransfer
+     * @param \Generated\Shared\Transfer\DeliveryCustomerMapperTransfer $deliveryCustomerMapperTransfer
      *
-     * @return \Generated\Shared\Transfer\ArvatoRssBillingCustomerTransfer
+     * @return \Generated\Shared\Transfer\ArvatoRssDeliveryCustomerTransfer
      */
-    public function map(BillingCustomerMapperTransfer $billingCustomerMapperTransfer)
+    public function map(DeliveryCustomerMapperTransfer $deliveryCustomerMapperTransfer)
     {
-        $billingCustomerTransfer = new ArvatoRssBillingCustomerTransfer();
-        $addressTransfer = $billingCustomerMapperTransfer->getBillingAddress();
-        $customerAddressTransfer = $this->prepareCustomerAddressTransfer($addressTransfer);
-        $billingCustomerTransfer->setAddress($customerAddressTransfer);
-        $billingCustomerTransfer->setFirstName($addressTransfer->getFirstName());
-        $billingCustomerTransfer->setLastName($addressTransfer->getLastName());
-        $billingCustomerTransfer->setSalutation(strtoupper($addressTransfer->getSalutation()));
-        $billingCustomerTransfer->setEmail($billingCustomerMapperTransfer->getEmail());
-        $billingCustomerTransfer->setTelephoneNumber($addressTransfer->getPhone());
+        $deliveryCustomerTransfer = new ArvatoRssDeliveryCustomerTransfer();
+        $deliveryAddressTransfer = $deliveryCustomerMapperTransfer->getDeliveryAddress();
+        $customerAddressTransfer = $this->prepareCustomerAddressTransfer($deliveryAddressTransfer);
+        $deliveryCustomerTransfer->setAddress($customerAddressTransfer);
+        $deliveryCustomerTransfer->setFirstName($deliveryAddressTransfer->getFirstName());
+        $deliveryCustomerTransfer->setLastName($deliveryAddressTransfer->getLastName());
+        $deliveryCustomerTransfer->setSalutation(strtoupper($deliveryAddressTransfer->getSalutation()));
+        $deliveryCustomerTransfer->setEmail($deliveryCustomerMapperTransfer->getEmail());
+        $deliveryCustomerTransfer->setTelephoneNumber($deliveryAddressTransfer->getPhone());
 
-        return $billingCustomerTransfer;
+        return $deliveryCustomerTransfer;
     }
 
     /**

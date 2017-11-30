@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Converter;
 
+use Generated\Shared\Transfer\ArvatoRssCustomerAddressTransfer;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
 use SprykerEco\Zed\ArvatoRss\Business\Api\ArvatoRssRequestApiConfig;
 
@@ -20,9 +21,10 @@ class RiskCheckRequestConverter implements RiskCheckRequestConverterInterface
     public function convert(ArvatoRssRiskCheckRequestTransfer $arvatoRssRiskCheckRequestTransfer)
     {
         $billingCustomer = $this->convertBillingCustomer($arvatoRssRiskCheckRequestTransfer);
+        $deliveryCustomer = $this->convertDeliveryCustomer($arvatoRssRiskCheckRequestTransfer);
         $order = $this->convertOrder($arvatoRssRiskCheckRequestTransfer);
 
-        return $billingCustomer + $order;
+        return $billingCustomer + $deliveryCustomer + $order;
     }
 
     /**
@@ -34,21 +36,49 @@ class RiskCheckRequestConverter implements RiskCheckRequestConverterInterface
     {
         $result = [];
         $billingCustomerTransfer = $arvatoRssRiskCheckRequestTransfer->getBillingCustomer();
-        $addressTranfer = $billingCustomerTransfer->getAddress();
-        $address = [
-            ArvatoRssRequestApiConfig::ARVATORSS_API_COUNTRY => $addressTranfer->getCountry(),
-            ArvatoRssRequestApiConfig::ARVATORSS_API_CITY => $addressTranfer->getCity(),
-            ArvatoRssRequestApiConfig::ARVATORSS_API_STREET => $addressTranfer->getStreet(),
-            ArvatoRssRequestApiConfig::ARVATORSS_API_STREET_NUMBER => $addressTranfer->getStreetNumber(),
-            ArvatoRssRequestApiConfig::ARVATORSS_API_ZIPCODE => $addressTranfer->getZipCode(),
-        ];
+        $customerAddressTransfer = $billingCustomerTransfer->getAddress();
         $result[ArvatoRssRequestApiConfig::ARVATORSS_API_BILLINGCUSTOMER] = [
             ArvatoRssRequestApiConfig::ARVATORSS_API_FIRSTNAME => $billingCustomerTransfer->getFirstName(),
             ArvatoRssRequestApiConfig::ARVATORSS_API_LASTNAME => $billingCustomerTransfer->getLastName(),
-            ArvatoRssRequestApiConfig::ARVATORSS_API_ADDRESS => $address,
+            ArvatoRssRequestApiConfig::ARVATORSS_API_ADDRESS => $this->convertCustomerAddress($customerAddressTransfer),
         ];
 
         return $result;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $arvatoRssRiskCheckRequestTransfer
+     *
+     * @return array
+     */
+    protected function convertDeliveryCustomer(ArvatoRssRiskCheckRequestTransfer $arvatoRssRiskCheckRequestTransfer)
+    {
+        $result = [];
+        $deliveryCustomerTransfer = $arvatoRssRiskCheckRequestTransfer->getDeliveryCustomer();
+        $customerAddressTransfer = $deliveryCustomerTransfer->getAddress();
+        $result[ArvatoRssRequestApiConfig::ARVATORSS_API_DELIVERYCUSTOMER] = [
+            ArvatoRssRequestApiConfig::ARVATORSS_API_FIRSTNAME => $deliveryCustomerTransfer->getFirstName(),
+            ArvatoRssRequestApiConfig::ARVATORSS_API_LASTNAME => $deliveryCustomerTransfer->getLastName(),
+            ArvatoRssRequestApiConfig::ARVATORSS_API_ADDRESS => $this->convertCustomerAddress($customerAddressTransfer),
+        ];
+
+        return $result;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ArvatoRssCustomerAddressTransfer $customerAddressTransfer
+     *
+     * @return array
+     */
+    protected function convertCustomerAddress(ArvatoRssCustomerAddressTransfer $customerAddressTransfer)
+    {
+        return [
+            ArvatoRssRequestApiConfig::ARVATORSS_API_COUNTRY => $customerAddressTransfer->getCountry(),
+            ArvatoRssRequestApiConfig::ARVATORSS_API_CITY => $customerAddressTransfer->getCity(),
+            ArvatoRssRequestApiConfig::ARVATORSS_API_STREET => $customerAddressTransfer->getStreet(),
+            ArvatoRssRequestApiConfig::ARVATORSS_API_STREET_NUMBER => $customerAddressTransfer->getStreetNumber(),
+            ArvatoRssRequestApiConfig::ARVATORSS_API_ZIPCODE => $customerAddressTransfer->getZipCode(),
+        ];
     }
 
     /**

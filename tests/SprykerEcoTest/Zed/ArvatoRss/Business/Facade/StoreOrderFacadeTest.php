@@ -61,7 +61,7 @@ class StoreOrderFacadeTest extends AbstractBusinessTest
     protected function test()
     {
         $apiCallLog = $this->getApiCallLog();
-        $this->assertInstanceOf($apiCallLog, SpyArvatoRssApiCallLog::class);
+        $this->assertInstanceOf(SpyArvatoRssApiCallLog::class, $apiCallLog);
         $this->assertEquals($apiCallLog->getCallType(), ArvatoRssApiConfig::TRANSACTION_TYPE_STORE_ORDER);
     }
 

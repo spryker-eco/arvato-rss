@@ -18,6 +18,16 @@
         <property name="address" type="ArvatoRssCustomerAddress" />
     </transfer>
 
+    <transfer name="ArvatoRssDeliveryCustomer">
+        <property name="firstName" type="string" />
+        <property name="lastName" type="string" />
+        <property name="salutation" type="string" />
+        <property name="birthDay" type="string" />
+        <property name="email" type="string" />
+        <property name="telephoneNumber" type="string" />
+        <property name="address" type="ArvatoRssCustomerAddress" />
+    </transfer>
+
     <transfer name="ArvatoRssCustomerAddress">
         <property name="street" type="string" />
         <property name="streetNumber" type="string" />
@@ -47,6 +57,7 @@
     <transfer name="ArvatoRssRiskCheckRequest">
         <property name="identification" type="ArvatoRssIdentificationRequest" />
         <property name="billingCustomer" type="ArvatoRssBillingCustomer" />
+        <property name="deliveryCustomer" type="ArvatoRssDeliveryCustomer" />
         <property name="order" type="ArvatoRssOrder" />
     </transfer>
 
@@ -85,6 +96,12 @@
 
     <transfer name="BillingCustomerMapper">
         <property name="billingAddress" type="Address" />
+        <property name="salutation" type="string" />
+        <property name="email" type="string"/>
+    </transfer>
+
+    <transfer name="DeliveryCustomerMapper">
+        <property name="deliveryAddress" type="Address" />
         <property name="salutation" type="string" />
         <property name="email" type="string"/>
     </transfer>
