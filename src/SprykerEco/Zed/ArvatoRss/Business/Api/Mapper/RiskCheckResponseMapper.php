@@ -7,6 +7,7 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
 
+use Generated\Shared\Transfer\ArvatoRssQuoteDataTransfer;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 
@@ -22,7 +23,12 @@ class RiskCheckResponseMapper implements RiskCheckResponseMapperInterface
         ArvatoRssRiskCheckResponseTransfer $arvatoRssRiskCheckResponseTransfer,
         QuoteTransfer $quoteTransfer
     ) {
-        $quoteTransfer->setArvatoRssRiskCheckResponse($arvatoRssRiskCheckResponseTransfer);
+        if (!$quoteTransfer->getArvatoRssQuoteData()) {
+            $quoteTransfer->setArvatoRssQuoteData(new ArvatoRssQuoteDataTransfer());
+        }
+        $quoteTransfer->getArvatoRssQuoteData()
+            ->setArvatoRssRiskCheckResponse($arvatoRssRiskCheckResponseTransfer);
+
         return $quoteTransfer;
     }
 }

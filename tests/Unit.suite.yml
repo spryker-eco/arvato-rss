@@ -1,7 +1,0 @@
-actor: UnitTester
-modules:
-    enabled:
-        - Asserts
-        - \ArvatoRss\Helper\QuoteHelper
-        - \ArvatoRss\Helper\Unit\MapperTestHelper
-        - \ArvatoRss\Module\EnvironmentModule

@@ -7,14 +7,26 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Business;
 
+use Generated\Shared\Transfer\OrderTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 
 interface ArvatoRssFacadeInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTrasnfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
-    public function performRiskCheck(QuoteTransfer $quoteTransfer);
+    public function performRiskCheck(QuoteTransfer $quoteTrasnfer);
+
+    /**
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     *
+     * @return void
+     */
+    public function storeOrder(OrderTransfer $orderTransfer);
 }
