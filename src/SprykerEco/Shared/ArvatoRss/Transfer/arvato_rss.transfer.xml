@@ -66,8 +66,19 @@
         <property name="actionCode" type="string" />
         <property name="resultCode" type="string" />
         <property name="resultText" type="string" />
+        <property name="billingAddressValidation" type="ArvatoRssAddressValidationResponse" />
+        <property name="deliveryAddressValidation" type="ArvatoRssAddressValidationResponse" />
         <property name="isError" type="bool" />
         <property name="errorMessage" type="string" />
+    </transfer>
+
+    <transfer name="ArvatoRssAddressValidationResponse">
+        <property name="returnCode" type="string" />
+        <property name="street" type="string" />
+        <property name="streetNumber" type="string" />
+        <property name="zipCode" type="string" />
+        <property name="city" type="string" />
+        <property name="country" type="string" />
     </transfer>
 
     <transfer name="ArvatoRssStoreOrderRequest">
