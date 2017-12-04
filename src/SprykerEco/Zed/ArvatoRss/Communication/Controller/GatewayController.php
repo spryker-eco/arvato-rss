@@ -11,11 +11,10 @@ use Generated\Shared\Transfer\QuoteTransfer;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractGatewayController;
 
 /**
- * @method \SprykerEco\Zed\ArvatoRss\Business\ArvatoRssFacade getFacade()
+ * @method \SprykerEco\Zed\ArvatoRss\Business\ArvatoRssFacadeInterface getFacade()
  */
 class GatewayController extends AbstractGatewayController
 {
-
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
@@ -25,5 +24,4 @@ class GatewayController extends AbstractGatewayController
     {
         return $this->getFacade()->performRiskCheck($quoteTransfer);
     }
-
 }

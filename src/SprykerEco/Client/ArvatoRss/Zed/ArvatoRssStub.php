@@ -12,7 +12,6 @@ use Spryker\Client\ZedRequest\Stub\ZedRequestStub;
 
 class ArvatoRssStub extends ZedRequestStub implements ArvatoRssStubInterface
 {
-
     /**
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
@@ -25,5 +24,4 @@ class ArvatoRssStub extends ZedRequestStub implements ArvatoRssStubInterface
             $quoteTransfer
         );
     }
-
 }

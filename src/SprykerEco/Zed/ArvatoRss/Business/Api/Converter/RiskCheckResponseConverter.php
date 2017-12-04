@@ -7,12 +7,12 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Converter;
 
+use Generated\Shared\Transfer\ArvatoRssAddressValidationResponseTransfer;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer;
 use stdClass;
 
 class RiskCheckResponseConverter implements RiskCheckResponseConverterInterface
 {
-
     /**
      * @param \stdClass $response
      *
@@ -27,7 +27,39 @@ class RiskCheckResponseConverter implements RiskCheckResponseConverterInterface
         $responseTransfer->setActionCode($response->Decision->ActionCode);
         $responseTransfer->setResultText($response->Decision->ResultText);
 
+        if (isset($response->Details)) {
+            $responseTransfer->setBillingAddressValidation(
+                $this->convertAddressValidationResponse(
+                    $response->Details->BillingCustomerResult->ServiceResults->AddressValidationResponse
+                )
+            );
+
+            $responseTransfer->setDeliveryAddressValidation(
+                $this->convertAddressValidationResponse(
+                    $response->Details->DeliveryCustomerResult->ServiceResults->AddressValidationResponse
+                )
+            );
+        }
+
         return $responseTransfer;
     }
 
+    /**
+     * @param \stdClass $response
+     *
+     * @return \Generated\Shared\Transfer\ArvatoRssAddressValidationResponseTransfer
+     */
+    protected function convertAddressValidationResponse(stdClass $response)
+    {
+        $addressValidationResponse = new ArvatoRssAddressValidationResponseTransfer();
+
+        $addressValidationResponse->setReturnCode($response->ReturnCode);
+        $addressValidationResponse->setStreet($response->Street);
+        $addressValidationResponse->setStreetNumber($response->StreetNumber);
+        $addressValidationResponse->setZipCode($response->ZipCode);
+        $addressValidationResponse->setCity($response->City);
+        $addressValidationResponse->setCountry($response->Country);
+
+        return $addressValidationResponse;
+    }
 }

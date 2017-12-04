@@ -12,7 +12,6 @@ use Spryker\Client\Kernel\Container;
 
 class ArvatoRssDependencyProvider extends AbstractDependencyProvider
 {
-
     const CLIENT_ZED_REQUEST = 'CLIENT_ZED_REQUEST';
 
     /**
@@ -40,5 +39,4 @@ class ArvatoRssDependencyProvider extends AbstractDependencyProvider
 
         return $container;
     }
-
 }

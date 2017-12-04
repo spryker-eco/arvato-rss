@@ -7,28 +7,25 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Business\Handler;
 
-use Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiAdapterInterface;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Exception\ArvatoRssRiskCheckApiException;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapperInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckResponseMapperInterface;
 
 class RiskCheckHandler implements RiskCheckHandlerInterface
 {
-
     /**
-     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapperInterface $riskCheckRequestMapper
+     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapperInterface
      */
     protected $riskCheckRequestMapper;
 
     /**
-     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckResponseMapperInterface $riskCheckResponseMapper
+     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckResponseMapperInterface
      */
     protected $riskCheckResponseMapper;
 
     /**
-     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiAdapterInterface $apiAdapter
+     * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiAdapterInterface
      */
     protected $apiAdapter;
 
@@ -56,15 +53,9 @@ class RiskCheckHandler implements RiskCheckHandlerInterface
     public function performRiskCheck(QuoteTransfer $quoteTransfer)
     {
         $requestTransfer = $this->riskCheckRequestMapper->mapQuoteToRequestTranfer($quoteTransfer);
-        try {
-            $responseTransfer = $this->apiAdapter->performRiskCheck($requestTransfer);
-        } catch (ArvatoRssRiskCheckApiException $exception) {
-            $responseTransfer = new ArvatoRssRiskCheckResponseTransfer();
-        }
-
+        $responseTransfer = $this->apiAdapter->performRiskCheck($requestTransfer);
         $quoteTransfer = $this->riskCheckResponseMapper->mapResponseToQuote($responseTransfer, $quoteTransfer);
 
         return $quoteTransfer;
     }
-
 }

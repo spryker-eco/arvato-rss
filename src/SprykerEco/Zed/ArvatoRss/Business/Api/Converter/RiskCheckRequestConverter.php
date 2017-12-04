@@ -7,12 +7,12 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Converter;
 
+use Generated\Shared\Transfer\ArvatoRssCustomerAddressTransfer;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
-use SprykerEco\Zed\ArvatoRss\Business\Api\ArvatoRssApiConstants;
+use SprykerEco\Zed\ArvatoRss\Business\Api\ArvatoRssRequestApiConfig;
 
 class RiskCheckRequestConverter implements RiskCheckRequestConverterInterface
 {
-
     /**
      * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $arvatoRssRiskCheckRequestTransfer
      *
@@ -20,12 +20,11 @@ class RiskCheckRequestConverter implements RiskCheckRequestConverterInterface
      */
     public function convert(ArvatoRssRiskCheckRequestTransfer $arvatoRssRiskCheckRequestTransfer)
     {
-
         $billingCustomer = $this->convertBillingCustomer($arvatoRssRiskCheckRequestTransfer);
+        $deliveryCustomer = $this->convertDeliveryCustomer($arvatoRssRiskCheckRequestTransfer);
         $order = $this->convertOrder($arvatoRssRiskCheckRequestTransfer);
 
-        //Merge arrays.
-        return $billingCustomer + $order;
+        return $billingCustomer + $deliveryCustomer + $order;
     }
 
     /**
@@ -37,21 +36,49 @@ class RiskCheckRequestConverter implements RiskCheckRequestConverterInterface
     {
         $result = [];
         $billingCustomerTransfer = $arvatoRssRiskCheckRequestTransfer->getBillingCustomer();
-        $addressTranfer = $billingCustomerTransfer->getAddress();
-        $address = [
-            ArvatoRssApiConstants::ARVATORSS_API_COUNTRY => $addressTranfer->getCountry(),
-            ArvatoRssApiConstants::ARVATORSS_API_CITY => $addressTranfer->getCity(),
-            ArvatoRssApiConstants::ARVATORSS_API_STREET => $addressTranfer->getStreet(),
-            ArvatoRssApiConstants::ARVATORSS_API_STREET_NUMBER => $addressTranfer->getStreetNumber(),
-            ArvatoRssApiConstants::ARVATORSS_API_ZIPCODE => $addressTranfer->getZipCode(),
-        ];
-        $result[ArvatoRssApiConstants::ARVATORSS_API_BILLINGCUSTOMER] = [
-            ArvatoRssApiConstants::ARVATORSS_API_FIRSTNAME => $billingCustomerTransfer->getFirstName(),
-            ArvatoRssApiConstants::ARVATORSS_API_LASTNAME => $billingCustomerTransfer->getLastName(),
-            ArvatoRssApiConstants::ARVATORSS_API_ADDRESS => $address,
+        $customerAddressTransfer = $billingCustomerTransfer->getAddress();
+        $result[ArvatoRssRequestApiConfig::ARVATORSS_API_BILLINGCUSTOMER] = [
+            ArvatoRssRequestApiConfig::ARVATORSS_API_FIRSTNAME => $billingCustomerTransfer->getFirstName(),
+            ArvatoRssRequestApiConfig::ARVATORSS_API_LASTNAME => $billingCustomerTransfer->getLastName(),
+            ArvatoRssRequestApiConfig::ARVATORSS_API_ADDRESS => $this->convertCustomerAddress($customerAddressTransfer),
         ];
 
         return $result;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $arvatoRssRiskCheckRequestTransfer
+     *
+     * @return array
+     */
+    protected function convertDeliveryCustomer(ArvatoRssRiskCheckRequestTransfer $arvatoRssRiskCheckRequestTransfer)
+    {
+        $result = [];
+        $deliveryCustomerTransfer = $arvatoRssRiskCheckRequestTransfer->getDeliveryCustomer();
+        $customerAddressTransfer = $deliveryCustomerTransfer->getAddress();
+        $result[ArvatoRssRequestApiConfig::ARVATORSS_API_DELIVERYCUSTOMER] = [
+            ArvatoRssRequestApiConfig::ARVATORSS_API_FIRSTNAME => $deliveryCustomerTransfer->getFirstName(),
+            ArvatoRssRequestApiConfig::ARVATORSS_API_LASTNAME => $deliveryCustomerTransfer->getLastName(),
+            ArvatoRssRequestApiConfig::ARVATORSS_API_ADDRESS => $this->convertCustomerAddress($customerAddressTransfer),
+        ];
+
+        return $result;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ArvatoRssCustomerAddressTransfer $customerAddressTransfer
+     *
+     * @return array
+     */
+    protected function convertCustomerAddress(ArvatoRssCustomerAddressTransfer $customerAddressTransfer)
+    {
+        return [
+            ArvatoRssRequestApiConfig::ARVATORSS_API_COUNTRY => $customerAddressTransfer->getCountry(),
+            ArvatoRssRequestApiConfig::ARVATORSS_API_CITY => $customerAddressTransfer->getCity(),
+            ArvatoRssRequestApiConfig::ARVATORSS_API_STREET => $customerAddressTransfer->getStreet(),
+            ArvatoRssRequestApiConfig::ARVATORSS_API_STREET_NUMBER => $customerAddressTransfer->getStreetNumber(),
+            ArvatoRssRequestApiConfig::ARVATORSS_API_ZIPCODE => $customerAddressTransfer->getZipCode(),
+        ];
     }
 
     /**
@@ -64,28 +91,23 @@ class RiskCheckRequestConverter implements RiskCheckRequestConverterInterface
         $result = [];
         $order = $arvatoRssRiskCheckRequestTransfer->getOrder();
 
-        $result[ArvatoRssApiConstants::ARVATORSS_API_ORDER] = [
-            //TODO: Clarify what it means
-            ArvatoRssApiConstants::ARVATORSS_API_REGISTEREDORDER => true,
-            ArvatoRssApiConstants::ARVATORSS_API_CURRENCY => $order->getCurrency(),
-            ArvatoRssApiConstants::ARVATORSS_API_GROSSTOTALBILL => $order->getGrossTotalBill(),
-            ArvatoRssApiConstants::ARVATORSS_API_TOTALORDERVALUE => $order->getTotalOrderValue(),
+        $result[ArvatoRssRequestApiConfig::ARVATORSS_API_ORDER] = [
+            ArvatoRssRequestApiConfig::ARVATORSS_API_REGISTEREDORDER => $order->getRegisteredOrder(),
+            ArvatoRssRequestApiConfig::ARVATORSS_API_CURRENCY => $order->getCurrency(),
+            ArvatoRssRequestApiConfig::ARVATORSS_API_GROSSTOTALBILL => $order->getGrossTotalBill(),
+            ArvatoRssRequestApiConfig::ARVATORSS_API_TOTALORDERVALUE => $order->getTotalOrderValue(),
         ];
-        // TODO: deal with items.
-        $result[ArvatoRssApiConstants::ARVATORSS_API_ORDER][ArvatoRssApiConstants::ARVATORSS_API_ITEM] = [];
+        $result[ArvatoRssRequestApiConfig::ARVATORSS_API_ORDER][ArvatoRssRequestApiConfig::ARVATORSS_API_ITEM] = [];
 
-        foreach ($order->getItem() as $item) {
-            $result[ArvatoRssApiConstants::ARVATORSS_API_ORDER][ArvatoRssApiConstants::ARVATORSS_API_ITEM][] = [
-                //TODO: clarify this. Is it sku?
-                ArvatoRssApiConstants::ARVATORSS_API_PRODUCTNUMBER => $item->getProductNumber(),
-                //TODO: clarify
-                ArvatoRssApiConstants::ARVATORSS_API_PRODUCTGROUPID => $item->getProductGroupId(),
-                ArvatoRssApiConstants::ARVATORSS_API_UNITPRICE => $item->getUnitPrice(),
-                ArvatoRssApiConstants::ARVATORSS_API_UNITCOUNT => $item->getUnitCount(),
+        foreach ($order->getItems() as $item) {
+            $result[ArvatoRssRequestApiConfig::ARVATORSS_API_ORDER][ArvatoRssRequestApiConfig::ARVATORSS_API_ITEM][] = [
+                ArvatoRssRequestApiConfig::ARVATORSS_API_PRODUCTNUMBER => $item->getProductNumber(),
+                ArvatoRssRequestApiConfig::ARVATORSS_API_PRODUCTGROUPID => $item->getProductGroupId(),
+                ArvatoRssRequestApiConfig::ARVATORSS_API_UNITPRICE => $item->getUnitPrice(),
+                ArvatoRssRequestApiConfig::ARVATORSS_API_UNITCOUNT => $item->getUnitCount(),
             ];
         }
 
         return $result;
     }
-
 }

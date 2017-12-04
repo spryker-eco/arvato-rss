@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\ArvatoRss\Dependency\Facade;
 
 interface ArvatoRssToMoneyInterface
 {
-
     /**
      * @param int $value
      *
@@ -23,5 +22,4 @@ interface ArvatoRssToMoneyInterface
      * @return int
      */
     public function convertDecimalToInteger($value);
-
 }

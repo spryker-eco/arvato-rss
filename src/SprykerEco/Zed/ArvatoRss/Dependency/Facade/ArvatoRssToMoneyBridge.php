@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\ArvatoRss\Dependency\Facade;
 
 class ArvatoRssToMoneyBridge implements ArvatoRssToMoneyInterface
 {
-
     /**
      * @var \Spryker\Zed\Money\Business\MoneyFacadeInterface
      */
@@ -42,5 +41,4 @@ class ArvatoRssToMoneyBridge implements ArvatoRssToMoneyInterface
     {
         return $this->moneyFacade->convertDecimalToInteger($value);
     }
-
 }

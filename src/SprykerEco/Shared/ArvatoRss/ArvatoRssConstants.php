@@ -1,15 +1,16 @@
 <?php
 
+/**
+ * MIT License
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
 namespace SprykerEco\Shared\ArvatoRss;
 
 interface ArvatoRssConstants
 {
-
-    const ARVATORSS = "ARVATORSS";
-
-    // Authorization data
-    const ARVATORSS_URL = "ARVATORSS_URL";
-    const ARVATORSS_CLIENTID = "CLIENTID";
-    const ARVATORSS_PASSWORD = "PASSWORD";
-
+    const ARVATORSS_URL = "ARVATORSS:ARVATORSS_URL";
+    const ARVATORSS_CLIENTID = "ARVATORSS:ARVATORSS_CLIENTID";
+    const ARVATORSS_AUTHORISATION = "ARVATORSS:ARVATORSS_AUTHORISATION";
+    const ARVATORSS_PAYMENT_TYPE_MAPPING = 'ARVATORSS:ARVATORSS_PAYMENT_TYPE_MAPPING';
 }

@@ -2,7 +2,9 @@
 
 use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
 
-// Production url: https://customer.risk-solution-services.de/rss-services/risk-solution-services.v2.1
-$config[ArvatoRssConstants::ARVATORSS_URL] = 'https://integration.risk-solution-services.de/rss-services/risk-solution-services.v2.1';
+$config[ArvatoRssConstants::ARVATORSS_URL] = '';
 $config[ArvatoRssConstants::ARVATORSS_CLIENTID] = '';
-$config[ArvatoRssConstants::ARVATORSS_PASSWORD] = '';
+$config[ArvatoRssConstants::ARVATORSS_AUTHORISATION] = '';
+$config[ArvatoRssConstants::ARVATORSS_PAYMENT_TYPE_MAPPING] = [
+    'invoice' => \SprykerEco\Shared\ArvatoRss\ArvatoRssApiConfig::INVOICE,
+];
