@@ -84,7 +84,7 @@ class StoreOrderRequestMapper implements StoreOrderRequestMapperInterface
             )
         );
         if ($orderTransfer->getCustomer()) {
-            $order->setDebitorNumber($orderTransfer->getCustomer()->getIdCustomer());
+            $order->setDebitorNumber($orderTransfer->getCustomer()->getCustomerReference());
         }
 
         return $order;
