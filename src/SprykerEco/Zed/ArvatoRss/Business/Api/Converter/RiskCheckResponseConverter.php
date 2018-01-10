@@ -29,17 +29,21 @@ class RiskCheckResponseConverter implements RiskCheckResponseConverterInterface
         $responseTransfer->setCommunicationToken($response->Decision->CommunicationToken);
 
         if (isset($response->Details)) {
-            $responseTransfer->setBillingAddressValidation(
-                $this->convertAddressValidationResponse(
-                    $response->Details->BillingCustomerResult->ServiceResults->AddressValidationResponse
-                )
-            );
+            if (isset($response->Details->BillingCustomerResult->ServiceResults->AddressValidationResponse)) {
+                $responseTransfer->setBillingAddressValidation(
+                    $this->convertAddressValidationResponse(
+                        $response->Details->BillingCustomerResult->ServiceResults->AddressValidationResponse
+                    )
+                );
+            }
 
-            $responseTransfer->setDeliveryAddressValidation(
-                $this->convertAddressValidationResponse(
-                    $response->Details->DeliveryCustomerResult->ServiceResults->AddressValidationResponse
-                )
-            );
+            if (isset($response->Details->DeliveryCustomerResult->ServiceResults->AddressValidationResponse)) {
+                $responseTransfer->setDeliveryAddressValidation(
+                    $this->convertAddressValidationResponse(
+                        $response->Details->DeliveryCustomerResult->ServiceResults->AddressValidationResponse
+                    )
+                );
+            }
         }
 
         return $responseTransfer;
