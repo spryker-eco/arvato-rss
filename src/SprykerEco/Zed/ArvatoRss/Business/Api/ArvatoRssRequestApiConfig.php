@@ -32,4 +32,5 @@ interface ArvatoRssRequestApiConfig
     const ARVATORSS_API_PRODUCTGROUPID = 'ProductGroupId';
     const ARVATORSS_API_UNITPRICE = 'UnitPrice';
     const ARVATORSS_API_UNITCOUNT = 'UnitCount';
+    const ARVATORSS_API_STREET_ADDITIONAL = 'StreetNumberAdditional';
 }

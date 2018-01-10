@@ -62,6 +62,7 @@ class BillingCustomerMapper implements BillingCustomerMapperInterface
         $customerAddressTransfer->setStreet($addressTransfer->getAddress1());
         $customerAddressTransfer->setStreetNumber($addressTransfer->getAddress2());
         $customerAddressTransfer->setZipCode($addressTransfer->getZipCode());
+        $customerAddressTransfer->setStreetNumberAdditional($addressTransfer->getAddress3());
 
         return $customerAddressTransfer;
     }
