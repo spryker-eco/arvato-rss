@@ -16,6 +16,10 @@ use Spryker\Client\Kernel\AbstractClient;
 class ArvatoRssClient extends AbstractClient implements ArvatoRssClientInterface
 {
     /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
      *
      * @return \Generated\Shared\Transfer\QuoteTransfer
