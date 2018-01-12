@@ -16,6 +16,10 @@ class Iso3166ConverterService extends AbstractService implements Iso3166Converte
     const ISO3166_KEY = 'numeric';
 
     /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
      * @param string $iso2CountryCode
      *
      * @return string|null
@@ -31,6 +35,10 @@ class Iso3166ConverterService extends AbstractService implements Iso3166Converte
     }
 
     /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
      * @param string $iso3166CountryCode
      *
      * @return string|null
