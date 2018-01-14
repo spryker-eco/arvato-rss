@@ -47,6 +47,10 @@ class StoreOrderRequestMapperTest extends AbstractBusinessTest
             $result->getOrder()->getPaymentType(),
             ArvatoRssApiConfig::INVOICE
         );
+        $this->assertEquals(
+            $result->getOrder()->getDebitorNumber(),
+            $this->order->getCustomer()->getCustomerReference()
+        );
     }
 
     /**
