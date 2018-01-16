@@ -26,6 +26,7 @@ class RiskCheckResponseConverter implements RiskCheckResponseConverterInterface
         $responseTransfer->setResultCode($response->Decision->ResultCode);
         $responseTransfer->setActionCode($response->Decision->ActionCode);
         $responseTransfer->setResultText($response->Decision->ResultText);
+        $responseTransfer->setCommunicationToken($response->Decision->CommunicationToken);
 
         if (isset($response->Details)) {
             $responseTransfer->setBillingAddressValidation(

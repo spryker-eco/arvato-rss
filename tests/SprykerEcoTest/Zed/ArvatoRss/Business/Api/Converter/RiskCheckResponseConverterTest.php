@@ -38,6 +38,7 @@ class RiskCheckResponseConverterTest extends Test
         $response->Decision->ResultCode = '123123';
         $response->Decision->ActionCode = '123123';
         $response->Decision->ResultText = 'text';
+        $response->Decision->CommunicationToken = '1298748712644644';
 
         return $response;
     }
@@ -53,6 +54,7 @@ class RiskCheckResponseConverterTest extends Test
             ->setResult($response->Decision->Result)
             ->setResultCode($response->Decision->ResultCode)
             ->setActionCode($response->Decision->ActionCode)
-            ->setResultText($response->Decision->ResultText);
+            ->setResultText($response->Decision->ResultText)
+            ->setCommunicationToken($response->Decision->CommunicationToken);
     }
 }
