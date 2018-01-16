@@ -78,7 +78,7 @@ class RiskCheckRequestConverter implements RiskCheckRequestConverterInterface
             ArvatoRssRequestApiConfig::ARVATORSS_API_STREET => $customerAddressTransfer->getStreet(),
             ArvatoRssRequestApiConfig::ARVATORSS_API_STREET_NUMBER => $customerAddressTransfer->getStreetNumber(),
             ArvatoRssRequestApiConfig::ARVATORSS_API_ZIPCODE => $customerAddressTransfer->getZipCode(),
-            ArvatoRssRequestApiConfig::ARVATORSS_API_STREET_ADDITIONAL => $customerAddressTransfer->getStreetNumberAdditional(),
+            ArvatoRssRequestApiConfig::ARVATORSS_API_STREET_NUMBER_ADDITIONAL => $customerAddressTransfer->getStreetNumberAdditional(),
         ];
     }
 

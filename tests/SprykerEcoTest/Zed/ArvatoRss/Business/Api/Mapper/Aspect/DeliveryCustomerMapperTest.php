@@ -48,5 +48,6 @@ class DeliveryCustomerMapperTest extends AbstractBusinessTest
         $this->assertEquals($result->getTelephoneNumber(), $this->quote->getBillingAddress()->getPhone());
         $this->assertEquals($result->getEmail(), $this->quote->getCustomer()->getEmail());
         $this->assertEquals($result->getSalutation(), strtoupper($this->quote->getCustomer()->getSalutation()));
+        $this->assertEquals($address->getStreetNumberAdditional(), $this->quote->getBillingAddress()->getAddress3());
     }
 }

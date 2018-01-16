@@ -22,6 +22,7 @@ xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xs
         <property name="zipCode" dataBuilderRule="postcode" />
         <property name="city" dataBuilderRule="=Berlin" />
         <property name="country" dataBuilderRule="country" />
+        <property name="streetNumberAdditional" dataBuilderRule="=test" />
     </transfer>
 
     <transfer name="ArvatoRssOrder">
