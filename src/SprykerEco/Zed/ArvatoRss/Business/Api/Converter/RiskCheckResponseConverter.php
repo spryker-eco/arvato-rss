@@ -29,24 +29,49 @@ class RiskCheckResponseConverter implements RiskCheckResponseConverterInterface
         $responseTransfer->setCommunicationToken($response->Decision->CommunicationToken);
 
         if (isset($response->Details)) {
-            if (isset($response->Details->BillingCustomerResult->ServiceResults->AddressValidationResponse)) {
-                $responseTransfer->setBillingAddressValidation(
-                    $this->convertAddressValidationResponse(
-                        $response->Details->BillingCustomerResult->ServiceResults->AddressValidationResponse
-                    )
-                );
-            }
-
-            if (isset($response->Details->DeliveryCustomerResult->ServiceResults->AddressValidationResponse)) {
-                $responseTransfer->setDeliveryAddressValidation(
-                    $this->convertAddressValidationResponse(
-                        $response->Details->DeliveryCustomerResult->ServiceResults->AddressValidationResponse
-                    )
-                );
-            }
+            $this->processBillingAddressResponse($responseTransfer, $response->Details->BillingCustomerResult);
+            $this->processDeliveryAddressResponse($responseTransfer, $response->Details->DeliveryCustomerResult);
         }
 
         return $responseTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer $responseTransfer
+     * @param \stdClass $response
+     *
+     * @return void
+     */
+    protected function processBillingAddressResponse(
+        ArvatoRssRiskCheckResponseTransfer $responseTransfer,
+        stdClass $response
+    ) {
+        if (isset($response->ServiceResults->AddressValidationResponse)) {
+            $responseTransfer->setBillingAddressValidation(
+                $this->convertAddressValidationResponse(
+                    $response->ServiceResults->AddressValidationResponse
+                )
+            );
+        }
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer $responseTransfer
+     * @param \stdClass $response
+     *
+     * @return void
+     */
+    protected function processDeliveryAddressResponse(
+        ArvatoRssRiskCheckResponseTransfer $responseTransfer,
+        stdClass $response
+    ) {
+        if (isset($response->ServiceResults->AddressValidationResponse)) {
+            $responseTransfer->setDeliveryAddressValidation(
+                $this->convertAddressValidationResponse(
+                    $response->ServiceResults->AddressValidationResponse
+                )
+            );
+        }
     }
 
     /**
