@@ -39,16 +39,21 @@ class RiskCheckResponseConverterTest extends Test
         $simpleResponse = self::createResponse();
         $simpleExpected = self::createExpectedResult($simpleResponse);
 
-        $responseWithAddresses = $simpleResponse;
-        $responseWithAddresses->Details = new stdClass();
-        $responseWithAddresses->Details->BillingCustomerResult = self::createAddressResponse();
-        $responseWithAddresses->Details->DeliveryCustomerResult = self::createAddressResponse();
-        $expectedWithAddress = $simpleExpected
+        $responseWithoutAddress = $simpleResponse;
+        $responseWithoutAddress->Details = new stdClass();
+        $responseWithoutAddress->Details->BillingCustomerResult = self::createAddressResponse();
+        $responseWithoutAddress->Details->DeliveryCustomerResult = new stdClass();
+        $responseWithoutAddress->Details->DeliveryCustomerResult->ServiceResults = new stdClass();
+        $expectedWithoutAddress = $simpleExpected
             ->setBillingAddressValidation(
                 self::createAddressValidationTransfer(
-                    $responseWithAddresses->Details->BillingCustomerResult->ServiceResults->AddressValidationResponse
+                    $responseWithoutAddress->Details->BillingCustomerResult->ServiceResults->AddressValidationResponse
                 )
-            )
+            );
+
+        $responseWithAddresses = $responseWithoutAddress;
+        $responseWithAddresses->Details->DeliveryCustomerResult = self::createAddressResponse();
+        $expectedWithAddress = $expectedWithoutAddress
             ->setDeliveryAddressValidation(
                 self::createAddressValidationTransfer(
                     $responseWithAddresses->Details->DeliveryCustomerResult->ServiceResults->AddressValidationResponse
@@ -74,6 +79,7 @@ class RiskCheckResponseConverterTest extends Test
             'simple response' => [$simpleResponse, $simpleExpected],
             'response with addresses' => [$responseWithAddresses, $expectedWithAddress],
             'response with additional address field' => [$responseWithAdditionalAddress, $expectedWithAdditionalField],
+            'response without address' => [$responseWithoutAddress, $expectedWithoutAddress]
         ];
     }
 
