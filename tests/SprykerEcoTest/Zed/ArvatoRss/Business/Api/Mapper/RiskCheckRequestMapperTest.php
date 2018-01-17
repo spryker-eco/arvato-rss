@@ -23,13 +23,13 @@ use SprykerEcoTest\Zed\ArvatoRss\Business\AbstractBusinessTest;
 class RiskCheckRequestMapperTest extends AbstractBusinessTest
 {
     /**
-     * @param QuoteTransfer $quote
+     * @param bool $billingSameAsShipping
      *
      * @dataProvider provideQuoteData
      *
      * @return void
      */
-    public function testMapQuoteToRequestTranfer(QuoteTransfer $quote)
+    public function testMapQuoteToRequestTranfer($billingSameAsShipping)
     {
         $mapper = new RiskCheckRequestMapper(
             $this->createIdentificationMapperMock(),
@@ -37,6 +37,8 @@ class RiskCheckRequestMapperTest extends AbstractBusinessTest
             $this->createDeliveryCustomerMapperMock(),
             $this->createOrderMapperMock()
         );
+        $quote = $this->quote;
+        $quote->setBillingSameAsShipping($billingSameAsShipping);
         $result = $mapper->mapQuoteToRequestTranfer($quote);
         $this->testResult($quote, $result);
     }
@@ -122,11 +124,9 @@ class RiskCheckRequestMapperTest extends AbstractBusinessTest
      */
     public static function provideQuoteData()
     {
-        $quoteBillingNotEqualDelivery = (new self())->quote;
-        $quoteBillingEqualDelivery = $quoteBillingNotEqualDelivery->setBillingSameAsShipping(true);
         return [
-            'quote: billing not equal delivery' => [$quoteBillingNotEqualDelivery],
-            'quote: billing equal delivery' => [$quoteBillingEqualDelivery],
+            'quote: billing not equal delivery' => [false],
+            'quote: billing equal delivery' => [true],
         ];
     }
 }
