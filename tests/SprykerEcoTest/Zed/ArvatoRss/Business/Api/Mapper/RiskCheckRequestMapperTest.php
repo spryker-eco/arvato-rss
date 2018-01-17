@@ -34,6 +34,8 @@ class RiskCheckRequestMapperTest extends AbstractBusinessTest
         );
         $result = $mapper->mapQuoteToRequestTranfer($this->quote);
         $this->testResult($result);
+
+        $this->testBillingSameAsShipping($mapper);
     }
 
     /**
@@ -108,5 +110,19 @@ class RiskCheckRequestMapperTest extends AbstractBusinessTest
             ->willReturn(new ArvatoRssOrderTransfer());
 
         return $moneyFacadeMock;
+    }
+
+    /**
+     * @param RiskCheckRequestMapper $mapper
+     */
+    protected function testBillingSameAsShipping(RiskCheckRequestMapper $mapper)
+    {
+        $this->quote->setBillingSameAsShipping(true);
+        $result = $mapper->mapQuoteToRequestTranfer($this->quote);
+        $this->assertEmpty($result->getDeliveryCustomer());
+
+        $this->quote->setBillingSameAsShipping(false);
+        $result = $mapper->mapQuoteToRequestTranfer($this->quote);
+        $this->assertInstanceOf(ArvatoRssDeliveryCustomerTransfer::class, $result->getDeliveryCustomer());
     }
 }
