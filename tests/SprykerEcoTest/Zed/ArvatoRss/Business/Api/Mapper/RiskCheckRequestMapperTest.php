@@ -54,9 +54,8 @@ class RiskCheckRequestMapperTest extends AbstractBusinessTest
         $this->assertInstanceOf(ArvatoRssRiskCheckRequestTransfer::class, $result);
         $this->assertInstanceOf(ArvatoRssIdentificationRequestTransfer::class, $result->getIdentification());
         $this->assertInstanceOf(ArvatoRssBillingCustomerTransfer::class, $result->getBillingCustomer());
-        $this->assertInstanceOf(ArvatoRssDeliveryCustomerTransfer::class, $result->getDeliveryCustomer());
         $this->assertInstanceOf(ArvatoRssOrderTransfer::class, $result->getOrder());
-        $this->assertEquals($quote->getBillingSameAsShipping(), (bool) $result->getDeliveryCustomer());
+        $this->assertNotEquals($quote->getBillingSameAsShipping(), (bool) $result->getDeliveryCustomer());
     }
 
     /**
