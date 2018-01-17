@@ -29,8 +29,6 @@ class RiskCheckResponseConverterTest extends Test
         $actual = $converter->convert($response);
 
         $this->assertEquals($expected, $actual);
-
-        $this->testDeliveryPresents($converter);
     }
 
     /**
@@ -148,60 +146,5 @@ class RiskCheckResponseConverterTest extends Test
             ->setZipCode($response->ZipCode)
             ->setCity($response->City)
             ->setCountry($response->Country);
-    }
-
-    /**
-     * @param RiskCheckResponseConverter $converter
-     */
-    protected function testDeliveryPresents(RiskCheckResponseConverter $converter)
-    {
-        $result = $converter->convert($this->createResponseWithDelivery());
-
-        $this->assertInstanceOf(
-            ArvatoRssAddressValidationResponseTransfer::class,
-            $result->getDeliveryAddressValidation()
-        );
-
-        $result = $converter->convert($this->createResponseWithBilling());
-        $this->assertEmpty($result->getDeliveryAddressValidation());
-    }
-
-    /**
-     * @return stdClass
-     */
-    protected function createResponseWithDelivery()
-    {
-        $response = $this->createResponseWithBilling();
-        $response->Details->DeliveryCustomerResult = new stdClass();
-        $response->Details->DeliveryCustomerResult->ServiceResults = new stdClass();
-        $response->Details->DeliveryCustomerResult->ServiceResults->AddressValidationResponse = new stdClass();
-        $response->Details->DeliveryCustomerResult->ServiceResults->AddressValidationResponse->ReturnCode = 'ReturnCode';
-        $response->Details->DeliveryCustomerResult->ServiceResults->AddressValidationResponse->Street = 'Street';
-        $response->Details->DeliveryCustomerResult->ServiceResults->AddressValidationResponse->StreetNumber = 'StreetNumber';
-        $response->Details->DeliveryCustomerResult->ServiceResults->AddressValidationResponse->ZipCode = 'ZipCode';
-        $response->Details->DeliveryCustomerResult->ServiceResults->AddressValidationResponse->City = 'City';
-        $response->Details->DeliveryCustomerResult->ServiceResults->AddressValidationResponse->Country = 'Country';
-
-        return $response;
-    }
-
-    /**
-     * @return stdClass
-     */
-    protected function createResponseWithBilling()
-    {
-        $response = $this->createResponse();
-        $response->Details = new stdClass();
-        $response->Details->BillingCustomerResult = new stdClass();
-        $response->Details->BillingCustomerResult->ServiceResults = new stdClass();
-        $response->Details->BillingCustomerResult->ServiceResults->AddressValidationResponse = new stdClass();
-        $response->Details->BillingCustomerResult->ServiceResults->AddressValidationResponse->ReturnCode = 'ReturnCode';
-        $response->Details->BillingCustomerResult->ServiceResults->AddressValidationResponse->Street = 'Street';
-        $response->Details->BillingCustomerResult->ServiceResults->AddressValidationResponse->StreetNumber = 'StreetNumber';
-        $response->Details->BillingCustomerResult->ServiceResults->AddressValidationResponse->ZipCode = 'ZipCode';
-        $response->Details->BillingCustomerResult->ServiceResults->AddressValidationResponse->City = 'City';
-        $response->Details->BillingCustomerResult->ServiceResults->AddressValidationResponse->Country = 'Country';
-
-        return $response;
     }
 }
