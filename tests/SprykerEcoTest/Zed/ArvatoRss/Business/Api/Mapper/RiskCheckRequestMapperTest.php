@@ -12,6 +12,7 @@ use Generated\Shared\Transfer\ArvatoRssDeliveryCustomerTransfer;
 use Generated\Shared\Transfer\ArvatoRssIdentificationRequestTransfer;
 use Generated\Shared\Transfer\ArvatoRssOrderTransfer;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
+use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\BillingCustomerMapperInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\DeliveryCustomerMapperInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\IdentificationMapperInterface;
@@ -22,9 +23,13 @@ use SprykerEcoTest\Zed\ArvatoRss\Business\AbstractBusinessTest;
 class RiskCheckRequestMapperTest extends AbstractBusinessTest
 {
     /**
+     * @param bool $billingSameAsShipping
+     *
+     * @dataProvider provideQuoteData
+     *
      * @return void
      */
-    public function testMapQuoteToRequestTranfer()
+    public function testMapQuoteToRequestTranfer($billingSameAsShipping)
     {
         $mapper = new RiskCheckRequestMapper(
             $this->createIdentificationMapperMock(),
@@ -32,22 +37,25 @@ class RiskCheckRequestMapperTest extends AbstractBusinessTest
             $this->createDeliveryCustomerMapperMock(),
             $this->createOrderMapperMock()
         );
-        $result = $mapper->mapQuoteToRequestTranfer($this->quote);
-        $this->testResult($result);
+        $quote = $this->quote;
+        $quote->setBillingSameAsShipping($billingSameAsShipping);
+        $result = $mapper->mapQuoteToRequestTranfer($quote);
+        $this->testResult($quote, $result);
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ArvatoRssStoreOrderRequestTransfer $result
+     * @param QuoteTransfer $quote
+     * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $result
      *
      * @return void
      */
-    protected function testResult($result)
+    protected function testResult(QuoteTransfer $quote, $result)
     {
         $this->assertInstanceOf(ArvatoRssRiskCheckRequestTransfer::class, $result);
         $this->assertInstanceOf(ArvatoRssIdentificationRequestTransfer::class, $result->getIdentification());
         $this->assertInstanceOf(ArvatoRssBillingCustomerTransfer::class, $result->getBillingCustomer());
-        $this->assertInstanceOf(ArvatoRssDeliveryCustomerTransfer::class, $result->getDeliveryCustomer());
         $this->assertInstanceOf(ArvatoRssOrderTransfer::class, $result->getOrder());
+        $this->assertNotEquals($quote->getBillingSameAsShipping(), $result->getDeliveryCustomer() !== null);
     }
 
     /**
@@ -108,5 +116,16 @@ class RiskCheckRequestMapperTest extends AbstractBusinessTest
             ->willReturn(new ArvatoRssOrderTransfer());
 
         return $moneyFacadeMock;
+    }
+
+    /**
+     * @return array
+     */
+    public static function provideQuoteData()
+    {
+        return [
+            'quote: billing not equal delivery' => [false],
+            'quote: billing equal delivery' => [true],
+        ];
     }
 }

@@ -30,7 +30,9 @@ class RiskCheckResponseConverter implements RiskCheckResponseConverterInterface
 
         if (isset($response->Details)) {
             $this->processBillingAddressResponse($responseTransfer, $response->Details->BillingCustomerResult);
-            $this->processDeliveryAddressResponse($responseTransfer, $response->Details->DeliveryCustomerResult);
+            if (isset($response->Details->DeliveryCustomerResult)) {
+                $this->processDeliveryAddressResponse($responseTransfer, $response->Details->DeliveryCustomerResult);
+            }
         }
 
         return $responseTransfer;

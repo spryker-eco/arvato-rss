@@ -148,9 +148,15 @@ class RiskCheckRequestConverterTest extends Test
             )
             ->withOrder()
             ->build();
+        $requestWithoutAddress = (new ArvatoRssRiskCheckRequestBuilder())
+            ->withIdentification()
+            ->withBillingCustomer((new ArvatoRssBillingCustomerBuilder())->withAddress())
+            ->withOrder()
+            ->build();
         return [
             'with additional address' => [$requestWithAdditionalAddress],
-            'without additional address' => [$requestWithoutAdditionalAddress]
+            'without additional address' => [$requestWithoutAdditionalAddress],
+            'without delivery address' => [$requestWithoutAddress],
         ];
     }
 }
