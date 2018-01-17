@@ -62,6 +62,7 @@ class DeliveryCustomerMapper implements DeliveryCustomerMapperInterface
         $customerAddressTransfer->setStreet($addressTransfer->getAddress1());
         $customerAddressTransfer->setStreetNumber($addressTransfer->getAddress2());
         $customerAddressTransfer->setZipCode($addressTransfer->getZipCode());
+        $customerAddressTransfer->setStreetNumberAdditional($addressTransfer->getAddress3());
 
         return $customerAddressTransfer;
     }

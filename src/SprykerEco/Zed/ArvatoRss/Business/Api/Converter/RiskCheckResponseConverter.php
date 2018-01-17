@@ -61,6 +61,10 @@ class RiskCheckResponseConverter implements RiskCheckResponseConverterInterface
         $addressValidationResponse->setCity($response->City);
         $addressValidationResponse->setCountry($response->Country);
 
+        if (isset($response->StreetNumberAdditional)) {
+            $addressValidationResponse->setStreetNumberAdditional($response->StreetNumberAdditional);
+        }
+
         return $addressValidationResponse;
     }
 }

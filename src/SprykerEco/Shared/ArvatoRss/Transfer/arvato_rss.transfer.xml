@@ -34,6 +34,7 @@
         <property name="zipCode" type="string" />
         <property name="city" type="string" />
         <property name="country" type="string" />
+        <property name="streetNumberAdditional" type="string" />
     </transfer>
 
     <transfer name="ArvatoRssOrder">
@@ -80,6 +81,7 @@
         <property name="zipCode" type="string" />
         <property name="city" type="string" />
         <property name="country" type="string" />
+        <property name="streetNumberAdditional" type="string" />
     </transfer>
 
     <transfer name="ArvatoRssStoreOrderRequest">
