@@ -9,6 +9,7 @@ namespace SprykerEcoTest\Zed\ArvatoRss\Business\Api\Converter;
 
 use Codeception\TestCase\Test;
 use Generated\Shared\DataBuilder\ArvatoRssBillingCustomerBuilder;
+use Generated\Shared\DataBuilder\ArvatoRssCustomerAddressBuilder;
 use Generated\Shared\DataBuilder\ArvatoRssDeliveryCustomerBuilder;
 use Generated\Shared\DataBuilder\ArvatoRssRiskCheckRequestBuilder;
 use Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer;
@@ -18,21 +19,15 @@ use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverter;
 class RiskCheckRequestConverterTest extends Test
 {
     /**
+     * @param ArvatoRssRiskCheckRequestTransfer $requestTransfer
+     *
+     * @dataProvider provideRequestTransferData
+     *
      * @return void
      */
-    public function testConvert()
+    public function testConvert(ArvatoRssRiskCheckRequestTransfer $requestTransfer)
     {
         $converter = new RiskCheckRequestConverter();
-        $requestTransfer = (new ArvatoRssRiskCheckRequestBuilder())
-            ->withIdentification()
-            ->withBillingCustomer(
-                (new ArvatoRssBillingCustomerBuilder())->withAddress()
-            )
-            ->withDeliveryCustomer(
-                (new ArvatoRssDeliveryCustomerBuilder())->withAddress()
-            )
-            ->withOrder()
-            ->build();
         $result = $converter->convert($requestTransfer);
         $this->testResult($result, $requestTransfer);
     }
@@ -68,6 +63,10 @@ class RiskCheckRequestConverterTest extends Test
         $this->assertEquals(
             $billingCustomer[ArvatoRssRequestApiConfig::ARVATORSS_API_ADDRESS][ArvatoRssRequestApiConfig::ARVATORSS_API_ZIPCODE],
             $requestTranfer->getBillingCustomer()->getAddress()->getZipCode()
+        );
+        $this->assertEquals(
+            $billingCustomer[ArvatoRssRequestApiConfig::ARVATORSS_API_ADDRESS][ArvatoRssRequestApiConfig::ARVATORSS_API_STREET_NUMBER_ADDITIONAL],
+            $requestTranfer->getBillingCustomer()->getAddress()->getStreetNumberAdditional()
         );
 
         $this->assertEquals(
@@ -122,5 +121,42 @@ class RiskCheckRequestConverterTest extends Test
                 $requestTranfer->getOrder()->getItems()[$key]->getUnitCount()
             );
         }
+    }
+
+    /**
+     * @return array
+     */
+    public static function provideRequestTransferData()
+    {
+        $requestWithAdditionalAddress = (new ArvatoRssRiskCheckRequestBuilder())
+            ->withIdentification()
+            ->withBillingCustomer((new ArvatoRssBillingCustomerBuilder())->withAddress())
+            ->withDeliveryCustomer((new ArvatoRssDeliveryCustomerBuilder())->withAddress())
+            ->withOrder()
+            ->build();
+        $requestWithoutAdditionalAddress = (new ArvatoRssRiskCheckRequestBuilder())
+            ->withIdentification()
+            ->withBillingCustomer(
+                (new ArvatoRssBillingCustomerBuilder())->withAddress(
+                    (new ArvatoRssCustomerAddressBuilder())->except(['streetNumberAdditional'])
+                )
+            )
+            ->withDeliveryCustomer(
+                (new ArvatoRssDeliveryCustomerBuilder())->withAddress(
+                    (new ArvatoRssCustomerAddressBuilder())->except(['streetNumberAdditional'])
+                )
+            )
+            ->withOrder()
+            ->build();
+        $requestWithoutAddress = (new ArvatoRssRiskCheckRequestBuilder())
+            ->withIdentification()
+            ->withBillingCustomer((new ArvatoRssBillingCustomerBuilder())->withAddress())
+            ->withOrder()
+            ->build();
+        return [
+            'with additional address' => [$requestWithAdditionalAddress],
+            'without additional address' => [$requestWithoutAdditionalAddress],
+            'without delivery address' => [$requestWithoutAddress],
+        ];
     }
 }

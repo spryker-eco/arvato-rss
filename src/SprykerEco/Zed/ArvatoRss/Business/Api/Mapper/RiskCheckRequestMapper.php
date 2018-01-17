@@ -70,17 +70,22 @@ class RiskCheckRequestMapper implements RiskCheckRequestMapperInterface
         $billingCustomerTransfer = $this->billingCustomerMapper->map(
             $this->createBillingCustomerMapperTransfer($quoteTransfer)
         );
-        $deliveryCustomerTransfer = $this->deliveryCustomerMapper->map(
-            $this->createDeliveryCustomerMapperTransfer($quoteTransfer)
-        );
+
         $orderTransfer = $this->orderMapper->map(
             $this->createOrderMaperTransfer($quoteTransfer)
         );
 
         $requestTransfer->setIdentification($identificationRequestTransfer);
         $requestTransfer->setBillingCustomer($billingCustomerTransfer);
-        $requestTransfer->setDeliveryCustomer($deliveryCustomerTransfer);
         $requestTransfer->setOrder($orderTransfer);
+
+        if (!$quoteTransfer->getBillingSameAsShipping()) {
+            $deliveryCustomerTransfer = $this->deliveryCustomerMapper->map(
+                $this->createDeliveryCustomerMapperTransfer($quoteTransfer)
+            );
+
+            $requestTransfer->setDeliveryCustomer($deliveryCustomerTransfer);
+        }
 
         return $requestTransfer;
     }
