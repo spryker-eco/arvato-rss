@@ -5,6 +5,8 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/spryker-eco/arvato-rss/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/spryker-eco/arvato-rss/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/spryker-eco/arvato-rss/badges/build.png?b=master)](https://scrutinizer-ci.com/g/spryker-eco/arvato-rss/build-status/master)
 
+Arvato risk security check module.
+
 ## Installation
 
 ```
