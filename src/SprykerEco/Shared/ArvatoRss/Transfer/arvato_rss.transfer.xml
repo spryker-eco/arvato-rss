@@ -131,4 +131,14 @@
     <transfer name="Order">
         <property name="arvatoRssCommunicationToken" type="string" />
     </transfer>
+
+    <transfer name="ArvatoRssApiCallLog">
+        <property name="idPaymentArvatoRssApiCallLog" type="int" />
+        <property name="orderReference" type="string" />
+        <property name="callType" type="string" />
+        <property name="resultCode" type="string" />
+        <property name="requestPayload" type="string" />
+        <property name="responsePayload" type="string" />
+    </transfer>
+
 </transfers>

@@ -7,7 +7,7 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Communication\Plugin\Oms\Condition;
 
-use Orm\Zed\ArvatoRss\Persistence\SpyArvatoRssApiCallLog;
+use Generated\Shared\Transfer\ArvatoRssApiCallLogTransfer;
 use Orm\Zed\Sales\Persistence\SpySalesOrderItem;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 use Spryker\Zed\Oms\Dependency\Plugin\Condition\ConditionInterface;
@@ -16,6 +16,7 @@ use SprykerEco\Shared\ArvatoRss\ArvatoRssApiConfig;
 /**
  * @method \SprykerEco\Zed\ArvatoRss\Business\ArvatorssFacadeInterface getFacade()
  * @method \SprykerEco\Zed\ArvatoRss\Persistence\ArvatoRssQueryContainerInterface getQueryContainer()
+ * @method \SprykerEco\Zed\ArvatoRss\Persistence\ArvatoRssRepositoryInterface getRepository()
  * @method \SprykerEco\Zed\ArvatoRss\Communication\ArvatoRssCommunicationFactory getFactory()
  */
 class IsStoreOrderSuccessfulPlugin extends AbstractPlugin implements ConditionInterface
@@ -43,36 +44,36 @@ class IsStoreOrderSuccessfulPlugin extends AbstractPlugin implements ConditionIn
      */
     protected function isStoreOrderSuccessful($orderReference)
     {
-        $storeOrderApiCallLog = $this->getApiCallLogEntry($orderReference);
-        if ($storeOrderApiCallLog === null) {
+        $storeOrderApiCallLogTransfer = $this->getApiCallLogEntry($orderReference);
+
+        if ($storeOrderApiCallLogTransfer === null) {
             return false;
         }
 
-        return $this->isTransactionSuccessfull($storeOrderApiCallLog);
+        return $this->isTransactionSuccessful($storeOrderApiCallLogTransfer);
     }
 
     /**
      * @param string $orderReference
      *
-     * @return \Orm\Zed\ArvatoRss\Persistence\SpyArvatoRssApiCallLog
+     * @return \Generated\Shared\Transfer\ArvatoRssApiCallLogTransfer
      */
-    protected function getApiCallLogEntry($orderReference)
+    protected function getApiCallLogEntry(string $orderReference): ArvatoRssApiCallLogTransfer
     {
-        return $this->getQueryContainer()
-            ->queryApiLogByOrderReferenceAndType(
+        return $this->getRepository()
+            ->findApiLogByOrderReferenceAndType(
                 $orderReference,
                 ArvatoRssApiConfig::TRANSACTION_TYPE_STORE_ORDER
-            )
-            ->findOne();
+            );
     }
 
     /**
-     * @param \Orm\Zed\ArvatoRss\Persistence\Base\SpyArvatoRssApiCallLog $apiCallLog
+     * @param \Generated\Shared\Transfer\ArvatoRssApiCallLogTransfer $arvatoRssApiCallLogTransfer
      *
      * @return bool
      */
-    protected function isTransactionSuccessfull(SpyArvatoRssApiCallLog $apiCallLog)
+    protected function isTransactionSuccessful(ArvatoRssApiCallLogTransfer $arvatoRssApiCallLogTransfer)
     {
-        return $apiCallLog->getResultCode() == ArvatoRssApiConfig::RESULT_CODE_SUCCESS;
+        return $arvatoRssApiCallLogTransfer->getResultCode() == ArvatoRssApiConfig::RESULT_CODE_SUCCESS;
     }
 }
