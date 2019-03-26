@@ -29,7 +29,7 @@ class IsStoreOrderSuccessfulPlugin extends AbstractPlugin implements ConditionIn
      *
      * @return bool
      */
-    public function check(SpySalesOrderItem $orderItem)
+    public function check(SpySalesOrderItem $orderItem): bool
     {
         return $this->isStoreOrderSuccessful(
             $orderItem
@@ -43,11 +43,11 @@ class IsStoreOrderSuccessfulPlugin extends AbstractPlugin implements ConditionIn
      *
      * @return bool
      */
-    protected function isStoreOrderSuccessful($orderReference)
+    protected function isStoreOrderSuccessful(string $orderReference): bool
     {
         $storeOrderApiCallLogTransfer = $this->getApiCallLogEntry($orderReference);
 
-        if ($storeOrderApiCallLogTransfer->getIdPaymentArvatoRssApiCallLog() === null) {
+        if ($storeOrderApiCallLogTransfer === null) {
             return false;
         }
 
@@ -57,9 +57,9 @@ class IsStoreOrderSuccessfulPlugin extends AbstractPlugin implements ConditionIn
     /**
      * @param string $orderReference
      *
-     * @return \Generated\Shared\Transfer\ArvatoRssApiCallLogTransfer
+     * @return \Generated\Shared\Transfer\ArvatoRssApiCallLogTransfer|null
      */
-    protected function getApiCallLogEntry(string $orderReference): ArvatoRssApiCallLogTransfer
+    protected function getApiCallLogEntry(string $orderReference): ?ArvatoRssApiCallLogTransfer
     {
         return $this->getRepository()
             ->findApiLogByOrderReferenceAndType(

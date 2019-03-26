@@ -42,7 +42,7 @@ env:
     - APPLICATION_STORE=DE
     - MODULE_DIR=module
     - SHOP_DIR=current
-    - MODULE_NAME=easycredit
+    - MODULE_NAME=arvato-rss
 
 cache:
   directories:

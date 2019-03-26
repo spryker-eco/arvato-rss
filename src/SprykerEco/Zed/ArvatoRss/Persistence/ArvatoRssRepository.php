@@ -18,9 +18,9 @@ class ArvatoRssRepository implements ArvatoRssRepositoryInterface
      * @param string $orderReference
      * @param string $type
      *
-     * @return \Generated\Shared\Transfer\ArvatoRssApiCallLogTransfer
+     * @return \Generated\Shared\Transfer\ArvatoRssApiCallLogTransfer|null
      */
-    public function findApiLogByOrderReferenceAndType(string $orderReference, string $type): ArvatoRssApiCallLogTransfer
+    public function findApiLogByOrderReferenceAndType(string $orderReference, string $type): ?ArvatoRssApiCallLogTransfer
     {
         $arvatoRssApiCallLog = $this->getFactory()->createArvatoRssApiCallLogQuery()
             ->filterByCallType($type)
@@ -28,7 +28,7 @@ class ArvatoRssRepository implements ArvatoRssRepositoryInterface
             ->findOne();
 
         if ($arvatoRssApiCallLog === null) {
-            return new ArvatoRssApiCallLogTransfer();
+            return null;
         }
 
         return $this->getFactory()
