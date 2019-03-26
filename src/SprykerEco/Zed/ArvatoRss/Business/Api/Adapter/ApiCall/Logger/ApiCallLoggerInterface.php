@@ -1,7 +1,7 @@
 <?php
 
 /**
- * MIT License
+ * Copyright © 2016-present Spryker Systems GmbH. All rights reserved.
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
@@ -15,8 +15,8 @@ interface ApiCallLoggerInterface
      * @param string $orderReference
      * @param string $type
      * @param string $result
-     * @param string $requestPayload
-     * @param string $responsePayload
+     * @param array $requestPayload
+     * @param \stdClass $responsePayload
      *
      * @return void
      */

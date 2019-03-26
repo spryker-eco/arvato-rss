@@ -1,7 +1,7 @@
 <?php
 
 /**
- * MIT License
+ * Copyright © 2016-present Spryker Systems GmbH. All rights reserved.
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
@@ -12,8 +12,8 @@ use SprykerEco\Shared\ArvatoRss\ArvatoRssCountryConfig;
 
 class Iso3166ConverterService extends AbstractService implements Iso3166ConverterServiceInterface
 {
-    const ISO2_KEY = 'alpha2';
-    const ISO3166_KEY = 'numeric';
+    public const ISO2_KEY = 'alpha2';
+    public const ISO3166_KEY = 'numeric';
 
     /**
      * {@inheritdoc}

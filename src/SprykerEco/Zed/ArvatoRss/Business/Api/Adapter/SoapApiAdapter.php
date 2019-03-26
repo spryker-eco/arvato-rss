@@ -1,7 +1,7 @@
 <?php
 
 /**
- * MIT License
+ * Copyright © 2016-present Spryker Systems GmbH. All rights reserved.
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
@@ -16,7 +16,7 @@ use SprykerEco\Zed\ArvatoRss\Business\Api\Exception\ArvatoRssStoreOrderApiExcept
 
 class SoapApiAdapter implements ApiAdapterInterface
 {
-    const WSDL_PATH = __DIR__ . "/../Etc/risk-solution-services.v2.1.wsdl";
+    public const WSDL_PATH = __DIR__ . "/../Etc/risk-solution-services.v2.1.wsdl";
 
     /**
      * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\AdapterFactoryInterface

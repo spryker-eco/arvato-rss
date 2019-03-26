@@ -1,7 +1,7 @@
 <?php
 
 /**
- * MIT License
+ * Copyright © 2016-present Spryker Systems GmbH. All rights reserved.
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
@@ -19,7 +19,7 @@ class OrderMapper implements OrderMapperInterface
     /**
      * @const int PRODUCT_GROUP_ID
      */
-    const PRODUCT_GROUP_ID = 1;
+    public const PRODUCT_GROUP_ID = 1;
 
     /**
      * @var \SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface

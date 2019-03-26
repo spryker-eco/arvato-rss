@@ -1,7 +1,7 @@
 <?php
 
 /**
- * MIT License
+ * Copyright © 2016-present Spryker Systems GmbH. All rights reserved.
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
@@ -12,7 +12,7 @@ use Spryker\Client\Kernel\Container;
 
 class ArvatoRssDependencyProvider extends AbstractDependencyProvider
 {
-    const CLIENT_ZED_REQUEST = 'CLIENT_ZED_REQUEST';
+    public const CLIENT_ZED_REQUEST = 'CLIENT_ZED_REQUEST';
 
     /**
      * @param \Spryker\Client\Kernel\Container $container

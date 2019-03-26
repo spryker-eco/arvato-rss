@@ -1,7 +1,7 @@
 <?php
 
 /**
- * MIT License
+ * Copyright © 2016-present Spryker Systems GmbH. All rights reserved.
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
@@ -19,9 +19,9 @@ class ArvatoRssStub extends ZedRequestStub implements ArvatoRssStubInterface
      */
     public function performRiskCheck(QuoteTransfer $quoteTransfer)
     {
-        return $this->zedStub->call(
-            '/arvato-rss/gateway/perform-risk-check',
-            $quoteTransfer
-        );
+        /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
+        $quoteTransfer = $this->zedStub->call('/arvato-rss/gateway/perform-risk-check', $quoteTransfer);
+
+        return $quoteTransfer;
     }
 }

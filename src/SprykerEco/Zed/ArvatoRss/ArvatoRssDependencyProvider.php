@@ -1,7 +1,7 @@
 <?php
 
 /**
- * MIT License
+ * Copyright © 2016-present Spryker Systems GmbH. All rights reserved.
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
@@ -15,9 +15,9 @@ use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToStoreBridge;
 
 class ArvatoRssDependencyProvider extends AbstractBundleDependencyProvider
 {
-    const FACADE_MONEY = 'FACADE_MONEY';
-    const FACADE_STORE = 'FACADE_STORE';
-    const FACADE_SALES = 'FACADE_SALES';
+    public const FACADE_MONEY = 'FACADE_MONEY';
+    public const FACADE_STORE = 'FACADE_STORE';
+    public const FACADE_SALES = 'FACADE_SALES';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container

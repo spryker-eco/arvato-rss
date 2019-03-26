@@ -1,7 +1,7 @@
 <?php
 
 /**
- * MIT License
+ * Copyright © 2016-present Spryker Systems GmbH. All rights reserved.
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
@@ -14,6 +14,8 @@ use SprykerEco\Zed\ArvatoRss\Persistence\Mapper\ArvatoRssPersistenceMapperInterf
 
 /**
  * @method \SprykerEco\Zed\ArvatoRss\ArvatoRssConfig getConfig()
+ * @method \SprykerEco\Zed\ArvatoRss\Persistence\ArvatoRssQueryContainerInterface getQueryContainer()
+ * @method \SprykerEco\Zed\ArvatoRss\Persistence\ArvatoRssRepositoryInterface getRepository()
  */
 class ArvatoRssPersistenceFactory extends AbstractPersistenceFactory
 {
