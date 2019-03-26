@@ -15,7 +15,7 @@ interface ArvatoRssRepositoryInterface
      * @param string $orderReference
      * @param string $type
      *
-     * @return \Generated\Shared\Transfer\ArvatoRssApiCallLogTransfer|null
+     * @return \Generated\Shared\Transfer\ArvatoRssApiCallLogTransfer
      */
-    public function findApiLogByOrderReferenceAndType(string $orderReference, string $type): ?ArvatoRssApiCallLogTransfer;
+    public function findApiLogByOrderReferenceAndType(string $orderReference, string $type): ArvatoRssApiCallLogTransfer;
 }
