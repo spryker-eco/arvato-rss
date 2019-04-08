@@ -2,35 +2,35 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEco\Zed\ArvatoRss\Business\Api;
 
 interface ArvatoRssRequestApiConfig
 {
-    const ARVATORSS_API_COUNTRY = 'Country';
-    const ARVATORSS_API_CITY = 'City';
-    const ARVATORSS_API_STREET = 'Street';
-    const ARVATORSS_API_STREET_NUMBER = 'StreetNumber';
-    const ARVATORSS_API_ZIPCODE = 'ZipCode';
-    const ARVATORSS_API_BILLINGCUSTOMER = 'BillingCustomer';
-    const ARVATORSS_API_DELIVERYCUSTOMER = 'DeliveryCustomer';
-    const ARVATORSS_API_FIRSTNAME = 'FirstName';
-    const ARVATORSS_API_LASTNAME = 'LastName';
-    const ARVATORSS_API_ADDRESS = 'Address';
-    const ARVATORSS_API_ORDER = 'Order';
-    const ARVATORSS_API_REGISTEREDORDER = 'RegisteredOrder';
-    const ARVATORSS_API_ORDER_NUMBER = 'OrderNumber';
-    const ARVATORSS_API_DEBITOR_NUMBER = 'DebitorNumber';
-    const ARVATORSS_API_PAYMENT_TYPE = 'PaymentType';
-    const ARVATORSS_API_CURRENCY = 'Currency';
-    const ARVATORSS_API_GROSSTOTALBILL = 'GrossTotalBill';
-    const ARVATORSS_API_TOTALORDERVALUE = 'TotalOrderValue';
-    const ARVATORSS_API_ITEM = 'Item';
-    const ARVATORSS_API_PRODUCTNUMBER = 'ProductNumber';
-    const ARVATORSS_API_PRODUCTGROUPID = 'ProductGroupId';
-    const ARVATORSS_API_UNITPRICE = 'UnitPrice';
-    const ARVATORSS_API_UNITCOUNT = 'UnitCount';
-    const ARVATORSS_API_STREET_NUMBER_ADDITIONAL = 'StreetNumberAdditional';
+    public const ARVATORSS_API_COUNTRY = 'Country';
+    public const ARVATORSS_API_CITY = 'City';
+    public const ARVATORSS_API_STREET = 'Street';
+    public const ARVATORSS_API_STREET_NUMBER = 'StreetNumber';
+    public const ARVATORSS_API_ZIPCODE = 'ZipCode';
+    public const ARVATORSS_API_BILLINGCUSTOMER = 'BillingCustomer';
+    public const ARVATORSS_API_DELIVERYCUSTOMER = 'DeliveryCustomer';
+    public const ARVATORSS_API_FIRSTNAME = 'FirstName';
+    public const ARVATORSS_API_LASTNAME = 'LastName';
+    public const ARVATORSS_API_ADDRESS = 'Address';
+    public const ARVATORSS_API_ORDER = 'Order';
+    public const ARVATORSS_API_REGISTEREDORDER = 'RegisteredOrder';
+    public const ARVATORSS_API_ORDER_NUMBER = 'OrderNumber';
+    public const ARVATORSS_API_DEBITOR_NUMBER = 'DebitorNumber';
+    public const ARVATORSS_API_PAYMENT_TYPE = 'PaymentType';
+    public const ARVATORSS_API_CURRENCY = 'Currency';
+    public const ARVATORSS_API_GROSSTOTALBILL = 'GrossTotalBill';
+    public const ARVATORSS_API_TOTALORDERVALUE = 'TotalOrderValue';
+    public const ARVATORSS_API_ITEM = 'Item';
+    public const ARVATORSS_API_PRODUCTNUMBER = 'ProductNumber';
+    public const ARVATORSS_API_PRODUCTGROUPID = 'ProductGroupId';
+    public const ARVATORSS_API_UNITPRICE = 'UnitPrice';
+    public const ARVATORSS_API_UNITCOUNT = 'UnitCount';
+    public const ARVATORSS_API_STREET_NUMBER_ADDITIONAL = 'StreetNumberAdditional';
 }

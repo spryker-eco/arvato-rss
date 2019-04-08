@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEco\Client\ArvatoRss\Zed;
@@ -19,9 +19,9 @@ class ArvatoRssStub extends ZedRequestStub implements ArvatoRssStubInterface
      */
     public function performRiskCheck(QuoteTransfer $quoteTransfer)
     {
-        return $this->zedStub->call(
-            '/arvato-rss/gateway/perform-risk-check',
-            $quoteTransfer
-        );
+        /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
+        $quoteTransfer = $this->zedStub->call('/arvato-rss/gateway/perform-risk-check', $quoteTransfer);
+
+        return $quoteTransfer;
     }
 }

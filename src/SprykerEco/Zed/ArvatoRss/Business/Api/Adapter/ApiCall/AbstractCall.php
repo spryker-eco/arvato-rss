@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall;
@@ -21,12 +21,12 @@ abstract class AbstractCall implements ApiCallInterface
     /**
      * @const string
      */
-    const WSDL_PATH = __DIR__ . "/../../Etc/risk-solution-services.v2.1.wsdl";
+    public const WSDL_PATH = __DIR__ . "/../../Etc/risk-solution-services.v2.1.wsdl";
 
     /**
      * @const string
      */
-    const CALL_TYPE = 'UNKNOWN';
+    public const CALL_TYPE = 'UNKNOWN';
 
     /**
      * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RequestHeaderConverterInterface
@@ -165,8 +165,8 @@ abstract class AbstractCall implements ApiCallInterface
     {
         return isset(
             $params[ArvatoRssRequestApiConfig::ARVATORSS_API_ORDER][ArvatoRssRequestApiConfig::ARVATORSS_API_ORDER_NUMBER]
-        )?
-            $params[ArvatoRssRequestApiConfig::ARVATORSS_API_ORDER][ArvatoRssRequestApiConfig::ARVATORSS_API_ORDER_NUMBER]:
+        ) ?
+            $params[ArvatoRssRequestApiConfig::ARVATORSS_API_ORDER][ArvatoRssRequestApiConfig::ARVATORSS_API_ORDER_NUMBER] :
             '';
     }
 

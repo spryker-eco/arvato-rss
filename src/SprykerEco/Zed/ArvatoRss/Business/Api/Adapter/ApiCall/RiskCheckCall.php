@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall;
@@ -16,7 +16,7 @@ class RiskCheckCall extends AbstractCall
     /**
      * @const string
      */
-    const CALL_TYPE = ArvatoRssApiConfig::TRANSACTION_TYPE_RISK_CHECK;
+    public const CALL_TYPE = ArvatoRssApiConfig::TRANSACTION_TYPE_RISK_CHECK;
 
     /**
      * @param \SoapClient $soapClient
