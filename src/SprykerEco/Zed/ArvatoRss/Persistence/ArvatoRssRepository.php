@@ -8,11 +8,12 @@
 namespace SprykerEco\Zed\ArvatoRss\Persistence;
 
 use Generated\Shared\Transfer\ArvatoRssApiCallLogTransfer;
+use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
 /**
  * @method \SprykerEco\Zed\ArvatoRss\Persistence\ArvatoRssPersistenceFactory getFactory()
  */
-class ArvatoRssRepository implements ArvatoRssRepositoryInterface
+class ArvatoRssRepository extends AbstractRepository implements ArvatoRssRepositoryInterface
 {
     /**
      * @param string $orderReference
