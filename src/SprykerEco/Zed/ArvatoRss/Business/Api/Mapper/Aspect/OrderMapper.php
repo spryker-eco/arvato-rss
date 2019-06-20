@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect;
@@ -19,7 +19,7 @@ class OrderMapper implements OrderMapperInterface
     /**
      * @const int PRODUCT_GROUP_ID
      */
-    const PRODUCT_GROUP_ID = 1;
+    public const PRODUCT_GROUP_ID = 1;
 
     /**
      * @var \SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface

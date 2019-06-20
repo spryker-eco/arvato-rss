@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEco\Service\ArvatoRss;
@@ -12,8 +12,8 @@ use SprykerEco\Shared\ArvatoRss\ArvatoRssCountryConfig;
 
 class Iso3166ConverterService extends AbstractService implements Iso3166ConverterServiceInterface
 {
-    const ISO2_KEY = 'alpha2';
-    const ISO3166_KEY = 'numeric';
+    public const ISO2_KEY = 'alpha2';
+    public const ISO3166_KEY = 'numeric';
 
     /**
      * {@inheritdoc}

@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEco\Shared\ArvatoRss;
@@ -12,7 +12,7 @@ interface ArvatoRssCountryConfig
     /**
      * @const array ISO3166 Temporary list of numeric country codes needed by arvato rss request.
      */
-    const ISO3166 = [
+    public const ISO3166 = [
         [
             'name' => 'Afghanistan',
             'alpha2' => 'AF',
