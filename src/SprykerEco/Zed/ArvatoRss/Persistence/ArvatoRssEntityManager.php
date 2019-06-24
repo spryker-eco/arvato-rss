@@ -17,7 +17,6 @@ use SprykerEco\Zed\ArvatoRss\Persistence\Mapper\ArvatoRssPersistenceMapper;
  */
 class ArvatoRssEntityManager extends AbstractEntityManager implements ArvatoRssEntityManagerInterface
 {
-
     /**
      * @param \Generated\Shared\Transfer\ArvatoRssApiCallLogTransfer $arvatoRssApiCallLogTransfer
      *

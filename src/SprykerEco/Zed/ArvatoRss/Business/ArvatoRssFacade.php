@@ -48,7 +48,7 @@ class ArvatoRssFacade extends AbstractFacade implements ArvatoRssFacadeInterface
     /**
      * {@inheritdoc}
      *
-     * @pai
+     * @api
      *
      * @param string $communicationToken
      * @param string $orderReference
