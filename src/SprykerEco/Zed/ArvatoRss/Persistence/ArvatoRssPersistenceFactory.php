@@ -10,7 +10,6 @@ namespace SprykerEco\Zed\ArvatoRss\Persistence;
 use Orm\Zed\ArvatoRss\Persistence\SpyArvatoRssApiCallLogQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 use SprykerEco\Zed\ArvatoRss\Persistence\Mapper\ArvatoRssPersistenceMapper;
-use SprykerEco\Zed\ArvatoRss\Persistence\Mapper\ArvatoRssPersistenceMapperInterface;
 
 /**
  * @method \SprykerEco\Zed\ArvatoRss\ArvatoRssConfig getConfig()
@@ -28,9 +27,9 @@ class ArvatoRssPersistenceFactory extends AbstractPersistenceFactory
     }
 
     /**
-     * @return \SprykerEco\Zed\ArvatoRss\Persistence\Mapper\ArvatoRssPersistenceMapperInterface
+     * @return \SprykerEco\Zed\ArvatoRss\Persistence\Mapper\ArvatoRssPersistenceMapper
      */
-    public function createArvatoRssPersistenceMapper(): ArvatoRssPersistenceMapperInterface
+    public function createArvatoRssPersistenceMapper(): ArvatoRssPersistenceMapper
     {
         return new ArvatoRssPersistenceMapper();
     }

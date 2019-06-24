@@ -13,6 +13,9 @@ use Generated\Shared\Transfer\QuoteTransfer;
 interface ArvatoRssFacadeInterface
 {
     /**
+     * Specification:
+     *  - Performs RiskCheck API call.
+     *
      * @api
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTrasnfer
@@ -22,6 +25,9 @@ interface ArvatoRssFacadeInterface
     public function performRiskCheck(QuoteTransfer $quoteTrasnfer);
 
     /**
+     * Specification:
+     *  - Performs StoreOrder API call.
+     *
      * @api
      *
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
@@ -29,4 +35,17 @@ interface ArvatoRssFacadeInterface
      * @return void
      */
     public function storeOrder(OrderTransfer $orderTransfer);
+
+    /**
+     * Specification:
+     *  - Updates API log row with order reference.
+     *
+     * @api
+     *
+     * @param string $communicationToken
+     * @param string $orderReference
+     *
+     * @return void
+     */
+    public function updateApiLog(string $communicationToken, string $orderReference): void;
 }

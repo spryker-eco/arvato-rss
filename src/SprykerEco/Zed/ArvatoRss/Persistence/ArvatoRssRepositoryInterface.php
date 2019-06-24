@@ -18,4 +18,12 @@ interface ArvatoRssRepositoryInterface
      * @return \Generated\Shared\Transfer\ArvatoRssApiCallLogTransfer|null
      */
     public function findApiLogByOrderReferenceAndType(string $orderReference, string $type): ?ArvatoRssApiCallLogTransfer;
+
+    /**
+     * @param string $communicationToken
+     * @param string $type
+     *
+     * @return \Generated\Shared\Transfer\ArvatoRssApiCallLogTransfer|null
+     */
+    public function findApiLogByCommunicationTokenAndType(string $communicationToken, string $type): ?ArvatoRssApiCallLogTransfer;
 }

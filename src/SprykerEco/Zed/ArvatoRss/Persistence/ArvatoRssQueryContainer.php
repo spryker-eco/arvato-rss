@@ -10,6 +10,8 @@ namespace SprykerEco\Zed\ArvatoRss\Persistence;
 use Spryker\Zed\Kernel\Persistence\AbstractQueryContainer;
 
 /**
+ * @deprecated Use \SprykerEco\Zed\ArvatoRss\Persistence\ArvatoRssRepositoryInterface instead.
+ *
  * @method \SprykerEco\Zed\ArvatoRss\Persistence\ArvatoRssPersistenceFactory getFactory()
  */
 class ArvatoRssQueryContainer extends AbstractQueryContainer implements ArvatoRssQueryContainerInterface

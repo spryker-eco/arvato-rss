@@ -17,6 +17,10 @@ use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverter;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\StoreOrderRequestConverter;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\StoreOrderResponseConverter;
 
+/**
+ * @method \SprykerEco\Zed\ArvatoRss\Persistence\ArvatoRssRepositoryInterface getRepository()
+ * @method \SprykerEco\Zed\ArvatoRss\Persistence\ArvatoRssEntityManagerInterface getEntityManager()()
+ */
 class AdapterFactory extends AbstractBusinessFactory implements AdapterFactoryInterface
 {
     /**
@@ -64,7 +68,10 @@ class AdapterFactory extends AbstractBusinessFactory implements AdapterFactoryIn
      */
     public function createApiCallLogger()
     {
-        return new ApiCallLogger();
+        return new ApiCallLogger(
+            $this->getRepository(),
+            $this->getEntityManager()
+        );
     }
 
     /**

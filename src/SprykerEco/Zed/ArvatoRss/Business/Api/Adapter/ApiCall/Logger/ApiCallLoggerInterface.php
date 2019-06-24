@@ -26,5 +26,13 @@ interface ApiCallLoggerInterface
         $result,
         array $requestPayload,
         stdClass $responsePayload
-    );
+    ): void;
+
+    /**
+     * @param string $communicationToken
+     * @param string $orderReference
+     *
+     * @return void
+     */
+    public function updateLogWithOrderReference(string $communicationToken, string $orderReference): void;
 }

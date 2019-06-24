@@ -18,6 +18,8 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
 class ArvatoRssFacade extends AbstractFacade implements ArvatoRssFacadeInterface
 {
     /**
+     * {@inheritdoc}
+     *
      * @api
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -30,6 +32,8 @@ class ArvatoRssFacade extends AbstractFacade implements ArvatoRssFacadeInterface
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @api
      *
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
@@ -39,5 +43,23 @@ class ArvatoRssFacade extends AbstractFacade implements ArvatoRssFacadeInterface
     public function storeOrder(OrderTransfer $orderTransfer)
     {
         $this->getFactory()->createStoreOrderHandler()->storeOrder($orderTransfer);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @pai
+     *
+     * @param string $communicationToken
+     * @param string $orderReference
+     *
+     * @return void
+     */
+    public function updateApiLog(string $communicationToken, string $orderReference): void
+    {
+        $this->getFactory()
+            ->createAdapterFactory()
+            ->createApiCallLogger()
+            ->updateLogWithOrderReference($communicationToken, $orderReference);
     }
 }

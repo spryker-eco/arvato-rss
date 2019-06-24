@@ -55,11 +55,12 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\StoreOrderRequestMapperInterface
      */
-    protected function createStoreOrderRequestMapper()
+    public function createStoreOrderRequestMapper()
     {
         return new StoreOrderRequestMapper(
             $this->createIdentificationMapper(),
             $this->createOrderMapper(),
+            $this->getRepository(),
             $this->getConfig()
         );
     }
@@ -67,7 +68,7 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapperInterface
      */
-    protected function createRiskCheckRequestMapper()
+    public function createRiskCheckRequestMapper()
     {
         return new RiskCheckRequestMapper(
             $this->createIdentificationMapper(),
@@ -80,7 +81,7 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\IdentificationMapperInterface
      */
-    protected function createIdentificationMapper()
+    public function createIdentificationMapper()
     {
         return new IdentificationMapper(
             $this->getConfig()
@@ -90,7 +91,7 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\BillingCustomerMapperInterface
      */
-    protected function createBillingCustomerMapper()
+    public function createBillingCustomerMapper()
     {
         return new BillingCustomerMapper(
             $this->createIso3166Converter()
@@ -100,7 +101,7 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\DeliveryCustomerMapperInterface
      */
-    protected function createDeliveryCustomerMapper()
+    public function createDeliveryCustomerMapper()
     {
         return new DeliveryCustomerMapper(
             $this->createIso3166Converter()
@@ -110,7 +111,7 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\OrderMapperInterface
      */
-    protected function createOrderMapper()
+    public function createOrderMapper()
     {
         return new OrderMapper(
             $this->getMoneyFacade(),
@@ -121,7 +122,7 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToStoreInterface
      */
-    protected function getStoreFacade()
+    public function getStoreFacade()
     {
         return $this->getProvidedDependency(ArvatoRssDependencyProvider::FACADE_STORE);
     }
@@ -129,7 +130,7 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckResponseMapperInterface
      */
-    protected function createRiskCheckResponseMapper()
+    public function createRiskCheckResponseMapper()
     {
         return new RiskCheckResponseMapper();
     }
@@ -137,7 +138,7 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiAdapterInterface
      */
-    protected function createSoapApiAdapter()
+    public function createSoapApiAdapter()
     {
         return new SoapApiAdapter(
             $this->createAdapterFactory()
@@ -147,7 +148,7 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface
      */
-    protected function getMoneyFacade()
+    public function getMoneyFacade()
     {
         return $this->getProvidedDependency(ArvatoRssDependencyProvider::FACADE_MONEY);
     }
@@ -155,7 +156,7 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Service\ArvatoRss\Iso3166ConverterServiceInterface
      */
-    protected function createIso3166Converter()
+    public function createIso3166Converter()
     {
         return new Iso3166ConverterService();
     }
@@ -163,7 +164,7 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\AdapterFactoryInterface
      */
-    protected function createAdapterFactory()
+    public function createAdapterFactory()
     {
         return new AdapterFactory();
     }
