@@ -16,7 +16,7 @@ class ArvatoRssBusinessFactoryMock extends ArvatoRssBusinessFactory
     /**
      * @return \SprykerEcoTest\Zed\ArvatoRss\Mock\Api\Adapter\SoapApiAdapterMock
      */
-    protected function createSoapApiAdapter()
+    public function createSoapApiAdapter()
     {
         return new SoapApiAdapterMock(
             $this->createAdapterFactory()
@@ -26,7 +26,7 @@ class ArvatoRssBusinessFactoryMock extends ArvatoRssBusinessFactory
     /**
      * @return \SprykerEcoTest\Zed\ArvatoRss\Mock\MoneyFacadeMock
      */
-    protected function getMoneyFacade()
+    public function getMoneyFacade()
     {
         return new MoneyFacadeMock();
     }
@@ -34,7 +34,7 @@ class ArvatoRssBusinessFactoryMock extends ArvatoRssBusinessFactory
     /**
      * @return \SprykerEcoTest\Zed\ArvatoRss\Mock\Api\Adapter\AdapterFactoryMock
      */
-    protected function createAdapterFactory()
+    public function createAdapterFactory()
     {
         return new AdapterFactoryMock();
     }

@@ -12,7 +12,6 @@ use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
 use SprykerEco\Zed\ArvatoRss\ArvatoRssConfig;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\IdentificationMapper;
 use SprykerEcoTest\Zed\ArvatoRss\Business\AbstractBusinessTest;
-use SprykerTest\Shared\Testify\Helper\ConfigHelper;
 
 class IdentificationMapperTest extends AbstractBusinessTest
 {
@@ -24,10 +23,8 @@ class IdentificationMapperTest extends AbstractBusinessTest
      */
     public function testMap()
     {
-        $this->getModule('\\' . ConfigHelper::class)
-            ->setConfig(ArvatoRssConstants::ARVATORSS_CLIENTID, static::CLIENT_ID);
-        $this->getModule('\\' . ConfigHelper::class)
-            ->setConfig(ArvatoRssConstants::ARVATORSS_AUTHORISATION, static::AUTHORIZATION);
+        $this->tester->setConfig(ArvatoRssConstants::ARVATORSS_CLIENTID, static::CLIENT_ID);
+        $this->tester->setConfig(ArvatoRssConstants::ARVATORSS_AUTHORISATION, static::AUTHORIZATION);
         $mapper = new IdentificationMapper(
             new ArvatoRssConfig()
         );

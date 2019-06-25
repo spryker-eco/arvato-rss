@@ -12,7 +12,6 @@ use Orm\Zed\ArvatoRss\Persistence\SpyArvatoRssApiCallLogQuery;
 use SprykerEco\Shared\ArvatoRss\ArvatoRssApiConfig;
 use SprykerEcoTest\Zed\ArvatoRss\Business\AbstractBusinessTest;
 use SprykerEcoTest\Zed\ArvatoRss\Mock\ArvatoRssBusinessFactoryMock;
-use SprykerTest\Shared\Testify\Helper\BusinessHelper;
 
 class StoreOrderFacadeTest extends AbstractBusinessTest
 {
@@ -39,10 +38,8 @@ class StoreOrderFacadeTest extends AbstractBusinessTest
      */
     public function testStoreOrder()
     {
-        $facade = $this->getModule('\\' . BusinessHelper::class)->getFacade();
-        $facade->setFactory(
-            new ArvatoRssBusinessFactoryMock()
-        );
+        $facade = $this->tester->getFacade();
+        $facade->setFactory(new ArvatoRssBusinessFactoryMock());
         $facade->storeOrder($this->order);
         $this->test();
     }

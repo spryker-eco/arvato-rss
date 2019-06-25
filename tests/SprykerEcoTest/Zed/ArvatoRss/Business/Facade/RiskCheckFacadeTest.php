@@ -12,7 +12,6 @@ use Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use SprykerEcoTest\Zed\ArvatoRss\Business\AbstractBusinessTest;
 use SprykerEcoTest\Zed\ArvatoRss\Mock\ArvatoRssBusinessFactoryMock;
-use SprykerTest\Shared\Testify\Helper\BusinessHelper;
 
 class RiskCheckFacadeTest extends AbstractBusinessTest
 {
@@ -21,10 +20,8 @@ class RiskCheckFacadeTest extends AbstractBusinessTest
      */
     public function testPerformRiskCheck()
     {
-        $facade = $this->getModule('\\' . BusinessHelper::class)->getFacade();
-        $facade->setFactory(
-            new ArvatoRssBusinessFactoryMock()
-        );
+        $facade = $this->tester->getFacade();
+        $facade->setFactory(new ArvatoRssBusinessFactoryMock());
         $response = $facade->performRiskCheck($this->quote);
         $this->testResponse($response);
     }
