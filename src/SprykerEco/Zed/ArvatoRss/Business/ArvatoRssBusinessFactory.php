@@ -35,7 +35,6 @@ use SprykerEco\Zed\ArvatoRss\Business\Handler\RiskCheckHandlerInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Handler\StoreOrderHandler;
 use SprykerEco\Zed\ArvatoRss\Business\Handler\StoreOrderHandlerInterface;
 use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface;
-use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToSalesInterface;
 use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToStoreInterface;
 
 /**
