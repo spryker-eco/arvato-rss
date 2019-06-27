@@ -15,6 +15,7 @@ use SprykerEco\Zed\ArvatoRss\Persistence\Mapper\ArvatoRssPersistenceMapper;
  * @method \SprykerEco\Zed\ArvatoRss\ArvatoRssConfig getConfig()
  * @method \SprykerEco\Zed\ArvatoRss\Persistence\ArvatoRssQueryContainerInterface getQueryContainer()
  * @method \SprykerEco\Zed\ArvatoRss\Persistence\ArvatoRssRepositoryInterface getRepository()
+ * @method \SprykerEco\Zed\ArvatoRss\Persistence\ArvatoRssEntityManagerInterface getEntityManager()
  */
 class ArvatoRssPersistenceFactory extends AbstractPersistenceFactory
 {

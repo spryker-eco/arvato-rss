@@ -21,7 +21,8 @@ use Spryker\Zed\Oms\Dependency\Plugin\Command\CommandByOrderInterface;
 class StoreOrderPlugin extends AbstractPlugin implements CommandByOrderInterface
 {
     /**
-     * Command which is executed per order basis
+     * {@inheritdoc}
+     * - Performs StoreOrder API call.
      *
      * @api
      *

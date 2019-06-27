@@ -8,14 +8,23 @@
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Adapter;
 
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\ApiCallInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\Logger\ApiCallLogger;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\Logger\ApiCallLoggerInterface;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\Logger\ArvatoRssApiCallLogger;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\Logger\ArvatoRssApiCallLoggerInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\RiskCheckCall;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\StoreOrderCall;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RequestHeaderConverter;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RequestHeaderConverterInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverter;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverterInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverter;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverterInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\StoreOrderRequestConverter;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\StoreOrderRequestConverterInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\StoreOrderResponseConverter;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\StoreOrderResponseConverterInterface;
 
 /**
  * @method \SprykerEco\Zed\ArvatoRss\Persistence\ArvatoRssRepositoryInterface getRepository()
@@ -26,7 +35,7 @@ class AdapterFactory extends AbstractBusinessFactory implements AdapterFactoryIn
     /**
      * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RequestHeaderConverterInterface
      */
-    public function createRequestHeaderConverter()
+    public function createRequestHeaderConverter(): RequestHeaderConverterInterface
     {
         return new RequestHeaderConverter();
     }
@@ -34,7 +43,7 @@ class AdapterFactory extends AbstractBusinessFactory implements AdapterFactoryIn
     /**
      * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverterInterface
      */
-    public function createRiskCheckRequestConverter()
+    public function createRiskCheckRequestConverter(): RiskCheckRequestConverterInterface
     {
         return new RiskCheckRequestConverter();
     }
@@ -42,7 +51,7 @@ class AdapterFactory extends AbstractBusinessFactory implements AdapterFactoryIn
     /**
      * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverterInterface
      */
-    public function createRiskCheckResponseConverter()
+    public function createRiskCheckResponseConverter(): RiskCheckResponseConverterInterface
     {
         return new RiskCheckResponseConverter();
     }
@@ -50,7 +59,7 @@ class AdapterFactory extends AbstractBusinessFactory implements AdapterFactoryIn
     /**
      * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\StoreOrderRequestConverterInterface
      */
-    public function createStoreOrderRequestConverter()
+    public function createStoreOrderRequestConverter(): StoreOrderRequestConverterInterface
     {
         return new StoreOrderRequestConverter();
     }
@@ -58,17 +67,27 @@ class AdapterFactory extends AbstractBusinessFactory implements AdapterFactoryIn
     /**
      * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\StoreOrderResponseConverterInterface
      */
-    public function createStoreOrderResponseConverter()
+    public function createStoreOrderResponseConverter(): StoreOrderResponseConverterInterface
     {
         return new StoreOrderResponseConverter();
     }
 
     /**
+     * @deprecated Use `\SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\AdapterFactory::createArvatoRssApiCallLogger()` instead.
+     *
      * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\Logger\ApiCallLoggerInterface
      */
-    public function createApiCallLogger()
+    public function createApiCallLogger(): ApiCallLoggerInterface
     {
-        return new ApiCallLogger(
+        return new ApiCallLogger();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\Logger\ArvatoRssApiCallLoggerInterface
+     */
+    public function createArvatoRssApiCallLogger(): ArvatoRssApiCallLoggerInterface
+    {
+        return new ArvatoRssApiCallLogger(
             $this->getRepository(),
             $this->getEntityManager()
         );
@@ -77,22 +96,22 @@ class AdapterFactory extends AbstractBusinessFactory implements AdapterFactoryIn
     /**
      * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\ApiCallInterface
      */
-    public function createRiskCheckCall()
+    public function createRiskCheckCall(): ApiCallInterface
     {
         return new RiskCheckCall(
             $this->createRequestHeaderConverter(),
-            $this->createApiCallLogger()
+            $this->createArvatoRssApiCallLogger()
         );
     }
 
     /**
      * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\ApiCallInterface
      */
-    public function createStoreOrderCall()
+    public function createStoreOrderCall(): ApiCallInterface
     {
         return new StoreOrderCall(
             $this->createRequestHeaderConverter(),
-            $this->createApiCallLogger()
+            $this->createArvatoRssApiCallLogger()
         );
     }
 }

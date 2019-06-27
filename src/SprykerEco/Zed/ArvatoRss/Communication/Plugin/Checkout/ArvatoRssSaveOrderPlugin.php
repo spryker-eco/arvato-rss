@@ -21,7 +21,7 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 class ArvatoRssSaveOrderPlugin extends AbstractPlugin implements CheckoutDoSaveOrderInterface
 {
     /**
-     * Specification:
+     * {@inheritdoc}
      * - Updates API log with order reference.
      *
      * @api

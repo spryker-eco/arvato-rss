@@ -7,15 +7,18 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Mapper;
 
+use Generated\Shared\Transfer\ArvatoRssIdentificationRequestTransfer;
 use Generated\Shared\Transfer\ArvatoRssOrderTransfer;
 use Generated\Shared\Transfer\ArvatoRssStoreOrderRequestTransfer;
 use Generated\Shared\Transfer\OrderMapperTransfer;
 use Generated\Shared\Transfer\OrderTransfer;
+use SprykerEco\Shared\ArvatoRss\ArvatoRssApiConfig;
 use SprykerEco\Zed\ArvatoRss\ArvatoRssConfig;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\IdentificationMapperInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\OrderMapperInterface;
+use SprykerEco\Zed\ArvatoRss\Persistence\ArvatoRssRepositoryInterface;
 
-class StoreOrderRequestMapper implements StoreOrderRequestMapperInterface
+class StoreOrderCallRequestMapper implements StoreOrderRequestMapperInterface
 {
     /**
      * @var \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\IdentificationMapperInterface
@@ -28,6 +31,11 @@ class StoreOrderRequestMapper implements StoreOrderRequestMapperInterface
     protected $orderMapper;
 
     /**
+     * @var \SprykerEco\Zed\ArvatoRss\Persistence\ArvatoRssRepositoryInterface
+     */
+    protected $repository;
+
+    /**
      * @var \SprykerEco\Zed\ArvatoRss\ArvatoRssConfig $config
      */
     protected $config;
@@ -35,15 +43,18 @@ class StoreOrderRequestMapper implements StoreOrderRequestMapperInterface
     /**
      * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\IdentificationMapperInterface $identificationMapper
      * @param \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\OrderMapperInterface $orderMapper
+     * @param \SprykerEco\Zed\ArvatoRss\Persistence\ArvatoRssRepositoryInterface $repository
      * @param \SprykerEco\Zed\ArvatoRss\ArvatoRssConfig $config
      */
     public function __construct(
         IdentificationMapperInterface $identificationMapper,
         OrderMapperInterface $orderMapper,
+        ArvatoRssRepositoryInterface $repository,
         ArvatoRssConfig $config
     ) {
         $this->identificationMapper = $identificationMapper;
         $this->orderMapper = $orderMapper;
+        $this->repository = $repository;
         $this->config = $config;
     }
 
@@ -57,6 +68,8 @@ class StoreOrderRequestMapper implements StoreOrderRequestMapperInterface
         $requestTransfer = new ArvatoRssStoreOrderRequestTransfer();
 
         $identification = $this->identificationMapper->map();
+        $identification = $this->updateIdentification($orderTransfer, $identification);
+
         $order = $this->orderMapper->map(
             $this->createOrderMapperTransfer($orderTransfer)
         );
@@ -105,5 +118,28 @@ class StoreOrderRequestMapper implements StoreOrderRequestMapperInterface
         $transfer->setCustomerIsGuest($customer ? $customer->getIsGuest() : true);
 
         return $transfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
+     * @param \Generated\Shared\Transfer\ArvatoRssIdentificationRequestTransfer $identification
+     *
+     * @return \Generated\Shared\Transfer\ArvatoRssIdentificationRequestTransfer
+     */
+    protected function updateIdentification(
+        OrderTransfer $orderTransfer,
+        ArvatoRssIdentificationRequestTransfer $identification
+    ): ArvatoRssIdentificationRequestTransfer {
+        $arvatoRssApiCallLogTransfer = $this->repository
+            ->findApiLogByOrderReferenceAndType(
+                $orderTransfer->getOrderReference(),
+                ArvatoRssApiConfig::TRANSACTION_TYPE_RISK_CHECK
+            );
+
+        if ($arvatoRssApiCallLogTransfer !== null) {
+            $identification->setCommunicationToken($arvatoRssApiCallLogTransfer->getCommunicationToken());
+        }
+
+        return $identification;
     }
 }

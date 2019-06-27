@@ -24,7 +24,4 @@ interface ArvatoRssApiConfig
     //Transaction types
     public const TRANSACTION_TYPE_STORE_ORDER = 'STORE_ORDER';
     public const TRANSACTION_TYPE_RISK_CHECK = 'RISK_CHECK';
-
-    public const RESPONSE_DECISION = 'Decision';
-    public const RESPONSE_COMMUNICATION_TOKEN = 'CommunicationToken';
 }

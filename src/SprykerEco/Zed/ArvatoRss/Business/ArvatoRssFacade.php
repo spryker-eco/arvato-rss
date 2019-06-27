@@ -14,6 +14,7 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
 /**
  * @method \SprykerEco\Zed\ArvatoRss\Business\ArvatoRssBusinessFactory getFactory()
  * @method \SprykerEco\Zed\ArvatoRss\Persistence\ArvatoRssRepositoryInterface getRepository()
+ * @method \SprykerEco\Zed\ArvatoRss\Persistence\ArvatoRssEntityManagerInterface getEntityManager()
  */
 class ArvatoRssFacade extends AbstractFacade implements ArvatoRssFacadeInterface
 {
@@ -59,7 +60,7 @@ class ArvatoRssFacade extends AbstractFacade implements ArvatoRssFacadeInterface
     {
         $this->getFactory()
             ->createAdapterFactory()
-            ->createApiCallLogger()
+            ->createArvatoRssApiCallLogger()
             ->updateLogWithOrderReference($communicationToken, $orderReference);
     }
 }
