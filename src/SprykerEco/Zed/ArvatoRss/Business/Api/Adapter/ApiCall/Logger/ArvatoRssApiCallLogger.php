@@ -55,7 +55,7 @@ class ArvatoRssApiCallLogger implements ArvatoRssApiCallLoggerInterface
         $resultCode,
         array $requestPayload,
         stdClass $responsePayload
-    ):void {
+    ): void {
         $callLog = (new ArvatoRssApiCallLogTransfer())
             ->setOrderReference($orderReference)
             ->setCallType($type)

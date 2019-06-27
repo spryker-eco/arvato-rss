@@ -36,6 +36,7 @@ use SprykerEco\Zed\ArvatoRss\Business\Handler\StoreOrderHandler;
 use SprykerEco\Zed\ArvatoRss\Business\Handler\StoreOrderHandlerInterface;
 use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface;
 use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToSalesInterface;
+use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToStoreInterface;
 
 /**
  * @method \SprykerEco\Zed\ArvatoRss\ArvatoRssConfig getConfig()
@@ -152,7 +153,7 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToStoreInterface
      */
-    public function getStoreFacade(): ArvatoRssToSalesInterface
+    public function getStoreFacade(): ArvatoRssToStoreInterface
     {
         return $this->getProvidedDependency(ArvatoRssDependencyProvider::FACADE_STORE);
     }

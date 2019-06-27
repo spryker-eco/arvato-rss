@@ -7,16 +7,19 @@
 
 namespace SprykerEcoTest\Zed\ArvatoRss\Mock;
 
+use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\AdapterFactoryInterface;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiAdapterInterface;
 use SprykerEco\Zed\ArvatoRss\Business\ArvatoRssBusinessFactory;
+use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface;
 use SprykerEcoTest\Zed\ArvatoRss\Mock\Api\Adapter\AdapterFactoryMock;
 use SprykerEcoTest\Zed\ArvatoRss\Mock\Api\Adapter\SoapApiAdapterMock;
 
 class ArvatoRssBusinessFactoryMock extends ArvatoRssBusinessFactory
 {
     /**
-     * @return \SprykerEcoTest\Zed\ArvatoRss\Mock\Api\Adapter\SoapApiAdapterMock
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiAdapterInterface
      */
-    public function createSoapApiAdapter()
+    public function createSoapApiAdapter(): ApiAdapterInterface
     {
         return new SoapApiAdapterMock(
             $this->createAdapterFactory()
@@ -24,17 +27,17 @@ class ArvatoRssBusinessFactoryMock extends ArvatoRssBusinessFactory
     }
 
     /**
-     * @return \SprykerEcoTest\Zed\ArvatoRss\Mock\MoneyFacadeMock
+     * @return \SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface
      */
-    public function getMoneyFacade()
+    public function getMoneyFacade(): ArvatoRssToMoneyInterface
     {
         return new MoneyFacadeMock();
     }
 
     /**
-     * @return \SprykerEcoTest\Zed\ArvatoRss\Mock\Api\Adapter\AdapterFactoryMock
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\AdapterFactoryInterface
      */
-    public function createAdapterFactory()
+    public function createAdapterFactory(): AdapterFactoryInterface
     {
         return new AdapterFactoryMock();
     }

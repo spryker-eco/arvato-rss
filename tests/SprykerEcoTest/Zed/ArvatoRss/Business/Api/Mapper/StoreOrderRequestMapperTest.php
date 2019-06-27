@@ -14,7 +14,7 @@ use SprykerEco\Shared\ArvatoRss\ArvatoRssApiConfig;
 use SprykerEco\Zed\ArvatoRss\ArvatoRssConfig;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\IdentificationMapperInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\OrderMapperInterface;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\StoreOrderRequestMapper;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\StoreOrderCallRequestMapper;
 use SprykerEco\Zed\ArvatoRss\Persistence\ArvatoRssRepository;
 use SprykerEcoTest\Zed\ArvatoRss\Business\AbstractBusinessTest;
 
@@ -25,7 +25,7 @@ class StoreOrderRequestMapperTest extends AbstractBusinessTest
      */
     public function testMapQuoteToRequestTranfer()
     {
-        $mapper = new StoreOrderRequestMapper(
+        $mapper = new StoreOrderCallRequestMapper(
             $this->createIdentificationMapperMock(),
             $this->createOrderMapperMock(),
             new ArvatoRssRepository(),
