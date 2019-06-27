@@ -34,6 +34,8 @@ use SprykerEco\Zed\ArvatoRss\Business\Handler\RiskCheckHandler;
 use SprykerEco\Zed\ArvatoRss\Business\Handler\RiskCheckHandlerInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Handler\StoreOrderHandler;
 use SprykerEco\Zed\ArvatoRss\Business\Handler\StoreOrderHandlerInterface;
+use SprykerEco\Zed\ArvatoRss\Business\Reader\ArvatoRssReader;
+use SprykerEco\Zed\ArvatoRss\Business\Reader\ArvatoRssReaderInterface;
 use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface;
 use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToStoreInterface;
 
@@ -90,7 +92,7 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
         return new StoreOrderCallRequestMapper(
             $this->createIdentificationMapper(),
             $this->createOrderMapper(),
-            $this->getRepository(),
+            $this->createArvatoRssReader(),
             $this->getConfig()
         );
     }
@@ -195,5 +197,13 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     public function createAdapterFactory(): AdapterFactoryInterface
     {
         return new AdapterFactory();
+    }
+
+    /**
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Reader\ArvatoRssReaderInterface
+     */
+    public function createArvatoRssReader(): ArvatoRssReaderInterface
+    {
+        return new ArvatoRssReader($this->getRepository());
     }
 }

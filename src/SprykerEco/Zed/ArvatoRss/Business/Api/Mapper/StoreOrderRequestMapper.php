@@ -15,6 +15,9 @@ use SprykerEco\Zed\ArvatoRss\ArvatoRssConfig;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\IdentificationMapperInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\OrderMapperInterface;
 
+/**
+ * @deprecated Use `\SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\StoreOrderCallRequestMapper` instead.
+ */
 class StoreOrderRequestMapper implements StoreOrderRequestMapperInterface
 {
     /**
