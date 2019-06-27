@@ -18,7 +18,7 @@ class StoreOrderFacadeTest extends AbstractBusinessTest
     /**
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->cleanUp();
@@ -27,7 +27,7 @@ class StoreOrderFacadeTest extends AbstractBusinessTest
     /**
      * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         parent::tearDown();
         $this->cleanUp();
@@ -36,8 +36,9 @@ class StoreOrderFacadeTest extends AbstractBusinessTest
     /**
      * @return void
      */
-    public function testStoreOrder()
+    public function testStoreOrder(): void
     {
+        /** @var \SprykerEco\Zed\ArvatoRss\Business\ArvatoRssFacade $facade */
         $facade = $this->tester->getFacade();
         $facade->setFactory(new ArvatoRssBusinessFactoryMock());
         $facade->storeOrder($this->order);
@@ -45,9 +46,9 @@ class StoreOrderFacadeTest extends AbstractBusinessTest
     }
 
     /**
-     * @return \Orm\Zed\ArvatoRss\Persistence\SpyArvatoRssApiCallLog
+     * @return \Orm\Zed\ArvatoRss\Persistence\SpyArvatoRssApiCallLog|null
      */
-    protected function getApiCallLog()
+    protected function getApiCallLog(): ?SpyArvatoRssApiCallLog
     {
         return SpyArvatoRssApiCallLogQuery::create()->findOne();
     }
@@ -55,18 +56,10 @@ class StoreOrderFacadeTest extends AbstractBusinessTest
     /**
      * @return void
      */
-    protected function test()
+    protected function test(): void
     {
         $apiCallLog = $this->getApiCallLog();
         $this->assertInstanceOf(SpyArvatoRssApiCallLog::class, $apiCallLog);
         $this->assertEquals($apiCallLog->getCallType(), ArvatoRssApiConfig::TRANSACTION_TYPE_STORE_ORDER);
-    }
-
-    /**
-     * @return void
-     */
-    protected function cleanUp()
-    {
-        SpyArvatoRssApiCallLogQuery::create()->deleteAll();
     }
 }

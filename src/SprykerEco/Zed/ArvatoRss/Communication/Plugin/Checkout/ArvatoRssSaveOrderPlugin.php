@@ -38,6 +38,6 @@ class ArvatoRssSaveOrderPlugin extends AbstractPlugin implements CheckoutDoSaveO
             ->getCommunicationToken();
 
         $this->getFacade()
-            ->updateApiLog($communicationToken, $saveOrderTransfer->getOrderReference());
+            ->updateApiLogWithOrderReference($communicationToken, $saveOrderTransfer->getOrderReference());
     }
 }

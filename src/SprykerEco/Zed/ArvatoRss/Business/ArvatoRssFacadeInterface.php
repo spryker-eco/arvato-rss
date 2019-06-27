@@ -47,5 +47,5 @@ interface ArvatoRssFacadeInterface
      *
      * @return void
      */
-    public function updateApiLog(string $communicationToken, string $orderReference): void;
+    public function updateApiLogWithOrderReference(string $communicationToken, string $orderReference): void;
 }

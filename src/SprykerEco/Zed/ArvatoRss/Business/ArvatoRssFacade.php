@@ -55,7 +55,7 @@ class ArvatoRssFacade extends AbstractFacade implements ArvatoRssFacadeInterface
      *
      * @return void
      */
-    public function updateApiLog(string $communicationToken, string $orderReference): void
+    public function updateApiLogWithOrderReference(string $communicationToken, string $orderReference): void
     {
         $this->getFactory()
             ->createAdapterFactory()

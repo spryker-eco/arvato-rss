@@ -18,8 +18,9 @@ class RiskCheckFacadeTest extends AbstractBusinessTest
     /**
      * @return void
      */
-    public function testPerformRiskCheck()
+    public function testPerformRiskCheck(): void
     {
+        /** @var \SprykerEco\Zed\ArvatoRss\Business\ArvatoRssFacade $facade */
         $facade = $this->tester->getFacade();
         $facade->setFactory(new ArvatoRssBusinessFactoryMock());
         $response = $facade->performRiskCheck($this->quote);
@@ -31,7 +32,7 @@ class RiskCheckFacadeTest extends AbstractBusinessTest
      *
      * @return void
      */
-    protected function testResponse(QuoteTransfer $response)
+    protected function testResponse(QuoteTransfer $response): void
     {
         $this->assertInstanceOf(ArvatoRssQuoteDataTransfer::class, $response->getArvatoRssQuoteData());
         $this->assertInstanceOf(

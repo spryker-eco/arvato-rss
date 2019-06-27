@@ -8,6 +8,7 @@
 namespace SprykerEcoTest\Zed\ArvatoRss\Business;
 
 use Codeception\TestCase\Test;
+use Orm\Zed\ArvatoRss\Persistence\SpyArvatoRssApiCallLogQuery;
 use SprykerEco\Shared\ArvatoRss\ArvatoRssApiConfig;
 use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
 
@@ -33,7 +34,7 @@ class AbstractBusinessTest extends Test
     /**
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->tester->setConfig(ArvatoRssConstants::ARVATORSS_CLIENTID, 'test');
@@ -43,5 +44,13 @@ class AbstractBusinessTest extends Test
         ]);
         $this->quote = $this->tester->createQuoteTransfer();
         $this->order = $this->tester->createOrderTransfer();
+    }
+
+    /**
+     * @return void
+     */
+    protected function cleanUp(): void
+    {
+        SpyArvatoRssApiCallLogQuery::create()->deleteAll();
     }
 }
