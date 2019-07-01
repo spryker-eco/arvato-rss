@@ -16,7 +16,7 @@
     "ext-soap": "*",
     "spryker/kernel": "^3.0.0",
     "spryker/money": "^2.1.0",
-    "spryker/sales": "^8.0.0",
+    "spryker/sales": "^8.0.0 || ^10.0.0",
     "spryker/config": "^3.0.0",
     "spryker/transfer": "^3.4.0",
     "spryker/zed-request": "^3.0.0"
