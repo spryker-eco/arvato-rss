@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEcoTest\Zed\ArvatoRss\Business\Api\Mapper;
@@ -14,7 +14,7 @@ use SprykerEco\Shared\ArvatoRss\ArvatoRssApiConfig;
 use SprykerEco\Zed\ArvatoRss\ArvatoRssConfig;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\IdentificationMapperInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\OrderMapperInterface;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\StoreOrderCallRequestMapper;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\StoreOrderRequestMapper;
 use SprykerEco\Zed\ArvatoRss\Business\Reader\ArvatoRssReader;
 use SprykerEco\Zed\ArvatoRss\Business\Reader\ArvatoRssReaderInterface;
 use SprykerEco\Zed\ArvatoRss\Persistence\ArvatoRssRepository;
@@ -28,11 +28,11 @@ class StoreOrderRequestMapperTest extends AbstractBusinessTest
      */
     public function testMapQuoteToRequestTranfer()
     {
-        $mapper = new StoreOrderCallRequestMapper(
+        $mapper = new StoreOrderRequestMapper(
             $this->createIdentificationMapperMock(),
             $this->createOrderMapperMock(),
-            $this->createReader(),
-            new ArvatoRssConfig()
+            new ArvatoRssConfig(),
+            $this->createReader()
         );
         $result = $mapper->mapOrderToRequestTransfer($this->order);
         $this->testResult($result);

@@ -53,6 +53,7 @@ class SoapApiAdapter implements ApiAdapterInterface
             $responseTransfer = new ArvatoRssRiskCheckResponseTransfer();
             $responseTransfer->setIsError(true);
             $responseTransfer->setErrorMessage($exception->getMessage());
+
             return $responseTransfer;
         }
 

@@ -150,6 +150,7 @@ abstract class AbstractCall implements ApiCallInterface
         if (isset($result->detail) && !empty(array_keys(get_object_vars($result->detail))[0])) {
             $exceptionName = array_keys(get_object_vars($result->detail))[0];
             $exceptionObj = $result->detail->{$exceptionName};
+
             return $exceptionObj->Description;
         }
 

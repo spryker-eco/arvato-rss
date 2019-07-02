@@ -59,8 +59,7 @@ class ArvatoRssFacade extends AbstractFacade implements ArvatoRssFacadeInterface
     public function updateApiLogWithOrderReference(string $communicationToken, string $orderReference): void
     {
         $this->getFactory()
-            ->createAdapterFactory()
-            ->createArvatoRssApiCallLogger()
+            ->createArvatoRssWriter()
             ->updateLogWithOrderReference($communicationToken, $orderReference);
     }
 }

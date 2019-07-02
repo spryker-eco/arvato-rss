@@ -27,7 +27,6 @@ use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapper;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckRequestMapperInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckResponseMapper;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\RiskCheckResponseMapperInterface;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\StoreOrderCallRequestMapper;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\StoreOrderRequestMapper;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\StoreOrderRequestMapperInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Handler\RiskCheckHandler;
@@ -36,6 +35,8 @@ use SprykerEco\Zed\ArvatoRss\Business\Handler\StoreOrderHandler;
 use SprykerEco\Zed\ArvatoRss\Business\Handler\StoreOrderHandlerInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Reader\ArvatoRssReader;
 use SprykerEco\Zed\ArvatoRss\Business\Reader\ArvatoRssReaderInterface;
+use SprykerEco\Zed\ArvatoRss\Business\Writer\ArvatoRssWriter;
+use SprykerEco\Zed\ArvatoRss\Business\Writer\ArvatoRssWriterInterface;
 use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToMoneyInterface;
 use SprykerEco\Zed\ArvatoRss\Dependency\Facade\ArvatoRssToStoreInterface;
 
@@ -65,14 +66,12 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     public function createStoreOrderHandler(): StoreOrderHandlerInterface
     {
         return new StoreOrderHandler(
-            $this->createStoreOrderCallRequestMapper(),
+            $this->createStoreOrderRequestMapper(),
             $this->createSoapApiAdapter()
         );
     }
 
     /**
-     * @deprecated Use `\SprykerEco\Zed\ArvatoRss\Business\ArvatoRssBusinessFactory::createStoreOrderCallRequestMapper()` instead.
-     *
      * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\StoreOrderRequestMapperInterface
      */
     public function createStoreOrderRequestMapper(): StoreOrderRequestMapperInterface
@@ -80,20 +79,8 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
         return new StoreOrderRequestMapper(
             $this->createIdentificationMapper(),
             $this->createOrderMapper(),
-            $this->getConfig()
-        );
-    }
-
-    /**
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\StoreOrderRequestMapperInterface
-     */
-    public function createStoreOrderCallRequestMapper(): StoreOrderRequestMapperInterface
-    {
-        return new StoreOrderCallRequestMapper(
-            $this->createIdentificationMapper(),
-            $this->createOrderMapper(),
-            $this->createArvatoRssReader(),
-            $this->getConfig()
+            $this->getConfig(),
+            $this->createArvatoRssReader()
         );
     }
 
@@ -205,5 +192,16 @@ class ArvatoRssBusinessFactory extends AbstractBusinessFactory
     public function createArvatoRssReader(): ArvatoRssReaderInterface
     {
         return new ArvatoRssReader($this->getRepository());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Writer\ArvatoRssWriterInterface
+     */
+    public function createArvatoRssWriter(): ArvatoRssWriterInterface
+    {
+        return new ArvatoRssWriter(
+            $this->getRepository(),
+            $this->getEntityManager()
+        );
     }
 }

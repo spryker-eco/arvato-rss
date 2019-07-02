@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEcoTest\Zed\ArvatoRss\Business\Api\Mapper;
@@ -23,9 +23,9 @@ use SprykerEcoTest\Zed\ArvatoRss\Business\AbstractBusinessTest;
 class RiskCheckRequestMapperTest extends AbstractBusinessTest
 {
     /**
-     * @param bool $billingSameAsShipping
-     *
      * @dataProvider provideQuoteData
+     *
+     * @param bool $billingSameAsShipping
      *
      * @return void
      */
@@ -44,7 +44,7 @@ class RiskCheckRequestMapperTest extends AbstractBusinessTest
     }
 
     /**
-     * @param QuoteTransfer $quote
+     * @param \Generated\Shared\Transfer\QuoteTransfer $quote
      * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $result
      *
      * @return void

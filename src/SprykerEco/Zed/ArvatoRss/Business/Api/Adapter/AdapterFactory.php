@@ -11,8 +11,6 @@ use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\ApiCallInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\Logger\ApiCallLogger;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\Logger\ApiCallLoggerInterface;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\Logger\ArvatoRssApiCallLogger;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\Logger\ArvatoRssApiCallLoggerInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\RiskCheckCall;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\StoreOrderCall;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RequestHeaderConverter;
@@ -73,24 +71,11 @@ class AdapterFactory extends AbstractBusinessFactory implements AdapterFactoryIn
     }
 
     /**
-     * @deprecated Use `\SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\AdapterFactory::createArvatoRssApiCallLogger()` instead.
-     *
      * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\Logger\ApiCallLoggerInterface
      */
     public function createApiCallLogger(): ApiCallLoggerInterface
     {
         return new ApiCallLogger();
-    }
-
-    /**
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\Logger\ArvatoRssApiCallLoggerInterface
-     */
-    public function createArvatoRssApiCallLogger(): ArvatoRssApiCallLoggerInterface
-    {
-        return new ArvatoRssApiCallLogger(
-            $this->getRepository(),
-            $this->getEntityManager()
-        );
     }
 
     /**
@@ -100,7 +85,7 @@ class AdapterFactory extends AbstractBusinessFactory implements AdapterFactoryIn
     {
         return new RiskCheckCall(
             $this->createRequestHeaderConverter(),
-            $this->createArvatoRssApiCallLogger()
+            $this->createApiCallLogger()
         );
     }
 
@@ -111,7 +96,7 @@ class AdapterFactory extends AbstractBusinessFactory implements AdapterFactoryIn
     {
         return new StoreOrderCall(
             $this->createRequestHeaderConverter(),
-            $this->createArvatoRssApiCallLogger()
+            $this->createApiCallLogger()
         );
     }
 }

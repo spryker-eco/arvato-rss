@@ -9,9 +9,6 @@ namespace SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\Logger;
 
 use stdClass;
 
-/**
- * @deprecated Use `\SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\Logger\ArvatoRssApiCallLoggerInterface` instead.
- */
 interface ApiCallLoggerInterface
 {
     /**

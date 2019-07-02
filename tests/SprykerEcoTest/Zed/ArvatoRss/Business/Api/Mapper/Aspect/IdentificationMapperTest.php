@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEcoTest\Zed\ArvatoRss\Business\Api\Mapper\Aspect;
@@ -15,8 +15,8 @@ use SprykerEcoTest\Zed\ArvatoRss\Business\AbstractBusinessTest;
 
 class IdentificationMapperTest extends AbstractBusinessTest
 {
-    const CLIENT_ID = 'CLIENT_ID';
-    const AUTHORIZATION = 'AUTHORIZATION';
+    public const CLIENT_ID = 'CLIENT_ID';
+    public const AUTHORIZATION = 'AUTHORIZATION';
 
     /**
      * @return void

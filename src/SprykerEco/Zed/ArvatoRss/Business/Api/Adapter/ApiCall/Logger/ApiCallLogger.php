@@ -10,11 +10,11 @@ namespace SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\Logger;
 use Orm\Zed\ArvatoRss\Persistence\SpyArvatoRssApiCallLog;
 use stdClass;
 
-/**
- * @deprecated Use `\SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\Logger\ArvatoRssApiCallLogger` instead.
- */
 class ApiCallLogger implements ApiCallLoggerInterface
 {
+    protected const RESPONSE_DECISION = 'Decision';
+    protected const RESPONSE_COMMUNICATION_TOKEN = 'CommunicationToken';
+
     /**
      * @param string $orderReference
      * @param string $type
@@ -40,7 +40,23 @@ class ApiCallLogger implements ApiCallLoggerInterface
             )
             ->setResponsePayload(
                 print_r($responsePayload, true)
-            )
-            ->save();
+            );
+
+        if ($this->isResponsePayloadCommunicationTokenExists($responsePayload)) {
+            $callLog->setCommunicationToken($responsePayload->Decision->CommunicationToken);
+        }
+
+        $callLog->save();
+    }
+
+    /**
+     * @param \stdClass $responsePayload
+     *
+     * @return bool
+     */
+    protected function isResponsePayloadCommunicationTokenExists(stdClass $responsePayload): bool
+    {
+        return property_exists($responsePayload, static::RESPONSE_DECISION)
+            && property_exists($responsePayload->Decision, static::RESPONSE_COMMUNICATION_TOKEN);
     }
 }

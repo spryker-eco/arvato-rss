@@ -9,7 +9,6 @@ namespace SprykerEco\Zed\ArvatoRss\Business\Api\Adapter;
 
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\ApiCallInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\Logger\ApiCallLoggerInterface;
-use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\Logger\ArvatoRssApiCallLoggerInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RequestHeaderConverterInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverterInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverterInterface;
@@ -44,16 +43,9 @@ interface AdapterFactoryInterface
     public function createStoreOrderResponseConverter(): StoreOrderResponseConverterInterface;
 
     /**
-     * @deprecated Use `\SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\AdapterFactory::createArvatoRssApiCallLogger()` instead.
-     *
      * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\Logger\ApiCallLoggerInterface
      */
     public function createApiCallLogger(): ApiCallLoggerInterface;
-
-    /**
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\Logger\ArvatoRssApiCallLoggerInterface
-     */
-    public function createArvatoRssApiCallLogger(): ArvatoRssApiCallLoggerInterface;
 
     /**
      * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\ApiCallInterface
