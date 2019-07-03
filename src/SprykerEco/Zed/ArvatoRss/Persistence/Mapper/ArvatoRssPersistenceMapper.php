@@ -10,7 +10,7 @@ namespace SprykerEco\Zed\ArvatoRss\Persistence\Mapper;
 use Generated\Shared\Transfer\ArvatoRssApiCallLogTransfer;
 use Orm\Zed\ArvatoRss\Persistence\SpyArvatoRssApiCallLog;
 
-class ArvatoRssPersistenceMapper implements ArvatoRssPersistenceMapperInterface
+class ArvatoRssPersistenceMapper
 {
     /**
      * @param \Generated\Shared\Transfer\ArvatoRssApiCallLogTransfer $arvatoRssApiCallLogTransfer

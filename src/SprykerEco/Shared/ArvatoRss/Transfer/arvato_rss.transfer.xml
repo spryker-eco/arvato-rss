@@ -6,6 +6,7 @@
     <transfer name="ArvatoRssIdentificationRequest">
         <property name="clientId" type="string" />
         <property name="authorisation" type="string" />
+        <property name="communicationToken" type="string" />
     </transfer>
 
     <transfer name="ArvatoRssBillingCustomer">
@@ -137,6 +138,7 @@
         <property name="orderReference" type="string" />
         <property name="callType" type="string" />
         <property name="resultCode" type="string" />
+        <property name="communicationToken" type="string" />
         <property name="requestPayload" type="string" />
         <property name="responsePayload" type="string" />
     </transfer>

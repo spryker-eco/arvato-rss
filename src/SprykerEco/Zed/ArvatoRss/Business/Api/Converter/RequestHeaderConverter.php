@@ -69,6 +69,7 @@ class RequestHeaderConverter implements RequestHeaderConverterInterface
         return [
             ArvatoRssIdentificationApiConfig::ARVATORSS_API_CLIENTID => 'clientId',
             ArvatoRssIdentificationApiConfig::ARVATORSS_API_AUTHORISATION => 'authorisation',
+            ArvatoRssIdentificationApiConfig::ARVATORSS_API_COMMUNICATION_TOKEN => 'communicationToken',
         ];
     }
 }

@@ -7,45 +7,53 @@
 
 namespace SprykerEco\Zed\ArvatoRss\Business\Api\Adapter;
 
+use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\ApiCallInterface;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\Logger\ApiCallLoggerInterface;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RequestHeaderConverterInterface;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverterInterface;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverterInterface;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\StoreOrderRequestConverterInterface;
+use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\StoreOrderResponseConverterInterface;
+
 interface AdapterFactoryInterface
 {
     /**
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RequestHeaderConverter
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RequestHeaderConverterInterface
      */
-    public function createRequestHeaderConverter();
+    public function createRequestHeaderConverter(): RequestHeaderConverterInterface;
 
     /**
      * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverterInterface
      */
-    public function createRiskCheckRequestConverter();
+    public function createRiskCheckRequestConverter(): RiskCheckRequestConverterInterface;
 
     /**
      * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckResponseConverterInterface
      */
-    public function createRiskCheckResponseConverter();
+    public function createRiskCheckResponseConverter(): RiskCheckResponseConverterInterface;
 
     /**
      * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\StoreOrderRequestConverterInterface
      */
-    public function createStoreOrderRequestConverter();
+    public function createStoreOrderRequestConverter(): StoreOrderRequestConverterInterface;
 
     /**
      * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Converter\StoreOrderResponseConverterInterface
      */
-    public function createStoreOrderResponseConverter();
+    public function createStoreOrderResponseConverter(): StoreOrderResponseConverterInterface;
 
     /**
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\Logger\ApiCallLogger
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\Logger\ApiCallLoggerInterface
      */
-    public function createApiCallLogger();
-
-    /**
-     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\ApiCallInterface
-     */
-    public function createStoreOrderCall();
+    public function createApiCallLogger(): ApiCallLoggerInterface;
 
     /**
      * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\ApiCallInterface
      */
-    public function createRiskCheckCall();
+    public function createStoreOrderCall(): ApiCallInterface;
+
+    /**
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Api\Adapter\ApiCall\ApiCallInterface
+     */
+    public function createRiskCheckCall(): ApiCallInterface;
 }

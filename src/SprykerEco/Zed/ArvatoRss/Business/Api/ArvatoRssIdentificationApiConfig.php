@@ -13,4 +13,5 @@ interface ArvatoRssIdentificationApiConfig
     public const ARVATORSS_API_IDENTIFICATION_HEADER_NAME = 'Identification';
     public const ARVATORSS_API_CLIENTID = 'ClientID';
     public const ARVATORSS_API_AUTHORISATION = 'Authorisation';
+    public const ARVATORSS_API_COMMUNICATION_TOKEN = 'CommunicationToken';
 }

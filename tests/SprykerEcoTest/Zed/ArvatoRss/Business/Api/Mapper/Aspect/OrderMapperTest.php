@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEcoTest\Zed\ArvatoRss\Business\Api\Mapper\Aspect;
@@ -21,7 +21,7 @@ class OrderMapperTest extends AbstractBusinessTest
     /**
      * @const float
      */
-    const VALUE_DECIMAL = 124.75;
+    public const VALUE_DECIMAL = 124.75;
 
     /**
      * @return void

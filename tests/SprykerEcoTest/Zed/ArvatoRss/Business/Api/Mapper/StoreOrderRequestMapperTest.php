@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEcoTest\Zed\ArvatoRss\Business\Api\Mapper;
@@ -15,6 +15,10 @@ use SprykerEco\Zed\ArvatoRss\ArvatoRssConfig;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\IdentificationMapperInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\OrderMapperInterface;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\StoreOrderRequestMapper;
+use SprykerEco\Zed\ArvatoRss\Business\Reader\ArvatoRssReader;
+use SprykerEco\Zed\ArvatoRss\Business\Reader\ArvatoRssReaderInterface;
+use SprykerEco\Zed\ArvatoRss\Persistence\ArvatoRssRepository;
+use SprykerEco\Zed\ArvatoRss\Persistence\ArvatoRssRepositoryInterface;
 use SprykerEcoTest\Zed\ArvatoRss\Business\AbstractBusinessTest;
 
 class StoreOrderRequestMapperTest extends AbstractBusinessTest
@@ -27,7 +31,8 @@ class StoreOrderRequestMapperTest extends AbstractBusinessTest
         $mapper = new StoreOrderRequestMapper(
             $this->createIdentificationMapperMock(),
             $this->createOrderMapperMock(),
-            new ArvatoRssConfig()
+            new ArvatoRssConfig(),
+            $this->createReader()
         );
         $result = $mapper->mapOrderToRequestTransfer($this->order);
         $this->testResult($result);
@@ -81,5 +86,21 @@ class StoreOrderRequestMapperTest extends AbstractBusinessTest
             ->willReturn(new ArvatoRssOrderTransfer());
 
         return $orderMapperMock;
+    }
+
+    /**
+     * @return \SprykerEco\Zed\ArvatoRss\Business\Reader\ArvatoRssReaderInterface
+     */
+    protected function createReader(): ArvatoRssReaderInterface
+    {
+        return new ArvatoRssReader($this->createRepository());
+    }
+
+    /**
+     * @return \SprykerEco\Zed\ArvatoRss\Persistence\ArvatoRssRepositoryInterface
+     */
+    protected function createRepository(): ArvatoRssRepositoryInterface
+    {
+        return new ArvatoRssRepository();
     }
 }

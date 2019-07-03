@@ -12,6 +12,7 @@
         <column name="order_reference" required="false" type="VARCHAR"/>
         <column name="call_type" required="false" type="VARCHAR"/>
         <column name="result_code" required="true" type="VARCHAR"/>
+        <column name="communication_token" required="false" type="VARCHAR"/>
         <column name="request_payload" required="false" type="LONGVARCHAR"/>
         <column name="response_payload" required="true" type="LONGVARCHAR"/>
         <behavior name="timestampable"/>

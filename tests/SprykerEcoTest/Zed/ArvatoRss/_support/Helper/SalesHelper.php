@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEcoTest\Zed\ArvatoRss\Helper;
@@ -15,6 +15,8 @@ use Generated\Shared\DataBuilder\QuoteBuilder;
 
 class SalesHelper extends Module
 {
+    protected const TEST_ORDER_REFERENCE = 'TEST--DE--1';
+
     /**
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
@@ -31,7 +33,8 @@ class SalesHelper extends Module
             ->withTotals()
             ->withCurrency()
             ->withItem()
-            ->build()->setPayment(
+            ->build()
+            ->setPayment(
                 (new PaymentBuilder())
                     ->build()
                     ->setPaymentMethod('invoice')
@@ -50,10 +53,12 @@ class SalesHelper extends Module
             ->withCustomer()
             ->withItem()
             ->withCurrency()
-            ->build()->addPayment(
+            ->build()
+            ->addPayment(
                 (new PaymentBuilder())
                     ->build()
                     ->setPaymentMethod('invoice')
-            );
+            )
+            ->setOrderReference(static::TEST_ORDER_REFERENCE);
     }
 }

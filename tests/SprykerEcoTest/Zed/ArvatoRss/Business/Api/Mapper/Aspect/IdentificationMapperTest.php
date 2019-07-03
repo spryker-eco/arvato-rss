@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEcoTest\Zed\ArvatoRss\Business\Api\Mapper\Aspect;
@@ -12,22 +12,19 @@ use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
 use SprykerEco\Zed\ArvatoRss\ArvatoRssConfig;
 use SprykerEco\Zed\ArvatoRss\Business\Api\Mapper\Aspect\IdentificationMapper;
 use SprykerEcoTest\Zed\ArvatoRss\Business\AbstractBusinessTest;
-use SprykerTest\Shared\Testify\Helper\ConfigHelper;
 
 class IdentificationMapperTest extends AbstractBusinessTest
 {
-    const CLIENT_ID = 'CLIENT_ID';
-    const AUTHORIZATION = 'AUTHORIZATION';
+    public const CLIENT_ID = 'CLIENT_ID';
+    public const AUTHORIZATION = 'AUTHORIZATION';
 
     /**
      * @return void
      */
     public function testMap()
     {
-        $this->getModule('\\' . ConfigHelper::class)
-            ->setConfig(ArvatoRssConstants::ARVATORSS_CLIENTID, static::CLIENT_ID);
-        $this->getModule('\\' . ConfigHelper::class)
-            ->setConfig(ArvatoRssConstants::ARVATORSS_AUTHORISATION, static::AUTHORIZATION);
+        $this->tester->setConfig(ArvatoRssConstants::ARVATORSS_CLIENTID, static::CLIENT_ID);
+        $this->tester->setConfig(ArvatoRssConstants::ARVATORSS_AUTHORISATION, static::AUTHORIZATION);
         $mapper = new IdentificationMapper(
             new ArvatoRssConfig()
         );

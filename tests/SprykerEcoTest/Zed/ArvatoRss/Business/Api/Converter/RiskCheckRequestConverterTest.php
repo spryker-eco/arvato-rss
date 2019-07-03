@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEcoTest\Zed\ArvatoRss\Business\Api\Converter;
@@ -19,9 +19,9 @@ use SprykerEco\Zed\ArvatoRss\Business\Api\Converter\RiskCheckRequestConverter;
 class RiskCheckRequestConverterTest extends Test
 {
     /**
-     * @param ArvatoRssRiskCheckRequestTransfer $requestTransfer
-     *
      * @dataProvider provideRequestTransferData
+     *
+     * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckRequestTransfer $requestTransfer
      *
      * @return void
      */
@@ -153,6 +153,7 @@ class RiskCheckRequestConverterTest extends Test
             ->withBillingCustomer((new ArvatoRssBillingCustomerBuilder())->withAddress())
             ->withOrder()
             ->build();
+
         return [
             'with additional address' => [$requestWithAdditionalAddress],
             'without additional address' => [$requestWithoutAdditionalAddress],

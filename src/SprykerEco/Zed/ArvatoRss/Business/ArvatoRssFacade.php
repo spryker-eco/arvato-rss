@@ -14,10 +14,13 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
 /**
  * @method \SprykerEco\Zed\ArvatoRss\Business\ArvatoRssBusinessFactory getFactory()
  * @method \SprykerEco\Zed\ArvatoRss\Persistence\ArvatoRssRepositoryInterface getRepository()
+ * @method \SprykerEco\Zed\ArvatoRss\Persistence\ArvatoRssEntityManagerInterface getEntityManager()
  */
 class ArvatoRssFacade extends AbstractFacade implements ArvatoRssFacadeInterface
 {
     /**
+     * {@inheritdoc}
+     *
      * @api
      *
      * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
@@ -30,6 +33,8 @@ class ArvatoRssFacade extends AbstractFacade implements ArvatoRssFacadeInterface
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @api
      *
      * @param \Generated\Shared\Transfer\OrderTransfer $orderTransfer
@@ -39,5 +44,22 @@ class ArvatoRssFacade extends AbstractFacade implements ArvatoRssFacadeInterface
     public function storeOrder(OrderTransfer $orderTransfer)
     {
         $this->getFactory()->createStoreOrderHandler()->storeOrder($orderTransfer);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param string $communicationToken
+     * @param string $orderReference
+     *
+     * @return void
+     */
+    public function updateApiLogWithOrderReference(string $communicationToken, string $orderReference): void
+    {
+        $this->getFactory()
+            ->createArvatoRssWriter()
+            ->updateLogWithOrderReference($communicationToken, $orderReference);
     }
 }
