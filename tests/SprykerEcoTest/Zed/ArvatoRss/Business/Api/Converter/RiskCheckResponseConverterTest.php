@@ -2,7 +2,7 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEcoTest\Zed\ArvatoRss\Business\Api\Converter;
@@ -16,10 +16,10 @@ use stdClass;
 class RiskCheckResponseConverterTest extends Test
 {
     /**
-     * @param stdClass $response
-     * @param ArvatoRssRiskCheckResponseTransfer $expected
-     *
      * @dataProvider provideResponseData
+     *
+     * @param \stdClass $response
+     * @param \Generated\Shared\Transfer\ArvatoRssRiskCheckResponseTransfer $expected
      *
      * @return void
      */
@@ -79,7 +79,7 @@ class RiskCheckResponseConverterTest extends Test
             'simple response' => [$simpleResponse, $simpleExpected],
             'response with addresses' => [$responseWithAddresses, $expectedWithAddress],
             'response with additional address field' => [$responseWithAdditionalAddress, $expectedWithAdditionalField],
-            'response without address' => [$responseWithoutAddress, $expectedWithoutAddress]
+            'response without address' => [$responseWithoutAddress, $expectedWithoutAddress],
         ];
     }
 
@@ -100,7 +100,7 @@ class RiskCheckResponseConverterTest extends Test
     }
 
     /**
-     * @return stdClass
+     * @return \stdClass
      */
     protected static function createAddressResponse()
     {
@@ -133,9 +133,9 @@ class RiskCheckResponseConverterTest extends Test
     }
 
     /**
-     * @param stdClass $response
+     * @param \stdClass $response
      *
-     * @return ArvatoRssAddressValidationResponseTransfer
+     * @return \Generated\Shared\Transfer\ArvatoRssAddressValidationResponseTransfer
      */
     protected static function createAddressValidationTransfer($response)
     {

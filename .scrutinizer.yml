@@ -4,7 +4,7 @@ build:
 
     tests:
         override:
-            - true
+            - true # disable test execution on scrutinizer
 
     nodes:
         analysis:

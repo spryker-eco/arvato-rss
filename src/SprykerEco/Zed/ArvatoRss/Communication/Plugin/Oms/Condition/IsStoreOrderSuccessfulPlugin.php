@@ -23,6 +23,9 @@ use SprykerEco\Shared\ArvatoRss\ArvatoRssApiConfig;
 class IsStoreOrderSuccessfulPlugin extends AbstractPlugin implements ConditionInterface
 {
     /**
+     * {@inheritdoc}
+     * - Checks if StoreOrder API call was successful.
+     *
      * @api
      *
      * @param \Orm\Zed\Sales\Persistence\SpySalesOrderItem $orderItem

@@ -2,20 +2,24 @@
 
 /**
  * MIT License
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
 namespace SprykerEcoTest\Zed\ArvatoRss\Business;
 
 use Codeception\TestCase\Test;
+use Orm\Zed\ArvatoRss\Persistence\SpyArvatoRssApiCallLogQuery;
 use SprykerEco\Shared\ArvatoRss\ArvatoRssApiConfig;
 use SprykerEco\Shared\ArvatoRss\ArvatoRssConstants;
-use SprykerEcoTest\Zed\ArvatoRss\Helper\SalesHelper;
-use SprykerTest\Shared\Testify\Helper\ConfigHelper;
 
 class AbstractBusinessTest extends Test
 {
-    const RESPONSE_STRING_FIELD_VALUE = 'test';
+    protected const RESPONSE_STRING_FIELD_VALUE = 'test';
+
+    /**
+     * @var \SprykerEcoTest\Zed\ArvatoRss\ArvatoRssZedTester
+     */
+    protected $tester;
 
     /**
      * @var \Generated\Shared\Transfer\QuoteTransfer
@@ -30,15 +34,23 @@ class AbstractBusinessTest extends Test
     /**
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
-        $this->getModule('\\' . ConfigHelper::class)->setConfig(ArvatoRssConstants::ARVATORSS_CLIENTID, 'test');
-        $this->getModule('\\' . ConfigHelper::class)->setConfig(ArvatoRssConstants::ARVATORSS_AUTHORISATION, 'test');
-        $this->getModule('\\' . ConfigHelper::class)->setConfig(ArvatoRssConstants::ARVATORSS_PAYMENT_TYPE_MAPPING, [
+        $this->tester->setConfig(ArvatoRssConstants::ARVATORSS_CLIENTID, 'test');
+        $this->tester->setConfig(ArvatoRssConstants::ARVATORSS_AUTHORISATION, 'test');
+        $this->tester->setConfig(ArvatoRssConstants::ARVATORSS_PAYMENT_TYPE_MAPPING, [
             'invoice' => ArvatoRssApiConfig::INVOICE,
         ]);
-        $this->quote = $this->getModule('\\' . SalesHelper::class)->createQuoteTransfer();
-        $this->order = $this->getModule('\\' . SalesHelper::class)->createOrderTransfer();
+        $this->quote = $this->tester->createQuoteTransfer();
+        $this->order = $this->tester->createOrderTransfer();
+    }
+
+    /**
+     * @return void
+     */
+    protected function cleanUp(): void
+    {
+        SpyArvatoRssApiCallLogQuery::create()->deleteAll();
     }
 }

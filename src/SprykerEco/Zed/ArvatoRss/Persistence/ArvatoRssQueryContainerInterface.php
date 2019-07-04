@@ -9,6 +9,9 @@ namespace SprykerEco\Zed\ArvatoRss\Persistence;
 
 use Spryker\Zed\Kernel\Persistence\QueryContainer\QueryContainerInterface;
 
+/**
+ * @deprecated Use `\SprykerEco\Zed\ArvatoRss\Persistence\ArvatoRssRepositoryInterface` instead.
+ */
 interface ArvatoRssQueryContainerInterface extends QueryContainerInterface
 {
     /**
