@@ -1,37 +1,37 @@
 {
-  "name": "spryker-eco/arvato-rss",
-  "description": "ArvatoRss module",
-  "license": "MIT",
-  "require": {
-    "ext-soap": "*",
-    "spryker/kernel": "^3.0.0",
-    "spryker/money": "^2.1.0",
-    "spryker/sales": "^8.0.0 || ^10.0.0 || ^11.0.0",
-    "spryker/config": "^3.0.0",
-    "spryker/transfer": "^3.4.0",
-    "spryker/zed-request": "^3.0.0"
-  },
-  "require-dev": {
-    "spryker/code-sniffer": "*"
-  },  
-  "autoload": {
-    "psr-4": {
-      "SprykerEco\\": "src/SprykerEco/"
+    "name": "spryker-eco/arvato-rss",
+    "description": "ArvatoRss module",
+    "license": "MIT",
+    "require": {
+        "ext-soap": "*",
+        "spryker/kernel": "^3.0.0",
+        "spryker/money": "^2.1.0",
+        "spryker/sales": "^8.0.0 || ^10.0.0 || ^11.0.0",
+        "spryker/config": "^3.0.0",
+        "spryker/transfer": "^3.4.0",
+        "spryker/zed-request": "^3.0.0"
+    },
+    "require-dev": {
+        "spryker/code-sniffer": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "SprykerEco\\": "src/SprykerEco/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SprykerEcoTest\\": "tests/SprykerEcoTest/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
     }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "SprykerEcoTest\\": "tests/SprykerEcoTest/"
-    }
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true,
-  "extra": {
-    "branch-alias": {
-      "dev-master": "1.0.x-dev"
-    }
-  },
-  "config": {
-    "sort-packages": true
-  }
 }
